@@ -57,13 +57,13 @@
     </header>
     <body>
         <div class="projectInfo">
-            Oboae x Wonhyuck Choi
+            Oboae x 사진가 최원혁
             <br>
-            Paper design. Commercial, Jun. 2024
+            Paper design. Commercial, Aug. 2023
             <br>
         </div>
         <div class="moreInfo">To find out more about the project details, hover here ↗
-            <div class="moreInfoMumu">
+            <div class="moreInfoOboae">
                 제주 중앙로에 위치한 오보에 엽서 5종을 개발했습니다. 전면은 사진의 타이틀을, 후면은 4종의 레이아웃을 개발해 작업을 진행했습니다.
             </div>
         </div>
@@ -132,13 +132,13 @@
     </script>
     <script>
         const moreInfo = document.querySelector('.moreInfo');
-        const moreInfoMumu = document.querySelector('.moreInfoMumu');
+        const moreInfoOboae = document.querySelector('.moreInfoOboae');
         const containerElements = document.querySelectorAll('.container > *'); // `.container`의 직계 자식 요소만 선택
         // .moreInfo에 mouseenter 이벤트 추가
         moreInfo.addEventListener('mouseenter', () => {
-            // .moreInfoMumu의 opacity를 1로 설정
-            moreInfoMumu.style.opacity = 1;
-            // .moreInfo와 .moreInfoMumu를 제외한 나머지 요소들의 opacity를 0.5로 설정
+            // .moreInfoOboae의 opacity를 1로 설정
+            moreInfoOboae.style.opacity = 1;
+            // .moreInfo와 .moreInfoOboae를 제외한 나머지 요소들의 opacity를 0.5로 설정
             containerElements.forEach(el => {
                 if (el !== moreInfo) { // .moreInfo 자체는 제외
                     el.style.opacity = 0.25;
@@ -148,8 +148,8 @@
 
         // .moreInfo에 mouseleave 이벤트 추가
         moreInfo.addEventListener('mouseleave', () => {
-            // .moreInfoMumu의 opacity를 0으로 초기화
-            moreInfoMumu.style.opacity = 0;
+            // .moreInfoOboae의 opacity를 0으로 초기화
+            moreInfoOboae.style.opacity = 0;
             // 모든 요소의 opacity를 다시 1로 복원
             containerElements.forEach(el => {
                 el.style.opacity = 1;
