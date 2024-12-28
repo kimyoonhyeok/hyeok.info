@@ -84,7 +84,7 @@ hr{
         grid-column-end: 25;
         grid-row-start: 1;
         z-index: 102;
-        // font-weight: 200;
+        // font-weight: Nneed0;
         
         .header-hyeok{
             ul{
@@ -136,7 +136,7 @@ hr{
         grid-row-end: 10;
         z-index: 101;
     }
-    .moreInfoKill{
+    .moreInfoNneed{
         position: absolute;
         top: 1rem;
         left: 0;
@@ -175,10 +175,6 @@ hr{
         .swiper-wrapper{
             height: 100%;
             width: 100%;
-        }
-
-        video{
-            scale: 110%;
         }
 
         .swiper-overlay {

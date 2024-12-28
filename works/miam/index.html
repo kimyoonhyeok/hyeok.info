@@ -57,13 +57,13 @@
     </header>
     <body>
         <div class="projectInfo">
-            MiamMiam
+            사진가 최원혁 ≪MiamMiam≫
             <br>
-            Album jacket design. Commercial, Oct. 2024
+            Identity design. Commercial, Aug. 2023
             <br>
         </div>
         <div class="moreInfo">To find out more about the project details, hover here ↗
-            <p class="moreInfoLovingYou">
+            <p class="moreInfoMiam">
                 앨범에서 정의하는 [사랑]과 [이별]이 극단적인 단절
                 형태가 아닌 경계가 모호하다는 것에서 프로젝트 시각화 콘셉트를
                 설정했습니다. 구체적으로 [추상적 주제(사랑과 이별)의 경계 :
@@ -139,13 +139,13 @@
     </script>
     <script>
         const moreInfo = document.querySelector('.moreInfo');
-        const moreInfoLovingYou = document.querySelector('.moreInfoLovingYou');
+        const moreInfoMiam = document.querySelector('.moreInfoMiam');
         const containerElements = document.querySelectorAll('.container > *'); // `.container`의 직계 자식 요소만 선택
         // .moreInfo에 mouseenter 이벤트 추가
         moreInfo.addEventListener('mouseenter', () => {
-            // .moreInfoLovingYou의 opacity를 1로 설정
-            moreInfoLovingYou.style.opacity = 1;
-            // .moreInfo와 .moreInfoLovingYou를 제외한 나머지 요소들의 opacity를 0.5로 설정
+            // .moreInfoMiam의 opacity를 1로 설정
+            moreInfoMiam.style.opacity = 1;
+            // .moreInfo와 .moreInfoMiam를 제외한 나머지 요소들의 opacity를 0.5로 설정
             containerElements.forEach(el => {
                 if (el !== moreInfo) { // .moreInfo 자체는 제외
                     el.style.opacity = 0.25;
@@ -155,8 +155,8 @@
 
         // .moreInfo에 mouseleave 이벤트 추가
         moreInfo.addEventListener('mouseleave', () => {
-            // .moreInfoLovingYou의 opacity를 0으로 초기화
-            moreInfoLovingYou.style.opacity = 0;
+            // .moreInfoMiam의 opacity를 0으로 초기화
+            moreInfoMiam.style.opacity = 0;
             // 모든 요소의 opacity를 다시 1로 복원
             containerElements.forEach(el => {
                 el.style.opacity = 1;
