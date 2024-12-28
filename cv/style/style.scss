@@ -69,7 +69,7 @@ hr{
     column-gap: 0.5rem;
     a:link{color: $color;}
     a:visited {color : $color;}
-    height: 100%;
+    height: 100vh;
     padding: 1rem;
     word-break: keep-all;
 
@@ -164,6 +164,11 @@ hr{
             padding-bottom: 0.5rem;
         }
         .license{
+            font-size: 0.8rem;
+            line-height: 1rem;
+            padding-bottom: 0.5rem;  
+        }
+        .tools{
             font-size: 0.8rem;
             line-height: 1rem;
             padding-bottom: 0.5rem;  

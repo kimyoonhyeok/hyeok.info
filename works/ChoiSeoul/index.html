@@ -57,15 +57,17 @@
     </header>
     <body>
         <div class="projectInfo">
-            Buckwild
+            사진가 최원혁 ≪Open Studio≫
             <br>
-            Editorial design. Non-Commercial, Oct. 2023
+            Identity design. Commercial, Aug. 2023
             <br>
         </div>
         <div class="moreInfo">To find out more about the project details, hover here ↗
-            <p class="moreInfoBuckwild">
-                사진가 전기홍과 [buckwild]라는 콘셉트를 가지고 20페이지 분량의 에디토리얼 작업을 진행했습니다.
-            </p>
+            <div class="moreInfoChoiSeoul">
+                ≪Open Studio≫라는 타이틀로 진행된 최원혁 사진가의 개인전 그래픽을 담당했습니다. 전시를 통한 구체적인 메시지를 전하는 것이 아닌 작가의 작업을 모아 놓은 것으로 전시가
+                진행되었기 때문에, 공간과 작가의 이미지를 조화롭게 표현하는 것이 주요 과제였습니다.
+                이에 따라 작가의 이미지 중 메인 포스터로 활용될 이미지를 택하는 과정이 먼저 이루어졌습니다. 이후 선택된 이미지를 지면과 동일한 크기로 편집하는 과정을 거쳐 2차 가공을 진행했고, 전시 정보를 위계에 따라 조율하는 것을 끝으로 작업을 마무리했습니다.
+            </div>
         </div>
         <div class="image">
             <!-- Swiper -->
@@ -75,22 +77,6 @@
                     <div class="swiper-slide"><img src="./02.jpg" alt="Slide 2"></div>
                     <div class="swiper-slide"><img src="./03.jpg" alt="Slide 3"></div>
                     <div class="swiper-slide"><img src="./04.jpg" alt="Slide 4"></div>
-                    <div class="swiper-slide"><img src="./05.jpg" alt="Slide 5"></div>
-                    <div class="swiper-slide"><img src="./06.jpg" alt="Slide 6"></div>
-                    <div class="swiper-slide"><img src="./07.jpg" alt="Slide 7"></div>
-                    <div class="swiper-slide"><img src="./08.jpg" alt="Slide 8"></div>
-                    <div class="swiper-slide"><img src="./09.jpg" alt="Slide 9"></div>
-                    <div class="swiper-slide"><img src="./10.jpg" alt="Slide 10"></div>
-                    <div class="swiper-slide"><img src="./11.jpg" alt="Slide 11"></div>
-                    <div class="swiper-slide"><img src="./12.jpg" alt="Slide 12"></div>
-                    <div class="swiper-slide"><img src="./13.jpg" alt="Slide 13"></div>
-                    <div class="swiper-slide"><img src="./14.jpg" alt="Slide 14"></div>
-                    <div class="swiper-slide"><img src="./15.jpg" alt="Slide 15"></div>
-                    <div class="swiper-slide"><img src="./16.jpg" alt="Slide 16"></div>
-                    <div class="swiper-slide"><img src="./17.jpg" alt="Slide 17"></div>
-                    <div class="swiper-slide"><img src="./18.jpg" alt="Slide 18"></div>
-                    <div class="swiper-slide"><img src="./19.jpg" alt="Slide 19"></div>
-                    <div class="swiper-slide"><img src="./20.jpg" alt="Slide 20"></div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -144,13 +130,13 @@
     </script>
     <script>
         const moreInfo = document.querySelector('.moreInfo');
-        const moreInfoBuckwild = document.querySelector('.moreInfoBuckwild');
+        const moreInfoChoiSeoul = document.querySelector('.moreInfoChoiSeoul');
         const containerElements = document.querySelectorAll('.container > *'); // `.container`의 직계 자식 요소만 선택
         // .moreInfo에 mouseenter 이벤트 추가
         moreInfo.addEventListener('mouseenter', () => {
-            // .moreInfoBuckwild의 opacity를 1로 설정
-            moreInfoBuckwild.style.opacity = 1;
-            // .moreInfo와 .moreInfoBuckwild를 제외한 나머지 요소들의 opacity를 0.5로 설정
+            // .moreInfoChoiSeoul의 opacity를 1로 설정
+            moreInfoChoiSeoul.style.opacity = 1;
+            // .moreInfo와 .moreInfoChoiSeoul를 제외한 나머지 요소들의 opacity를 0.5로 설정
             containerElements.forEach(el => {
                 if (el !== moreInfo) { // .moreInfo 자체는 제외
                     el.style.opacity = 0.25;
@@ -160,8 +146,8 @@
 
         // .moreInfo에 mouseleave 이벤트 추가
         moreInfo.addEventListener('mouseleave', () => {
-            // .moreInfoBuckwild의 opacity를 0으로 초기화
-            moreInfoBuckwild.style.opacity = 0;
+            // .moreInfoChoiSeoul의 opacity를 0으로 초기화
+            moreInfoChoiSeoul.style.opacity = 0;
             // 모든 요소의 opacity를 다시 1로 복원
             containerElements.forEach(el => {
                 el.style.opacity = 1;
