@@ -1,5 +1,8 @@
 {
     "version": 2,
+    "rewrites": [
+    { "source": "/works/(.*)", "destination": "/works/index.html" }
+    ],
     "routes": [
         {
             "src": "/",
@@ -15,3 +18,7 @@
         }
     ]
 }
+
+
+    
+
