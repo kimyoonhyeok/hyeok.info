@@ -5,6 +5,10 @@
     {
         "source": "/works/(.*)",
         "destination": "/works/$1"
+    },
+    {
+        "source": "/(.*)",
+        "destination": "/index.html"
     }
     ]
 }
