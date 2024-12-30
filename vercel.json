@@ -1,0 +1,6 @@
+{
+    "version": 2,
+    "public": "./",  // 현재 디렉토리의 모든 파일과 폴더를 제공
+    "cleanUrls": true,  // URL에서 .html 확장자 제거
+    "trailingSlash": false  // URL 끝에 슬래시 제거 (선택)
+}
