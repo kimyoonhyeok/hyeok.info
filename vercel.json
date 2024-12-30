@@ -1,14 +1,14 @@
 {
     "version": 2,
-    "cleanUrls": true,
     "rewrites": [
+    {
+        "source": "/works",
+        "destination": "/works/index.html"
+    },
     {
         "source": "/works/(.*)",
         "destination": "/works/$1"
-    },
-    {
-        "source": "/(.*)",
-        "destination": "/index.html"
     }
-    ]
+    ],
+    "cleanUrls": true
 }
