@@ -1,21 +1,9 @@
 {
     "version": 2,
-    "rewrites": [
-        {
-            "source": "/works/index.html",
-            "destination": "/works/index.html"
-        },
-        {
-            "source": "/works",
-            "destination": "/works/index.html"
-        },
-        {
-            "source": "/works/(.*)",
-            "destination": "/works/$1"
-        },
-        {
-            "source": "/",
-            "destination": "/main/index.html"
-        }
+    "routes": [
+        { "src": "/works/index.html", "dest": "/works/index.html" },
+        { "src": "/works/", "dest": "/works/index.html" },
+        { "src": "/works/(.*)", "dest": "/works/$1" },
+        { "src": "/", "dest": "/main/index.html" }
     ]
 }
