@@ -2,6 +2,10 @@
     "version": 2,
     "rewrites": [
         {
+            "source": "/works/index.html",
+            "destination": "/works/index.html"
+        },
+        {
             "source": "/works",
             "destination": "/works/index.html"
         },
