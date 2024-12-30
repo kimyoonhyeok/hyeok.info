@@ -1,9 +1,6 @@
 {
     "version": 2,
-    "routes": [
-        { "src": "/works/index.html", "dest": "/works/index.html" },
-        { "src": "/works/", "dest": "/works/index.html" },
-        { "src": "/works/(.*)", "dest": "/works/$1" },
-        { "src": "/", "dest": "/main/index.html" }
+    "rewrites": [
+    { "source": "/works/(.*)", "destination": "/works/$1" }
     ]
 }
