@@ -1,5 +1,10 @@
 {
     "version": 2,
-    "public": "./",
-    "cleanUrls": true
-} 
+    "cleanUrls": true,
+    "rewrites": [
+    {
+        "source": "/works/(.*)",
+        "destination": "/works/$1"
+    }
+    ]
+}
