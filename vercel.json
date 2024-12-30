@@ -1,18 +1,17 @@
 {
     "version": 2,
-    "rewrites": [
+    "routes": [
         {
-            "source": "/",
-            "destination": "/main/index.html"
+            "src": "/",
+            "dest": "/main/index.html"
         },
         {
-            "source": "/works",
-            "destination": "/works/index.html"
+            "src": "/works",
+            "dest": "/works/index.html"
         },
         {
-            "source": "/works/:path*",
-            "destination": "/works/:path*"
+            "src": "/works/(.*)",
+            "dest": "/works/$1"
         }
-    ],
-    "cleanUrls": true
+    ]
 }
