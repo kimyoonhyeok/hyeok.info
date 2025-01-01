@@ -1,5 +1,10 @@
 {
     "version": 2,
     "cleanUrls": true,
-    "trailingSlash": true
+    "trailingSlash": true,
+    "rewrites": [
+      { "source": "/works", "destination": "/works.html" },
+      { "source": "/works/", "destination": "/works.html" },
+      { "source": "/works/(.*)", "destination": "/works/$1" }
+    ]
   }
