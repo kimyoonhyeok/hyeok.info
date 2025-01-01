@@ -2,5 +2,7 @@
     "version": 2,
     "rewrites": [
     { "source": "/works/(.*)", "destination": "/works/$1" }
-    ]
+    ],
+    "cleanUrls": true,
+    "trailingSlash": true
 }
