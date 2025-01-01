@@ -1,9 +1,5 @@
 {
     "version": 2,
-    "routes": [
-      { "src": "/works/", "dest": "/works/index.html" },
-      { "src": "/works/(.*)", "dest": "/works/$1" }
-    ],
     "cleanUrls": true,
     "trailingSlash": true
   }
