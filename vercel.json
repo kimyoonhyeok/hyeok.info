@@ -1,8 +1,9 @@
 {
     "version": 2,
-    "rewrites": [
-    { "source": "/works/(.*)", "destination": "/works/$1" }
+    "routes": [
+      { "src": "/works/", "dest": "/works/index.html" },
+      { "src": "/works/(.*)", "dest": "/works/$1" }
     ],
     "cleanUrls": true,
     "trailingSlash": true
-}
+  }
