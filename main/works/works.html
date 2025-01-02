@@ -621,18 +621,20 @@ function cycleImage(el, images) {
     $thumbnail.empty();
     curImageIndex = (curImageIndex + 1) % images.length; // 다음 이미지 인덱스로
 
-    if (currentMedia.endsWith(".mp4")) {
-        var video = document.createElement("video");
-        video.src = currentMedia;
-        video.autoplay = true;
-        video.loop = true;
-        video.muted = true;
-        // video.controls = true;  
-        video.style.width = "100%";
-        $thumbnail.append(video);
+    if (currentMedia && typeof currentMedia === "string" && currentMedia.endsWith(".mp4")) {
+    var video = document.createElement("video");
+    video.src = currentMedia;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    // video.controls = true;  
+    video.style.width = "100%";
+    $thumbnail.append(video);
 
-        currentInterval = 7000; // 비디오일 때 인터벌을 3000ms로 설정
-    } else {
+    currentInterval = 7000; // 비디오일 때 인터벌을 7000ms로 설정
+    }
+    
+    else {
         var img = document.createElement("img");
         img.src = currentMedia;
         img.style.width = "100%";
