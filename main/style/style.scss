@@ -149,6 +149,27 @@ body{
     }
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 1700px){
+    .container{
+        display: none;
+    }
+    .ing{
+        display: block;
+    }
     
+}
+
+@media screen and (max-width: 1px) {
+    .ing{
+        display: none;
+        text-align: center;
+        .ko{
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        .en{
+            font-size: 0.75rem;
+            text-align: center;
+        }
+    }
 }
