@@ -149,22 +149,142 @@ body{
     }
 }
 
-@media screen and (min-width: 400px) and (max-width: 1699px){
+@media screen and (min-width: 425px) and (max-width: 1399px){
     .container{
         display: none;
     }
     .ing{
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(24, 1fr);
+        grid-template-rows: repeat(50,2vh);
+        column-gap: 0.5rem;
+        a:link{color: $color;}
+        a:visited {color : $color;}
+        height: 100vh;
+        padding: 1rem;
         align-items: center;
         justify-content: center;
+
         .en{
+            word-break: keep-all;
+            grid-column: 11 / 16;
+            grid-row: 20 / 30;
             font-size: 1rem;
             text-align: center;
+        }
+        footer{
+            display: grid;
+            align-self: end;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            grid-column-start: 1;
+            grid-column-end: 25;
+            height: 100px;
+            position: relative;
+            grid-row-end: 50;
+            
+                .footer-left{
+                    align-self: end;
+                    grid-column: 1 / 15;
+                    grid-row: 1;
+                    
+                    ul{
+                        font-size: 0.75rem;
+                        padding: 0;
+                        margin: 0;
+                        text-align: left;}
+                    li{
+                        font-size: 0.75rem;}
+    
+                    a{
+                        font-size: 0.75rem;}
+                }
+    
+                .footer-right{
+                    color: rgb(0, 0, 0);
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                    align-self: end;
+                    text-align: right;
+                    grid-column: 15 / 25;
+                    grid-row: 1;
+                    z-index: 101;
+                    font-size: 0.75rem;
+                }
         }
     }
 }
 
-@media screen and (min-width: 1699px) and (max-width: 3000px) {
+@media screen and (min-width: 1px) and (max-width: 425px){
+    .container{
+        height: 100vh;
+        display: none;
+    }
+    .ing{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(40,2vh);
+        column-gap: 0.25rem;
+        a:link{color: $color;}
+        a:visited {color : $color;}
+        height: 100vh;
+        padding: 1rem;
+        align-items: center;
+        justify-content: center;
+
+        .en{
+            word-break: keep-all;
+            grid-column: 1 / 13;
+            grid-row: 1 / 45;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        footer{
+            display: grid;
+            column-gap: 0.25rem;
+
+            align-self: end;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            grid-column-start: 1;
+            grid-column-end: 13;
+            position: relative;
+            grid-row-start: 1;
+            grid-row-end: 46;
+            
+                .footer-left{
+                    align-self: end;
+                    grid-column: 1 / 6;
+                    grid-row: 1;
+                    
+                    ul{
+                        font-size: 0.5rem;
+                        padding: 0;
+                        margin: 0;
+                        text-align: left;}
+                    li{
+                        font-size: 0.5rem;}
+    
+                    a{
+                        font-size: 0.5rem;}
+                }
+    
+                .footer-right{
+                    color: rgb(0, 0, 0);
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                    align-self: end;
+                    text-align: right;
+                    grid-column: 7 / 13;
+                    grid-row: 1;
+                    z-index: 101;
+                    font-size: 0.5rem;
+                }
+        }
+    }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 3000px) {
     .ing{
         display: none;
     }
