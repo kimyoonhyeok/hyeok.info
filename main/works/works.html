@@ -2,6 +2,7 @@
 <html lang="kr">
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hyeok.info</title>
@@ -371,7 +372,7 @@ var imageSets = {
       "./kill/26.jpg",
       "./kill/27.jpg",
       "./kill/28.jpg",
-      "./kill/29jpg",
+      "./kill/29.jpg",
       "./kill/30.jpg",
       "./kill/31.jpg",
       "./kill/32.jpg",
@@ -576,6 +577,25 @@ var imageSets = {
     ],
     // 다른 ID들에 대한 배열을 이곳에 추가 가능
 };
+
+const loadImages = (id) => {
+  const images = imageSets[id] || [];
+  images.forEach((src) => {
+    const imgElement = document.createElement('img');
+    imgElement.src = src;
+    document.querySelector(`#${id}`).appendChild(imgElement);
+  });
+};
+
+// 특정 섹션이 보일 때 이미지를 로드
+document.addEventListener('scroll', () => {
+  const worksSections = document.querySelectorAll('.two');
+  worksSections.forEach((section) => {
+    if (section.getBoundingClientRect().top < window.innerHeight) {
+      loadImages(section.id);
+    }
+  });
+});
 
 var curImageIndex = 0; // 현재 이미지 인덱스
 var intervalIds = {};  // 각 요소별 인터벌 ID 저장 객체
