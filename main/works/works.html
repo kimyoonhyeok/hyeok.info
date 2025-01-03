@@ -581,32 +581,6 @@ var curImageIndex = 0; // 현재 이미지 인덱스
 var intervalIds = {};  // 각 요소별 인터벌 ID 저장 객체
 var currentInterval = 500; // 기본 인터벌 설정
 
-function cycleImage(key) {
-    // imageSets에 key가 존재하는지 확인
-    if (!imageSets[key]) {
-        console.error(`Key "${key}" does not exist in imageSets.`);
-        return; // key가 없으면 함수 종료
-    }
-
-    // 현재 key에 할당된 이미지 배열
-    const images = imageSets[key];
-
-    if (!Array.isArray(images) || images.length === 0) {
-        console.error(`No valid images found for key "${key}".`);
-        return; // 유효한 이미지 배열이 없으면 함수 종료
-    }
-
-    // 이미지 배열에서 endsWith 확인 및 로직 수행
-    images.forEach(image => {
-        if (typeof image === "string" && image.endsWith(".jpg")) {
-            console.log(`Displaying image: ${image}`);
-            // 여기에서 이미지를 처리하는 로직 추가
-        } else {
-            console.warn(`Invalid or unsupported image format: ${image}`);
-        }
-    });
-}
-
 function startImageCycle(el) {
     var images = getImagesForElement(el); // 현재 요소에 대한 이미지 배열 가져오기
     cycleImage(el, images); // 즉시 첫 이미지를 보여주기 위해 cycleImage 호출
@@ -635,23 +609,16 @@ function getImagesForElement(el) {
 }
 
 function cycleImage(el, images) {
-    // 이미지 배열이 비어 있거나 정의되지 않은 경우 확인
-    if (!images || !Array.isArray(images) || images.length === 0) {
+  if (!images || images.length === 0) {
         console.error("Error: images array is empty or undefined for element:", el);
-        return; // 이미지 배열이 유효하지 않으면 함수 종료
+        return; // 이미지 배열이 비어 있으면 함수 종료
     }
-
+    // console.log("Cycling image for:", el); // 요소 ID 확인
+    // console.log("Images array:", images);  // 이미지 배열 확인
     var currentMedia = images[curImageIndex];
-
-    // 현재 미디어가 유효한 문자열인지 확인
-    if (!currentMedia || typeof currentMedia !== "string") {
-        console.error("Error: currentMedia is invalid or undefined for element:", el);
-        return;
-    }
-
     var $thumbnail = $('.thumbnail-blank');
-    $thumbnail.empty(); // 기존 썸네일 콘텐츠 초기화
-    curImageIndex = (curImageIndex + 1) % images.length; // 다음 이미지 인덱스로 순환
+    $thumbnail.empty();
+    curImageIndex = (curImageIndex + 1) % images.length; // 다음 이미지 인덱스로
 
     if (currentMedia.endsWith(".mp4")) {
         var video = document.createElement("video");
@@ -659,23 +626,21 @@ function cycleImage(el, images) {
         video.autoplay = true;
         video.loop = true;
         video.muted = true;
+        // video.controls = true;  
         video.style.width = "100%";
         $thumbnail.append(video);
 
-        currentInterval = 7000; // 비디오일 때 인터벌 설정
-    } else if (currentMedia.endsWith(".jpg") || currentMedia.endsWith(".png")) {
+        currentInterval = 7000; // 비디오일 때 인터벌을 3000ms로 설정
+    } else {
         var img = document.createElement("img");
         img.src = currentMedia;
         img.style.width = "100%";
         $thumbnail.append(img);
 
-        currentInterval = 300; // 이미지일 때 인터벌 설정
-    } else {
-        console.warn("Unsupported media format:", currentMedia);
-        return; // 지원되지 않는 형식일 경우 함수 종료
+        currentInterval = 300; // 이미지일 때 인터벌을 300ms로 설정
     }
 
-    // 인터벌 갱신
+    // 인터벌을 업데이트하기 위해 기존 인터벌을 지우고 새로 설정
     clearInterval(intervalIds[el]);
     intervalIds[el] = setInterval(function() {
         cycleImage(el, images);
