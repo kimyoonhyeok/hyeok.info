@@ -149,27 +149,24 @@ body{
     }
 }
 
-@media screen and (max-width: 1700px){
+@media screen and (min-width: 400px) and (max-width: 1699px){
     .container{
         display: none;
     }
     .ing{
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .en{
+            font-size: 1rem;
+            text-align: center;
+        }
     }
-    
 }
 
-@media screen and (max-width: 1px) {
+@media screen and (min-width: 1699px) and (max-width: 3000px) {
     .ing{
         display: none;
-        text-align: center;
-        .ko{
-            font-size: 0.75rem;
-            text-align: center;
-        }
-        .en{
-            font-size: 0.75rem;
-            text-align: center;
-        }
     }
+    
 }
