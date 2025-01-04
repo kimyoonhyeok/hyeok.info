@@ -108,7 +108,6 @@ hr{
         }
     }
     //각 header마다 남는 여백이 다름.
-
     .work-2024{
         display: grid;
         grid-column-start: 3;
@@ -120,17 +119,16 @@ hr{
 
         .one{
             text-align: left;
-            width: 10%;
-        }
-        .two{
+            width: 10%;}
+        .two {
             text-align: left;
             width: 70%;
-            :hover {color:silver !important;}
+            transition: color 0.3s ease;
+            :hover{color: silver !important;}
         }
         .three{
             text-align: right;
-            width: 10%;
-        }
+            width: 10%;}
     }
 
     .thumbnail-blank{
