@@ -61,12 +61,16 @@ body{
 .container{
     display: grid;
     grid-template-columns: repeat(24, 1fr);
-    grid-template-rows: repeat(50,2vh);
+    grid-template-rows: repeat(50,2fr);
     column-gap: 0.5rem;
     a:link{color: $color;}
     a:visited {color : $color;}
     height: 100vh;
-    padding: 1rem;
+    height: 100vh;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
 
     .enterance{
         display: grid;
@@ -114,9 +118,8 @@ body{
         justify-content: space-between;
         grid-column-start: 1;
         grid-column-end: 25;
-        height: 100px;
         position: relative;
-        grid-row-end: 50;
+        grid-row-end: 51;
         
             .footer-left{
                 align-self: end;
@@ -149,43 +152,174 @@ body{
     }
 }
 
-@media screen and (min-width: 425px) and (max-width: 1399px){
+
+//작업 중
+@media screen and (min-width: 1px) and (max-width: 319px){
+    .container{display: none;}
+    .minWidth320{display: none;}
+    .minWidth768{display: none;}
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
     .container{
+                height: 100vh;
+                display: none;}
+    .minWidth768{
+        height: 100vh;
         display: none;
     }
-    .ing{
+                
+    .minWidth320{
         display: grid;
-        grid-template-columns: repeat(24, 1fr);
-        grid-template-rows: repeat(50,2vh);
-        column-gap: 0.5rem;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(40,2fr);
+        column-gap: 0.25rem;
         a:link{color: $color;}
         a:visited {color : $color;}
         height: 100vh;
         padding: 1rem;
         align-items: center;
         justify-content: center;
+        
 
-        .en{
-            word-break: keep-all;
-            grid-column: 11 / 16;
-            grid-row: 20 / 30;
-            font-size: 1rem;
-            text-align: center;
-        }
+            .enterance{
+                place-items: center; /* 이미지와 링크를 상하좌우 중앙 정렬 */
+                height: 100%; /* 부모 컨테이너의 높이 */
+                width: 100%;
+                // grid-template-columns: repeat(24, 1fr);
+                // grid-template-rows: repeat(50,2vh);
+                // column-gap: 0.5rem;
+                grid-column-start: 2;
+                grid-column-end: 12;
+                grid-row: 16 / 23; /* 첫 번째 행부터 마지막 행까지 차지 */
+                aspect-ratio: 2;
+        
+                img{
+                    border: 0.5px solid black;
+        
+                    #enterance01{
+                        z-index: 100;
+                    }
+                } 
+            }
+            
+            .enterance a {
+                grid-column: 2 / 12;
+                // max-width: 75%; /* 이미지 크기와 동일 */
+                height: auto; /* 이미지 비율 유지 */
+            }
+            
+            .enterance img {
+                max-width: 100%; /* 부모(<a>) 크기에 맞춤 */
+                height: auto; /* 원본 비율 유지 */
+                object-fit: contain;
+            }
+            
+            footer{
+                display: flex;
+                align-self: end;
+                justify-content: center;
+                text-align: center;
+                grid-column-start: 1;
+                grid-column-end: 13;
+                position: relative;
+                grid-row-end: 41;
+                
+                    .footer-all{
+                        color: rgb(0, 0, 0);
+                        padding-bottom: 0;
+                        margin-bottom: 0;
+                        align-self: end;
+                        text-align: right;
+                        grid-row: 1;
+                        z-index: 101;
+                        font-size: 0.625rem;
+                        align-self: end;
+                        grid-row: 1;
+                        
+                        ul{
+                            font-size: 0.625rem;
+                            padding: 0;
+                            margin: 0;
+                            text-align: center;}
+                        li{
+                            font-size: 0.625rem;}
+        
+                        a{
+                            font-size: 0.625rem;}
+                        h1{
+                            font-size: 0.625rem;}
+                    }
+            }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1399px){
+    .container{
+        height: 100vh;
+        display: none;}
+    .minWidth320{
+        height: 100vh;
+        display: none;
+    }
+        
+    .minWidth768{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(40,2fr);
+    column-gap: 0.375rem;
+    a:link{color: $color;}
+    a:visited {color : $color;}
+    height: 100vh;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+
+
+    .enterance{
+        place-items: center; /* 이미지와 링크를 상하좌우 중앙 정렬 */
+        // height: 100%; /* 부모 컨테이너의 높이 */
+        width: 100%;
+        grid-column-start: 4;
+        grid-column-end: 10;
+        grid-row: 16 / 23; /* 첫 번째 행부터 마지막 행까지 차지 */
+        aspect-ratio: 2;
+        align-self: center;
+
+        img{
+            border: 0.5px solid black;
+
+            #enterance01{
+                z-index: 100;
+            }
+        } 
+    }
+    
+    .enterance a {
+        grid-column: 2 / 12;
+        max-width: 100%; /* 이미지 크기와 동일 */
+        height: auto; /* 이미지 비율 유지 */
+    }
+    
+    .enterance img {
+        max-width: 100%; /* 부모(<a>) 크기에 맞춤 */
+        height: auto; /* 원본 비율 유지 */
+        object-fit: contain;
+    }
+        
         footer{
-            display: grid;
+            display: flex;
             align-self: end;
             flex-direction: row-reverse;
             justify-content: space-between;
             grid-column-start: 1;
-            grid-column-end: 25;
-            height: 100px;
+            grid-column-end: 13;
             position: relative;
-            grid-row-end: 50;
+            grid-row-end: 41;
             
                 .footer-left{
                     align-self: end;
-                    grid-column: 1 / 15;
+                    grid-column: 1 / 6;
                     grid-row: 1;
                     
                     ul{
@@ -206,7 +340,7 @@ body{
                     margin-bottom: 0;
                     align-self: end;
                     text-align: right;
-                    grid-column: 15 / 25;
+                    grid-column: 7 / 13;
                     grid-row: 1;
                     z-index: 101;
                     font-size: 0.75rem;
@@ -215,78 +349,7 @@ body{
     }
 }
 
-@media screen and (min-width: 1px) and (max-width: 425px){
-    .container{
-        height: 100vh;
-        display: none;
-    }
-    .ing{
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: repeat(40,2vh);
-        column-gap: 0.25rem;
-        a:link{color: $color;}
-        a:visited {color : $color;}
-        height: 100vh;
-        padding: 1rem;
-        align-items: center;
-        justify-content: center;
-
-        .en{
-            word-break: keep-all;
-            grid-column: 1 / 13;
-            grid-row: 1 / 45;
-            font-size: 0.75rem;
-            text-align: center;
-        }
-        footer{
-            display: grid;
-            column-gap: 0.25rem;
-
-            align-self: end;
-            flex-direction: row-reverse;
-            justify-content: space-between;
-            grid-column-start: 1;
-            grid-column-end: 13;
-            position: relative;
-            grid-row-start: 1;
-            grid-row-end: 46;
-            
-                .footer-left{
-                    align-self: end;
-                    grid-column: 1 / 6;
-                    grid-row: 1;
-                    
-                    ul{
-                        font-size: 0.5rem;
-                        padding: 0;
-                        margin: 0;
-                        text-align: left;}
-                    li{
-                        font-size: 0.5rem;}
-    
-                    a{
-                        font-size: 0.5rem;}
-                }
-    
-                .footer-right{
-                    color: rgb(0, 0, 0);
-                    padding-bottom: 0;
-                    margin-bottom: 0;
-                    align-self: end;
-                    text-align: right;
-                    grid-column: 7 / 13;
-                    grid-row: 1;
-                    z-index: 101;
-                    font-size: 0.5rem;
-                }
-        }
-    }
-}
-
-@media screen and (min-width: 1400px) and (max-width: 3000px) {
-    .ing{
-        display: none;
-    }
-    
+@media screen and (min-width: 1400px) {
+    .minWidth320{display: none;}
+    .minWidth768{display: none;}
 }
