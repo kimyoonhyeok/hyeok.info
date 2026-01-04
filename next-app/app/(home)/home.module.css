@@ -1,0 +1,191 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(50, 2fr);
+    column-gap: 0.5rem;
+    height: 100vh;
+    padding: 1rem 1rem 0.5rem 1rem;
+    width: 100%;
+}
+
+.enterance {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 100%;
+    grid-column: 1 / 25;
+    grid-row: 1 / 50;
+    aspect-ratio: 2;
+}
+
+.enterance a {
+    cursor: url(/style/hand.cur), help;
+    display: grid;
+    max-width: 25%;
+    height: auto;
+    justify-self: center;
+}
+
+.enterance img {
+    border: 1px solid #000;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Footer Styles (Ported from legacy style.css) */
+/* Using class names instead of tags to satisfy CSS Module purity */
+
+.footerWrapper {
+    display: flex;
+    align-self: end;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    grid-column: 1 / 25;
+    position: relative;
+    grid-row-end: 51;
+    width: 100%;
+}
+
+.footerLeft {
+    align-self: end;
+    grid-column: 1 / 15;
+    grid-row: 1;
+}
+
+.footerLeft ul {
+    font-size: 0.75rem;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.footerLeft li,
+.footerLeft a {
+    font-size: 0.75rem;
+    color: #000;
+    text-decoration: none;
+}
+
+.footerLeft a:hover {
+    opacity: 0.25;
+    transition: opacity 0.3s ease;
+}
+
+.footerRight {
+    color: #000;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    align-self: end;
+    text-align: right;
+    grid-column: 15 / 25;
+    grid-row: 1;
+    z-index: 101;
+    font-size: 0.75rem;
+}
+
+/* Mobile Helpers */
+.minWidth320 {
+    display: none;
+}
+
+.minWidth768 {
+    display: none;
+}
+
+/* Responsive Logic */
+
+/* Mobile (320px - 767px) */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .container {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(40, 2fr);
+        column-gap: 0.25rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .enterance {
+        grid-column: 2 / 12;
+        grid-row: 16 / 23;
+    }
+
+    .enterance img {
+        border: 0.5px solid #000;
+    }
+
+    /* Footer Mobile override */
+    .footerWrapper {
+        display: flex;
+        align-self: end;
+        justify-content: center;
+        text-align: center;
+        grid-column: 1 / 13;
+        position: relative;
+        grid-row-end: 41;
+    }
+
+    /* Hide standard footer content */
+    .footerLeft,
+    .footerRight {
+        display: none;
+    }
+
+    .minWidth320 {
+        display: block;
+        /* Show wrapper */
+        grid-column: 1 / 13;
+        grid-row-end: 41;
+        align-self: end;
+        width: 100%;
+    }
+
+    .footerAll {
+        color: #000;
+        text-align: center;
+        font-size: 0.625rem;
+    }
+
+    .footerAll ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .footerAll li,
+    .footerAll a,
+    .footerAll h1 {
+        font-size: 0.625rem;
+        font-weight: 400;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1399px) {
+    .container {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(40, 2fr);
+        column-gap: 0.375rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .enterance {
+        grid-column: 4 / 10;
+        grid-row: 16 / 23;
+        align-self: center;
+    }
+
+    .footerWrapper {
+        flex-direction: row-reverse;
+        grid-column: 1 / 13;
+        grid-row-end: 41;
+    }
+
+    .footerLeft {
+        grid-column: 1 / 6;
+    }
+
+    .footerRight {
+        grid-column: 7 / 13;
+    }
+}

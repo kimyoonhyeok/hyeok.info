@@ -1,0 +1,76 @@
+/* Refined Grid Layout: Equal 4 Columns */
+.informationGrid {
+    display: grid;
+    /* Ensure it spans full width of parent container grid */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    /* 0.75rem approx */
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+
+    /* Global Typography from Works page */
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.06px;
+    color: #000;
+}
+
+.infoColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* 0.75rem spacing between sections */
+}
+
+/* Typography Hierarchy matches Works */
+.sectionTitle {
+    display: block;
+    /* Margin removed completely to make title and body look attached (Visual newline only) */
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+.infoText {
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* Gap between EN and KO in Intro */
+.introDivider {
+    display: block;
+    height: 1.6em;
+    /* Match body line-height gap */
+}
+
+.infoListItem {
+    margin-bottom: 0px;
+    line-height: 1.5;
+}
+
+/* Links in text (Contact etc) */
+.textLink {
+    color: inherit;
+    text-decoration: none;
+}
+
+.textLink:hover {
+    text-decoration: none;
+    opacity: 0.25;
+    transition: opacity 0.3s ease;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+    .informationGrid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .informationGrid {
+        grid-template-columns: 1fr;
+    }
+}

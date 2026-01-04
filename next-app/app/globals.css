@@ -1,0 +1,295 @@
+:root {
+  --background: rgb(255, 255, 255);
+  --color: rgb(0, 0, 0);
+}
+
+@font-face {
+  font-family: "agchoijeongho-screen";
+  src: url(https://fonts.adobe.com/search?query=%EC%B5%9C%EC%A0%95%ED%98%B8);
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue"), local(Helvetica);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Helvetica Neue", "agchoijeongho-screen", sans-serif;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--background);
+  color: var(--color);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* 
+   Works/Sub Layout Styles 
+   Moved from generic global scope to .works-wrapper context if possible, 
+   but for now keeping here but strictly separated from Home styles.
+*/
+
+.works-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header/Footer are used in Works Layout */
+/* We keep these global classes because Header/Footer components use them */
+
+/* --- Header (For Works) --- */
+.global-header {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  column-gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
+  position: relative;
+  z-index: 102;
+}
+
+.global-header ul {
+  padding: 0;
+  margin: 0;
+}
+
+.global-header .header-hyeok {
+  grid-column: 1 / 3;
+}
+
+.global-header .header-works {
+  grid-column: 3 / 5;
+}
+
+.global-header .header-about {
+  grid-column: 13 / 15;
+}
+
+.global-header .header-cv {
+  grid-column: 23 / 25;
+  text-align: right;
+}
+
+.global-header a:hover,
+footer a:hover,
+footer li:hover {
+  opacity: 0.25;
+  transition: opacity 0.3s ease;
+}
+
+/* --- Project Grid (For Works) --- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 0.5rem;
+  gap: 20px;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+}
+
+.project-item {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.project-item:hover .image-wrapper img,
+.project-item:hover .image-wrapper video {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.image-wrapper {
+  width: 100%;
+  aspect-ratio: 1.3;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.image-wrapper img,
+.image-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.info-wrapper {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.06px;
+  color: #000;
+}
+
+.info-wrapper .title {
+  display: block;
+  margin-bottom: 0px;
+}
+
+.info-wrapper .metadata {
+  margin-top: 0;
+}
+
+.info-wrapper .category {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.category-text {
+  font-weight: 400;
+}
+
+.category-text.active {
+  opacity: 1;
+}
+
+.category-text.inactive {
+  opacity: 0.25;
+}
+
+.info-wrapper .year {
+  margin-top: 4px;
+}
+
+/* --- Footer (Generic/Works) --- */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: row !important;
+  font-size: 0.75rem;
+  width: 100%;
+  margin-top: auto;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.minWidth320 {
+  display: none;
+}
+
+.minWidth768 {
+  display: none;
+  /* Home specific class, hidden by default globally */
+}
+
+/* --- Responsive (Works) --- */
+@media screen and (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .works-container {
+    padding: 1rem;
+  }
+
+  .global-header {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 0.25rem;
+  }
+
+  .global-header a {
+    font-size: 0.625rem;
+  }
+
+  .global-header .header-hyeok {
+    grid-column: 1 / 3;
+  }
+
+  .global-header .header-works {
+    grid-column: 3 / 5;
+  }
+
+  .global-header .header-about {
+    grid-column: 9 / 11;
+  }
+
+  .global-header .header-cv {
+    grid-column: 11 / 13;
+    text-align: right;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .info-wrapper,
+  .info-wrapper * {
+    font-size: 11px;
+  }
+
+  footer {
+    display: none;
+    /* Works footer hides on mobile */
+  }
+
+  .minWidth320 {
+    display: block;
+    margin-top: 2rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .minWidth320 h1,
+  .minWidth320 a {
+    font-size: 0.625rem;
+    font-weight: 400;
+  }
+}
+
+/* Sticky Header */
+.global-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+}
+
+.global-header.scrolled {
+  background-color: #ffffff;
+}
+
+.image-wrapper {
+  padding: 25px 0 !important;
+  background-color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.image-wrapper img,
+.image-wrapper video {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+}

@@ -1,0 +1,358 @@
+/* Ported from Legacy SCSS to CSS Module */
+/* Using :global() for classes that come from shared components */
+
+/* Variables / Root */
+.container {
+    --background: rgb(255, 255, 255);
+    --color: rgb(0, 0, 0);
+    --std: 16px;
+    background: var(--background);
+    color: var(--color);
+    width: 100%;
+    min-height: 100vh;
+    padding: 1rem 1rem 0.5rem 1rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.container * {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Desktop Grid (>=1400px) */
+@media screen and (min-width: 1400px) {
+    .container {
+        display: grid;
+        position: relative;
+        grid-template-columns: repeat(24, 1fr);
+        grid-template-rows: repeat(50, 2fr);
+        column-gap: 0.5rem;
+        height: 100vh;
+    }
+
+    .container :global(a:link),
+    .container :global(a:visited) {
+        color: var(--color);
+        text-decoration: none;
+    }
+
+    /* HEADER Placement */
+    .container :global(.global-header) {
+        display: grid;
+        grid-template-columns: repeat(24, 1fr);
+        column-gap: 0.5rem;
+        grid-column: 1 / 25;
+        grid-row: 1;
+        z-index: 102;
+        /* Reset margin to ensure Grid placement controls spacing strictly */
+        margin-bottom: 0 !important;
+    }
+
+    .container :global(.global-header .header-hyeok) {
+        grid-column: 1 / 3;
+    }
+
+    .container :global(.global-header .header-works) {
+        grid-column: 3 / 5;
+    }
+
+    .container :global(.global-header .header-about) {
+        grid-column: 13 / 15;
+    }
+
+    .container :global(.global-header .header-cv) {
+        grid-column: 23 / 25;
+        text-align: right;
+    }
+
+    .container :global(.global-header ul) {
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Project Info */
+    .projectInfo {
+        font-size: 0.75rem;
+        grid-column: 3 / 10;
+        grid-row: 2 / 4;
+        /* Standard Line Height */
+        line-height: 1.4;
+        /* Match About page spacing (0.75rem = ~12px) as requested */
+        padding-top: 0.75rem;
+    }
+
+    /* More Info Trigger Container */
+    .moreInfo {
+        font-size: 0.75rem;
+        grid-column: 13 / 19;
+        grid-row: 2 / 10;
+        z-index: 101;
+        /* Revert to relative for correct child positioning (Left 0 of Col 13) */
+        position: relative !important;
+        /* Match vertical spacing with ProjectInfo */
+        padding-top: 0.75rem;
+    }
+
+    /* Revealed Text */
+    .moreInfoContent {
+        position: absolute;
+        top: 0.75rem;
+        /* Adjust to match the padding-top if needed, or keep 1rem (16px) down from top edge of .moreInfo */
+        left: 0;
+        display: flex;
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+        font-size: 0.75rem;
+        line-height: 1.2rem;
+        /* 12px * 1.6? or 1.2rem = 19.2px? Legacy: line-height: 1.2rem */
+        word-break: keep-all;
+        cursor: url(/hand.cur), help;
+        height: auto;
+        z-index: 102;
+        margin-top: 1rem;
+        /* Additional spacing for the content itself relative to trigger line? */
+    }
+
+    /* Image Area */
+    .image {
+        grid-column: 1 / 25;
+        grid-row: 5 / 45;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .image :global(.swiper),
+    .image :global(.swiper-wrapper) {
+        height: 100%;
+        width: 100%;
+    }
+
+    .image :global(.swiper-overlay) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+        z-index: 5;
+        pointer-events: auto;
+    }
+
+    .image :global(.left) {
+        left: 0%;
+        right: 50%;
+        cursor: url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%227.91%200%208.53%20.95%202.93%204.66%2026.03%204.66%2026.03%205.8%202.93%205.8%208.53%209.5%207.91%2010.45%200%205.23%207.91%200%22/%3E%3C/svg%3E') 26.03 10.45, w-resize;
+    }
+
+    .image :global(.right) {
+        left: 50%;
+        right: 0%;
+        cursor: url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%2218.13%200%2017.5%20.95%2023.1%204.66%200%204.66%200%205.8%2023.1%205.8%2017.5%209.5%2018.13%2010.45%2026.03%205.23%2018.13%200%22/%3E%3C/svg%3E') 26.03 10.45, e-resize;
+    }
+
+    .image :global(.swiper-button-prev),
+    .image :global(.swiper-button-next) {
+        display: none;
+    }
+
+    .image :global(.swiper-slide) {
+        margin-right: 0;
+        text-align: center;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .image :global(.swiper-slide img),
+    .image :global(.swiper-slide video) {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    /* FOOTER Placement */
+    .container :global(footer:not(.minWidth320)) {
+        display: flex;
+        align-self: end;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        grid-column: 1 / 25;
+        position: relative;
+        grid-row: 50 / 51;
+        width: 100%;
+    }
+
+    .container :global(footer.minWidth320) {
+        display: none !important;
+    }
+
+    .container :global(.footer-left) {
+        align-self: end;
+        grid-column: 1 / 15;
+        grid-row: 1;
+    }
+
+    .container :global(.footer-right) {
+        align-self: end;
+        text-align: right;
+        grid-column: 15 / 25;
+        grid-row: 1;
+        z-index: 101;
+        font-size: 0.75rem;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        color: var(--color);
+    }
+
+    .container :global(footer ul),
+    .container :global(footer li),
+    .container :global(footer a) {
+        font-size: 0.75rem;
+        text-align: left;
+        color: var(--color);
+    }
+
+    .minWidth320 {
+        display: none;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1399px) {
+    .container {
+        display: none;
+    }
+}
+
+/* Mobile */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(40, 2fr);
+        column-gap: 0.25rem;
+        height: 100vh;
+        padding: 1rem;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .container :global(a:link),
+    .container :global(a:visited) {
+        color: var(--color);
+    }
+
+    .container :global(.global-header) {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: 0.25rem;
+        grid-column: 1 / 13;
+        grid-row: 1;
+        z-index: 102;
+        margin-bottom: 0 !important;
+    }
+
+    .container :global(.global-header a) {
+        font-size: 0.625rem;
+    }
+
+    .container :global(.header-hyeok) {
+        grid-column: 1 / 2;
+    }
+
+    .container :global(.header-works) {
+        grid-column: 3 / 4;
+    }
+
+    .container :global(.header-about) {
+        grid-column: 10 / 11;
+    }
+
+    .container :global(.header-cv) {
+        grid-column: 12 / 13;
+        text-align: right;
+    }
+
+    .projectInfo,
+    .moreInfo {
+        display: none;
+    }
+
+    .image {
+        grid-column: 1 / 13;
+        grid-row: 1 / 40;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+
+    .image :global(.swiper),
+    .image :global(.swiper-wrapper) {
+        width: 100%;
+    }
+
+    .image :global(.swiper-overlay) {
+        display: none;
+    }
+
+    .image :global(.swiper-button-prev),
+    .image :global(.swiper-button-next) {
+        display: none;
+    }
+
+    .image :global(.swiper-slide) {
+        margin-right: 0;
+        text-align: center;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .image :global(.swiper-slide img),
+    .image :global(.swiper-slide video) {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .container :global(footer:not(.minWidth320)) {
+        display: none !important;
+    }
+
+    .container :global(footer.minWidth320) {
+        display: block !important;
+        grid-column: 1 / 13;
+        grid-row: 40 / 41;
+        text-align: center;
+    }
+
+    .container :global(footer.minWidth320 ul) {
+        justify-content: center;
+        display: flex;
+    }
+
+    .container :global(footer.minWidth320 li),
+    .container :global(footer.minWidth320 a),
+    .container :global(footer.minWidth320 h1) {
+        font-size: 0.625rem !important;
+        font-weight: 400;
+        color: var(--color);
+    }
+}
+
+@media screen and (max-width: 319px) {
+    .container {
+        display: none;
+    }
+}
