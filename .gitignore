@@ -1,1 +1,16 @@
+# General
+node_modules
+.DS_Store
+*.log
+
+# Next.js
+.next
+out
+build
+
+# Env
+.env
+.env.local
+
+# Vercel
 .vercel
