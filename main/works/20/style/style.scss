@@ -61,22 +61,20 @@ hr{
     transition: opacity 0.3s ease-in-out; /* 부드러운 전환 */
 }
 
-.container{
-    display: grid;
-    position: relative;
-    grid-template-columns: repeat(24, 1fr);
-    grid-template-rows: repeat(50,2fr);
-    column-gap: 0.5rem;
-    a:link{color: $color;}
-    a:visited {color : $color;}
-    height: 100vh;
-    padding-top: 1rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    padding-bottom: 0.5rem;
-    // width: 100%;
-    // max-width: 100%;
-    // overflow: hidden;
+@media screen and (min-width: 1400px){
+    .container{
+        display: grid;
+        position: relative;
+        grid-template-columns: repeat(24, 1fr);
+        grid-template-rows: repeat(50,2fr);
+        column-gap: 0.5rem;
+        a:link{color: $color;}
+        a:visited {color : $color;}
+        height: 100vh;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        padding-bottom: 0.5rem;
 
     .global-header{
         display: grid;
@@ -269,23 +267,22 @@ hr{
                 font-size: 0.75rem;
             }
     }
+
+    .minWidth320{
+        display: none;
+    }
+}
 }
 
-@media screen and (min-width: 1px) and (max-width: 319px){
-    .container{display: none;}
-    .minWidth320{display: none;}
-    .minWidth768{display: none;}
-}
-
-@media screen and (min-width: 320px) and (max-width: 767px){
+@media screen and (min-width: 768px) and (max-width: 1399px){
     .container{
         height: 100vh;
         display: none;}
-    .minWidth768{
-        height: 100vh;
-        display: none;}
-                
-    .minWidth320{
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+
+    .container{
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(40,2fr);
@@ -299,7 +296,6 @@ hr{
 
         .global-header{
             a{font-size: 0.625rem;}
-
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             column-gap: 0.25rem;
@@ -341,58 +337,36 @@ hr{
                     text-align: right;
             }
         }
-        .moreInfo{
-            font-size: 0.625rem;
-            grid-column-start: 1;
-            grid-column-end: 13;
-            grid-row: 1 / 41;
-            z-index: 101;
-            word-break: keep-all;
-            text-align: center;
+        
+        .projectInfo{
+            display: none;
         }
-        // .moreInfo20{
-        //     position: absolute;
-        //     top: 1rem;
-        //     left: 0;
-        //     display: flex;
-        //     opacity: 0;
-        //     transition: opacity 0.2s ease-in-out;
-        //     font-size: 0.75rem;
-        //     line-height: 1.2rem;
-        //     word-break: keep-all;
-        //     cursor: url(hand.cur), help;
-        //     height: auto; /* 이미지 비율 유지 */
-        // }
-    
+
+        .moreInfo{
+            display: none;
+        }
+        
         .image{
             grid-column: 1 / 13;
-            grid-row-start: 3;
+            grid-row-start: 1;
             grid-row-end: 40;
             justify-content: center; /* 가로 정렬 */
             align-items: center; /* 세로 정렬 */
             overflow: hidden; /* 필요 시 컨테이너 밖의 요소 숨김 */
-            height: 100%;
             width: 100%;
     
             .swiper{
-                height: 100%;
                 width: 100%;
             }
     
             .swiper-wrapper{
-                height: 100%;
                 width: 100%;
             }
     
             .swiper-overlay {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                width: 50%;
-                z-index: 5; /* Swiper 버튼보다 낮게 설정 */
-                pointer-events: auto; /* 클릭 이벤트를 활성화 */
-                // cursor: pointer;
+                display: none;
             }
+
                 .left{
                     left: 0%;
                     right: 50%;
@@ -405,11 +379,10 @@ hr{
                 }
     
                 .swiper-button-prev, .swiper-button-next {
+                    display: none;
                     outline: none; /* 포커스 outline 제거 */
                     border: none;  /* 필요하면 border도 제거 */
                     background: none;
-                    pointer-events: none;
-                    display: none;
                     outline: none;
                     font-size: 0;
                     line-height: 0;
@@ -441,7 +414,7 @@ hr{
         }
         
         footer{
-                display: flex;
+                display: none;
                 align-self: end;
                 justify-content: center;
                 text-align: center;
@@ -449,36 +422,17 @@ hr{
                 grid-column-end: 13;
                 position: relative;
                 grid-row: 40 / 41;
-                
-                    .footer-all{
-                        padding-bottom: 0;
-                        margin-bottom: 0;
-                        align-self: end;
-                        text-align: right;
-                        grid-row: 1;
-                        z-index: 101;
-                        font-size: 0.625rem;
-                        align-self: end;
-                        grid-row: 1;
-                        
-                        h1, h2{
-                            font-size: 0.625rem;}
-                    }
+        }
+        
+        .minWidth320{
+            display: block;
+            grid-row-start: 40;
+            grid-row-end: 41;
+            font-size: 0.625rem !important;
         }
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1399px){
-    .container{
-        height: 100vh;
-        display: none;}
-    .minWidth320{
-        height: 100vh;
-        display: none;
-    }
-}
-
-@media screen and (min-width: 1400px){
-    .minWidth320{display: none;}
-    .minWidth768{display: none;}
+@media screen and (min-width: 1px) and (max-width: 319px){
+    .container{display: none;}
 }

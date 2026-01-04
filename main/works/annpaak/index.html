@@ -36,28 +36,28 @@
         <nav class="header-hyeok">
             <ul>
                 <li>
-                    <a href="/index.html">info</a>
+                    <a href="/index.html">Info</a>
                 </li>
             </ul>
         </nav>
         <nav class="header-works">
             <ul>
                 <li>
-                    <a href="/works/works.html">works</a>
+                    <a href="/works/works.html">Works</a>
                 </li>
             </ul>
         </nav>
         <nav class="header-about">
             <ul>
                 <li>
-                    <a href="/about/about.html">about</a>
+                    <a href="/about/about.html">About</a>
                 </li>
             </ul>
         </nav>
         <nav class="header-cv">
             <ul>
                 <li>
-                    <a href="/cv/cv.html">↗ CV</a>
+                    <a href="/brief/brief.html">↗ Brief</a>
                 </li>
             </ul>
         </nav>
@@ -111,58 +111,36 @@
             <div class="footer-right">(c) 2025. Yoonhyeok Kim. all rights reserved.</div>
             <div class="footer-left">
                 <ul>
-                    <li>contact |
+                    <li>Contact |
                     <!-- <hr align="left"> -->
                     <a href="https://www.instagram.com/hyeok.info/" target="_blank">@hyeok.info /</a>
                     <a href="mailto:hyeok.info@gmail.com" target="_blank">hyeok.info@gmail.com</a></li>
                 </ul>
             </div>
         </footer>
-    </body>
-</div>
+        <footer class="minWidth320">
+            Name ≪장면과 소외≫ Category Identity design. Commercial
+            <br>
+            Completion Apr. 2024 Commissioned by Annpaak Space
+        </footer>
+    
+<script>
+    // Sticky Header Script
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('.global-header');
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+    });
+</script>
 
-    <div class="minWidth320">
-    <header class="global-header">
-        <nav class="header-hyeok">
-            <ul>
-                <li>
-                    <a href="/index2.html">info</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="header-works">
-            <ul>
-                <li>
-                    <a href="/works/works.html">works</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="header-about">
-            <ul>
-                <li>
-                    <a href="/about/about.html">about</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="header-cv">
-            <ul>
-                <li>
-                    <a href="/cv/cv.html">↗ CV</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-        <div class="moreInfo">
-        The 320~1399px range is currently under development.
-        <br>
-        If you want to check out the project, please use a monitor wider than 1400px.
-        </div>
-    <!-- <footer>
-        <div class="footer-all">
-            <h1>Name ≪20≫ Category Album jacket design. Commercial</h1>
-            <h2>Completion Dec. 2024 Commissioned by LYW, Sunoa</h2>
-        </div>
-    </footer> -->
+</body>
 </div>
     
     <!-- Swiper JS -->
@@ -170,7 +148,7 @@
     <!-- Initialize Swiper -->
     <script>
         const swiper = new Swiper(".mySwiper", {
-            touchRatio: 0,
+            touchRatio: 1,
             autoHeight: true,
             // speed: 650,
             // observer: true,

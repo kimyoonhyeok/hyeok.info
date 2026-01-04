@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr">
+
 <head>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <meta charset="UTF-8">
@@ -10,24 +11,103 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PGR3FGHPWE"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-PGR3FGHPWE');
+        gtag('config', 'G-PGR3FGHPWE');
     </script>
 
     <!-- 최정호체 <script> -->
     <script>
-        (function(d) {
-        var config = {
-            kitId: 'vzs3olx',
-            scriptTimeout: 3000,
-            async: true
-        },
-        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        (function (d) {
+            var config = {
+                kitId: 'vzs3olx',
+                scriptTimeout: 3000,
+                async: true
+            },
+                h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
         })(document);
     </script>
+
+    <style>
+        /* Refined Grid Layout: Equal 4 Columns */
+        .information-grid {
+            grid-column: 1 / -1;
+            /* Ensure it spans full width of parent container grid */
+            display: grid;
+            /* 
+               User Request: Equal 4-column split
+            */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+
+            /* Global Typography from Works page */
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.4;
+            letter-spacing: -0.06px;
+            color: #000;
+        }
+
+        .info-column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Typography Hierarchy matches Works */
+        .section-title {
+            display: block;
+            /* Margin removed completely to make title and body look attached (Visual newline only) */
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        .info-text {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Gap between EN and KO in Intro */
+        .intro-divider {
+            display: block;
+            height: 1.6em;
+            /* Match body line-height gap */
+        }
+
+        .info-list-item {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+
+        /* Links in text (Contact etc) */
+        .text-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 1024px) {
+            .information-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .information-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 
 </head>
 <div class="container">
@@ -35,128 +115,213 @@
         <nav class="header-hyeok">
             <ul>
                 <li>
-                    <a href="/index.html">info</a>
+                    <a href="/index.html">Info</a>
                 </li>
             </ul>
         </nav>
         <nav class="header-works">
             <ul>
                 <li>
-                    <a href="/works/works.html">works</a>
+                    <a href="/works/works.html">Works</a>
                 </li>
             </ul>
         </nav>
         <nav class="header-about">
             <ul>
                 <li>
-                    <a href="/about/about.html">about</a>
+                    <a href="/about/about.html">About</a>
                 </li>
             </ul>
         </nav>
         <nav class="header-cv">
             <ul>
                 <li>
-                    <a href="/cv/cv.html">↗ CV</a>
+                    <a href="/brief/brief.html">↗ Brief</a>
                 </li>
             </ul>
         </nav>
     </header>
+
     <body>
-        <div class="global-info">
-            <div class="about">
-                    info
-                    <hr align="left" style="border: solid 0.5px black; width: 100%;">
-                        <div class="name">
-                            김윤혁은 서울을 기반으로 활동하는 그래픽 디자이너입니다. 조형성을 바탕으로 다양한 요소들을 매개하는 시각 언어로 개발하는 데에 집중하고 있습니다. 주로 포스터와 책, 기타 발행물 같은 지류 작업과 브랜드와 관련된 아이덴티티를 개발하는 작업을 하고 있습니다. 궁극적으로 디자인이라는 도구를 통해 어떤 메시지를 전할지 고민하는 사람이 되고자 합니다.
-                        </div>
-                    •••
-                    <br>
-                    Yoonhyeok Kim  is a graphic designer based in Seoul. Formalty It’s a visual language that mediates various elements based on that I’m focusing on it, mainly on posters and books and other 
-                    tributaries like publications I’m working on developing brand-
-                    related identities. Ultimately thinking about what kind of 
-                    message I’m going to convey through a tool called design.
+        <div class="information-grid">
+            <!-- Column 1: Introduction -->
+            <div class="info-column">
+                <div>
+                    <span class="section-title">Introduction</span>
+                    <div class="info-text">
+                        Yoonhyeok Kim is a graphic designer based in Seoul. I focus on developing visual languages that
+                        mediate various elements based on form. I mainly work on printed matter such as posters, books,
+                        and other publications, as well as brand-related identities. Ultimately, I strive to be someone
+                        who contemplates what message to convey through the tool of design.
+                        <span class="intro-divider"></span>
+                        김윤혁은 서울을 기반으로 활동하는 그래픽 디자이너입니다. 조형성을 바탕으로 다양한 요소들을 매개하는 시각 언어로 개발하는 데에 집중하고 있습니다. 주로 포스터와 책, 기타
+                        발행물 같은 지류 작업과 브랜드와 관련된 아이덴티티를 개발하는 작업을 하고 있습니다. 궁극적으로 디자인이라는 도구를 통해 어떤 메시지를 전할지 고민하는 사람이 되고자
+                        합니다.
+                    </div>
+                </div>
             </div>
-            <div class="collab">
-                    clients / collaboration
-                    <hr align="left" style="border: solid 0.5px black; width: 100%;">
-                    korica, lwy, sunoa, bongak choi, Seodaemun-gu, SWYFT, lobby/st, kodo coffee, annpaak, Subverted Anatomical Landscape (SAL), ist entertainment, theboyz, Incheon National University (INU), glaspress, beigebongbong, ubomanli, janggo chum network of yunseeon sung, jeom store, wonhyuck choi, bite poets, garb, templethebongbong, gihong jeon, inho cho, chelon archive Co., cidae mag, miammiam liberal, oboae, sanctuary, nneed coffee, each differ, doosan Corp., vlook Inc., jiyoung kim, glosome, the societ of fashoin & textile industry, seoul fashion hub, bfrog vintage, higher coffee, off seoul, magazine lets, sungkyul univ., lotteimall •••
+
+            <!-- Column 2: Profile, Education, Contact... (Order: Profile in Col 2) -->
+            <div class="info-column">
+                <div>
+                    <span class="section-title">Profile</span>
+                    <div>
+                        Yoonhyeok Kim<br>
+                        From Seoul, Republic of Korea
+                    </div>
+                </div>
+                <div>
+                    <span class="section-title">Education</span>
+                    <div>
+                        2020-27(expected), Incheon National University(INU),B.F.A. in Visual Design, Double Major in
+                        Fashion Industry
+                    </div>
+                </div>
+                <div>
+                    <span class="section-title">Contact</span>
+                    <div>
+                        <a href="https://www.instagram.com/hyeok.info/" target="_blank"
+                            class="text-link">hyeok.info</a><br>
+                        +82 10 2458 0187<br>
+                        <a href="mailto:hyeok.info@gmail.com" class="text-link">hyeok.info@gmail.com</a>
+                    </div>
+                </div>
+                <div>
+                    <span class="section-title">Exhibition</span>
+                    <div class="info-list-item">2022, ≪Maximalism≫, Anpak Space, Seoul</div>
+                    <div class="info-list-item">2022, ≪Maximalism≫, ArtsxStay, Seoul</div>
+                </div>
+                <div>
+                    <span class="section-title">Career</span>
+                    <div class="info-list-item">2022–Present, Freelance Visual Designer</div>
+                    <div class="info-list-item">2022–2023, Visual Design Intern, Glosome Design Team, Some&Company Co.,
+                        Ltd.</div>
+                    <div class="info-list-item">2021–2023, Founder & President, Myo (Government Startup Project
+                        Collective)</div>
+                    <div class="info-list-item">2021–2023, Member, 27th Class, O.F.F (National University Student
+                        Fashion Association)</div>
+                    <div class="info-list-item">2021, Editorial Design Team, Lets Magazine</div>
+                </div>
+                <div>
+                    <span class="section-title">Awards</span>
+                    <div class="info-list-item">2022, Honorable Mention, 11th International Digital Fashion Contest,
+                        Korean Society of Clothing and Textiles (KSCT)</div>
+                    <div class="info-list-item">2022, Selected for the Seoul Fashion Hub Digital Design Showcase</div>
+                </div>
+                <div>
+                    <span class="section-title">License</span>
+                    <div class="info-list-item">2024, National Technical Qualification, Certified Photographer</div>
+                </div>
+            </div>
+
+            <!-- Column 3: Work (Order: Work in Col 3) -->
+            <div class="info-column">
+                <div>
+                    <span class="section-title">Work</span>
+                    <div class="info-list-item">2025, ｢한국근현대미술연구재단(korica)｣ 로고 디자인</div>
+                    <div class="info-list-item">2025, ｢한국근현대미술연구재단(korica)｣ 웹사이트 디자인 및 개발</div>
+                    <div class="info-list-item">2024, ｢LWY x SUNOA｣ ≪20≫ 앨범 자켓 디자인</div>
+                    <div class="info-list-item">2024, ｢LWY x SUNOA｣ ≪Loving You≫ 앨범 자켓 디자인</div>
+                    <div class="info-list-item">2024, ｢Subverted Anatomical Landscape｣ 명함 디자인</div>
+                    <div class="info-list-item">2024, ｢Subverted Anatomical Landscape｣ ≪β≫ 서강대메리홀, 프로그램 디자인</div>
+                    <div class="info-list-item">2024, ｢최봉각 작가 x 피트니스 이상｣ 프로그램 디자인</div>
+                    <div class="info-list-item">2024, ｢GoiiGoii｣ 로고 디자인</div>
+                    <div class="info-list-item">2024, ｢신촌글로벌대학문화제(SWYFT)｣ 제 2회 페스티벌 아이덴티티 디자인</div>
+                    <div class="info-list-item">2024, ｢Kodo.jeong｣ 패키지 디자인</div>
+                    <div class="info-list-item">2024, ｢Ubomanli｣ 로고 디자인</div>
+                    <div class="info-list-item">2024, ｢Ubomanli｣ ≪서양극장 속 한옥≫ 아르코 · 대학로예술극장, 프로그램 디자인</div>
+                    <div class="info-list-item">2024, ｢Subverted Anatomical Landscape｣ ≪KILL≫ LG 아트센터, 프로그램 디자인</div>
+                    <div class="info-list-item">2024, ｢Annpaak｣ 기획전 ≪장면과 소외≫ 프로그램 디자인</div>
+                    <div class="info-list-item">2024, ｢THE BOYZ｣ 2nd full Pt.3 ≪Love Letter≫ 앨범 자켓 및 프로모션 디자인</div>
+                    <div class="info-list-item">2023, ｢beigebongbong｣ 아이덴티티 디자인</div>
+                    <div class="info-list-item">2023, ｢성윤선의 장고춤 네트워크｣ 성균소극장 12월 상설공연 ≪동행≫ 프로그램 디자인</div>
+                    <div class="info-list-item">2023, ｢Jeom store｣ 1st anniversary 굿즈 디자인</div>
+                    <div class="info-list-item">2023, ｢TTB x garb x bite poets｣ ≪extra ordinary≫ 프로그램 디자인</div>
+                    <div class="info-list-item">2023, ｢Ubomanli｣명함 디자인</div>
+                    <div class="info-list-item">2023, ｢전기홍 작가｣ ≪buckwild≫ 에디토리얼 디자인</div>
+                    <div class="info-list-item">2023, ｢Ubomanli｣ ≪Knock≫ 국립극장, 프로그램 디자인</div>
+                    <div class="info-list-item">2023, ｢chelon archive co.｣ 아이덴티티 디자인</div>
+                    <div class="info-list-item">2023, ｢Mumu｣ 아이덴티티 디자인</div>
+                    <div class="info-list-item">2023, ｢Cidae.co｣ 에디토리얼 디자인</div>
+                    <div class="info-list-item">2023, ｢Miammiam x 최원혁 작가｣ 프로그램 디자인</div>
+                    <div class="info-list-item">2023, ｢Oboae｣ 쇼룸 엽서 디자인</div>
+                    <div class="info-list-item">2023, ｢Info x cidae.co｣ 굿즈 디자인</div>
+                    <div class="info-list-item">2023, ｢Nneed coffee｣ 아이덴티티 디자인</div>
+                    <div class="info-list-item">2023, ｢Each differ｣ 23f/w 아트워크 디자인</div>
+                    <div class="info-list-item">2023, ｢최원혁 작가｣ ≪open studio in seoul≫ 프로그램 디자인</div>
+                    <div class="info-list-item">2023, ｢Each differ｣ 로고 디자인</div>
+                    <div class="info-list-item">2023, ｢최원혁 작가｣ ≪open studio in jeju≫ 프로그램 디자인</div>
+                    <div class="info-list-item">2023, ｢Doosan x vlook｣ 아이덴티티 및 팝업스토어 매장 디자인</div>
+                    <div class="info-list-item">2023, ｢AAO｣ 월별 3D 아트워크 디자인</div>
+                    <div class="info-list-item">2023, ｢Viewfinder｣ 연력 포스터 디자인</div>
+                    <div class="info-list-item">2023, ｢Viewfinder｣ 로고 디자인</div>
+                    <div class="info-list-item">2022, ｢Bfrog｣ 쇼룸 로고 디자인</div>
+                    <div class="info-list-item">2022, ｢Higher coffee｣ 행사 포스터 디자인</div>
+                </div>
+            </div>
+
+            <!-- Column 4: Tools, Clients -->
+            <div class="info-column">
+                <div>
+                    <span class="section-title">Tools</span>
+                    <div>
+                        Indesign, Illustrator, Photoshop, Lightroom, LightroomClassic, AfterEffects, Cinema4D, Redshift,
+                        TouchDesigner, XD, HTML/CSS
+                    </div>
+                </div>
+                <div>
+                    <span class="section-title">Clients / Collaboration</span>
+                    <div class="info-list-item">
+                        korica, lwy, sunoa, bongak choi, Seodaemun-gu, SWYFT, lobby/st, kodo coffee, annpaak, Subverted
+                        Anatomical Landscape (SAL), ist entertainment, theboyz, Incheon National University (INU),
+                        glaspress, beigebongbong, ubomanli, janggo chum network of yunseeon sung, jeom store, wonhyuck
+                        choi, bite poets, garb, templethebongbong, gihong jeon, inho cho, chelon archive Co., cidae mag,
+                        miammiam liberal, oboae, sanctuary, nneed coffee, each differ, doosan Corp., vlook Inc., jiyoung
+                        kim, glosome, the societ of fashoin & textile industry, seoul fashion hub, bfrog vintage, higher
+                        coffee, off seoul, magazine lets, sungkyul univ., lotteimall •••
+                    </div>
+                </div>
             </div>
         </div>
+
+        <script>
+            // Sticky Header Script
+            document.addEventListener('DOMContentLoaded', () => {
+                const header = document.querySelector('.global-header');
+                if (header) {
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 10) {
+                            header.classList.add('scrolled');
+                        } else {
+                            header.classList.remove('scrolled');
+                        }
+                    });
+                }
+            });
+        </script>
+
     </body>
     <footer>
         <div class="footer-right">(c) 2025. Yoonhyeok Kim. all rights reserved.</div>
         <div class="footer-left">
             <ul>
-                <li>contact |
-                <!-- <hr align="left"> -->
-                <a href="https://www.instagram.com/hyeok.info/" target="_blank">@hyeok.info /</a>
-                <a href="mailto:hyeok.info@gmail.com" target="_blank">hyeok.info@gmail.com</a></li>
+                <li>Contact |
+                    <!-- <hr align="left"> -->
+                    <a href="https://www.instagram.com/hyeok.info/" target="_blank">@hyeok.info /</a>
+                    <a href="mailto:hyeok.info@gmail.com" target="_blank">hyeok.info@gmail.com</a>
+                </li>
             </ul>
         </div>
     </footer>
-</div>
-
-
-<div class="minWidth320">
-    <header class="global-header">
-        <nav class="header-hyeok">
-            <ul>
-                <li>
-                    <a href="/index2.html">info</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="header-works">
-            <ul>
-                <li>
-                    <a href="/works/works.html">works</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="header-about">
-            <ul>
-                <li>
-                    <a href="/about/about.html">about</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="header-cv">
-            <ul>
-                <li>
-                    <a href="/cv/cv.html">↗ CV</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <div class="global-info320">
-        <div class="about">
-                info
-                <hr align="left" style="border: solid 0.5px black; width: 100%;">
-                    <div class="name">
-                        김윤혁은 서울을 기반으로 활동하는 그래픽 디자이너입니다. 조형성을 바탕으로 다양한 요소들을 매개하는 시각 언어로 개발하는 데에 집중하고 있습니다. 주로 포스터와 책, 기타 발행물 같은 지류 작업과 브랜드와 관련된 아이덴티티를 개발하는 작업을 하고 있습니다. 궁극적으로 디자인이라는 도구를 통해 어떤 메시지를 전할지 고민하는 사람이 되고자 합니다.
-                    </div>
-                •••
-                <br>
-                Yoonhyeok Kim  is a graphic designer based in Seoul. Formalty It’s a visual language that mediates various elements based on that I’m focusing on it, mainly on posters and books and other 
-                tributaries like publications I’m working on developing brand-
-                related identities. Ultimately thinking about what kind of 
-                message I’m going to convey through a tool called design.
-        </div>
-        <div class="collab">
-                clients / collaboration
-                <hr align="left" style="border: solid 0.5px black; width: 100%;">
-                korica, lwy, sunoa, bongak choi, Seodaemun-gu, SWYFT, lobby/st, kodo coffee, annpaak, Subverted Anatomical Landscape (SAL), ist entertainment, theboyz, Incheon National University (INU), glaspress, beigebongbong, ubomanli, janggo chum network of yunseeon sung, jeom store, wonhyuck choi, bite poets, garb, templethebongbong, gihong jeon, inho cho, chelon archive Co., cidae mag, miammiam liberal, oboae, sanctuary, nneed coffee, each differ, doosan Corp., vlook Inc., jiyoung kim, glosome, the societ of fashoin & textile industry, seoul fashion hub, bfrog vintage, higher coffee, off seoul, magazine lets, sungkyul univ., lotteimall •••
-        </div>
-    </div>
-    <footer>
-        <div class="footer-all">
-            <ul>
-                <li>contact |
+    <footer class="minWidth320">
+        <ul>
+            <li>Contact |
                 <!-- <hr align="left"> -->
-                <a href="mailto:hyeok.info@gmail.com" target="_blank">hyeok.info@gmail.com</a></li>
-            </ul>
-            <h1>(c) 2025. Yoonhyeok Kim. all rights reserved.</h1>
-        </div>
+                <a href="mailto:hyeok.info@gmail.com" target="_blank">hyeok.info@gmail.com</a>
+            </li>
+        </ul>
+        <h1>(c) 2025. Yoonhyeok Kim. all rights reserved.</h1>
     </footer>
 </div>
+
 </html>
