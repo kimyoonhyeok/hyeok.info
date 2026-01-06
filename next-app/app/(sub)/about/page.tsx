@@ -48,7 +48,7 @@ export default function AboutPage() {
                 <div>
                     <span className={styles.sectionTitle}>Exhibition</span>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>≪LOOPING IN THE BOX≫, ARTKOREALAB, Seoul</span></div>
-                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>≪INU x ISO Project≫, Illinois State Univ.(ISO), Incheon Nat'l Univ.(INU)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>≪INU x ISO Project≫, Illinois State Univ.(ISO), Incheon Nat&apos;l Univ.(INU)</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>≪Maximalism≫, Anpak Space, Seoul</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>≪Maximalism≫, ArtsxStay, Seoul</span></div>
                 </div>
