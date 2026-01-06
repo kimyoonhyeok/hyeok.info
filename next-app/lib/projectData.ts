@@ -281,7 +281,7 @@ export const projects: Project[] = [
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
   },
   {
-    slug: "calendar",
+    slug: "Calendar",
     title: "Calendar 2024",
     scope: "Paper Design",
     category: "Non-Commercial",
