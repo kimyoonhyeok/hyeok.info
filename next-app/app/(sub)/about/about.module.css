@@ -49,6 +49,14 @@
     margin-bottom: 0px;
     line-height: 1.5;
     word-break: keep-all;
+    display: flex;
+    align-items: baseline;
+}
+
+.yearLabel {
+    flex-shrink: 0;
+    margin-right: 0.35em;
+    /* Simulates one space gap */
 }
 
 /* Links in text (Contact etc) */

@@ -1,0 +1,16 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "next-app",
+    "projectPath": "/Users/yoonhyeokkim/Desktop/2025/Web/hyeok/hyeok.info/next-app",
+    "testIds": [],
+    "additionalInstruction": "CRITICAL VISUAL & FUNCTIONAL REQUIREMENTS (Product Spec):\n1. **Video Thumbnails**: Projects 'TD' and 'AcademicMotionGraphic' MUST render with aspect-ratio 13:10 (roughly 1.3) and object-fit: contain. Ensure NO cropping.\n2. **Hover Effect**: On hover, project items must have opacity 0.55.\n3. **Mobile Footer**: Footer must be visible at the bottom of the Home page on mobile viewports (e.g. iPhone 13) and not float in the middle.\n4. **Navigation**: Clicking 'Works', 'About' should navigate correctly. Back button from Project Detail must restore scroll position in Works list.\n5. **Safari Fonts**: Check computed style of Footer font-weight. It must be 400 (Normal), not Bold.\n6. **Layout**:\n   - Desktop: 3 columns.\n   - Tablet: 2 columns.\n   - Mobile: 1 column.\n7. **About Page**: Lists under Education/Career must have hanging indents (check CSS class .infoListItem).\n8. **Assets**: Verify '04.mp4' loads in 'lovingYou' project. Verify 'TDWorkShop' project exists.",
+    "envs": {
+      "API_KEY": "sk-user-SNOGIkvuZAdWXtutlPTNtqfIiQR4JeiRzUMLOF8gF-BLLpTQfjrHOtNtCQ3LV5vxaUOlwb4Uqnrq4twNuuWNxRGkPFtyJCjnpdyUOJzCDCl28OgUqICkDhsjn_uHv8HFc9I"
+    }
+  },
+  "proxy": "http://0712085a-aadd-47e6-87df-34c6aa0160cf:LWa1t6U1TPyrtrrUhjkwHzpZp2s7bnxv@tun.testsprite.com:8080"
+}

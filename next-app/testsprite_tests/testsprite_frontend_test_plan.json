@@ -1,0 +1,362 @@
+[
+  {
+    "id": "TC001",
+    "title": "Verify Home page entrance image responsiveness and styling",
+    "description": "Ensure that the featured entrance image on the Home page scales appropriately with correct shadowing across desktop, tablet, and mobile devices.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Home page on desktop resolution"
+      },
+      {
+        "type": "assertion",
+        "description": "Check the entrance image scales correctly and shadow is visible and consistent with design"
+      },
+      {
+        "type": "action",
+        "description": "Resize viewport to tablet resolution and reload Home page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify entrance image responsiveness and shadow styling remain consistent"
+      },
+      {
+        "type": "action",
+        "description": "Resize viewport to mobile resolution and reload Home page"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm entrance image scales properly without cropping or distortion and shadow is correct"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Validate global header navigation links and active state",
+    "description": "Check that the header navigation links (Home, Works, About, Brief) navigate correctly and show appropriate active link highlighting, and the logo link returns to Home page.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load any page with the global header visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on each navigation link one by one: Home, Works, About, Brief"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page navigates correctly to each respective page"
+      },
+      {
+        "type": "action",
+        "description": "After navigation, check the respective nav item for active state styling"
+      },
+      {
+        "type": "action",
+        "description": "Click the logo in the header"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm navigation back to Home page and active state updates accordingly"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Ensure Works page grid responsiveness and hover interactions",
+    "description": "Validate that the Works page displays a grid of projects with the correct number of columns depending on device size, and that hovering or tapping project thumbnails shows the correct visual feedback for both image and video thumbnails.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Works page on desktop"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify grid columns count matches design specifications for desktop"
+      },
+      {
+        "type": "action",
+        "description": "Hover mouse over project image thumbnail"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that hover visual feedback is displayed with correct opacity and styling"
+      },
+      {
+        "type": "action",
+        "description": "Hover mouse over project video thumbnail"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that hover visual feedback is displayed and video thumbnail plays or animates as expected"
+      },
+      {
+        "type": "action",
+        "description": "Resize viewport to mobile and tablet sizes and reload Works page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify column count adjusts responsively and tapping project thumbnails triggers visual feedback"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Validate Project Detail page slider behavior on desktop",
+    "description": "Ensure the Project Detail page displays split-screen layout with a slider/swiper for images and videos that supports navigation clicks, autoplay media, and respects layout constraints on desktop devices.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to a Project Detail page on desktop"
+      },
+      {
+        "type": "assertion",
+        "description": "Check the layout uses a split-screen format with a sticky info sidebar"
+      },
+      {
+        "type": "action",
+        "description": "Use navigation arrows or click to move between slider items"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify slider transitions smoothly to next/previous images or videos"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm videos autoplay upon slide visibility without cropping or distortion"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure high-resolution images are displayed without layout overflow or breaking constraints"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Validate Project Detail page slider behavior on mobile and tablet",
+    "description": "Ensure the Project Detail page slider supports swipe gestures for images and videos, with autoplay functionality and responsive layout on mobile and tablet devices.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open a Project Detail page on a tablet device or mobile viewport"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify layout switches to swipe-enabled slider without split-screen"
+      },
+      {
+        "type": "action",
+        "description": "Use swipe gestures to navigate between slider media"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that slide transitions happen smoothly without delay or jank"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm videos autoplay correctly respecting aspect ratio and layout constraints"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Verify Works page scroll restoration after navigating back from Project Detail",
+    "description": "Check that when users navigate back from a Project Detail page to the Works page, their previous scroll position is preserved correctly.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Go to Works page and scroll down several projects"
+      },
+      {
+        "type": "action",
+        "description": "Select a project to navigate to its Detail page"
+      },
+      {
+        "type": "action",
+        "description": "Use the browser back button or site navigation to return to Works page"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the scroll position is restored to where the user left off"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Check About page typography and responsive layout",
+    "description": "Validate About page uses hanging indent for resume list, proper capitalization, and responsive column stacking on mobile devices.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the About page on a desktop viewport"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the resume list uses hanging indent styling"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that text capitalization matches design guidelines"
+      },
+      {
+        "type": "action",
+        "description": "Resize viewport to mobile resolution"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm columns stack vertically without layout issues"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Validate custom SVG cursor behavior across device types",
+    "description": "Check that custom SVG cursors appear on pointer devices and adapt or hide appropriately on touch devices.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the site on a desktop browser with a mouse pointer"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify custom SVG cursor is visible and interactive"
+      },
+      {
+        "type": "action",
+        "description": "Open the site on a mobile or tablet touch device"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the SVG cursor hides or adapts as expected without interfering with touch actions"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Verify font rendering and consistency across browsers",
+    "description": "Ensure that custom Korean and other fonts render correctly without flickering or inappropriate font weight across supported browsers including Safari.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open key pages (Home, Works, About) in latest Chrome"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm fonts render correctly with no flickering, correct weight, and proper Korean text display"
+      },
+      {
+        "type": "action",
+        "description": "Repeat test in Firefox"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify consistent font rendering with no visual defects"
+      },
+      {
+        "type": "action",
+        "description": "Repeat test in Safari"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure fonts render crisply and match intended styling without issues"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Test video thumbnail playback on iOS Low Power Mode",
+    "description": "Confirm that video thumbnails on the Works page maintain correct aspect ratios and playback smoothly without black bars or cropping when Low Power Mode is enabled on iOS devices.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Using an iOS device, enable Low Power Mode"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to Works page"
+      },
+      {
+        "type": "assertion",
+        "description": "Select projects with video thumbnails and observe playback"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify aspect ratio is preserved and no black bars, cropping, or playback errors occur"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Validate smooth page transitions and absence of errors",
+    "description": "Check that page transitions occur seamlessly with no visible glitches, console errors, hydration mismatches, or 404 errors throughout site navigation.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate through all main pages: Home, Works, individual Project Detail, About, Brief"
+      },
+      {
+        "type": "assertion",
+        "description": "Observe page transition animations for smoothness without flicker or jump"
+      },
+      {
+        "type": "assertion",
+        "description": "Open browser developer console and verify no errors or warnings occur during transitions"
+      },
+      {
+        "type": "action",
+        "description": "Use browser dev tools network panel to check for any 404 errors"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm no 404s or hydration mismatch warnings appear"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Verify known regression fixes: matching thumbnail sizes and mobile footer positioning",
+    "description": "Confirm that the fix for matching TD & Academic thumbnail sizes on Works page and correct mobile footer positioning on Home page are implemented and no regressions occur.",
+    "category": "regression",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load Works page and visually compare the thumbnail sizes for TD and Academic projects"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify thumbnails match in size without layout shifts"
+      },
+      {
+        "type": "action",
+        "description": "Load Home page on a mobile device"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the footer is correctly positioned with no overlay or visual glitches"
+      }
+    ]
+  }
+]

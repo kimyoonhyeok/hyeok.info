@@ -28,7 +28,7 @@ html.wf-inactive body {
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
-  font-family: "Helvetica Neue", Helvetica, Arial, "agchoijeongho-screen", "ag-choijeongho-screen", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "agchoijeongho-screen", "ag-choijeongho-screen", "AppleMyungjo", "Batang", serif;
   color: #000;
   -webkit-font-smoothing: antialiased;
 }
@@ -129,7 +129,7 @@ footer li {
 
 .project-item:hover .image-wrapper img,
 .project-item:hover .image-wrapper video {
-  opacity: 0.8;
+  opacity: 0.55;
   transition: opacity 0.3s ease;
 }
 

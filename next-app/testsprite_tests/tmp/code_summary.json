@@ -1,0 +1,43 @@
+{
+    "tech_stack": [
+        "TypeScript",
+        "Next.js",
+        "TailwindCSS",
+        "React"
+    ],
+    "features": [
+        {
+            "name": "Project List",
+            "description": "Displays a grid of projects with hover effects and responsive columns.",
+            "files": [
+                "app/(sub)/works/page.tsx",
+                "app/globals.css"
+            ]
+        },
+        {
+            "name": "Project Detail",
+            "description": "Shows project details with a slider/swiper for images/videos and sticky info sidebar.",
+            "files": [
+                "app/(sub)/works/[slug]/page.tsx",
+                "app/(sub)/works/[slug]/ProjectDetail.tsx",
+                "lib/projectData.ts"
+            ]
+        },
+        {
+            "name": "Navigation",
+            "description": "Global header with links to Home, Works, About, Brief.",
+            "files": [
+                "components/ui/Header.tsx",
+                "app/home.module.css"
+            ]
+        },
+        {
+            "name": "About Page",
+            "description": "Information about the artist/designer with hanging indent resume list.",
+            "files": [
+                "app/(sub)/about/page.tsx",
+                "app/(sub)/about/about.module.css"
+            ]
+        }
+    ]
+}
