@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/lib/projectData";
 import KoricaThumbnail from "@/components/KoricaThumbnail";
+import LazyVideo from "@/components/LazyVideo";
 
 interface ProjectItemProps {
     href: string;
@@ -20,15 +21,6 @@ interface ProjectItemProps {
 // Helper to render standardized project item
 const ProjectItem = ({ href, imgSrc, alt, title, scope, category, completion, slug }: ProjectItemProps) => {
     const isVideo = imgSrc.toLowerCase().endsWith('.mp4') || imgSrc.toLowerCase().endsWith('.webm');
-    const videoRef = React.useRef<HTMLVideoElement>(null);
-
-    React.useEffect(() => {
-        if (isVideo && videoRef.current) {
-            // Force play on mount to bypass potential React hydration timing issues with 'muted' attribute
-            videoRef.current.muted = true;
-            videoRef.current.play().catch(e => console.log('Autoplay blocked:', e));
-        }
-    }, [isVideo]);
 
     return (
         <Link href={href} className="project-item">
@@ -39,8 +31,7 @@ const ProjectItem = ({ href, imgSrc, alt, title, scope, category, completion, sl
                 {slug === 'KoricaWeb' ? (
                     <KoricaThumbnail />
                 ) : isVideo ? (
-                    <video
-                        ref={videoRef}
+                    <LazyVideo
                         src={`${imgSrc}?v=${slug === 'TD' || slug === 'AcademicMotionGraphic' ? '2' : '1'}`}
                         autoPlay
                         loop
@@ -50,7 +41,7 @@ const ProjectItem = ({ href, imgSrc, alt, title, scope, category, completion, sl
                             width: '100%',
                             height: '100%',
                             objectFit: (slug === 'AcademicMotionGraphic' || slug === 'TD') ? 'contain' : 'cover',
-                            willChange: 'transform', // Advanced optimization
+                            willChange: 'transform',
                             backfaceVisibility: 'hidden',
                             transform: slug === 'fitnessIdeal' ? 'scale(1.25) translate3d(0, 0, 0)' : 'translate3d(0, 0, 0)'
                         }}

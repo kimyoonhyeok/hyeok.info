@@ -6,6 +6,7 @@ import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import Image from 'next/image';
 
 import styles from '../app/(project)/project.module.css';
 
@@ -41,6 +42,8 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
             if (!video) return;
             if (index === activeIndex) {
                 video.currentTime = 0;
+                // Force load if it was preload="none"
+                video.preload = "auto";
                 const playPromise = video.play();
                 if (playPromise !== undefined) {
                     playPromise.catch((error) => {
@@ -117,6 +120,7 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                     {project.images.map((img: string, idx: number) => {
                         const isVideo = img.toLowerCase().endsWith('.mp4') || img.toLowerCase().endsWith('.webm');
                         const src = `/project_images/${slug}/${img}`;
+                        const isNearby = Math.abs(activeIndex - idx) <= 1; // Prioritize current and adjacent
 
                         return (
                             <SwiperSlide key={idx}>
@@ -127,16 +131,21 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                                         loop
                                         playsInline
                                         controls={false}
-
-                                        style={{ width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }} // Ensure swipes work over video
+                                        muted // Required for autoplay
+                                        preload={isNearby ? "auto" : "none"} // Huge bandwidth saver
+                                        style={{ width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }}
                                     />
                                 ) : (
-                                    <img
-                                        src={src}
-                                        alt={`${project.title} - ${idx + 1}`}
-                                        loading={idx === 0 || Math.abs(activeIndex - idx) <= 1 ? "eager" : "lazy"}
-                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                                    />
+                                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                        <Image
+                                            src={src}
+                                            alt={`${project.title} - ${idx + 1}`}
+                                            fill
+                                            priority={idx === 0} // Only first image priority
+                                            sizes="100vw"
+                                            style={{ objectFit: 'contain' }}
+                                        />
+                                    </div>
                                 )}
                             </SwiperSlide>
                         );
@@ -144,7 +153,6 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                 </Swiper>
 
                 {/* Desktop/Tablet Navigation Overlays - Explicit Click Handlers */}
-                {/* Use string literal classes to match CSS :global() definition */}
                 <div
                     className="swiper-overlay left"
                     onClick={handlePrev}
