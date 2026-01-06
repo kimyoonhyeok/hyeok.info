@@ -62,7 +62,7 @@ export const projects: Project[] = [
   },
   {
     slug: "Recylce",
-    title: "곰시선 프로젝트 «재활용? 제활용!»",
+    title: "곰시선 프로젝트 ≪재활용? 제활용!≫",
     scope: "Identity Design",
     category: "Commercial",
     completion: "Sep. 2025",
@@ -92,7 +92,7 @@ export const projects: Project[] = [
   },
   {
     slug: "Seong2025",
-    title: "성윤선의 장고춤 네트워크 «동행» Ⅱ",
+    title: "성윤선의 장고춤 네트워크 ≪동행≫ Ⅱ",
     scope: "Identity Design",
     category: "Commercial",
     completion: "Jun. 2025",
