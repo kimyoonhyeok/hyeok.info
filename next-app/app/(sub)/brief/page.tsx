@@ -119,8 +119,7 @@ export default function BriefPage() {
 
     // -- Handlers --
     const handlePortfolioClick = () => {
-        // Open PDF with toolbar hidden to discourage downloading
-        window.open('/Yoonhyeok%20Portfolio(~25.11).pdf#toolbar=0', '_blank');
+        window.open('/portfolio', '_blank');
     };
 
     const handleFileClick = () => {
