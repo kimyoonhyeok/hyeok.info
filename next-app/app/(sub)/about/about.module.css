@@ -35,6 +35,7 @@
 .infoText {
     line-height: 1.6;
     margin-bottom: 12px;
+    word-break: keep-all;
 }
 
 /* Gap between EN and KO in Intro */
@@ -47,6 +48,7 @@
 .infoListItem {
     margin-bottom: 0px;
     line-height: 1.5;
+    word-break: keep-all;
 }
 
 /* Links in text (Contact etc) */

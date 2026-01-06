@@ -146,9 +146,9 @@ export const projects: Project[] = [
     scope: "Paper Design",
     category: "Non-Commercial",
     completion: "Jan. 2024",
-    thumbnail: "Thumbnail.jpg",
+    thumbnail: "Thumbnail.mp4",
     description: "매번 오는 새해와 같은 숫자의 반복이지만, 같은 하루가 없다는 생각에 이상한 달력을 제작했습니다.보통 달력은 가로줄과 세로줄 두 줄을 기준으로 표현합니다. 가로는 요일, 세로는 주차를 의미합니다. 여기서 우리는 가로는 비슷하고 세로는 제법 다른 일상을 살아갑니다. 평일과 주말로 같은 선상의 반복 일상이 자리하고 첫째 주부터 넷째 주까지는 특별한 이벤트를 더해 가로선 사이의 위계를 주는 것이 예시라면 예시일 것 같습니다. 이 점에서 큰 움직임이 없는 가로는 되도록 유지하고 세로는 높이 차이를 부여해 보다 입체적으로 <매일>을 표현하려 노력했습니다. 또 벽걸이용 달력이 주는 특징으로 바랜 듯한 색감을 생각했는데, 이를 구현하기 위해 리소 프린트를 사용했습니다.판매용 달력이 아니었기 때문에, 23년 함께 작업했던 분들께 선물하는 것을 끝으로 작업을 마무리 했습니다.",
-    images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.mp4"]
+    images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "Thumbnail.mp4"]
   },
   {
     slug: "infoxCidae",
