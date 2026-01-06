@@ -3,10 +3,27 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "hyeok.info",
-  description: "Portfolio of Yoonhyeok Kim",
+  title: {
+    template: '%s | Yoonhyeok Kim',
+    default: 'Yoonhyeok Kim | Graphic Designer',
+  },
+  description: 'Graphic Designer Yoonhyeok Kim (김윤혁) Portfolio. Identity, Editorial, Digital Design based in Seoul.',
+  keywords: ['김윤혁', '디자이너 김윤혁', 'Yoonhyeok Kim', 'Graphic Designer', 'Portfolio', 'Seoul', 'Design', '그래픽 디자이너', '브랜딩', 'Branding', '디자이너 윤혁'],
   icons: {
     icon: "/favicon/favicon.ico",
+  },
+  metadataBase: new URL('https://hyeok.info'),
+  openGraph: {
+    title: 'Yoonhyeok Kim | Graphic Designer',
+    description: 'Graphic Designer Yoonhyeok Kim Portfolio',
+    url: 'https://hyeok.info',
+    siteName: 'Yoonhyeok Kim',
+    locale: 'ko_KR',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -19,7 +36,9 @@ export default function RootLayout({
     <html lang="kr">
       <body>
         {/* Adobe Fonts (Typekit) */}
-        <Script id="typekit" strategy="afterInteractive">
+        {/* Adobe Fonts (Typekit) - CSS Load for FOUT prevention */}
+        {/* Adobe Fonts (Typekit) - JS Loader for Robustness */}
+        <Script id="typekit-loader" strategy="afterInteractive">
           {`
             (function(d) {
               var config = {

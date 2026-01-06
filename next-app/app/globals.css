@@ -3,14 +3,23 @@
   --color: rgb(0, 0, 0);
 }
 
-@font-face {
-  font-family: "agchoijeongho-screen";
-  src: url(https://fonts.adobe.com/search?query=%EC%B5%9C%EC%A0%95%ED%98%B8);
+/* Typekit FOUT Prevention */
+html.wf-loading body {
+  opacity: 0;
+  visibility: hidden;
+}
+
+html.wf-active body,
+html.wf-inactive body {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease;
 }
 
 @font-face {
   font-family: "Helvetica Neue";
-  src: local("Helvetica Neue"), local(Helvetica);
+  src: local("Helvetica Neue"),
+    local(Helvetica);
 }
 
 * {
@@ -19,7 +28,7 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
-  font-family: "Helvetica Neue", "agchoijeongho-screen", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "agchoijeongho-screen", "ag-choijeongho-screen", sans-serif;
   color: #000;
   -webkit-font-smoothing: antialiased;
 }
@@ -86,10 +95,19 @@ body {
 }
 
 .global-header a:hover,
-footer a:hover,
-footer li:hover {
+footer a:hover {
   opacity: 0.25;
   transition: opacity 0.3s ease;
+}
+
+/* Explicitly set font weight/size for footer links to fix Safari inconsistency */
+footer a,
+footer li {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  /* Ensure consistent rendering on macOS */
 }
 
 /* --- Project Grid (For Works) --- */
@@ -139,6 +157,7 @@ footer li:hover {
   line-height: 1.4;
   letter-spacing: -0.06px;
   color: #000;
+  text-transform: capitalize;
 }
 
 .info-wrapper .title {
@@ -204,6 +223,35 @@ footer {
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Tablet & Mobile Footer (Unified) */
+  footer {
+    display: none;
+  }
+
+  .minWidth320 {
+    display: block;
+    margin-top: 2rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Explicitly target li to ensure "Contact |" text is affected */
+  .minWidth320 h1,
+  .minWidth320 a,
+  .minWidth320 li {
+    font-size: 0.625rem !important;
+    font-weight: 400;
+    color: var(--color);
+    list-style: none;
+  }
+
+  .minWidth320 ul {
+    justify-content: center;
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -247,23 +295,7 @@ footer {
     font-size: 11px;
   }
 
-  footer {
-    display: none;
-    /* Works footer hides on mobile */
-  }
-
-  .minWidth320 {
-    display: block;
-    margin-top: 2rem;
-    text-align: center;
-    width: 100%;
-  }
-
-  .minWidth320 h1,
-  .minWidth320 a {
-    font-size: 0.625rem;
-    font-weight: 400;
-  }
+  /* Footer styles moved to max-width: 1024px */
 }
 
 /* Sticky Header */

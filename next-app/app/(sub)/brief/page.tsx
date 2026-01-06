@@ -7,6 +7,7 @@ export default function BriefPage() {
 
     // -- State --
     const [viewMode, setViewMode] = useState<'initial' | 'form'>('initial');
+    const [isClosing, setIsClosing] = useState(false);
     const [gradients, setGradients] = useState({ left: '', right: '' });
 
     // -- Form State --
@@ -16,6 +17,7 @@ export default function BriefPage() {
 
     const formRef = useRef<HTMLFormElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const isDirtyRef = useRef(false);
 
     // -- Color Logic (Preserved) --
     useEffect(() => {
@@ -33,8 +35,9 @@ export default function BriefPage() {
                 const offset = isLeft ? 0 : 1;
                 for (let i = 0; i < 7; i++) {
                     const slotIndex = (i * 2) + offset;
-                    // Adjust hue spread
-                    const hue = (timeBase + (slotIndex * 25.7)) % 360;
+                    // Adjust hue spread (Opposite colors for Right circle)
+                    const phaseShift = isLeft ? 0 : 180;
+                    const hue = (timeBase + (slotIndex * 25.7) + phaseShift) % 360;
                     colors.push(`hsl(${hue}, 70%, 50%)`);
                 }
                 return colors;
@@ -74,12 +77,58 @@ export default function BriefPage() {
         return () => clearInterval(interval);
     }, []);
 
+    // -- Inactivity Timer --
+    const startTimeRef = useRef<number>(0);
+
+    const handleInteraction = () => {
+        isDirtyRef.current = true;
+    };
+
+    useEffect(() => {
+        if (viewMode !== 'form') return;
+
+        // Reset dirty state and start time on open
+        isDirtyRef.current = false;
+        startTimeRef.current = Date.now();
+
+        const timer = setInterval(() => {
+            // If dirty, do nothing (never close)
+            if (isDirtyRef.current) return;
+
+            // If 10s passed without dirty
+            if (Date.now() - startTimeRef.current > 10000) {
+                setIsClosing(true);
+                clearInterval(timer);
+            }
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [viewMode]);
+
+    // Effect to handle close animation completion
+    useEffect(() => {
+        if (isClosing) {
+            const timeout = setTimeout(() => {
+                setViewMode('initial');
+                setStatus('idle');
+                setIsClosing(false); // Reset closing state
+            }, 2500); // 2.5 seconds match CSS
+            return () => clearTimeout(timeout);
+        }
+    }, [isClosing]);
+
     // -- Handlers --
+    const handlePortfolioClick = () => {
+        window.open('/portfolio', '_blank');
+    };
+
     const handleFileClick = () => {
+        handleInteraction();
         fileInputRef.current?.click();
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        handleInteraction();
         const files = e.target.files;
         if (files && files.length > 0) {
             setFileLabel(`${files.length}개의 파일이 선택됨`);
@@ -92,6 +141,7 @@ export default function BriefPage() {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        handleInteraction();
         const form = e.currentTarget; // Capture form reference immediately
         setStatus('submitting');
 
@@ -141,7 +191,7 @@ export default function BriefPage() {
                     <span className={styles.boxTitle}>Brief</span>
                 </div>
             ) : (
-                <div className={styles.formContainer}>
+                <div className={`${styles.formContainer} ${isClosing ? styles.fadeOut : ''}`}>
                     <form ref={formRef} onSubmit={handleSubmit}>
 
                         <DynamicInput
@@ -149,6 +199,7 @@ export default function BriefPage() {
                             name="projectTitle"
                             required
                             placeholder="프로젝트의 제목을 입력해주세요."
+                            onInteract={handleInteraction}
                         />
 
                         <DynamicInput
@@ -156,6 +207,7 @@ export default function BriefPage() {
                             name="projectContent"
                             required
                             placeholder="프로젝트에 대해 최대한 상세한 설명을 작성해주세요."
+                            onInteract={handleInteraction}
                         />
 
                         {/* Custom File Input */}
@@ -187,6 +239,7 @@ export default function BriefPage() {
                             name="userIntro"
                             required
                             placeholder="본인 또는 팀에 대한 간단한 소개를 부탁드립니다."
+                            onInteract={handleInteraction}
                         />
 
                         <DynamicInput
@@ -195,6 +248,7 @@ export default function BriefPage() {
                             required
                             type="email"
                             placeholder="연락 가능한 이메일 주소를 입력해주세요."
+                            onInteract={handleInteraction}
                         />
 
                         <DynamicInput
@@ -202,24 +256,28 @@ export default function BriefPage() {
                             name="phone"
                             type="tel"
                             placeholder="연락 가능한 전화번호를 입력해주세요."
+                            onInteract={handleInteraction}
                         />
 
                         <DynamicInput
                             label="Project Type"
                             name="projectType"
                             placeholder="예: 브랜딩, 웹 디자인, 편집 디자인 등"
+                            onInteract={handleInteraction}
                         />
 
                         <DynamicInput
                             label="Schedule"
                             name="schedule"
                             placeholder="희망하시는 시작일과 마감일을 입력해주세요."
+                            onInteract={handleInteraction}
                         />
 
                         <DynamicInput
                             label="Budget"
                             name="budget"
                             placeholder="예상하시는 프로젝트 예산을 입력해주세요."
+                            onInteract={handleInteraction}
                         />
 
                         <div className={styles.submitWrapper}>
@@ -235,7 +293,8 @@ export default function BriefPage() {
 
             <div
                 className={styles.box}
-                style={{ background: gradients.right }}
+                style={{ background: gradients.right, cursor: 'pointer' }}
+                onClick={handlePortfolioClick}
             >
                 <span className={styles.boxTitle}>Portfolio · Process</span>
             </div>
@@ -249,12 +308,14 @@ interface DynamicInputProps {
     placeholder?: string;
     required?: boolean;
     type?: string;
+    onInteract?: () => void;
 }
 
-const DynamicInput = ({ label, name, placeholder, required }: DynamicInputProps) => {
+const DynamicInput = ({ label, name, placeholder, required, onInteract }: DynamicInputProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
+        onInteract?.();
         if (inputRef.current) {
             inputRef.current.value = e.currentTarget.innerText;
         }
@@ -274,6 +335,7 @@ const DynamicInput = ({ label, name, placeholder, required }: DynamicInputProps)
                         className={styles.editableDiv}
                         contentEditable
                         onInput={handleInput}
+                        onFocus={() => onInteract?.()}
                         data-placeholder={placeholder}
                         spellCheck={false}
                         suppressContentEditableWarning={true}

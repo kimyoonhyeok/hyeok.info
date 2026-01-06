@@ -79,13 +79,15 @@
         line-height: 1.4;
         /* Match About page spacing (0.75rem = ~12px) as requested */
         padding-top: 0.75rem;
+        text-transform: capitalize;
     }
 
     /* More Info Trigger Container */
     .moreInfo {
         font-size: 0.75rem;
         grid-column: 13 / 19;
-        grid-row: 2 / 10;
+        grid-row: 2 / 5;
+        /* Limit row span to prevent overlap with Image area (Row 5) */
         z-index: 101;
         /* Revert to relative for correct child positioning (Left 0 of Col 13) */
         position: relative !important;
@@ -116,7 +118,8 @@
     /* Image Area */
     .image {
         grid-column: 1 / 25;
-        grid-row: 5 / 45;
+        grid-row: 6 / 45;
+        display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
@@ -136,20 +139,21 @@
         top: 0;
         bottom: 0;
         width: 50%;
-        z-index: 5;
+        z-index: 20;
+        /* Ensure overlay sits ABOVE Swiper to capture clicks and prevent dragging */
         pointer-events: auto;
     }
 
     .image :global(.left) {
         left: 0%;
         right: 50%;
-        cursor: url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%227.91%200%208.53%20.95%202.93%204.66%2026.03%204.66%2026.03%205.8%202.93%205.8%208.53%209.5%207.91%2010.45%200%205.23%207.91%200%22/%3E%3C/svg%3E') 26.03 10.45, w-resize;
+        cursor: url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%227.91%200%208.53%20.95%202.93%204.66%2026.03%204.66%2026.03%205.8%202.93%205.8%208.53%209.5%207.91%2010.45%200%205.23%207.91%200%22/%3E%3C/svg%3E') 13 5, w-resize;
     }
 
     .image :global(.right) {
         left: 50%;
         right: 0%;
-        cursor: url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%2218.13%200%2017.5%20.95%2023.1%204.66%200%204.66%200%205.8%2023.1%205.8%2017.5%209.5%2018.13%2010.45%2026.03%205.23%2018.13%200%22/%3E%3C/svg%3E') 26.03 10.45, e-resize;
+        cursor: url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%2218.13%200%2017.5%20.95%2023.1%204.66%200%204.66%200%205.8%2023.1%205.8%2017.5%209.5%2018.13%2010.45%2026.03%205.23%2018.13%200%22/%3E%3C/svg%3E') 13 5, e-resize;
     }
 
     .image :global(.swiper-button-prev),
@@ -222,14 +226,132 @@
     }
 }
 
-/* Tablet */
+/* Tablet (768px - 1399px) */
 @media screen and (min-width: 768px) and (max-width: 1399px) {
     .container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(40, 2fr);
+        column-gap: 0.375rem;
+        height: 100vh;
+        padding: 1rem;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .container :global(.global-header) {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: 0.375rem;
+        grid-column: 1 / 13;
+        grid-row: 1;
+        z-index: 102;
+        margin-bottom: 0 !important;
+    }
+
+    .container :global(.global-header a) {
+        white-space: nowrap;
+    }
+
+    .container :global(.header-hyeok) {
+        grid-column: 1 / 3;
+    }
+
+    .container :global(.header-works) {
+        grid-column: 3 / 5;
+    }
+
+    .container :global(.header-about) {
+        grid-column: 7 / 9;
+    }
+
+    .container :global(.header-cv) {
+        grid-column: 11 / 13;
+        text-align: right;
+    }
+
+    .projectInfo,
+    .moreInfo {
         display: none;
+    }
+
+    .image {
+        grid-column: 1 / 13;
+        grid-row: 5 / 40;
+        /* Start below header (Row 1) to ensure true visual centering */
+        display: flex;
+        /* Center Content */
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        padding-block: 6rem;
+        padding-inline: 4rem;
+        /* Add horizontal padding to prevent images from being too large */
+        /* Increased safe area for Tablet */
+        box-sizing: border-box;
+    }
+
+    .image :global(.swiper),
+    .image :global(.swiper-wrapper) {
+        width: 100%;
+    }
+
+    .image :global(.swiper-overlay) {
+        display: none;
+    }
+
+    .image :global(.swiper-button-prev),
+    .image :global(.swiper-button-next) {
+        display: none;
+    }
+
+    .image :global(.swiper-slide) {
+        margin-right: 0;
+        text-align: center;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .image :global(.swiper-slide img),
+    .image :global(.swiper-slide video) {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .container :global(footer:not(.minWidth320)) {
+        display: none !important;
+    }
+
+    .container :global(footer.minWidth320) {
+        display: block !important;
+        grid-column: 1 / 13;
+        grid-row: 40 / 41;
+        text-align: center;
+    }
+
+    .container :global(footer.minWidth320 ul) {
+        justify-content: center;
+        display: flex;
+    }
+
+    .container :global(footer.minWidth320 li),
+    .container :global(footer.minWidth320 a),
+    .container :global(footer.minWidth320 h1) {
+        font-size: 0.625rem !important;
+        font-weight: 400;
+        color: var(--color);
     }
 }
 
-/* Mobile */
+/* Mobile (320px - 767px) */
 @media screen and (min-width: 320px) and (max-width: 767px) {
     .container {
         display: grid;
@@ -258,8 +380,11 @@
         margin-bottom: 0 !important;
     }
 
+    /* Mobile Header Text Fix */
     .container :global(.global-header a) {
         font-size: 0.625rem;
+        white-space: nowrap;
+        /* Prevent wrapping */
     }
 
     .container :global(.header-hyeok) {
@@ -287,11 +412,19 @@
     .image {
         grid-column: 1 / 13;
         grid-row: 1 / 40;
+        display: flex;
+        /* Center Content */
         justify-content: center;
         align-items: center;
         overflow: hidden;
         width: 100%;
         height: 100%;
+        /* Keep 100% but manage internal sizing */
+        padding-block: 4rem;
+        padding-inline: 1rem;
+        /* Add horizontal padding to reduce image size perceived */
+        /* Safe area for Header/Footer */
+        box-sizing: border-box;
     }
 
     .image :global(.swiper),
