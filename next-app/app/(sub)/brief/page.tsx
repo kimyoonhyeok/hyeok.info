@@ -297,7 +297,7 @@ export default function BriefPage() {
                 style={{ background: gradients.right, cursor: 'pointer' }}
                 onClick={handlePortfolioClick}
             >
-                <span className={styles.boxTitle}>Portfolio · Process</span>
+                <span className={styles.boxTitle}>Portfolio · Resume</span>
             </div>
         </div>
     );
