@@ -75,7 +75,7 @@
 
 .footerLeft a:hover,
 .footerRight a:hover {
-    opacity: 0.55;
+    opacity: 0.25;
     transition: opacity 0.3s ease;
 }
 
@@ -135,7 +135,7 @@
     }
 
     .footerAll a:hover {
-        opacity: 0.55;
+        opacity: 0.25;
         transition: opacity 0.3s ease;
     }
 }
