@@ -53,7 +53,8 @@ const ProjectItem = ({ href, imgSrc, alt, title, scope, category, completion, sl
                         width={600}
                         height={450}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        quality={60} // Optimization: Reduce thumbnail quality for speed
                     />
                 )}
             </div>
