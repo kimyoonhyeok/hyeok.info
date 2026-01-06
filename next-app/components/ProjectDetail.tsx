@@ -130,10 +130,9 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                                         src={src}
                                         loop
                                         playsInline
-                                        controls={false}
-                                        muted // Required for autoplay
+                                        controls={true}
                                         preload={isNearby ? "auto" : "none"} // Huge bandwidth saver
-                                        style={{ width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }}
+                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                     />
                                 ) : (
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
