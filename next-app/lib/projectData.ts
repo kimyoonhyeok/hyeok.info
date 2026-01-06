@@ -122,7 +122,7 @@ export const projects: Project[] = [
   },
   {
     slug: "TDWorkShop",
-    title: "TouchDesigner WorkShop,≪손과 원 연결하기 : - MediaPipe를 통한 Kinetic art≫",
+    title: "TouchDesigner WorkShop,≪손과 원 연결하기 : MediaPipe를 통한 Kinetic art≫",
     scope: "Interactive Design",
     category: "Non-Commercial",
     completion: "Jan. 2025",
@@ -352,7 +352,7 @@ export const projects: Project[] = [
     completion: "Nov. 2023",
     thumbnail: "Thumbnail.jpg",
     description: "제주 애월읍에 위치한 점 스토어의 일주년을 기념하는 엽서 7종 묶음을 개발했습니다. 브랜드 요소로 점(.)이라는 기호를 사용하고 있었기 때문에 점(.)을 활용한 디자인을 전개하는 방향을 메인 시각화 콘셉트로 채택했습니다. 7종의 구성 중 2장부터 6장의 경우, 최원혁 사진가의 ≪Flowers≫ 시리즈를 사용했습니다. 낱개가 아닌 묶음으로만 판매될 예정이었기 때문에 1장이 표지로 기능할 필요가 있다 생각했습니다. 결과적으로 1장의 경우, 2장부터 6장까지 사용된 ≪Flowers≫ 시리즈 사진 이미지를 점으로 변환하는 과정을 거쳐 표지 기능을 할 수 있도록 의도했습니다.",
-    images: ["01.JPG", "02.MP4", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.MP4"]
+    images: ["01.JPG", "02.mp4", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.mp4"]
   },
   {
     slug: "knock",
