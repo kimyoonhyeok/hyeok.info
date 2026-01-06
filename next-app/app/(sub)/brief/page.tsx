@@ -293,8 +293,8 @@ export default function BriefPage() {
 
             <div
                 className={styles.box}
-                style={{ background: gradients.right, cursor: 'pointer' }}
-                onClick={handlePortfolioClick}
+                style={{ background: gradients.right, cursor: 'default' }}
+            // onClick={handlePortfolioClick} // Disabled per user request
             >
                 <span className={styles.boxTitle}>Portfolio · Process</span>
             </div>
