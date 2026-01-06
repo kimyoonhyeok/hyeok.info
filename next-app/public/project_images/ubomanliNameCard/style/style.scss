@@ -1,0 +1,434 @@
+$logo_height: 1rem;
+$background:rgb(255, 255, 255);
+$color:rgb(0, 0,0);
+
+:root {
+    --background:rgb(255, 255, 255);
+    --color:rgb(0, 0, 0);
+    --std: 16px;
+}
+
+::selection{
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+@font-face {
+    font-family: "agchoijeongho-screen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+    src: url(https://fonts.adobe.com/search?query=%EC%B5%9C%EC%A0%95%ED%98%B8);
+}
+
+@font-face {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    src: local("Helvetica Neue"), local(Helvetica);
+}
+
+html:lang(ko) {
+    font-family: "agchoijeongho-screen", sans-serif;
+}
+
+html:lang(en) {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    position: relative;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    line-height: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Helvetica Neue", "Helvetica", "agchoijeongho-screen";
+}
+
+hr{
+    padding: 0;
+    margin: 0;
+}
+.container * {
+    transition: opacity 0.3s ease-in-out; /* 부드러운 전환 */
+}
+
+@media screen and (min-width: 1px) and (max-width: 319px){
+    .container{display: none;}
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+    .container{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(40,2fr);
+        column-gap: 0.25rem;
+        a:link{color: $color;}
+        a:visited {color : $color;}
+        height: 100vh;
+        padding: 1rem;
+        align-items: center;
+        justify-content: center;
+
+        .global-header{
+            a{font-size: 0.625rem;}
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            column-gap: 0.25rem;
+            grid-column-start: 1;
+            grid-column-end: 13;
+            grid-row: 1;
+            z-index: 102;
+
+            .header-hyeok{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 1;
+                    grid-column-end: 2;
+                }
+    
+            .header-works{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 3;
+                    grid-column-end: 4;
+            }
+    
+            .header-about{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 10;
+                    grid-column-end: 11;
+            }
+    
+            .header-cv{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 12;
+                    grid-column-end: 13;
+                    text-align: right;
+            }
+        }
+
+        .projectInfo{
+            display: none;
+        }
+
+        .moreInfo{
+            display: none;
+        }
+    
+        .image{
+            grid-column: 1 / 13;
+            grid-row-start: 10;
+            grid-row-end: 40;
+            justify-content: center; /* 가로 정렬 */
+            align-items: center; /* 세로 정렬 */
+            overflow: hidden; /* 필요 시 컨테이너 밖의 요소 숨김 */
+            height: 100%;
+            width: 100%;
+    
+            .swiper{
+                width: 100%;
+            }
+    
+            .swiper-wrapper{
+                width: 100%;
+            }
+    
+            .swiper-overlay{
+                display: none;
+            }
+
+                .left{
+                    left: 0%;
+                    right: 50%;
+                    cursor: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%227.91%200%208.53%20.95%202.93%204.66%2026.03%204.66%2026.03%205.8%202.93%205.8%208.53%209.5%207.91%2010.45%200%205.23%207.91%200%22/%3E%3C/svg%3E) 26.03 10.45, w-resize; /* URL 커서 적용 */
+                }
+                .right{
+                    left: 50%;
+                    right: 0%;
+                    cursor: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%2218.13%200%2017.5%20.95%2023.1%204.66%200%204.66%200%205.8%2023.1%205.8%2017.5%209.5%2018.13%2010.45%2026.03%205.23%2018.13%200%22/%3E%3C/svg%3E) 26.03 10.45, e-resize;
+                }
+    
+                .swiper-button-prev, .swiper-button-next {
+                    display: none;
+                    outline: none; /* 포커스 outline 제거 */
+                    border: none;  /* 필요하면 border도 제거 */
+                    background: none;
+                    outline: none;
+                    font-size: 0;
+                    line-height: 0;
+                    position: absolute;
+                    z-index: 50;
+                    top: 0;
+                    bottom: 0; /* 배경도 제거 가능 */
+                }
+            
+            .swiper-slide{
+                margin-right: 0;
+                text-align: center;
+                font-size: 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                max-width: 100%; /* 가로 크기를 컨테이너 너비에 맞춤 */
+                max-height: 100%; /* 세로 크기를 컨테이너 높이에 맞춤 */
+                height: 100%; /* 비율 유지 */
+                width: 100%; /* 비율 유지 */
+                // object-fit: contain; /* 이미지가 잘리지 않게 설정 */
+            }
+    
+            .swiper-slide img, video{
+                height: 100%; /* 비율 유지 */
+                width: 100%; /* 비율 유지 */
+                object-fit: contain;
+            }
+        }
+        
+        footer{
+                display: none;
+                align-self: end;
+                justify-content: center;
+                text-align: center;
+                grid-column-start: 1;
+                grid-column-end: 13;
+                position: relative;
+                grid-row: 40 / 41;
+        }
+
+        .minWidth320{
+            display: block;
+            grid-row-start: 40;
+            grid-row-end: 41;
+            font-size: 0.625rem !important;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1399px){
+    .container{
+        height: 100vh;
+        display: none;}
+}
+
+@media screen and (min-width: 1400px){
+    .container{
+        display: grid;
+        position: relative;
+        grid-template-columns: repeat(24, 1fr);
+        grid-template-rows: repeat(50,2fr);
+        column-gap: 0.5rem;
+        a:link{color: $color;}
+        a:visited {color : $color;}
+        height: 100vh;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        padding-bottom: 0.5rem;
+    
+        .global-header{
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            // grid-template-rows: repeat(8,1fr);
+            column-gap: 0.5rem;
+            grid-column-start: 1;
+            grid-column-end: 25;
+            grid-row-start: 1;
+            z-index: 102;
+            // font-weight: UbomanliCard0;
+            
+            .header-hyeok{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 1;
+                    grid-column-end: 3;
+                }
+    
+            .header-works{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 3;
+                    grid-column-end: 5;
+            }
+    
+            .header-about{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 13;
+                    grid-column-end: 15;
+            }
+    
+            .header-cv{
+                ul{
+                    padding: 0;
+                    margin: 0;}
+                    grid-column-start: 23;
+                    grid-column-end: 25;
+                    text-align: right;
+            }
+        }
+        //각 header마다 남는 여백이 다름.
+        .projectInfo{
+            font-size: 0.75rem;
+            grid-column-start: 3;
+            grid-column-end: 10;
+            grid-row-start: 2;
+            grid-row-end: 4;
+        }
+    
+        .moreInfo{
+            font-size: 0.75rem;
+            grid-column-start: 13;
+            grid-column-end: 19;
+            grid-row-start: 2;
+            grid-row-end: 10;
+            z-index: 101;
+        }
+        .moreInfoUbomanliCard{
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            display: flex;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            font-size: 0.75rem;
+            line-height: 1.2rem;
+            word-break: keep-all;
+            cursor: url(hand.cur), help;
+            height: auto; /* 이미지 비율 유지 */
+        }
+    
+        .image{
+            grid-column-start: 1;
+            grid-column-end: 25;
+            grid-row-start: 5;
+            grid-row-end: 45;
+            justify-content: center; /* 가로 정렬 */
+            align-items: center; /* 세로 정렬 */
+            overflow: hidden; /* 필요 시 컨테이너 밖의 요소 숨김 */
+            height: 100%;
+            width: 100%;
+    
+            .swiper{
+                height: 100%;
+                width: 100%;
+            }
+    
+            .swiper-wrapper{
+                height: 100%;
+                width: 100%;
+            }
+    
+            .swiper-overlay {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 50%;
+                z-index: 5; /* Swiper 버튼보다 낮게 설정 */
+                pointer-events: auto; /* 클릭 이벤트를 활성화 */
+                // cursor: pointer;
+            }
+                .left{
+                    left: 0%;
+                    right: 50%;
+                    cursor: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%227.91%200%208.53%20.95%202.93%204.66%2026.03%204.66%2026.03%205.8%202.93%205.8%208.53%209.5%207.91%2010.45%200%205.23%207.91%200%22/%3E%3C/svg%3E) 26.03 10.45, w-resize; /* URL 커서 적용 */
+                }
+                .right{
+                    left: 50%;
+                    right: 0%;
+                    cursor: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2226%22%20height=%2210%22%3E%3Cpolygon%20points=%2218.13%200%2017.5%20.95%2023.1%204.66%200%204.66%200%205.8%2023.1%205.8%2017.5%209.5%2018.13%2010.45%2026.03%205.23%2018.13%200%22/%3E%3C/svg%3E) 26.03 10.45, e-resize;
+                }
+    
+                .swiper-button-prev, .swiper-button-next {
+                    outline: none; /* 포커스 outline 제거 */
+                    border: none;  /* 필요하면 border도 제거 */
+                    background: none;
+                    pointer-events: none;
+                    display: none;
+                    outline: none;
+                    font-size: 0;
+                    line-height: 0;
+                    position: absolute;
+                    z-index: 50;
+                    top: 0;
+                    bottom: 0; /* 배경도 제거 가능 */
+                }
+            
+            .swiper-slide{
+                margin-right: 0;
+                text-align: center;
+                font-size: 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                max-width: 100%; /* 가로 크기를 컨테이너 너비에 맞춤 */
+                max-height: 100%; /* 세로 크기를 컨테이너 높이에 맞춤 */
+                height: 100%; /* 비율 유지 */
+                width: 100%; /* 비율 유지 */
+                // object-fit: contain; /* 이미지가 잘리지 않게 설정 */
+            }
+    
+            .swiper-slide img, video{
+                height: 100%; /* 비율 유지 */
+                width: 100%; /* 비율 유지 */
+                object-fit: contain;
+            }
+        }
+    
+        footer{
+            display: flex;
+            align-self: end;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            grid-column-start: 1;
+            grid-column-end: 25;
+            position: relative;
+            grid-row: 50 / 51;
+            
+                .footer-left{
+                    align-self: end;
+                    grid-column: 1 / 15;
+                    grid-row: 1;
+                    
+                    ul{
+                        font-size: 0.75rem;
+                        // padding: 0;
+                        // margin: 0;
+                        text-align: left;}
+                    li{
+                        font-size: 0.75rem;}
+    
+                    a{
+                        font-size: 0.75rem;}
+                }
+    
+                .footer-right{
+                    color: rgb(0, 0, 0);
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                    align-self: end;
+                    text-align: right;
+                    grid-column: 15 / 25;
+                    grid-row: 1;
+                    z-index: 101;
+                    font-size: 0.75rem;
+                }
+        }
+    }
+}
