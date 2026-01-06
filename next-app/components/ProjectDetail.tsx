@@ -33,13 +33,18 @@ interface ProjectDetailProps {
 export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isInfoHovered, setIsInfoHovered] = useState(false);
+    const [isMuted, setIsMuted] = useState(true); // Default muted for autoplay
     const swiperRef = useRef<SwiperType | null>(null);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-    // Handle Video Autoplay/Pause on Slide Change
+    // Handle Video Autoplay/Pause on Slide Change and Mute State
     useEffect(() => {
         videoRefs.current.forEach((video, index) => {
             if (!video) return;
+
+            // Sync mute state
+            video.muted = isMuted;
+
             if (index === activeIndex) {
                 video.currentTime = 0;
                 // Force load if it was preload="none"
@@ -55,7 +60,7 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                 video.currentTime = 0;
             }
         });
-    }, [activeIndex]);
+    }, [activeIndex, isMuted]); // Re-run when mute toggles
 
     const dimmedStyle = isInfoHovered ? { opacity: 0.25 } : { opacity: 1 };
 
@@ -67,6 +72,8 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
     const handleNext = useCallback(() => {
         if (swiperRef.current) swiperRef.current.slideNext();
     }, []);
+
+    const toggleMute = () => setIsMuted(prev => !prev);
 
     return (
         <div className={styles.container}>
@@ -130,8 +137,9 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                                         src={src}
                                         loop
                                         playsInline
-                                        controls={true}
-                                        preload={isNearby ? "auto" : "none"} // Huge bandwidth saver
+                                        controls={false} // Hidden controls
+                                        muted={isMuted} // React controlled
+                                        preload={isNearby ? "auto" : "none"}
                                         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                     />
                                 ) : (
@@ -140,7 +148,7 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                                             src={src}
                                             alt={`${project.title} - ${idx + 1}`}
                                             fill
-                                            priority={idx === 0} // Only first image priority
+                                            priority={idx === 0}
                                             sizes="100vw"
                                             style={{ objectFit: 'contain' }}
                                         />
@@ -150,6 +158,57 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                         );
                     })}
                 </Swiper>
+
+                {/* Custom Mute/Unmute Toggle Button */}
+                {/* Only show if current slide is video? No, show always if mixed content, or check if active is video. 
+                    But complicating "active is video" logic might be buggy with Swiper loop. 
+                    Simpler: Always show, or let it toggle global state. 
+                    Ideally, only show if active slide IS video. */}
+                {(() => {
+                    const currentImg = project.images[activeIndex];
+                    const isCurrentVideo = currentImg && (currentImg.toLowerCase().endsWith('.mp4') || currentImg.toLowerCase().endsWith('.webm'));
+
+                    if (!isCurrentVideo) return null;
+
+                    return (
+                        <button
+                            onClick={(e) => { e.stopPropagation(); toggleMute(); }}
+                            style={{
+                                position: 'absolute',
+                                bottom: '20px',
+                                right: '20px',
+                                zIndex: 50,
+                                background: 'transparent',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: '10px',
+                                opacity: 0.7,
+                                transition: 'opacity 0.2s',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
+                            aria-label={isMuted ? "Unmute" : "Mute"}
+                        >
+                            {isMuted ? (
+                                // Mute Icon (Speaker with X)
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M23 9L17 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M17 9L23 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            ) : (
+                                // Sound Icon (Speaker with waves)
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M19.07 4.93C20.98 6.84 21.96 9.42 21.96 12C21.96 14.58 20.98 17.16 19.07 19.07M15.54 8.46C16.47 9.39 17 10.74 17 12C17 13.26 16.47 14.61 15.54 15.54" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            )}
+                        </button>
+                    );
+                })()}
 
                 {/* Desktop/Tablet Navigation Overlays - Explicit Click Handlers */}
                 <div
