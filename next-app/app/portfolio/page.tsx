@@ -45,9 +45,13 @@ export default function PortfolioIndex() {
         return () => clearInterval(interval);
     }, []);
 
-    // URLs
-    const portfolioUrl = "/Yoonhyeok%20Portfolio(~25.11).pdf";
-    const resumeUrl = "/Yoonhyeok%20Resume(~25.11).pdf";
+    // URLs (Relative paths in public folder) asking browser to hide toolbar
+    const portfolioUrl = "/Yoonhyeok%20Portfolio(~25.11).pdf#toolbar=0&navpanes=0&scrollbar=0";
+    const resumeUrl = "/Yoonhyeok%20Resume(~25.11).pdf#toolbar=0&navpanes=0&scrollbar=0";
+
+    const preventRightClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+    };
 
     return (
         <div className={styles.container}>
@@ -65,6 +69,7 @@ export default function PortfolioIndex() {
                 rel="noopener noreferrer"
                 className={styles.circleLink}
                 style={{ background: leftGradient }}
+                onContextMenu={preventRightClick}
             >
                 <div className={styles.circleContent}>
                     Portfolio<br />~25.11
@@ -78,6 +83,7 @@ export default function PortfolioIndex() {
                 rel="noopener noreferrer"
                 className={styles.circleLink}
                 style={{ background: rightGradient }}
+                onContextMenu={preventRightClick}
             >
                 <div className={styles.circleContent}>
                     Resume<br />~25.11
