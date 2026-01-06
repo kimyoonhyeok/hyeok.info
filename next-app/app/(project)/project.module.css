@@ -297,6 +297,7 @@
     .image :global(.swiper),
     .image :global(.swiper-wrapper) {
         width: 100%;
+        height: 100%;
     }
 
     .image :global(.swiper-overlay) {
@@ -430,6 +431,7 @@
     .image :global(.swiper),
     .image :global(.swiper-wrapper) {
         width: 100%;
+        height: 100%;
     }
 
     .image :global(.swiper-overlay) {
