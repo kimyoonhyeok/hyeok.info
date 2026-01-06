@@ -122,7 +122,7 @@ export const projects: Project[] = [
   },
   {
     slug: "TDWorkShop",
-    title: "TouchDesigner WorkShop,≪손과 원 연결하기 : MediaPipe를 통한 Kinetic art≫",
+    title: "TouchDesigner WorkShop,≪손과 원 연결하기 : -| MediaPipe를 통한 Kinetic art≫",
     scope: "Interactive Design",
     category: "Non-Commercial",
     completion: "Jan. 2025",
