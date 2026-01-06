@@ -59,19 +59,9 @@ const ProjectItem = ({ href, imgSrc, alt, title, scope, category, completion, sl
                 )}
             </div>
             <div className="info-wrapper">
-                <div className="header">
-                    {title.includes('|') ? (
-                        <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                            <span className="title" style={{ flexShrink: 0, marginRight: '4px' }}>
-                                Project Name : {title.split('|')[0]}
-                            </span>
-                            <span className="title" style={{ display: 'block' }}>
-                                {title.split('|')[1]}
-                            </span>
-                        </div>
-                    ) : (
-                        <span className="title">Project Name : {title}</span>
-                    )}
+                <div className="header" style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <span className="title" style={{ flexShrink: 0, marginRight: '0.35em' }}>Project Name :</span>
+                    <span className="title" style={{ display: 'block' }}>{title}</span>
                 </div>
                 <div className="metadata">
                     <div>Task Scope : {scope}</div>
