@@ -119,7 +119,8 @@ export default function BriefPage() {
 
     // -- Handlers --
     const handlePortfolioClick = () => {
-        window.open('/portfolio', '_blank');
+        // Open PDF with toolbar hidden to discourage downloading
+        window.open('/Yoonhyeok%20Portfolio(~25.11).pdf#toolbar=0', '_blank');
     };
 
     const handleFileClick = () => {
@@ -293,10 +294,10 @@ export default function BriefPage() {
 
             <div
                 className={styles.box}
-                style={{ background: gradients.right, cursor: 'default' }}
-            // onClick={handlePortfolioClick} // Disabled per user request
+                style={{ background: gradients.right, cursor: 'pointer' }}
+                onClick={handlePortfolioClick}
             >
-                <span className={styles.boxTitle}>Portfolio · Process</span>
+                <span className={styles.boxTitle}>Portfolio · Resume</span>
             </div>
         </div>
     );

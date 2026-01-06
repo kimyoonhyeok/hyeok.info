@@ -7,6 +7,9 @@ export default function PortfolioIndex() {
     const [leftGradient, setLeftGradient] = useState('');
     const [rightGradient, setRightGradient] = useState('');
 
+    // State for viewing PDF
+    const [viewingPdf, setViewingPdf] = useState<string | null>(null);
+
     useEffect(() => {
         const interval = setInterval(() => {
             const now = Date.now();
@@ -45,9 +48,18 @@ export default function PortfolioIndex() {
         return () => clearInterval(interval);
     }, []);
 
-    // URLs
+    // URLs (Relative paths in public folder)
     const portfolioUrl = "/Yoonhyeok%20Portfolio(~25.11).pdf";
     const resumeUrl = "/Yoonhyeok%20Resume(~25.11).pdf";
+
+    const handleViewPdf = (url: string) => {
+        // Append #toolbar=0 to discourage download
+        setViewingPdf(`${url}#toolbar=0&navpanes=0`);
+    };
+
+    const closePdf = () => {
+        setViewingPdf(null);
+    };
 
     return (
         <div className={styles.container}>
@@ -58,31 +70,78 @@ export default function PortfolioIndex() {
                 </div>
             </div>
 
-            {/* Left: Portfolio */}
-            <a
-                href={portfolioUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+            {/* Left: Portfolio (Click opens viewer) */}
+            <div
+                onClick={() => handleViewPdf(portfolioUrl)}
                 className={styles.circleLink}
-                style={{ background: leftGradient }}
+                style={{ background: leftGradient, cursor: 'pointer' }}
             >
                 <div className={styles.circleContent}>
                     Portfolio<br />~25.11
                 </div>
-            </a>
+            </div>
 
-            {/* Right: Resume */}
-            <a
-                href={resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+            {/* Right: Resume (Click opens viewer) */}
+            <div
+                onClick={() => handleViewPdf(resumeUrl)}
                 className={styles.circleLink}
-                style={{ background: rightGradient }}
+                style={{ background: rightGradient, cursor: 'pointer' }}
             >
                 <div className={styles.circleContent}>
                     Resume<br />~25.11
                 </div>
-            </a>
+            </div>
+
+            {/* PDF Viewer Overlay */}
+            {viewingPdf && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100vw',
+                        height: '100vh',
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        zIndex: 100,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                    onClick={closePdf} // Close on backdrop click
+                >
+                    <div
+                        style={{
+                            width: '90%',
+                            height: '90%',
+                            position: 'relative',
+                            backgroundColor: '#fff'
+                        }}
+                        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking content
+                        onContextMenu={(e) => e.preventDefault()} // Block right click
+                    >
+                        <iframe
+                            src={viewingPdf}
+                            style={{ width: '100%', height: '100%', border: 'none' }}
+                            title="PDF Viewer"
+                        />
+                        <button
+                            onClick={closePdf}
+                            style={{
+                                position: 'absolute',
+                                top: '-40px',
+                                right: '0',
+                                color: 'white',
+                                background: 'transparent',
+                                border: 'none',
+                                fontSize: '24px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Close ✕
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
