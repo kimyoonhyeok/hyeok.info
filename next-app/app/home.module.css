@@ -1,3 +1,4 @@
+.container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -7,136 +8,137 @@
     padding: 1rem;
     position: relative;
     /* Removed grid-template-rows */
+}
 
-    .enterance {
-        flex: 1;
-        /* Pushes footer to bottom */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
+.enterance {
+    flex: 1;
+    /* Pushes footer to bottom */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
-    .enterance a {
-        cursor: url(/style/hand.cur), help;
-        display: block;
-        width: 100%;
-        max-width: 25%;
-        /* Desktop default */
-        text-align: center;
-    }
+.enterance a {
+    cursor: url(/style/hand.cur), help;
+    display: block;
+    width: 100%;
+    max-width: 25%;
+    /* Desktop default */
+    text-align: center;
+}
 
-    .enterance img {
-        /* border: 1px solid #000; removed per user request */
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        /* Card Shadow & Hover Effect */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease-in-out;
-    }
+.enterance img {
+    /* border: 1px solid #000; removed per user request */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Card Shadow & Hover Effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
 
-    .enterance a:hover img {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-    }
+.enterance a:hover img {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
 
-    /* Footer Styles */
+/* Footer Styles */
+.footerWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+    /* PB 0.5rem base + safe area */
+    pointer-events: none;
+    /* Allow clicks transparency if needed, but links need pointer-events: auto */
+}
+
+.footerLeft ul {
+    font-size: 0.75rem;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.footerLeft li,
+.footerLeft a {
+    font-size: 0.75rem;
+    color: #000;
+    text-decoration: none;
+    pointer-events: auto;
+}
+
+.footerRight {
+    color: #000;
+    font-size: 0.75rem;
+    text-align: right;
+    pointer-events: auto;
+}
+
+/* Mobile Helpers */
+.minWidth320 {
+    display: none;
+}
+
+/* Responsive Logic */
+
+/* Footer Logic: Mobile & Tablet (Max Width 1024px) */
+@media screen and (max-width: 1024px) {
+
+    /* Hide standard split footer */
     .footerWrapper {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: 1rem;
-        padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
-        /* PB 0.5rem base + safe area */
-        pointer-events: none;
-        /* Allow clicks transparency if needed, but links need pointer-events: auto */
-    }
-
-    .footerLeft ul {
-        font-size: 0.75rem;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-    }
-
-    .footerLeft li,
-    .footerLeft a {
-        font-size: 0.75rem;
-        color: #000;
-        text-decoration: none;
-        pointer-events: auto;
-    }
-
-    .footerRight {
-        color: #000;
-        font-size: 0.75rem;
-        text-align: right;
-        pointer-events: auto;
-    }
-
-    /* Mobile Helpers */
-    .minWidth320 {
         display: none;
     }
 
-    /* Responsive Logic */
-
-    /* Footer Logic: Mobile & Tablet (Max Width 1024px) */
-    @media screen and (max-width: 1024px) {
-
-        /* Hide standard split footer */
-        .footerWrapper {
-            display: none;
-        }
-
-        /* Show Centered Mobile-style Footer */
-        .minWidth320 {
-            display: block;
-            width: 100%;
-            text-align: center;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding-bottom: calc(2rem + env(safe-area-inset-bottom));
-            pointer-events: none;
-        }
-
-        .footerAll {
-            pointer-events: auto;
-            color: #000;
-            text-align: center;
-            font-size: 0.625rem;
-        }
-
-        .footerAll ul {
-            padding: 0;
-            margin: 0;
-        }
-
-        .footerAll li,
-        .footerAll a,
-        .footerAll h1 {
-            font-size: 0.625rem;
-            /* Match Works footer */
-            font-weight: 400;
-            /* Match Works footer */
-        }
+    /* Show Centered Mobile-style Footer */
+    .minWidth320 {
+        display: block;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+        pointer-events: none;
     }
 
-    /* Image Sizing: Mobile (< 768px) */
-    @media screen and (max-width: 767px) {
-        .enterance a {
-            max-width: 70%;
-        }
+    .footerAll {
+        pointer-events: auto;
+        color: #000;
+        text-align: center;
+        font-size: 0.625rem;
     }
 
-    /* Image Sizing: Tablet (768px - 1024px) */
-    @media screen and (min-width: 768px) and (max-width: 1024px) {
-        .enterance a {
-            max-width: 45%;
-        }
+    .footerAll ul {
+        padding: 0;
+        margin: 0;
     }
+
+    .footerAll li,
+    .footerAll a,
+    .footerAll h1 {
+        font-size: 0.625rem;
+        /* Match Works footer */
+        font-weight: 400;
+        /* Match Works footer */
+    }
+}
+
+/* Image Sizing: Mobile (< 768px) */
+@media screen and (max-width: 767px) {
+    .enterance a {
+        max-width: 70%;
+    }
+}
+
+/* Image Sizing: Tablet (768px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .enterance a {
+        max-width: 45%;
+    }
+}
