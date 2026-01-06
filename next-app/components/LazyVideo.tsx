@@ -35,7 +35,7 @@ export default function LazyVideo({ src, style, className, ...props }: LazyVideo
         <div
             ref={containerRef}
             className={className}
-            style={{ ...style, position: "relative", backgroundColor: "#f0f0f0" }} // Placeholder background
+            style={{ ...style, position: "relative", backgroundColor: "transparent" }} // Placeholder background
         >
             {isVisible ? (
                 <video

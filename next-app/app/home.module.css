@@ -8,7 +8,6 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
     min-height: 100dvh;
-    /* Removed grid-template-rows */
 }
 
 .enterance {
@@ -74,6 +73,12 @@
     pointer-events: auto;
 }
 
+.footerLeft a:hover,
+.footerRight a:hover {
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
+}
+
 .footerRight {
     color: #000;
     font-size: 0.75rem;
@@ -127,6 +132,11 @@
         /* Match Works footer */
         font-weight: 400;
         /* Match Works footer */
+    }
+
+    .footerAll a:hover {
+        opacity: 0.55;
+        transition: opacity 0.3s ease;
     }
 }
 
