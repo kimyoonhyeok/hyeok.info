@@ -23,9 +23,8 @@ export async function POST(request: NextRequest) {
         }
 
         if (!emailUser || !emailPass) {
-            console.warn('[API] Mocking success because credentials are missing.');
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            return NextResponse.json({ message: 'Email sent successfully (Mock)' }, { status: 200 });
+            console.error('[API] Credentials missing. EMAIL_USER or EMAIL_PASS is not set.');
+            return NextResponse.json({ error: 'Server Configuration Error: Missing Email Credentials' }, { status: 500 });
         }
 
 
