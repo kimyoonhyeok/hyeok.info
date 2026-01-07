@@ -86,21 +86,19 @@ export async function POST(request: NextRequest) {
             attachments: attachments,
         };
 
-        // Fire-and-Forget: Don't await. Send immediately.
-        transporter.sendMail(mailOptions).catch(err => {
-            console.error('[Background] Email send failed:', err);
-        });
-
-        // Return success immediately
-        return NextResponse.json({ message: 'Email passed to background worker' }, { status: 200 });
+        // Send the email and wait for the result
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log('[API] Email sent successfully');
+            return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
+        } catch (err) {
+            console.error('[API] Email send failed:', err);
+            return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+        }
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-        console.error('Error sending email:', error);
-        // Log more details if available
-        if (error.response) console.error('SMTP Response:', error.response);
-        if (error.code) console.error('Error Code:', error.code);
-
-        return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+        console.error('Error in route handler:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
