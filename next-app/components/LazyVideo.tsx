@@ -42,12 +42,22 @@ export default function LazyVideo({ src, style, className, ...props }: LazyVideo
                     ref={videoRef}
                     src={src}
                     style={{ width: "100%", height: "100%", objectFit: "cover", ...style }}
-                    onLoadedData={() => {
-                        if (props.autoPlay) {
-                            videoRef.current?.play().catch(() => { });
+                    {...props}
+                    playsInline
+                    muted
+                    loop
+                    autoPlay
+                    disablePictureInPicture
+                    controls={false}
+                    onLoadedData={(e) => {
+                        if (videoRef.current) {
+                            videoRef.current.muted = true;
+                            videoRef.current.play().catch(() => { });
+                        }
+                        if (props.onLoadedData) {
+                            props.onLoadedData(e);
                         }
                     }}
-                    {...props}
                 />
             ) : null}
         </div>
