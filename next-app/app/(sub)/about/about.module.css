@@ -20,8 +20,8 @@
 .infoColumn {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    /* 0.75rem spacing between sections */
+    gap: 19.5px;
+    /* Spacing between sections */
 }
 
 /* Typography Hierarchy matches Works */

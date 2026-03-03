@@ -37,12 +37,12 @@ export default function AboutPage() {
                     </div>
                 </div>
                 <div>
-                    <span className={styles.sectionTitle}>Contact</span>
+                    <span className={styles.sectionTitle}>Stay in touch</span>
                     <div>
-                        <a href="https://www.instagram.com/hyeok.info/" target="_blank" rel="noopener noreferrer"
+                        Instagram, <a href="https://www.instagram.com/hyeok.info/" target="_blank" rel="noopener noreferrer"
                             className={styles.textLink}>hyeok.info</a><br />
-                        +82 10 2458 0187<br />
-                        <a href="mailto:hyeok.info@gmail.com" className={styles.textLink} target="_blank" rel="noopener noreferrer">hyeok.info@gmail.com</a>
+                        Mobile, +82 10 2458 0187<br />
+                        E-mail, <a href="mailto:hyeok.info@gmail.com" className={styles.textLink} target="_blank" rel="noopener noreferrer">hyeok.info@gmail.com</a>
                     </div>
                 </div>
                 <div>
@@ -72,6 +72,11 @@ export default function AboutPage() {
                 <div>
                     <span className={styles.sectionTitle}>License</span>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>National Technical Qualification, Certified Photographer</span></div>
+                </div>
+                <div>
+                    <span className={styles.sectionTitle}>Workshops / Seminars</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>Notefolio WorkShop 6-week course ≪시작을 위한 나만의 책, 워크숍≫, 1F, 3-10 Donggyo-ro 27-gil, Mapo-gu, Seoul(03993)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>TouchDesigner WorkShop,≪손과 원 연결하기 : MediaPipe를 통한 Kinetic art≫, 83 Uisadang-daero, Yeongdeungpo-gu, Seoul(07325)</span></div>
                 </div>
             </div>
 
@@ -143,7 +148,7 @@ export default function AboutPage() {
                 <div>
                     <span className={styles.sectionTitle}>Clients / Collaboration</span>
                     <div className={styles.infoListItem}>
-                        Arko Theater, Sangmyung Univ., MSS, KOSME, Kyung Hee Univ., NA1, Bobu Office, Michan Lee, Sumin Kim, Korica, Lwy, Sunoa, Bongak Choi, Seodaemun-Gu, SWYFT, Lobby/St, Kodo Coffee, Annpaak, Subverted
+                        LG ART CENTER, SKETCHED SPACE, Coffee Collage, Arko Selection, Arko Theater, Sangmyung Univ., MSS, KOSME, Kyung Hee Univ., NA1, Bobu Office, Michan Lee, Sumin Kim, Korica, Lwy, Sunoa, Bongak Choi, Seodaemun-Gu, SWYFT, Lobby/St, Kodo Coffee, Annpaak, Subverted
                         Anatomical Landscape (SAL), Ist Entertainment, Theboyz,
                         Glaspress, Beigebongbong, Ubomanli, Janggo Chum Network Of Yunseeon Sung, Jeom Store, Wonhyuck
                         Choi, Bite Poets, Garb, Templethebongbong, Gihong Jeon, Inho Cho, Chelon Archive Co., Cidae Mag,

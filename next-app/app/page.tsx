@@ -34,7 +34,7 @@ export default function HomePage() {
                 <div className={styles.footerLeft}>
                     <ul>
                         <li>
-                            Contact |&nbsp;
+                            Stay in touch&nbsp;
                             <a href="https://www.instagram.com/hyeok.info/" target="_blank" rel="noopener noreferrer">
                                 @hyeok.info /&nbsp;
                             </a>
