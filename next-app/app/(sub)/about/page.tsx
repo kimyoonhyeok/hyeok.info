@@ -84,6 +84,7 @@ export default function AboutPage() {
             <div className={styles.infoColumn}>
                 <div>
                     <span className={styles.sectionTitle}>Work</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢SKETCHED SPACE｣ 웹사이트 디자인 및 개발</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Subverted Anatomical Landscape｣ ≪X≫ 아르코대극장, 프로그램 디자인</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢상명대학교 53회 졸업전시｣ 아이덴티티 디자인</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢곰시선 프로젝트｣ ≪재활용? 제활용!≫ 아르코 대학로예술극장 소극장, 프로그램 디자인</span></div>
