@@ -75,7 +75,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                     <span className={styles.sectionTitle}>Workshops / Seminars</span>
-                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>Notefolio WorkShop 6-week course ≪시작을 위한 나만의 책, 워크숍≫, 1F, 3-10 Donggyo-ro 27-gil, Mapo-gu, Seoul(03993)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>Notefolio WorkShop 6-week course ≪시작을 위한, 워크숍≫, 1F, 3-10 Donggyo-ro 27-gil, Mapo-gu, Seoul(03993)</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>TouchDesigner WorkShop,≪손과 원 연결하기 : MediaPipe를 통한 Kinetic art≫, 83 Uisadang-daero, Yeongdeungpo-gu, Seoul(07325)</span></div>
                 </div>
             </div>

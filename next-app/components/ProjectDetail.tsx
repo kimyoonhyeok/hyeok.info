@@ -148,7 +148,7 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                                             fill
                                             priority={idx === 0}
                                             sizes="(max-width: 768px) 100vw, 100vw"
-                                            quality={75} // Balanced quality for full screen
+                                            quality={95} // Higher quality to reduce artifacts for detailed images
                                             style={{ objectFit: 'contain' }}
                                         />
                                     </div>

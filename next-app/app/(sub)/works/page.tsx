@@ -30,6 +30,8 @@ const ProjectItem = ({ href, imgSrc, alt, title, scope, category, completion, sl
             >
                 {slug === 'KoricaWeb' ? (
                     <KoricaThumbnail />
+                ) : imgSrc.startsWith('#') ? (
+                    <div style={{ width: '100%', height: '100%', backgroundColor: imgSrc }} />
                 ) : isVideo ? (
                     <LazyVideo
                         src={`${imgSrc}?v=${slug === 'TD' || slug === 'AcademicMotionGraphic' ? '2' : '1'}`}
@@ -81,10 +83,13 @@ export default function WorksPage() {
             {projects.map((project) => {
                 // Use the thumbnail field from extraction
                 // Path: /works/{slug}/{thumbnail}
-                const thumbnailSrc = project.thumbnail
-                    ? `/project_images/${project.slug}/${project.thumbnail}`
-                    // Fallback to first image if thumbnail empty
-                    : (project.images.length > 0 ? `/project_images/${project.slug}/${project.images[0]}` : "/no-image.jpg");
+                const isHexColor = project.thumbnail?.startsWith('#');
+                const thumbnailSrc = isHexColor
+                    ? project.thumbnail
+                    : (project.thumbnail
+                        ? `/project_images/${project.slug}/${project.thumbnail}`
+                        // Fallback to first image if thumbnail empty
+                        : (project.images.length > 0 ? `/project_images/${project.slug}/${project.images[0]}` : "/no-image.jpg"));
 
                 return (
                     <ProjectItem

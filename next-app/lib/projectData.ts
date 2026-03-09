@@ -11,6 +11,26 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "Notefolio",
+    title: "Notefolio WorkShop 6-week course ≪시작을 위한, 워크숍≫",
+    scope: "Workshop",
+    category: "Commercial",
+    completion: "Jul. 2026",
+    thumbnail: "Thumbnail.jpg",
+    description: "",
+    images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
+  },
+  {
+    slug: "X",
+    title: "Subverted Anatomical Landscape ≪X≫",
+    scope: "Identity Design",
+    category: "Commercial",
+    completion: "Mar. 2026",
+    thumbnail: "Thumbnail.mp4",
+    description: "본 프로젝트는 공연 ≪Subverted Anatomical Landscape <X>≫를 기반으로, 인간과 기계의 관계를 탐구하는 시각 아이덴티티 구축을 목표로 했습니다. 작품의 본질적 주제인 <유한한 생명력>과 <무한한 기계성>의 대립을 시각화해야 했기 때문에, 추상적인 서사 대신 <서로 다른 물성의 물리적 충돌과 결합을 물질적인 증거처럼 제시할 것>이라는 전제를 바탕으로 작업이 진행되었습니다.콘셉트를 설정해나가며, 무대 위의 거대한 '엔진'과 '아기집'을 모티프로 삼는 것이 적절한 방향이라 판단했습니다. 이를 바탕으로 기계 부품과 다수의 인간 머리가 수직으로 응집된 '메탈릭 토템(Metallic Totem)' 형상을 구축했습니다. 특히 이 거대한 형상은 공연의 타이틀인 ≪X≫와 직관적으로 맞닿을 수 있도록 'X'자 형태로 교차하며 응집하는 실루엣으로 기획했습니다. 복잡한 이미지를 나열하기보다, 기계적 반복 운동 속에 갇힌 인간 군상이자 기계라는 모체에서 배양되는 새로운 혼종 인류의 모습을 하나의 거대한 덩어리로 상징하기 위함입니다.결과적으로 인공적인 금속, 유기적인 살덩어리, 유동적인 액체 등 이질적인 소재들을 정밀하게 묘사하여 보는 즉시 시각을 넘어선 촉각적인 자극을 전달하고자 했습니다. 구체적으로 거칠고 어두운 금속 표면을 타고 흘러내리는 점성 있는 액체의 움직임을 부여해, <정적인 결합>이 아닌 <동적인 융합>의 과정을 표현했습니다. 두 존재가 물리적으로 섞일 때 발생하는 이 <긴장감>을 바탕으로 모든 시각물을 통일해 표현하려 했습니다.",
+    images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg"]
+  },
+  {
     slug: "TD",
     title: "ARTKOREALAB ≪LOOPING IN THE BOX≫ Music By Michan Lee ≪GLIDE≫",
     scope: "Interactive Design",

@@ -11,7 +11,14 @@ export const metadata: Metadata = {
   description: 'Graphic Designer Yoonhyeok Kim (김윤혁) Portfolio. Identity, Editorial, Digital Design based in Seoul.',
   keywords: ['김윤혁', '디자이너 김윤혁', 'Yoonhyeok Kim', 'Graphic Designer', 'Portfolio', 'Seoul', 'Design', '그래픽 디자이너', '브랜딩', 'Branding', '디자이너 윤혁'],
   icons: {
-    icon: "/favicon/favicon.ico",
+    icon: [
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon/favicon.ico" },
+    ],
+    apple: [
+      { url: "/favicon/apple-icon-180x180.png" },
+    ],
   },
   metadataBase: new URL('https://hyeok.info'),
   openGraph: {
