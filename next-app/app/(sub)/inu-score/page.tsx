@@ -295,7 +295,7 @@ export default function IshiharaScorePage() {
 
     const playMelody = useCallback((note: string) => {
         if (samplerRef.current && samplerLoaded) {
-            try { samplerRef.current.triggerAttackRelease(note, "8n"); } catch (_e) { /* */ }
+            try { samplerRef.current.triggerAttackRelease(note, "8n"); } catch { /* */ }
         }
     }, [samplerLoaded]);
 
@@ -304,7 +304,7 @@ export default function IshiharaScorePage() {
             try {
                 const freq = NOISE_FREQS[Math.floor(Math.random() * NOISE_FREQS.length)];
                 noiseSynthRef.current.triggerAttackRelease(freq, "32n");
-            } catch (_e) { /* */ }
+            } catch { /* */ }
         }
     }, []);
 
