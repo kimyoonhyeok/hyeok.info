@@ -1,0 +1,194 @@
+/* Ishihara Score — 100vh canvas + text below fold */
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─── Canvas: full viewport ─── */
+.canvasSection {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #F5F0E8;
+}
+
+.canvasSection canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: crosshair;
+}
+
+/* Audio init overlay */
+.audioInit {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(245, 240, 232, 0.88);
+    cursor: pointer;
+    z-index: 10;
+    transition: opacity 0.5s ease;
+}
+
+.audioInitText {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #000;
+    opacity: 0.5;
+}
+
+/* ─── Text section below fold ─── */
+.textSection {
+    width: 100%;
+    padding: 60px 40px 80px;
+    background: #fff;
+}
+
+/* Title row */
+.titleRow {
+    margin-bottom: 40px;
+}
+
+.titleRow h1 {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #000;
+    margin: 0 0 16px 0;
+}
+
+/* Toggle — no box, just text */
+.toggleArea {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+.toggleBtn {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #000;
+    opacity: 0.3;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.toggleBtn:hover {
+    opacity: 0.6;
+}
+
+.toggleBtnActive {
+    opacity: 1;
+    font-weight: 500;
+}
+
+.toggleBtnActive:hover {
+    opacity: 0.8;
+}
+
+/* 2-column text grid: body left, footnotes right */
+.contentGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* Body text — left column */
+.bodyColumn {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.85;
+    letter-spacing: -0.02em;
+    color: #000;
+    text-align: left;
+}
+
+.bodyColumn h2 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+}
+
+.bodyColumn p {
+    margin: 0 0 32px 0;
+}
+
+.bodyColumn p:last-child {
+    margin-bottom: 0;
+}
+
+/* Footnotes — right column, 50% body size */
+.footnotesColumn {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 6px;
+    font-weight: 400;
+    line-height: 1.85;
+    letter-spacing: -0.01em;
+    color: #000;
+    opacity: 0.5;
+    text-align: left;
+    padding-top: 4px;
+}
+
+.footnotesColumn p {
+    margin: 0 0 10px 0;
+}
+
+.footnotesColumn p:last-child {
+    margin-bottom: 0;
+}
+
+/* ─── Responsive ─── */
+@media screen and (max-width: 1024px) {
+    .textSection {
+        padding: 40px 24px 60px;
+    }
+
+    .contentGrid {
+        gap: 24px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .textSection {
+        padding: 32px 16px 48px;
+    }
+
+    .contentGrid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .titleRow h1 {
+        font-size: 16px;
+    }
+
+    .toggleBtn {
+        font-size: 14px;
+    }
+
+    .bodyColumn {
+        font-size: 11px;
+    }
+
+    .footnotesColumn {
+        font-size: 5.5px;
+    }
+}

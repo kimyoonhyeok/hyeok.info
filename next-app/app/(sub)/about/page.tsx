@@ -1,4 +1,5 @@
 import styles from "./about.module.css";
+import Link from "next/link";
 
 export default function AboutPage() {
     return (
@@ -32,8 +33,8 @@ export default function AboutPage() {
                 <div>
                     <span className={styles.sectionTitle}>Education</span>
                     <div className={styles.infoListItem}>
-                        <span className={styles.yearLabel}>2020-27,</span><span>Incheon National University(INU),B.F.A. In Visual Design, Double Major In
-                            Fashion Industry</span>
+                        <span className={styles.yearLabel}>2020-27,</span><Link href="/inu-score" className={styles.textLink}>Incheon National University(INU),B.F.A. In Visual Design, Double Major In
+                            Fashion Industry</Link>
                     </div>
                 </div>
                 <div>
