@@ -21,25 +21,21 @@ interface DotNode {
 type ViewMode = "NORMAL" | "COLORBLIND";
 
 // ─────────────────────────────────────────────────────────
-// 2. COLOR PALETTES — Reference Ishihara plate match
+// 2. COLOR PALETTES — Strict Ishihara plate logic
+//
+//    NORMAL  = "Vanishing Plate"  → red path visible to normal, invisible to CVD
+//    CVD     = "Hidden Digit Plate" → confusion colors invisible to normal,
+//              path visible only to Deuteranopes
 // ─────────────────────────────────────────────────────────
 
-const NORMAL_PATH_COLORS = [
-    "#E74C3C", "#FF6B6B", "#D63031", "#E17055",
-    "#FF7979", "#C0392B", "#E55039", "#EB4D4B",
-];
-const NORMAL_NOISE_COLORS = [
-    "#636E72", "#2D3436", "#B2BEC3",
-    "#6D6352", "#A29587", "#857B6C", "#746B5C",
-    "#4B4B4B", "#8D8D8D", "#7B6F63", "#5D5347",
-    "#3D3D3D", "#9E9E9E",
-];
+// Mode 1: NORMAL (Vanishing Plate) — high Red-Green contrast
+const NORMAL_PATH_COLORS = ["#E74C3C", "#E67E22", "#C0392B", "#D35400"];
+const NORMAL_NOISE_COLORS = ["#2ECC71", "#27AE60", "#95A5A6", "#BDC3C7", "#7F8C8D"];
 
-const CVD_PATH_COLORS = ["#3498DB", "#1ABC9C", "#2980B9", "#48C9B0"];
-const CVD_NOISE_COLORS = [
-    "#F39C12", "#95A5A6", "#E67E22", "#7F8C8D",
-    "#D4AC0D", "#6D6352", "#857B6C", "#A29587",
-];
+// Mode 2: COLORBLIND (Hidden Digit Plate) — confusion colors
+// Normal eyes see random autumn mix; Deuteranopes see dark path on khaki ground
+const CVD_PATH_COLORS = ["#E06B3E", "#798A58", "#B55A33", "#8C986A"];
+const CVD_NOISE_COLORS = ["#F2AB55", "#9DB863", "#E8CC7D", "#B0A374", "#D4C08B"];
 
 // ─────────────────────────────────────────────────────────
 // 3. MELODY & NOISE AUDIO
@@ -206,7 +202,9 @@ export default function IshiharaScorePage() {
     const [audioReady, setAudioReady] = useState(false);
     const [samplerLoaded, setSamplerLoaded] = useState(false);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const samplerRef = useRef<any>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const noiseSynthRef = useRef<any>(null);
     const melodyIndexRef = useRef(0);
     const dotsRef = useRef<DotNode[]>([]);
@@ -297,7 +295,7 @@ export default function IshiharaScorePage() {
 
     const playMelody = useCallback((note: string) => {
         if (samplerRef.current && samplerLoaded) {
-            try { samplerRef.current.triggerAttackRelease(note, "8n"); } catch { /* */ }
+            try { samplerRef.current.triggerAttackRelease(note, "8n"); } catch (_e) { /* */ }
         }
     }, [samplerLoaded]);
 
@@ -306,7 +304,7 @@ export default function IshiharaScorePage() {
             try {
                 const freq = NOISE_FREQS[Math.floor(Math.random() * NOISE_FREQS.length)];
                 noiseSynthRef.current.triggerAttackRelease(freq, "32n");
-            } catch { /* */ }
+            } catch (_e) { /* */ }
         }
     }, []);
 
