@@ -66,12 +66,12 @@
     margin: 0 0 16px 0;
 }
 
-/* Toggle — no box, just text */
+/* Toggle panel — vertical column */
 .toggleArea {
     display: flex;
-    gap: 24px;
-    align-items: center;
-    margin-bottom: 48px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
 }
 
 .toggleBtn {
@@ -101,11 +101,12 @@
     opacity: 0.8;
 }
 
-/* 2-column text grid: body left, footnotes right */
+/* 3-column text grid: Panel, Body, Footnotes */
 .contentGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 180px 1.5fr 1fr;
+    gap: 60px;
+    align-items: start;
 }
 
 /* Body text — left column */
@@ -134,17 +135,15 @@
     margin-bottom: 0;
 }
 
-/* Footnotes — right column, 50% body size */
+/* Footnotes — right column, same size as body */
 .footnotesColumn {
     font-family: "Helvetica Neue", sans-serif;
-    font-size: 6px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.85;
     letter-spacing: -0.01em;
     color: #000;
-    opacity: 0.5;
     text-align: left;
-    padding-top: 4px;
 }
 
 .footnotesColumn p {

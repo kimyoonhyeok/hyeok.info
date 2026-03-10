@@ -380,23 +380,24 @@ export default function IshiharaScorePage() {
                     <h1>Ishihara × Score</h1>
                 </div>
 
-                <div className={styles.toggleArea}>
-                    <button
-                        className={`${styles.toggleBtn} ${viewMode === "NORMAL" ? styles.toggleBtnActive : ""}`}
-                        onClick={() => setViewMode("NORMAL")}
-                    >
-                        Normal Vision
-                    </button>
-                    <button
-                        className={`${styles.toggleBtn} ${viewMode === "COLORBLIND" ? styles.toggleBtnActive : ""}`}
-                        onClick={() => setViewMode("COLORBLIND")}
-                    >
-                        Deuteranopia
-                    </button>
-                </div>
-
                 <div className={styles.contentGrid}>
-                    {/* Left: body text */}
+                    {/* Column 1: Toggle panel */}
+                    <div className={styles.toggleArea}>
+                        <button
+                            className={`${styles.toggleBtn} ${viewMode === "NORMAL" ? styles.toggleBtnActive : ""}`}
+                            onClick={() => setViewMode("NORMAL")}
+                        >
+                            Normal Vision
+                        </button>
+                        <button
+                            className={`${styles.toggleBtn} ${viewMode === "COLORBLIND" ? styles.toggleBtnActive : ""}`}
+                            onClick={() => setViewMode("COLORBLIND")}
+                        >
+                            Deuteranopia
+                        </button>
+                    </div>
+
+                    {/* Column 2: body text */}
                     <div className={styles.bodyColumn}>
                         <h2>1. 주제 및 목적</h2>
                         <p>
@@ -439,7 +440,7 @@ export default function IshiharaScorePage() {
                         </p>
                     </div>
 
-                    {/* Right: footnotes at 50% size */}
+                    {/* Column 3: footnotes */}
                     <div className={styles.footnotesColumn}>
                         <p>
                             [1] Squire, T. J., et al. (2014). &ldquo;Occupational color vision standards: new prospects.&rdquo;
