@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
@@ -15,8 +16,11 @@ export default function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const pathname = usePathname();
+    const isHoverable = pathname?.replace(/\/$/, '') === '/inu-score';
+
     return (
-        <header className={`global-header ${scrolled ? "scrolled" : ""}`}>
+        <header className={`global-header ${scrolled ? "scrolled" : ""} ${isHoverable ? "header-hoverable" : ""}`}>
             <nav className="header-hyeok">
                 <ul>
                     <li>

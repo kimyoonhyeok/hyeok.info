@@ -1,0 +1,441 @@
+/* ─── PT Presentation Layout ─── */
+.ptContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #ffffff; /* Removed beige */
+    z-index: 100;
+    /* Optional smooth color transition if background changes */
+    transition: background-color 0.8s ease; 
+}
+
+.slidesWrapper {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    will-change: transform;
+}
+
+.slide {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 11% 0 6%;
+    box-sizing: border-box;
+}
+
+/* Slide 0 - Title */
+.titleContainer {
+    text-align: center;
+    max-width: 1200px;
+}
+
+/* Slide 1 - Table of Contents */
+.tocLayout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.tocLeft {
+    flex: 1 0 50%;
+    min-width: 0;
+    height: 100%;
+}
+
+.tocRight {
+    flex: 1 0 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 4rem;
+}
+
+.tocLabel {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #111;
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+}
+
+.tocList {
+    list-style: none;
+    counter-reset: toc-counter;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.tocList li {
+    counter-increment: toc-counter;
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    color: #111;
+    line-height: 1.4;
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+    padding-bottom: 1.6rem;
+}
+
+.tocList li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.tocList li::before {
+    content: counter(toc-counter) ".";
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    color: #111;
+    font-weight: 400;
+    flex-shrink: 0;
+    min-width: 2em;
+}
+
+/* Chapter Content Slide */
+.chapterLayout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: flex-start;
+}
+
+.chapterLeft {
+    flex: 1 0 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 4rem;
+    /* Match the TOC list start: approx 50vh - half-list height approx 120px */
+    padding-top: calc(50vh - 120px);
+}
+
+.chapterNum {
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    color: #111;
+    font-weight: 400;
+    display: inline;
+    margin-right: 0.3em;
+}
+
+.chapterTitle {
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #111;
+    line-height: 1.5;
+}
+
+.chapterRight {
+    flex: 1 0 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 4rem;
+    padding-top: calc(50vh - 120px);
+    gap: 1.6rem;
+}
+
+.chapterLabel {
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    color: #111;
+    line-height: 1.6;
+    text-align: left; /* Ensure left alignment */
+}
+
+.chapterBody {
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    color: #111;
+    line-height: 1.8;
+    text-align: left;
+    hyphens: auto;
+    word-break: break-word; /* Better for mixed language */
+}
+
+.examplesLayout {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 6%;
+    gap: 4.5rem;
+}
+
+.exampleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Left node (A) */
+.exampleA {
+    flex: 0 0 32%;
+    text-align: left;
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    color: #111;
+    line-height: 1.5;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.subStep1 .exampleA,
+.subStep2 .exampleA {
+    opacity: 1;
+}
+
+/* Center node */
+.exampleCenter {
+    flex: 0 0 auto;
+    text-align: center;
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    font-weight: 400; /* Regular weight as requested */
+    color: #111;
+    padding: 0 1rem;
+}
+
+/* Right node (B) */
+.exampleB {
+    flex: 0 0 32%;
+    text-align: right;
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    color: #111;
+    line-height: 1.5;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.subStep2 .exampleB {
+    opacity: 1;
+}
+
+.mainTitle {
+    font-family: "garamond-premier-pro", serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #111;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+}
+
+.subTitle {
+    font-family: "Pretendard", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #555;
+    letter-spacing: 0.02em;
+}
+
+/* Slide Content (General) */
+.slideContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1400px;
+    gap: 6rem;
+}
+
+.textSide {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slideHeader {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #E74C3C;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.slideTitle {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.slideDesc {
+    font-family: "Pretendard", sans-serif;
+    font-size: 1.15rem;
+    color: #333;
+    line-height: 1.7;
+    opacity: 0.85;
+}
+
+.frameSide {
+    flex: 1.3;
+    position: relative;
+    aspect-ratio: 16/10;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: #fff;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+}
+
+.frameSide:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 35px 70px rgba(0,0,0,0.12);
+}
+
+.iframeFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none; /* Prevents interaction */
+    background: #ffffff;
+}
+
+.frameOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(231, 76, 60, 0.02); /* subtle tint on hover */
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.4s ease;
+}
+
+.frameOverlay:hover {
+    background: rgba(231, 76, 60, 0.06);
+}
+
+.frameHoverPrompt {
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-family: "Pretendard", sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #E74C3C;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.frameOverlay:hover .frameHoverPrompt {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slideIndicators {
+    position: absolute;
+    right: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 50;
+    align-items: flex-end;
+}
+
+.indicatorWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.3;
+    transform: scale(0.85);
+    transform-origin: right center;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    font-family: "Helvetica Neue", "Pretendard", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
+}
+
+.indicatorWrapper:hover:not(.active) {
+    opacity: 0.6;
+}
+
+.indicatorWrapper.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.indicatorLine {
+    height: 1.5px;
+    background-color: #111;
+    width: 0px;
+    transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.indicatorWrapper.active .indicatorLine {
+    width: 20px;
+}
+
+/* Mobile Adjustments */
+@media screen and (max-width: 900px) {
+    .slideContent {
+        flex-direction: column;
+        gap: 3rem;
+        text-align: center;
+    }
+    .mainTitle {
+        font-size: 28px;
+    }
+    .subTitle {
+        font-size: 16px;
+    }
+    .slideTitle {
+        font-size: 2.2rem;
+    }
+    .slideIndicators {
+        right: 1.5rem;
+    }
+    .frameHoverPrompt {
+        opacity: 1; /* Always show prompt on mobile slightly */
+        transform: translateY(0);
+        background: rgba(255, 255, 255, 0.95);
+    }
+}

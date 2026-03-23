@@ -325,3 +325,32 @@ footer {
   width: 100% !important;
   height: 100% !important;
 }
+
+/* Header Hover Triggers (Used on specific pages like /inu-score) */
+.global-header.header-hoverable {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  background-color: transparent;
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s ease;
+}
+
+/* Creates a hit area extending below the off-screen header to catch mouse enter */
+.global-header.header-hoverable::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 80px;
+}
+
+.global-header.header-hoverable:hover,
+.global-header.header-hoverable.force-show {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+}

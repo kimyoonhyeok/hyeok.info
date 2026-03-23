@@ -14,7 +14,7 @@
     /* Accounts for header height roughly */
     min-height: 500px;
     overflow: hidden;
-    background: #F5F0E8;
+    background: #ffffff;
 }
 
 .canvasSection canvas {
@@ -34,7 +34,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(245, 240, 232, 0.88);
+    background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
     z-index: 10;
     transition: opacity 0.5s ease;
@@ -291,5 +291,155 @@
 
     .footnotesColumn {
         font-size: 5.5px;
+    }
+}
+
+/* ─── Introduction & 4-Tile Layout (Premium) ─── */
+.introSection {
+    padding: 120px 4rem 4rem;
+    min-height: 100vh;
+    background: #F5F0E8;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.introHeader {
+    max-width: 1200px;
+}
+
+.introHeader h1 {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 80px;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    margin-bottom: 20px;
+}
+
+.introDescription {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    max-width: 1200px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 30px;
+}
+
+.descLabel {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    opacity: 0.4;
+}
+
+.descContent {
+    font-family: "Pretendard", sans-serif;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
+    font-weight: 400;
+}
+
+.tileGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+.projectTile {
+    position: relative;
+    aspect-ratio: 16/11;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+    text-decoration: none;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.projectTile:hover {
+    transform: translateY(-12px);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    border-color: rgba(231, 76, 60, 0.3);
+}
+
+.tileBgEffect {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle at center, rgba(231, 76, 60, 0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.projectTile:hover .tileBgEffect {
+    opacity: 1;
+}
+
+.tileLabel {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #E74C3C;
+    margin-bottom: 12px;
+    z-index: 1;
+    font-weight: 700;
+}
+
+.tileTitle {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #000;
+    line-height: 1.05;
+    z-index: 1;
+    letter-spacing: -0.02em;
+}
+
+.tileDesc {
+    font-family: "Pretendard", sans-serif;
+    font-size: 15px;
+    color: #666;
+    margin-top: 15px;
+    max-width: 90%;
+    z-index: 1;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 767px) {
+    .introSection {
+        padding: 80px 24px 60px;
+        gap: 60px;
+    }
+    .introHeader h1 {
+        font-size: 52px;
+    }
+    .introDescription {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .tileGrid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .projectTile {
+        padding: 30px;
     }
 }
