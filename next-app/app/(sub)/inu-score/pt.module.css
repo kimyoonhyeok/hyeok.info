@@ -148,7 +148,7 @@
     justify-content: flex-start;
     padding-left: 4rem;
     padding-top: 0;
-    gap: 1.6rem;
+    gap: 13.2px; /* Updated to match 0.6em for uniform paragraph spacing */
 }
 
 .chapterLayoutCompact .chapterLeft,
