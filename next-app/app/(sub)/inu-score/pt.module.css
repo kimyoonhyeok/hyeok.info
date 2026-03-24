@@ -186,6 +186,7 @@
     font-family: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
+    letter-spacing: -0.03em; /* Tightened kerning to fit hanging characters in Korean */
     margin: 0;
 }
 
