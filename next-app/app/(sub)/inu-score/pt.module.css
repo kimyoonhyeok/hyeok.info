@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 0 11% 0 6%;
+    padding: 0 8.5%;
     box-sizing: border-box;
 }
 
@@ -80,8 +80,8 @@
 
 .tocList li {
     counter-increment: toc-counter;
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     color: #111;
     line-height: 1.4;
     display: flex;
@@ -97,8 +97,8 @@
 
 .tocList li::before {
     content: counter(toc-counter) ".";
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     color: #111;
     font-weight: 400;
     flex-shrink: 0;
@@ -110,8 +110,8 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100%;
-    align-items: flex-start;
+    /* Let content height dictate wrapper height, centering it in .slide */
+    align-items: flex-start; /* User requested: Top Alignment (Y-axis) */
 }
 
 .chapterLeft {
@@ -121,13 +121,11 @@
     flex-direction: column;
     justify-content: flex-start;
     padding-right: 4rem;
-    /* Match the TOC list start: approx 50vh - half-list height approx 120px */
-    padding-top: calc(50vh - 120px);
 }
 
 .chapterNum {
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     color: #111;
     font-weight: 400;
     display: inline;
@@ -135,8 +133,8 @@
 }
 
 .chapterTitle {
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     font-weight: 400;
     color: #111;
     line-height: 1.5;
@@ -149,26 +147,46 @@
     flex-direction: column;
     justify-content: flex-start;
     padding-left: 4rem;
-    padding-top: calc(50vh - 120px);
+    padding-top: 0;
     gap: 1.6rem;
 }
 
+.chapterLayoutCompact .chapterLeft,
+.chapterLayoutCompact .chapterRight {
+    padding-top: 0;
+}
+
+.chapterLayoutCompact .chapterRight {
+    padding-bottom: 0;
+}
+
 .chapterLabel {
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     color: #111;
     line-height: 1.6;
-    text-align: left; /* Ensure left alignment */
+    text-align: left;
+    margin-bottom: 0;
 }
 
 .chapterBody {
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 22px !important;
     color: #111;
-    line-height: 1.8;
+    line-height: 1.6;
     text-align: left;
     hyphens: auto;
     word-break: break-word; /* Better for mixed language */
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em; /* Provide uniform paragraph spacing matching Section 6 */
+}
+
+.chapterBody p {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    margin: 0;
 }
 
 .examplesLayout {
@@ -196,8 +214,8 @@
 .exampleA {
     flex: 0 0 32%;
     text-align: left;
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     color: #111;
     line-height: 1.5;
     opacity: 0;
@@ -213,8 +231,8 @@
 .exampleCenter {
     flex: 0 0 auto;
     text-align: center;
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     font-weight: 400; /* Regular weight as requested */
     color: #111;
     padding: 0 1rem;
@@ -224,8 +242,8 @@
 .exampleB {
     flex: 0 0 32%;
     text-align: right;
-    font-family: "Pretendard", sans-serif;
-    font-size: 22px;
+    font-family: "Pretendard Variable", "Pretendard", sans-serif !important;
+    font-size: 22px !important;
     color: #111;
     line-height: 1.5;
     opacity: 0;
@@ -294,7 +312,7 @@
 
 .slideDesc {
     font-family: "Pretendard", sans-serif;
-    font-size: 1.15rem;
+    font-size: 22px !important;
     color: #333;
     line-height: 1.7;
     opacity: 0.85;
@@ -368,50 +386,148 @@
 }
 
 .slideIndicators {
-    position: absolute;
+    position: fixed;
     right: 4rem;
     top: 50%;
     transform: translateY(-50%);
+    height: 320px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    z-index: 50;
     align-items: flex-end;
+    justify-content: center;
+    z-index: 50;
+    /* Fade top/bottom edges to enhance the wheel feel */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.indicatorsInner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .indicatorWrapper {
     display: flex;
     align-items: center;
     gap: 12px;
-    opacity: 0.3;
-    transform: scale(0.85);
     transform-origin: right center;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1),
+                opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
     cursor: pointer;
     font-family: "Helvetica Neue", "Pretendard", sans-serif;
     font-size: 14px;
     font-weight: 500;
     color: #111;
+    height: 44px;
+    justify-content: flex-end;
+    min-width: 60px;
 }
 
 .indicatorWrapper:hover:not(.active) {
-    opacity: 0.6;
-}
-
-.indicatorWrapper.active {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 0.5;
 }
 
 .indicatorLine {
     height: 1.5px;
     background-color: #111;
     width: 0px;
-    transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .indicatorWrapper.active .indicatorLine {
     width: 20px;
+}
+
+/* ─── BIBLIOGRAPHY / REFERENCE LIST ─── */
+
+.refInlineList {
+    color: #111;
+    font-size: 22px !important;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+.refInlineList * {
+    font-family: inherit !important;
+}
+
+.refDisplay {
+    font-weight: 400;
+}
+
+.refTopic {
+    color: #555;
+    font-weight: 400;
+}
+
+.refSeparator {
+    color: #000;
+    margin: 0 4px;
+}
+
+.refSup {
+    font-size: 0.65em;
+    vertical-align: super;
+    color: #000;
+    cursor: pointer;
+    margin-left: 3px;
+    font-weight: 400;
+    letter-spacing: 0;
+    user-select: none;
+    transition: color 0.2s ease;
+    line-height: 0;
+}
+
+.refSup:hover {
+    color: #999;
+}
+
+/* ─── FOOTNOTE TOOLTIP ─── */
+
+.refTooltip {
+    position: fixed;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    padding: 1rem 1.2rem;
+    max-width: 360px;
+    min-width: 220px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    pointer-events: auto;
+}
+
+.refTooltipKo {
+    font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #333;
+    margin: 0 0 0.75rem 0;
+    font-weight: 400;
+}
+
+.refTooltipUrl {
+    display: block;
+    font-family: "Helvetica Neue", monospace;
+    font-size: 10px;
+    color: #C0C0C0;
+    word-break: break-all;
+    text-decoration: none;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 0.6rem;
+    transition: color 0.2s ease;
+    line-height: 1.5;
+}
+
+.refTooltipUrl:hover {
+    color: #888;
+    text-decoration: underline;
 }
 
 /* Mobile Adjustments */
