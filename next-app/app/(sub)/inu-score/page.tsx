@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
 import IshiharaComponent from "./IshiharaComponent";
 import HolbeinComponent from "./HolbeinComponent";
 import styles from "./pt.module.css";
