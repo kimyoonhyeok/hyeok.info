@@ -43,6 +43,7 @@ export default function PresentationPage() {
     const [subSlide, setSubSlide] = useState(0);
     const [mounted, setMounted] = useState(false);
     const [activeRef, setActiveRef] = useState<{ id: number; x: number; y: number } | null>(null);
+    const [isPosterExpanded, setIsPosterExpanded] = useState(false);
     const totalSlides = 13;
     const isScrolling = useRef(false);
 
@@ -442,6 +443,7 @@ export default function PresentationPage() {
                             <img 
                                 src="/inu-score/Sample(03.24).jpg" 
                                 alt="Poster Sketch" 
+                                onClick={() => setIsPosterExpanded(true)}
                                 style={{
                                     width: '100%',
                                     maxWidth: '380px',
@@ -449,8 +451,12 @@ export default function PresentationPage() {
                                     borderRadius: '8px',
                                     marginTop: '4px', /* Aligns better with font line-height */
                                     boxShadow: '-10px 10px 30px rgba(0,0,0,0.3)',
-                                    border: '1px solid rgba(0,0,0,0.03)'
-                                }} 
+                                    border: '1px solid rgba(0,0,0,0.03)',
+                                    cursor: 'zoom-in',
+                                    transition: 'transform 0.2s ease',
+                                }}
+                                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+                                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                             />
                         </div>
                     </div>
@@ -467,6 +473,48 @@ export default function PresentationPage() {
 
             </div>
         </div>
+
+        {isPosterExpanded && (
+            <div 
+                onClick={() => setIsPosterExpanded(false)}
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    backgroundColor: 'rgba(255,255,255,0.92)',
+                    backdropFilter: 'blur(10px)',
+                    zIndex: 99999,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'zoom-out',
+                    animation: 'fadeIn 0.3s ease-out forwards'
+                }}
+            >
+                <img 
+                    src="/inu-score/Sample(03.24).jpg" 
+                    alt="Poster Sketch Expanded" 
+                    style={{
+                        maxWidth: '1000px',
+                        width: '80%',
+                        height: 'auto',
+                        maxHeight: '90vh',
+                        objectFit: 'contain',
+                        boxShadow: '-20px 20px 60px rgba(0,0,0,0.6)',
+                        border: '1px solid rgba(0,0,0,0.05)',
+                        borderRadius: '8px'
+                    }}
+                />
+                <style>{`
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                `}</style>
+            </div>
+        )}
 
         {activeRef && (
             <div
