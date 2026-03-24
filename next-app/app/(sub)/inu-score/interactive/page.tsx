@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback, PointerEvent } from "react";
 import styles from "../ishihara-score.module.css";
 
 // 1. DATA STRUCTURES
@@ -85,7 +85,13 @@ function drawFrame(ctx: CanvasRenderingContext2D, dots: DotNode[], w: number, h:
     });
 }
 
-function NodeUI({ mode, setMode, hasKnowledge, setHasKnowledge }: any) {
+interface NodeUIProps {
+    mode: ViewMode;
+    setMode: (mode: ViewMode) => void;
+    hasKnowledge: boolean;
+    setHasKnowledge: (has: boolean) => void;
+}
+function NodeUI({ mode, setMode, hasKnowledge, setHasKnowledge }: NodeUIProps) {
     const wireEndY = mode === "COLORBLIND" ? 11 : (hasKnowledge ? 87 : 49);
     return (
         <div className={styles.nodeUiContainer}>
@@ -99,7 +105,7 @@ function NodeUI({ mode, setMode, hasKnowledge, setHasKnowledge }: any) {
     );
 }
 
-const FOOTNOTES: any = {
+const FOOTNOTES: Record<number, string> = {
     1: 'Squire, et al. (2014). "Occupational color vision standards." JOSA A.',
     2: 'Henshaw, et al. (2024). "ADCT: Improving Robustness..." MDPI.',
     3: 'Sabatella, M. (2016). "Graphic Score on Trial." UC Irvine.',
@@ -128,7 +134,9 @@ export default function IshiharaScoreInteractivePage() {
     const [samplerLoaded, setSamplerLoaded] = useState(false);
     const [hoveredFootnote, setHoveredFootnote] = useState<{ id: number, x: number, y: number } | null>(null);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const samplerRef = useRef<any>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const synthRef = useRef<any>(null);
     const melodyIndexRef = useRef(0);
     const dim7IndexRef = useRef(0);
@@ -185,7 +193,7 @@ export default function IshiharaScoreInteractivePage() {
         setAudioReady(true);
     };
 
-    const handlePointerMove = (e: any) => {
+    const handlePointerMove = (e: PointerEvent<HTMLCanvasElement>) => {
         if (!audioReady) return;
         const rect = canvasRef.current!.getBoundingClientRect();
         const mx = e.clientX - rect.left; const my = e.clientY - rect.top;
@@ -207,7 +215,7 @@ export default function IshiharaScoreInteractivePage() {
         }
     };
 
-    const handlePointerDown = (e: any) => {
+    const handlePointerDown = (e: PointerEvent<HTMLCanvasElement>) => {
         if (!audioReady || viewModeRef.current !== "NORMAL" || !hasKnowledgeRef.current) return;
         const rect = canvasRef.current!.getBoundingClientRect();
         const mx = e.clientX - rect.left; const my = e.clientY - rect.top;
