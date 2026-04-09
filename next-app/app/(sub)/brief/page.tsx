@@ -148,11 +148,16 @@ export default function BriefPage() {
                     <div className={styles.submitWrapper}>
                         <div className={styles.submitLeft}></div>
                         <div className={styles.submitRight}>
-                            <button type="submit" className={styles.submitButton} disabled={status === 'submitting'}>
-                                {status === 'submitting' ? 'Sending...' : 'Submit Inquiry'}
+                            <button 
+                                type="submit" 
+                                className={styles.submitButton} 
+                                disabled={status === 'submitting' || status === 'success'}
+                            >
+                                {status === 'submitting' ? 'Sending...' : 
+                                 status === 'success' ? 'Successfully Sent' :
+                                 status === 'error' ? 'Failed to send. Try again' :
+                                 'Submit Inquiry'}
                             </button>
-                            {status === 'success' && <p className={`${styles.statusMessage} ${styles.statusSuccess}`}>성공적으로 전송되었습니다.</p>}
-                            {status === 'error' && <p className={`${styles.statusMessage} ${styles.statusError}`}>전송에 실패했습니다. 다시 시도해주세요.</p>}
                         </div>
                     </div>
                 </form>

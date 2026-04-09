@@ -183,19 +183,7 @@
     cursor: not-allowed;
 }
 
-.statusMessage {
-    margin-top: 10px;
-    font-size: 14px;
-    font-family: 'Helvetica Neue', Helvetica, Pretendard, sans-serif !important;
-}
 
-.statusSuccess {
-    color: blue;
-}
-
-.statusError {
-    color: red;
-}
 
 /* Responsive Mobile */
 @media screen and (max-width: 1023px) {
