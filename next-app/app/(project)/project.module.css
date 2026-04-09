@@ -224,6 +224,77 @@
     .minWidth320 {
         display: none;
     }
+
+}
+
+/* Info Section — globally positioned below .container (X project sample) */
+.infoSection {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 6rem 50px 6rem;
+    gap: 4rem;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--background);
+    color: var(--color);
+}
+
+.standaloneFooter {
+    width: 100%;
+    padding: 0 20px 20px 20px;
+    box-sizing: border-box;
+}
+
+.standaloneFooter :global(footer:not(.minWidth320)) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.standaloneFooter :global(.footer-left),
+.standaloneFooter :global(.footer-right) {
+    font-size: 0.75rem;
+    align-self: end;
+}
+
+.standaloneFooter :global(.footer-right) {
+    text-align: right;
+}
+
+.standaloneFooter :global(footer ul),
+.standaloneFooter :global(footer li),
+.standaloneFooter :global(footer a) {
+    font-size: 0.75rem;
+    color: var(--color);
+    text-align: left;
+}
+
+.standaloneFooter :global(footer.minWidth320) {
+    display: none;
+}
+
+.infoLeft {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.infoLeft div {
+    display: flex;
+    align-items: flex-start;
+}
+
+.infoRight {
+    flex: 1;
+    font-size: 20px;
+    line-height: 1.6;
+    word-break: keep-all;
 }
 
 /* Tablet (768px - 1399px) */

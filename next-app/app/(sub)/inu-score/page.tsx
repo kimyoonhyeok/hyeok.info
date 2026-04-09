@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import IshiharaComponent from "./IshiharaComponent";
 import HolbeinComponent from "./HolbeinComponent";
+import ColorConfusionGraphic from "./ColorConfusionGraphic";
 import styles from "./pt.module.css";
 
 const REF_LIST = [
@@ -464,9 +465,10 @@ export default function PresentationPage() {
                     </div>
                 </div>
 
-                {/* ─── SLIDE 14: END PAGE ─── */}
+                {/* ─── SLIDE 14: END PAGE & CONFUSION GRAPHIC ─── */}
                 <div className={styles.slide}>
-                    <div className={styles.titleContainer}>
+                    <div style={{ width: '100%', maxWidth: '1000px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4rem', marginTop: '2rem' }}>
+                        <ColorConfusionGraphic />
                         <h1 className={styles.mainTitle} style={{ fontFamily: '"garamond-premier-pro", serif', fontSize: '24px', fontWeight: 600, color: '#111' }}>
                             (c) 2026. Yoonhyeok Kim.
                         </h1>

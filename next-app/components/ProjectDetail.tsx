@@ -32,7 +32,6 @@ interface ProjectDetailProps {
 
 export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isInfoHovered, setIsInfoHovered] = useState(false);
     const swiperRef = useRef<SwiperType | null>(null);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
@@ -62,8 +61,6 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
         });
     }, [activeIndex]);
 
-    const dimmedStyle = isInfoHovered ? { opacity: 0.25 } : { opacity: 1 };
-
     // Navigation handlers
     const handlePrev = useCallback(() => {
         if (swiperRef.current) swiperRef.current.slidePrev();
@@ -74,37 +71,12 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
     }, []);
 
     return (
+        <div className="project-detail-wrapper">
         <div className={styles.container}>
             {/* Header (Participates in Grid) */}
             <Header />
 
-            <div className={`${styles.projectInfo}`} style={dimmedStyle}>
-                {project.title}
-                <br />
-                {project.scope}
-                <br />
-                {project.category}, {project.completion}
-            </div>
-
-            <div
-                className={styles.moreInfo}
-                onMouseEnter={() => setIsInfoHovered(true)}
-                onMouseLeave={() => setIsInfoHovered(false)}
-            >
-                To find out more about the project details, hover here ↗
-
-                <div
-                    className={styles.moreInfoContent}
-                    style={{
-                        opacity: isInfoHovered ? 1 : 0,
-                        visibility: isInfoHovered ? 'visible' : 'hidden'
-                    }}
-                >
-                    {project.description}
-                </div>
-            </div>
-
-            <div className={styles.image} style={dimmedStyle}>
+            <div className={styles.image}>
                 <Swiper
                     modules={[Navigation]}
                     onBeforeInit={(swiper) => {
@@ -168,9 +140,27 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                     onClick={handleNext}
                 />
             </div>
+        </div>
 
-            {/* Footer (Participates in Grid) */}
+        {/* Info Section — rendered below the swiper for all projects */}
+        <div className={styles.infoSection}>
+            {/* Left: Metadata */}
+            <div className={styles.infoLeft}>
+                <div>Project Name : {project.title}</div>
+                <div>Task Scope : {project.scope}</div>
+                <div>Category : {project.category}</div>
+                <div>Completion : {project.completion}</div>
+            </div>
+            {/* Right: Description */}
+            <div className={styles.infoRight}>
+                {project.description}
+            </div>
+        </div>
+
+        {/* Footer (Rendered outside Grid at bottom for all projects) */}
+        <div className={styles.standaloneFooter}>
             <Footer />
+        </div>
         </div>
     );
 }

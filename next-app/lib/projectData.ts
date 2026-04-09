@@ -12,7 +12,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "Notefolio",
-    title: "Notefolio WorkShop 6-week course ≪시작을 위한, 워크숍≫",
+    title: "Notefolio WorkShop 6-week course ≪Workshop for the Beginning≫",
     scope: "Workshop",
     category: "Commercial",
     completion: "Jul. 2026",
@@ -21,13 +21,23 @@ export const projects: Project[] = [
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
   },
   {
+    slug: "Collage",
+    title: "Coffee Collage",
+    scope: "Identity Design",
+    category: "Commercial",
+    completion: "Apr. 2026",
+    thumbnail: "Thumbnail.mp4",
+    description: "",
+    images: ["Thumbnail.mp4", "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg", "32.jpg", "33.jpg", "34.jpg", "35.jpg", "36.jpg", "37.jpg", "38.jpg", "39.jpg"]
+  },
+  {
     slug: "Sketched",
     title: "SKETCHED.Space Web",
     scope: "Web Design Development",
     category: "Commercial",
     completion: "Mar. 2026",
     thumbnail: "Thumbnail.mp4",
-    description: "sketched.space 웹사이트의 구축은 ‘Point of View(POV)’ 개념을 마인드맵 구조로 시각화하여 렌더링하는 방향으로 진행되었습니다. 전체적인 구조는 Canvas 기반의 전체 화면 레이아웃을 도입했습니다. 다수의 노드를 배치하기 위해 원 패킹(Circle Packing) 알고리즘을 적용하였으며, 이를 통해 문제 제기 지점에서 해결 도출 지점으로 전환되는 웹사이트의 서사 구조를 구현했습니다. 이 과정에서 비가시적 영역의 캔버스 렌더링을 위한 다수 객체의 좌표 연산과 Viewport 내 키워드 노드의 상태(State) 관리 기능이 통합되었습니다. 디자인과 기능 면에서는 스크롤 제어를 통한 인터랙션 구현에 주력했습니다. 이를 위해 사용자의 Wheel Event를 차단하고 프로그램 스크롤(Programmatic Scroll)을 실행하는 방식을 도입했습니다. 랜딩(Landing) 페이지의 경우, Gravity Scroll Inducement 메커니즘을 적용하여 화면 중앙의 키워드 군집이 하단으로 이동하는 이벤트를 트리거로 삼아 뷰포트 이동을 강제하도록 구현했습니다. 특히 랜딩 페이지의 파티클 애니메이션은 스크롤링을 기반으로 작동하므로 사용자 환경에 따른 경험 편차를 최소화하고, 일관성 있는 부드러운 프레임 레이트가 유지되도록 렌더링 최적화에 집중했습니다. Service 및 Works페이지에는 시퀀스 라인 애니메이션(Sequence Line Animation)을 적용하여 페이지 이동과 정보 노출을 제어했습니다. 기준선(Baseline)이 하단으로 연장되는 애니메이션의 진행 비율을 스크롤 값에 동기화하였으며, 선의 연장 상태에 따라 후속 섹션의 노출이 결정되도록 설계했습니다. 서비스 페이지는 스크롤 시 콘텐츠가 상단으로 상승하는 듯한 시각적 효과를 적용하여 스크롤 과정의 단조로움을 방지했습니다. Works 페이지는 사용자 스크롤 입력 없이 콘텐츠가 하단으로 자동 이동하며, 마우스 Hover 이벤트 발생 시 화면 이동이 정지하고 상세 설명이 노출되도록 구현했습니다. 기술적으로 이 기능은 뷰포트 진입을 감지하고, 애니메이션 라이브러리의 연산을 거쳐 스크립트에 설정된 좌표 단위로 화면을 제어하는 방식으로 작동합니다. 데이터 관리 측면에서는 Sanity CMS를 연동하여 콘텐츠 업데이트 구조를 확립했습니다. 이 과정에서 클라이언트 역시 관리자 페이지를 조작하는 사용자임을 고려하여, 직관적인 데이터 입력과 수정이 가능하도록 Schema를 구성하고 관리자 UX 최적화를 중요하게 고려했습니다.",
+    description: "The development of the sketched.space website was carried out by rendering the concept of 'Point of View (POV)' as a visualized mind-map structure. The overall architecture adopted a full-screen layout based on Canvas. A Circle Packing algorithm was applied to arrange multiple nodes, implementing the narrative structure of the website that transitions from the point of raising a problem to the point of deriving a solution. During this process, coordinate operations for multiple objects to render the canvas in invisible areas and state management functions for keyword nodes within the Viewport were integrated. \nIn terms of design and functionality, the focus was on implementing interaction through scroll control. To achieve this, a method of blocking the user's Wheel Event and executing Programmatic Scroll was introduced. For the Landing page, a Gravity Scroll Inducement mechanism was applied, triggering an event where the keyword cluster in the center of the screen moves downwards to force viewport movement. In particular, since the particle animation on the landing page operates based on scrolling, rendering optimization was prioritized to minimize experience variance based on user environments and maintain a consistent, smooth frame rate. \nSequence Line Animation was applied to the Service and Works pages to control page transitions and information exposure. The progression rate of the animation extending the baseline downwards was synchronized with the scroll value, and it was designed so that the exposure of subsequent sections is determined by the line's extension state. The Service page applied a visual effect where content seems to rise upwards upon scrolling, preventing monotony during the scrolling process. The Works page was implemented so that content automatically moves downwards without user scroll input, and upon a mouse Hover event, screen movement stops and detailed descriptions are exposed. Technically, this function works by detecting viewport entry and controlling the screen by coordinate units set in the script through animation library calculations. \nIn terms of data management, content update architecture was established by integrating Sanity CMS. During this process, considering that the client is also a user operating the administrator page, the Schema was structured to allow intuitive data input and modification, heavily prioritizing administrator UX.",
     images: ["01.mp4", "02.mp4", "03.mp4", "04.mp4", "05.mp4", "06.mp4"]
   },
   {
@@ -37,7 +47,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Mar. 2026",
     thumbnail: "Thumbnail.mp4",
-    description: "본 프로젝트는 공연 ≪Subverted Anatomical Landscape <X>≫를 기반으로, 인간과 기계의 관계를 탐구하는 시각 아이덴티티 구축을 목표로 했습니다. 작품의 본질적 주제인 <유한한 생명력>과 <무한한 기계성>의 대립을 시각화해야 했기 때문에, 추상적인 서사 대신 <서로 다른 물성의 물리적 충돌과 결합을 물질적인 증거처럼 제시할 것>이라는 전제를 바탕으로 작업이 진행되었습니다.콘셉트를 설정해나가며, 무대 위의 거대한 '엔진'과 '아기집'을 모티프로 삼는 것이 적절한 방향이라 판단했습니다. 이를 바탕으로 기계 부품과 다수의 인간 머리가 수직으로 응집된 '메탈릭 토템(Metallic Totem)' 형상을 구축했습니다. 특히 이 거대한 형상은 공연의 타이틀인 ≪X≫와 직관적으로 맞닿을 수 있도록 'X'자 형태로 교차하며 응집하는 실루엣으로 기획했습니다. 복잡한 이미지를 나열하기보다, 기계적 반복 운동 속에 갇힌 인간 군상이자 기계라는 모체에서 배양되는 새로운 혼종 인류의 모습을 하나의 거대한 덩어리로 상징하기 위함입니다.결과적으로 인공적인 금속, 유기적인 살덩어리, 유동적인 액체 등 이질적인 소재들을 정밀하게 묘사하여 보는 즉시 시각을 넘어선 촉각적인 자극을 전달하고자 했습니다. 구체적으로 거칠고 어두운 금속 표면을 타고 흘러내리는 점성 있는 액체의 움직임을 부여해, <정적인 결합>이 아닌 <동적인 융합>의 과정을 표현했습니다. 두 존재가 물리적으로 섞일 때 발생하는 이 <긴장감>을 바탕으로 모든 시각물을 통일해 표현하려 했습니다.",
+    description: "This project is based on the performance Subverted Anatomical Landscape ≪X≫ and aims to build a visual identity that explores the relationship between humans and machines. Since the essential theme of the work—the conflict between <finite vitality> and <infinite machinic nature>—needed to be visualized, the process was guided by the premise of <presenting the physical collision and combination of differing materialities as tangible evidence> rather than relying on abstract narrative. While establishing the concept, taking the massive 'engine' and 'womb' on stage as motifs was deemed the appropriate direction. Based on this, a 'Metallic Totem' form was constructed, where mechanical parts and numerous human heads coagulate vertically. In particular, this colossal structure was designed with a silhouette that crosses and condenses in the shape of an 'X', intuitively connecting with the performance's title, ≪X≫. Rather than listing complex images, the intent was to symbolize the human crowd trapped in mechanical repetitive motion, as well as the new hybrid humanity cultivated within the mother matrix of the machine, all condensed into a single massive lump. Ultimately, by precisely depicting disparate materials such as artificial metal, organic living flesh, and viscous liquids, the goal was to deliver an immediate tactile stimulation that transcends visual perception. Specifically, by adding the movement of viscous fluid flowing down a rough, dark metallic surface, a process of <dynamic fusion> was expressed rather than <static combination>. Using this <tension> generated when two distinct beings mechanically merge, an attempt was made to unify and express all visual artifacts.",
     images: ["00.mp4", "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.mp4", "10.jpg", "11.jpg", "12.mp4", "13.mp4", "14.mp4", "15.mp4"]
   },
   {
@@ -47,7 +57,7 @@ export const projects: Project[] = [
     category: "Non-Commercial",
     completion: "Jan. 2026",
     thumbnail: "Thumbnail.mp4",
-    description: "본 프로젝트는 음악을 구성하는 6가지 Stem파일인 Main Riff, EGTR, Bass, Pad, Drums, Strings를 개별적으로 분리하여, 각 오디오 신호를 시각적 변수로 변환한 Audio Reactive 작업입니다. 오디오의 볼륨 변화를 단순한 크기 변화로 치환하는 방식을 지양하고, 각 악기의 신호가 화면 내 픽셀의 좌표를 이동시키거나 섞는 물리적 연산의 값으로 작용하도록 설계했습니다. 이를 통해 청각 데이터가 시각 데이터의 움직임을 직접 제어하는 시스템을 구축했습니다. 데이터 처리는 터치디자이너의 CHOP Operators 단계에서 수행했습니다. 각 Stem 파일의 오디오 파형은 Audio Spectrum을 통해 주파수 대역별로 분석한 후, Analyze(RMS Power)와 Filter를 거쳐 단일 수치로 변환됩니다. Drums와 EGTR 같은 때리는 음은 수치 변화폭을 즉각적으로 반영하여 화면 왜곡의 강도를 조절하는 트리거로 사용되며, Pad와 Bass 같은 지속음은 화면 전체의 좌표를 지속적으로 이동시키는 기저 데이터로 맵핑했습니다. 시각화의 핵심 구조는 TOP Operator 단계의 ’Feedback Loop‘ 시스템입니다. Feedback TOP과 Displace TOP을 순환 구조로 연결하여 현재 프레임의 이미지가 다음 프레임에 누적되도록 설정함으로써, 픽셀이 이동 궤적을 남기는 효과를 구현했습니다. CHOP에서 추출한 오디오 데이터는 Displace Weight 파라미터에 연결되어, 소리의 크기에 따라 픽셀이 밀려나는 거리를 실시간으로 제어하며 유체의 흐름을 생성합니다. 질감의 경우, 음영 질감 표현을 위해 Slope TOP을 사용했습니다. 유동하는 이미지의 밝기 변화량을 계산하여 음영 정보를 생성하고, 이를 원본 이미지와 Hard Light 모드로 합성함으로써 평면적인 그래픽에 굴곡과 높낮이 정보를 추가했습니다. 이 과정에서 발생하는 색상 간섭을 방지하기 위해 쉐이딩 연산 단계에서는 이미지를 흑백으로 변환하여 형태와 명암 정보만을 처리하도록 구조화했습니다. 최종적인 색상은 «활공» 아트워크의 컬러 데이터를 Lookup TOP을 통해 매핑하여 구현했습니다. 흑백으로 시뮬레이션 된 유체 영상의 명도 단계에 따라 지정된 컬러 램프가 대입되는 방식입니다. 이를 통해 피드백 루프에 의한 복잡한 움직임 속에서도 원본 아트워크의 색상 정보가 왜곡 없이 출력되도록 설계했습니다.",
+    description: "This project is an Audio Reactive piece that separates the six stem files constituting the music (Main Riff, EGTR, Bass, Pad, Drums, Strings) and converts each audio signal into visual variables. Avoiding the simple substitution of volume changes for size changes, it was designed so that the signal of each instrument acts as a physical computational value that moves or mixes the pixel coordinates on the screen. Through this, a system was established where auditory data directly controls the movement of visual data.\nData processing was executed at the CHOP Operators stage in TouchDesigner. The audio waveform of each stem file is analyzed by frequency band through an Audio Spectrum, then converted into a single numerical value via Analyze (RMS Power) and Filter. Striking sounds like Drums and EGTR instantly reflect numerical fluctuations, acting as triggers that adjust the intensity of screen distortion, while sustaining sounds like Pad and Bass are mapped as base data that continuously shift the entire coordinates of the screen.\nThe core structure of visualization is the 'Feedback Loop' system in the TOP Operator stage. By connecting Feedback TOP and Displace TOP in a recursive structure, the current frame's image is accumulated onto the next frame, implementing an effect where pixels leave motion trajectories. The audio data extracted from CHOP is connected to the Displace Weight parameter, controlling the distance pixels are pushed based on volume in real-time to generate fluid flow.\nFor texture, Slope TOP was used to express shading. Brightness variation amounts of the flowing image evaluate shading information, which is blended with the original image via Hard Light mode to add topographical curves and elevation to flat graphics. To prevent color interference during this shading calculation, the image is converted to black and white so that only shape and contrast are evaluated. Finally, colors were mapped using the color data of the artwork ≪Glide≫ via Lookup TOP, substituting designated color ramps according to the brightness levels of the simulated black-and-white fluid video. Through this, the color info from the original artwork remains undistorted amidst the complex movements of the feedback loop.",
     images: ["01.mp4", "02.mp4", "03.mp4", "04.mp4", "05.mp4", "06.mp4", "07.mp4", "08.mp4", "09.mp4", "10.mp4"]
   },
   {
@@ -57,7 +67,7 @@ export const projects: Project[] = [
     category: "Non-Commercial",
     completion: "Dec. 2025",
     thumbnail: "Thumbnail.mp4",
-    description: "본 프로젝트는 영화 <The Substance(2024)>의 예고편을 기반으로, <두 신체가 분기되는 평면 구조>를 그래픽 언어로 재해석하는 타이틀 시퀀스입니다. 투약, 문, 신체, 섭식 등 영화의 핵심 장면을 기호적 형태(점·선·면)로 단순화하여 자기복제를 표현하려 합니다. 원색 RGB 대비와 굵은 고딕 타이포를 중심으로 구성할 계획입니다. 결과적으로 프로젝트를 통해 예고편의 특징점을 선정해, 이를 그래픽적 시스템으로 번역한 평면적 실험으로 제시하려 합니다.",
+    description: "This project is a title sequence interpreting the film <The Substance (2024)>'s trailer, reinterpreting the graphic language of <a planar structure where two bodies bifurcate>. Core movie scenes—administration, door, body, consumption—were simplified into semiotic shapes (point, line, plane) to express self-replication. It was planned centrally around primary color RGB contrasts and thick Gothic typography. Ultimately, the project aimed to extract characteristics from the trailer and translate them into a graphical system, proposing a planar experimental approach.",
     images: ["01.mp4"]
   },
   {
@@ -67,17 +77,17 @@ export const projects: Project[] = [
     category: "Non-Commercial",
     completion: "Dec. 2025",
     thumbnail: "Thumbnail.jpg",
-    description: "본 프로젝트는 브랜드 <바른생각>을 기반으로, 20살이 되는 예비 성인들을 위한 올바른 성생활 안내 키트를 기획 및 제작하는 것을 목표로 합니다. <성(性)>이라는 주제를 건전하고 긍정적인 관점에서 전달하기 위해, 브랜드가 지닌 정직함 · 배려 · 안전함의 이미지를 확장하여 패키지디자인으로 구현합니다. 키트는 성행위의 전 · 중 · 후 단계를 기준으로 구성되며, 각 단계에 필요한 제품 텅캔디(전), 콘돔(중), 청결제(후), 설명서가 포함됩니다. 각 제품의 패키지는 독립적인 구조와 그래픽을 가지되, 통합적으로는 하나의 브랜드 경험으로 이어지도록 설계합니다. 이를 통해 사용자가 성에 대한 올바른 인식과 책임 있는 태도를 가질 수 있도록 돕고, 패키지디자인이 단순한 포장 이상의 <교육적 매개체>로 기능할 수 있음을 제시합니다.",
+    description: "This project is based on the brand <Bareunsaenggak> and aims to plan and produce a sound sex life guide kit for prospective adults entering their 20s. To communicate the topic of <sex> from a healthy and positive perspective, the brand's image of honesty, consideration, and safety was expanded and implemented through packaging design. The kit is structured around the pre, mid, and post stages of sexual activity, encompassing necessary products for each stage: tongue candy (pre), condoms (mid), cleansers (post), and a manual. Each product's packaging retains independent structures and graphics while seamlessly integrating into a unified brand experience. Through this, the design seeks to help users develop proper awareness and responsible attitudes toward sex, presenting packaging design as an <educational medium> that functions far beyond simple wrappings.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg", "32.jpg", "33.jpg", "34.jpg"]
   },
   {
     slug: "Sangmyung",
-    title: "상명대학교 53회 졸업전시",
+    title: "Sangmyung University 53rd Graduation Exhibition",
     scope: "Identity Design",
     category: "Commercial",
     completion: "Nov. 2025",
     thumbnail: "Thumbnail.jpg",
-    description: "25년 11월에 있던 상명대학교 생활예술전공 53회 졸업전시 아이덴티티 디자인을 맡았습니다. 핵심 과제는 퍼니처와 텍스타일 두 전공이 하나의 전시 구조 안에서 어떻게 동등하게 제시될 수 있는지에 대한 시각적 해석이었습니다. 두 세부전공은 서로 다른 제작 방식과 조형적 미감을 지니고 있었기 때문에, 이를 하나의 체계로 통합하되 각 전공이 가진 전문성과 고유성을 명확히 드러내는 방향으로 제시하려 했습니다. 이에 따라 전체 판형과 수직적 구조는 동일하게 유지하여 두 전공이 동등한 위계 안에서 존재한다는 점을 시각적으로 확보함과 동시에 메인 비주얼은 각 전공의 물성, 조형 리듬, 패턴적 특성을 반영해 형태 언어를 다르게 설계함으로써, 하나의 시스템 안에서 균형과 차별성이 함께 구현되는 구성을 의도하려 했습니다. 이렇게 개발된 아이덴티티 시스템을 바탕으로 전시 포스터, 안내물 등 다양한 매체에서도 일관된 구조로 확장될 수 있도록 모듈화하여 적용하였습니다.",
+    description: "I took charge of the identity design for the 53rd Graduation Exhibition of Sangmyung University's Life Arts Major held in November 2025. The core task was creating a visual interpretation of how two distinct majors, Furniture and Textile, could be presented equally within a single exhibition structure. As the two sub-majors possessed differing production methods and formative aesthetics, the goal was to integrate them into a unified system while clearly conveying their individual expertise and distinctiveness. Accordingly, the overall layout and vertical format were kept identical to visually secure their equal hierarchy. Simultaneously, the main visuals were designed with differing formal languages that reflected each major's materiality, formative rhythm, and patterned characteristics. This aimed to realize a composition where balance and differentiation coexist within one system. The developed identity system was then modularized so it could extend uniformly across various media like exhibition posters and brochures.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg"]
   },
   {
@@ -92,7 +102,7 @@ export const projects: Project[] = [
   },
   {
     slug: "Recylce",
-    title: "곰시선 프로젝트 ≪재활용? 제활용!≫",
+    title: "Gomsiseon Project ≪Recycle? Jecycle!≫",
     scope: "Identity Design",
     category: "Commercial",
     completion: "Sep. 2025",
@@ -102,12 +112,12 @@ export const projects: Project[] = [
   },
   {
     slug: "SuwonExhibition",
-    title: "≪다닥다닥 마켓 백상회(百象會)≫",
+    title: "≪Dadakdadak Market Baeksanghoe (百象會)≫",
     scope: "Poster Design",
     category: "Commercial",
     completion: "Aug. 2025",
     thumbnail: "Thumbnail.jpg",
-    description: "≪다닥다닥 마켓 백상회(百象會)≫는 중소기업벤처부, 소상공인시장진흥공단, 경희대학교 로컬콘텐츠 중점대학 주최하고 수원도시재단, 영동시장상인회, 남문패션1번가시장상인회가 협력하는 대학과 지역의 협력 프로젝트입니다.프로젝트 디렉터 스튜디오 NA1(나하나)과 BOBU OFFICE 요청으로 국내외 디자이너·아티스트 30인으로 선정되어, 전시에 참여했습니다.≪다닥다닥 마켓 백상회(百象會)≫ 포스터 디자인 주제는 <없는 걸 팝니다.(Selling What Doesn’t Exist)>였습니다. 남문시장에서 팔지 않을 것 같은 가상의 무언가, 구체적으로 전통 시장이라는 실재하는 장소 위에 존재하지 않는, 팔지 않을 것 같은 대상을 표현하는 것이었습니다.슬로건을 바탕으로 수원 남문시장의 과거와 현재에 대해 먼저 생각했습니다. 그 과정에서 <수원 팔달문>을 중심으로 남문시장이 구성되었다는 점을 알게 되었고, 슬로건에서 현존하는 시장을 표현함과 동시에 과거부터 현재까지 시간이 흘러도 변하지 않는 것을 찾고자 했습니다. 결과적으로 그 대상을 <팔달문>으로 정의했는데, 처음 시장이 형성되었을 때부터 지금까지 <팔달문>이 그 중심을 이루고 있다고 생각했기 때문입니다. <팔지 않는 것 = 남문시장의 시간>으로 해석해, 남문 시장을 대표하는 <팔달문>을 통해 <남문시장이 가지는 상징과 불변하는 가치>를 표현하고자 했습니다",
+    description: "≪Dadakdadak Market Baeksanghoe (百象會)≫ is a collaborative project between universities and local regions, hosted by the Ministry of SMEs and Startups, the Small Enterprise and Market Service, and Kyung Hee University's Local Content Focus College, with cooperation from the Suwon City Foundation, Yeongdong Market Merchants Association, and Nammun Fashion 1st Street Merchants Association. At the request of Project Director Studio NA1 and BOBU OFFICE, I was selected as one of 30 domestic and international designers/artists to participate in the exhibition. \nThe poster design theme for the exhibition was <Selling What Doesn't Exist>. The concept was to express something imaginary that wouldn't likely be sold at Nammun Market, specifically expressing an object that does not exist and would not be sold upon the real location of a traditional market.\nBased on the slogan, I first reflected on the past and present of Suwon's Nammun Market. In the process, I learned that the market was formed around <Suwon Paldalmun (Gate)>, and I sought to find something that remains unchanging regardless of time passing, from the past to the present, while simultaneously expressing the existing market as stated in the slogan. Ultimately, I defined that object as <Paldalmun>, because I believed that <Paldalmun> has formed the core of the market since its initial formation until now. Interpreting <What isn't sold = The time of Nammun Market>, I intended to express the <symbols and immutable values of Nammun Market> through <Paldalmun>, which perfectly represents the market itself.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.mp4"]
   },
   {
@@ -117,17 +127,17 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jul. 2025",
     thumbnail: "Thumbnail.mp4",
-    description: "24년 11월 ≪β≫에 이은 단체의 세 번째 프로덕션인 본 공연은 ≪GAMMA≫라는 타이틀 안에 동등한 위계의 두 작품이 포함되어 있는 공연이었습니다. 포함되어 있는 두 작품이 공유하는 콘셉트가 <인간 욕망과 고통>이었기 때문에 <전체 시각물이 섬뜩하면서 오묘한 인상을 줄 것.>이라는 전제를 바탕으로 작업이 진행되었습니다.콘셉트를 설정해나가며, 잠재 관객에게 <오묘한 불쾌함>을 유발하는 것이 적절한 방향이라 생각했고, 이를 위해 직관적인 이미지를 개발이 필요하다 판단했습니다. 복잡한 이미지를 사용한다면 불쾌함 이전에 <이게 뭐지?> 하는 생각이 먼저 들 수 있기 때문입니다. 결과적으로 보는 즉시 <피>라는 이미지를 떠올릴 수 있도록 만들면서 그 시선의 종점이 포스터 바깥을 향하도록 의도했습니다. 구체적으로 <움직임 = 방향성>을 부여해 단순히 <정적인 피>가 아닌 <동적인 피>를 표현해, 흘러내리는 움직임을 중심으로 보이지는 않지만, 시작점이 되는 좌측 상단을 상상해 볼 수 있다면 좋겠다 생각했습니다.<흘러내리는 움직임>을 바탕으로 모든 시각물을 통일해 표현하려 했습니다.",
-    images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.mp4", "19.mp4", "20.mp4", "21.jpg", "22.jpg", "23.jpg", "24.jpg"]
+    description: "Following ≪β≫ in November 2024, this performance—the group's third production—was titled ≪GAMMA≫, encompassing two works of equal hierarchy within it. Because the shared concept between the two included works was <human desire and suffering>, the work proceeded under the premise that <the overall visual output should give off an eerie yet subtle impression>.\nWhile establishing the concept, I considered it an appropriate direction to induce <subtle discomfort> in potential audiences, and judged that developing an intuitive image was necessary for this. If a complex image is used, the thought <what is this?> might occur before feeling discomfort. Consequently, I intended to create an image that immediately brings <blood> to mind upon viewing, while directing the endpoint of that gaze toward the outside of the poster. Specifically, by granting <movement = directionality>, I expressed <dynamic blood> rather than simply <static blood>, hoping that viewers could imagine the unseen starting point at the upper left based on the flowing downward movement.\nBased on this <flowing movement>, I attempted to unify and express all visual materials.",
+    images: ["Thumbnail.mp4", "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.mp4", "19.mp4", "20.mp4", "21.jpg", "22.jpg", "23.jpg", "24.jpg"]
   },
   {
     slug: "Seong2025",
-    title: "성윤선의 장고춤 네트워크 ≪동행≫ Ⅱ",
+    title: "Seong Yoon-seon's Janggu Dance Network ≪Companion≫ Ⅱ",
     scope: "Identity Design",
     category: "Commercial",
     completion: "Jun. 2025",
     thumbnail: "Thumbnail.mp4",
-    description: "23년 11월 ≪동행≫에 이어 25년 6월 두 번째 ≪동행≫ 프로젝트 디자인을 맡았습니다.본 공연은 <혼자이더라도 함께 나아가고 있다.>는 메시지를 담는 것을 전제로 작업이 진행되었습니다. 일곱 작품을 한 공연 안에 보여주는 구성이었기 때문에 제한된 지면에서 일곱 작품의 무용수들이 함께 나아가고 있다는 메시지를 전달해야 했습니다. 또 타이틀에서 느껴지는 것처럼 공연의 분위기가 따뜻하고 가족적이라는 점을 고려해야 했습니다.<혼자이면서도 함께>를 이미지로 표현하려면 <혼자 = 분리>도 표현하고 <함께 = 융합>도 표현해야 했는데, 이를 위해서 <혼자>의 본 의미, 즉 7작품의 주요 특징 파악이 필요했습니다. 이를 위해 양해를 구해, 1차 시연 때 작품 별 사진 촬영을 진행했습니다. 사전 조사와 시연을 거쳐 작품에서 취하는 구성요소 (의상, 악기, 주가 되는 움직임)가 다르다 인상을 받았는데, 이를 활용해 각 작품을 대표하는 주요 이미지 간 차이를 강조해 <혼자 = 분리>를 표현하려 했습니다.<함께 = 융합>을 표현하는 방법으로 수평선을 기준으로 같은 라인을 공유하는 방법을 채택했습니다. <동행>이라는 의미를 생각해보면 <함께 걸어간다.> 혹은 <함께 나아간다.> 정도로 해석할 수 있는데, 길을 함께 걸을 때를 생각해보면, 발이 닿는 라인이 동일해지기 때문에 7작품의 밑단이 같은 라인에 닿아 있으면 <함께>라는 메시지 전달이 명확히 되겠다고 판단했습니다. 다만 이렇게 작업이 구성된다면 지면의 크기로 인해서 각 작품 주요 장면이 가로(ㅡ) 형태가 되거나 세로(ㅣ) 형태가 될 수밖에 없다는 문제가 있었습니다. 가로의 경우에는 일곱 작품이 가로로 들어가야 하기 때문에, 작품 주요 장면 크기가 작아질 수밖에 없는 문제가 생기고, 세로의 경우에는 장면의 크기는 유지할 수 있지만 작품 주요 장면이 한 곳에 뭉쳐져 형태 유지가 되지 않는다는 문제가 있었습니다. 조금 더 구체적으로, 가로 형태는 작품의 수가 많기 때문에 나열했을 때 <함께>의 느낌보다 <혼자>의 느낌을 강조한다는 인상을 주고, 세로형에서는 겹쳐지는 면이 단점이기도 하지만 동시에 <함께>라는 메시지를 직관적으로 전달한다는 장점도 있었기 때문에 세로형을 선택해 겹쳐지는 면으로 인해 형태 유지가 되지 않는 문제만 해결하면 되겠다고 생각했습니다.형태 유지라는 문제를 간단히 생각해보면 차이를 중심으로 구성한 각 작품 주요 이미지들의 개성을 강조하면 해결할 수 있다고 생각했습니다. 각 작품 주요 장면을 선택했기 때문에 형태는 이미 다른 상태이고 형태 외에 것으로 차이점을 짚어주면 된다고 생각했습니다. 그 해결방법으로 가장 직관적인 색상 부여를 통해 차이점을 짚어주려 했습니다. 작품 별 형태와 색상이 다르다면, 가장 단순하게 다른 작품이 함께 모여 있겠다라는 생각이 들 수 있기 때문입니다. 여러 고민과 결정을 거쳐 작업 초기에 생각했던 문제들은 해결했지만, 정말 마지막으로 남은 문제가 하나 있었는데, 결국 색이 다른 이미지를 한 곳에 겹쳐놓게 되면 인쇄 과정에서 가운데 겹쳐지는 면이 어두워지기 때문에 세로형을 선택한 이상 이 문제를 완전히 해결할 수가 없었습니다. 따라서 이후에 각 작품 주요 이미지에 부여했던 색상을 3단계로 세분화(짙은 노란색, 중간 노란색, 연한 노란색처럼)해, 색상값을 조절하고 그 값들의 선후 관계를 조절해 최종적으로 겹쳐지는 면의 부작용이 가장 적을 수 있도록 노력했습니다.",
+    description: "Following ≪Companion≫ in November 2023, I was in charge of designing the second ≪Companion≫ project in June 2025.\nThis performance was based on the premise of conveying the message, <Even if alone, we are moving forward together>. Since the structure presented seven pieces within a single performance, I had to deliver the message that the dancers of the seven pieces were moving forward together within a limited space. Also, as the title suggests, I had to consider that the atmosphere of the performance was warm and familial.\nTo visually express <alone yet together>, I needed to express both <alone = separation> and <together = fusion>. For this, understanding the true meaning of <alone>, capturing the main characteristics of the 7 pieces, was necessary. Therefore, with permission, I conducted a photo shoot for each piece during the first demonstration. Through preliminary research and demonstrations, I received the impression that the components taken in the pieces (costumes, instruments, main movements) were different. Utilizing this, I tried to express <alone = separation> by emphasizing the differences between the main images representing each piece.\nAs a method to express <together = fusion>, I adopted a method of sharing the same baseline against a horizontal line. Considering the meaning of <Companion (Donghaeng)>, it can be interpreted as <walking together> or <moving forward together>. When people walk a path together, the line their feet touch becomes identical, so I judged that the message of <together> would be clearly conveyed if the bottom edges of the 7 pieces touched the same line. However, if constructed this way, due to the size of the page, the main scenes of each piece would inevitably have to take either a horizontal (ㅡ) or vertical (ㅣ) form. In the case of horizontal, since seven pieces have to fit horizontally, the size of the main scene is forced to become smaller. In a vertical format, the size of the scenes can be maintained, but there's an issue where the main scenes of the pieces clump in one place, failing to maintain their shape. More specifically, the horizontal format gives the impression of emphasizing <alone> rather than <together> when listed, due to the number of pieces. The vertical format has overlapping surfaces as a drawback, but simultaneously intuitively delivers the message of <together>. Thus, I chose the vertical format, thinking I only needed to solve the problem of shapes not being maintained due to overlapping surfaces.\nI thought the issue of shape maintenance could be easily solved by emphasizing the individuality of the main images of each piece, which were structured centrally around their differences. Since the main scenes were selected, the shapes were already different, and I thought I just needed to pinpoint the differences with something other than shape. As a solution, I tried to pinpoint differences through the most intuitive color assignment. If the shapes and colors of each piece are different, one can simply think that different pieces are gathered together.\nThrough various contemplations and decisions, the problems I had thought of at the beginning of the work were solved, but there was one last problem remaining. Ultimately, if images of different colors are overlapped in one place, the overlapping center surface darkens during the printing process. Having chosen the vertical format, I couldn't completely solve this problem. Therefore, later on, I sub-divided the colors assigned to the main images of each piece into three stages (dark yellow, medium yellow, light yellow), adjusted the color values, and controlled the sequence of those values, striving to minimize the side effects of the overlapping surfaces as much as possible.",
     images: ["01.mp4", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg"]
   },
   {
@@ -137,7 +147,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jun. 2025",
     thumbnail: "Thumbnail.jpg",
-    description: "프로젝트 시각화 단계에서 <흐름 표현>, <분명한 방향성>, <짙은 톤의 색상>, <활공하는 상태의 복합적 상태> 네 가지 키워드를 설정하고 작업이 진행되었습니다.세밀하게 살피자면, 네 가지 키워드를 다시 형태와 색상으로 구분할 수 있습니다. 형태의 경우, 이미지 내부에서 흐름을 표현하고 그 흐름이 말하고자 하는 최종 방향이 있어야 한다고 생각했습니다. <활공> 하는 상태를 생각해보면, <방향과 움직임은 있지만, 동작은 없는 상태>라는 특징이 있습니다. 때문에 최종 방향 상태가 가지는 복합적 특징 즉, 동적임과 동시에 정적인 상태를 각 형태의 두께로 표현하고자 했습니다.색상의 경우, 형태는 보수적으로 설정하고 색상으로 흐름을 표현하려 했습니다. 초중반부에는 폭이 좁고 대비되는 색상을 사용해 방황하는, 저항하는 이미지를 표현하려 했고 후반부로 갈수록 폭이 넓고 유사한 톤의 밝은 색상을 사용해 안정적인 형태감을 표현하려 했습니다.",
+    description: "In the project visualization stage, the work proceeded by establishing four keywords: <Expression of Flow>, <Clear Directionality>, <Dark-toned Colors>, and <Complex state of gliding>.\nLooking closely, the four keywords can be re-categorized into form and color. For the form, I thought an image should express flow internally, and there must be an ultimate direction that flow tries to communicate. Thinking about the state of <gliding>, it has the characteristic of <having direction and movement, but no active motion>. Therefore, I tried to express the complex characteristics that the final directional state possesses—that is, the simultaneous dynamic and static state—through the thickness of each form.\nRegarding color, the form was set conservatively while flow was intended to be expressed through color. In the early and middle parts, I tried to express a wandering, resisting image using narrow and contrasting colors. Toward the latter half, I tried to express a stable sense of form using wide, similar-toned bright colors.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.mp4", "06.mp4"]
   },
   {
@@ -147,17 +157,17 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Apr. 2025",
     thumbnail: "Thumbnail.jpg",
-    description: "터치디자이너 가르쳐주시는 수민 님 명함을 디자인했습니다. 인쇄하지 않는 방식으로 간결하게.",
+    description: "I designed a business card for Sumin, who teaches me TouchDesigner. Kept concise, using an inkless printing method.",
     images: ["01.jpg"]
   },
   {
     slug: "TDWorkShop",
-    title: "TouchDesigner WorkShop,≪손과 원 연결하기 : MediaPipe를 통한 Kinetic art≫",
+    title: "TouchDesigner WorkShop, ≪Connecting Hand to Circle: Kinetic art via MediaPipe≫",
     scope: "Interactive Design",
     category: "Non-Commercial",
     completion: "Jan. 2025",
     thumbnail: "Thumbnail.mp4",
-    description: "워크숍 테마는 ≪손과 원을 연결하기 : MediaPipe를 통한 Kinetic art≫입니다. 예제 작업은 이렇게 진행됩니다. 1. 화면에서 각 구역을 설정합니다. 2. 손이 각 구역, 이를테면 zone 1, zone 2, zone 3, zone 4에 도달했을 때 출력되는 4가지 원을 제작합니다. 3. 구역별 출력된 원이 구역 내에서 손을 추적하도록 구조를 설정합니다. 4. 1-3까지 과정을 통해 왼손(h1)으로 원의 움직임을 제어할 수 있습니다. 이후 오른손(h2)을 함께 올려 회전을 주었을 때 원의 색상을 변경하는 구조를 설정합니다.",
+    description: "The workshop theme is ≪Connecting Hand to Circle: Kinetic art via MediaPipe≫. The example work proceeds like this: 1. Set areas on the screen. 2. Create 4 circles outputted when the hand reaches each area, such as zone 1, zone 2, zone 3, zone 4. 3. Establish a structure so the circle outputted per zone tracks the hand within that zone. 4. Through steps 1-3, movement of the circles can be controlled with the left hand (h1). Afterward, a structure is set where if the right hand (h2) is raised and rotated together, it modifies the color of the circles.",
     images: ["01.mp4", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg"]
   },
   {
@@ -167,7 +177,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jan. 2025",
     thumbnail: "custom", // Placeholder, logic handles render
-    description: "한국근현대미술연구재단의 웹 디자인 및 개발을 맡았습니다. 자료 분석을 통해 KoRICA를 대표하는 시각 언어로 <연결>과 <극대화>를 선택했고, <연결과 극대화 : 색조합을 고려하며> 라는 콘셉트를 바탕으로 디자인과 개발을 진행했습니다.구체적으로 색상과 선을 통해 각 페이지와 자료 간 차이를 강조했습니다. 동적으로 기능하는 웹 상에서 색조합을 통해 사용자로 하여금 선택했던 혹은 선택한 페이지와 자료를 색으로 인식시킬 수 있다고 생각했습니다. 또한 점이나 선만을 활용한 국지적 연결보다는, 면과 면 그리고 면과 선이 겹쳐지는 데서 오는 <만남>과 <교집합>의 이미지가 우리 문화예술을 세계와 연결짓는 KoRICA의 에토스와 더욱 어울린다고 판단했습니다.",
+    description: "I was in charge of the web design and development for the Korea Research Institute of Contemporary Art (KoRICA). Through data analysis, I chose <Connection> and <Maximization> as visual languages representing KoRICA, and proceeded with design and development based on the concept of <Connection and Maximization: Considering Color Combinations>.\nSpecifically, I emphasized differences between pages and materials through color and lines. On a dynamically functioning web, I thought users could visually recognize selected pages and materials via color combinations. Furthermore, rather than localized connections using only points or lines, I judged that the image of <Meeting> and <Intersection> arising from overlapping planes with planes, and planes with lines, better aligned with KoRICA's ethos of connecting our culture and art to the world.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.mp4", "10.jpg", "11.jpg"]
   },
   {
@@ -177,7 +187,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jan. 2025",
     thumbnail: "Thumbnail.jpg",
-    description: "재단법인 한국근현대미술연구재단은 현대화랑[(현)갤러리현대] 박명자 이사장이 설립한 미술연구재단입니다. 한국 근현대미술의 미술사적 가치를 연구하고 한국 미술과 세계 미술의 맥락을 연결하기 위한 다양한 사업을 전개합니다. 국내외 연구자들의 연구 활동을 지원하고, 한국 미술이 세계 무대에 소개될 수 있는 전시와 전문서적 발간을 지원하며, 미술관 위탁 운영을 비롯해 한국 미술의 가치가 보존되고 극대화될 수 있는 다양한 사업을 전개하여 세계 예술과의 소통을 추구합니다. 한국근현대미술연구재단의 두 가지 워드타입 로고 디자인 위해 시각화 과정에서 두 가지 작업 기준을 설정했습니다. 1. 너무 정적이지 않을 것. 2. 철자 중 시각적 포인트가 되는 지점이 있을 것. 명조류 폰트는 진지하고 신뢰감 있는 분위기를 표현할 수 있으나, 무겁고 다소 고리타분한 분위기를 가진다 생각했습니다. 재단이라는 브랜드 특성 상 진지하고 신뢰감 있는 시각언어를 가져야 한다는 데에는 이견이 없지만, 연결과 극대화라는 시각언어를 동적으로 표현하고 내부에서 발행하는 콘텐츠 자체가 진지하고 믿음직스러운 것이 가장 이상적인 브랜드 형태라 생각했습니다. 따라서 고딕류 폰트를 기본으로 설정했고 그 중에서도 폰트 자체가 다른 고딕류 폰트 보다 생동감 즉, 리듬감이 있는 <Futura>를 최종 채택했습니다. 또한 철자 중 <A, t, u>와 같은 포인트로 활용 가능한 지점이 존재했다는 점에서도 본 콘셉트와 적절하다 생각했습니다.",
+    description: "The Korea Research Institute of Contemporary Art (KoRICA) is an art research foundation established by Park Myung-ja, Chairperson of Hyundai Hwarang (currently Gallery Hyundai). It conducts various projects to research the art historical value of Korean modern and contemporary art and connect the context of Korean art with global art. It supports the research activities of domestic and international researchers, sponsors exhibitions and professional book publications to introduce Korean art to the global stage, operates museums on consignment, and pursues communication with global art by deploying various projects to preserve and maximize the value of Korean art.\nDuring the visualization process for the two word-type logo designs for KoRICA, I established two working standards: 1. It shouldn't be too static. 2. There should be a visual focal point among the letters. I thought Serif (Myeongjo) fonts could express a serious and trustworthy atmosphere, but they carried a heavy and somewhat stale vibe. While there was no disagreement that the foundation should have a serious and trustworthy visual language as its brand characteristic, I believed the most ideal brand form would express the concepts of connection and maximization dynamically while keeping the internally published content itself serious and reliable. \nTherefore, I set a Sans-serif (Gothic) font as the default, and among them, I ultimately adopted <Futura>, which possesses more vitality and rhythm than other Sans-serif fonts. Also, I deemed it appropriate for the concept because it featured points among its letters like <A, t, u> that could be utilized as focal points.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg"]
   },
   {
@@ -187,7 +197,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Dec. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "앨범에서 표현하고자 했던 타이틀이 [자유와 압박]라는 것에서 프로젝트 시각화 콘셉트를 설정했습니다. 구체적으로 [자유와 압박 : 확산되는 조형과 가두는 프레임]이라는 문장으로 방향성을 정의하는 단계를 거쳤습니다. [확산되는 조형]을 표현하기 위해 적절한 형태를 찾는 과정이 선행되었는데, 결과적으로 [폭죽]을 이용하는 접근법을 채택했습니다. 중심에서 외부로 향할 때 모든 방향으로 확산되는 형태를 가지고 있다는 점이 메타포로서 기능한다 생각했기 때문입니다. 이어서 [가두는 프레임]을 표현하기 위해 메인 이미지 [폭죽]이 3000*3000px이라는 규격을 벗어나는 형태로 표현했습니다. 이를 위해 원본 이미지에서 약 1/300 정도의 크기로 [폭죽]을 추출해 배경과의 대비감을 높이는 형태로 구조했습니다.",
+    description: "I established the project's visual concept from the title intended for the album, [Freedom and Pressure]. Specifically, I went through a stage of defining the direction with the phrase [Freedom and Pressure: Expanding Forms and Confining Frames]. A process of finding an appropriate form to express [Expanding Forms] preceded, and as a result, I adopted an approach using [Firecrackers]. I believed it functioned as a metaphor because it has a form that diffuses in all directions as it heads outward from the center. \nSubsequently, to express [Confining Frames], the main image [Firecracker] was portrayed in a format that breaks out of the standard 3000*3000px dimensions. To achieve this, I extracted the [Firecracker] from the original image at roughly 1/300 of its size and structured it to increase contrast with the background.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.mp4"]
   },
   {
@@ -197,7 +207,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Nov. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "전면과 후면 모두 인쇄 없는 먹박으로 진행했습니다. 후면의 경우, 이름과 직책의 시각적 여백을 보정하기 위해 이름 앞자 스케일을 부분 조정하는 해결책을 채택했습니다.",
+    description: "Both the front and back were processed with inkless foil stamping (black foil). For the back, to correct the visual spacing between the name and title, I adopted an approach of partially adjusting the scale of the first letter of the name.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg"]
   },
   {
@@ -207,7 +217,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Nov. 2024",
     thumbnail: "Thumbnail.mp4",
-    description: "프로젝트 시각화 콘셉트를 설정하는 단계에서 [권력의 시각화 : 프로그램 타이틀과 안고 있는 두 가지 작품을 고려하며]라는 문장으로 방향성을 정의하는 단계를 거쳤습니다. 핵심이 되는 내용은 ≪β≫ 라는 프로그램 타이틀이 속해있는 두 가지 작품 보다 강조되어야 한다는 점이었습니다. 다만 ≪β≫가 작품으로 기능하는 것이 아닌, 프로그램의 타이틀로 기능하고 있다는 점과 프로그램 안에 동등한 위계의 두 작품이 기능한다는 점이었습니다. 궁극적으로 결과물에서 ≪β≫를 [실체가 없는 울타리]라 정의해, 제한된 공간에서 차지하는 비율 차이를 통해 권력을 시각적으로 표현하려 의도했습니다. 끝으로 실물화 과정에서 불투명도가 낮은 트레이싱지를 사용해 [실체가 없는 울타리]를 표현하려 했습니다.",
+    description: "During the stage of defining the project's visual concept, I went through a process of defining directionality with the phrase [Visualization of Power: Considering the program title and the two works it embraces]. The core premise was that the program title, ≪β≫, needed to be emphasized more than the two works belonging to it. However, it had to be taken into account that ≪β≫ functions as a program title rather than a standalone piece, and that two works of equal hierarchy function within it. \nUltimately, I defined ≪β≫ as an [intangible fence] in the final outcome, intentionally trying to visually express power through the difference in ratio it occupies within the limited space. Finally, during the physical realization process, I tried to express the [intangible fence] by using low-opacity tracing paper.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.mp4", "16.mp4", "17.jpg", "18.jpg", "19.mp4", "20.jpg", "21.jpg", "22.jpg", "23.jpg"]
   },
   {
@@ -217,7 +227,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Oct. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "앨범에서 정의하는 [사랑]과 [이별]이 극단적인 단절 형태가 아닌 경계가 모호하다는 것에서 프로젝트 시각화 콘셉트를 설정했습니다. 구체적으로 [추상적 주제(사랑과 이별)의 경계 : 잔상과 대비감을 고려하며]라는 문장으로 방향성을 정의하여, 사진 자체로는 대비감이 강하지만 그 경계가 점진적으로 확산되는 형태로 촬영을 진행하고 이미지를 채택했습니다.",
+    description: "I established the project's visual concept from the fact that the [love] and [farewell] defined in the album are not extreme forms of severance but have ambiguous boundaries. Specifically, defining the direction with the phrase [Boundary between abstract themes (love and farewell): Considering afterimage and contrast], we proceeded with the shoot so that the photo itself has strong contrast, but its boundaries gradually disperse, and adopted those images.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.mp4"]
   },
   {
@@ -227,7 +237,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Sep. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "프로젝트 주요 과제로는 주최측에서 선정한 다섯 가지 키워드인 음악, 미디어, 음식, 교육, 부스를 상징하는 일러스트와 향후 축제에 사용할 수 있는 심볼 로고를 개발하는 것이었습니다. 기획에 따라 시각화를 위한 방향성을 먼저 설정했습니다. 1. 개별 일러스트를 통합한 메인 조형을 개발. 2. 디자인을 통해 축제의 역동성을 표현. 방향성 설정 이후, 축제 기획단과 회의를 통해 심볼 로고를 먼저 개발했습니다. 다음으로 스튜디오에서 촬영 모델과 각 키워드를 상징할 수 있는 매개체를 설정해 촬영을 진행했습니다. 촬영된 이미지를 바탕으로 개별 일러스트와 메인 조형을 개발했습니다. 개발된 요소를 바탕으로 메인 포스터와, 현수막 배너, 거리하늘 배너, 부스 이름띠, 브로셔, 이름표, 명함, 총 7가지 결과물로 사용되었습니다.",
+    description: "The main tasks of the project included developing illustrations representing the five keywords chosen by the organizers—Music, Media, Food, Education, and Booths—along with a symbol logo that could be used for future festivals. According to the plan, I first set the direction for visualization: 1. Develop a main composition integrating the individual illustrations. 2. Express the festival's dynamism through design.\nAfter setting the direction, I developed the symbol logo first through meetings with the festival planning committee. Next, we proceeded with a photoshoot at the studio, setting up a model and mediums to symbolize each keyword. Based on the shot images, individual illustrations and the main composition were developed. Based on these developed elements, they were utilized across a total of 7 outcomes: the main poster, banner, street sky banner, booth name bands, brochures, nametags, and business cards.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg"]
   },
   {
@@ -237,7 +247,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Aug. 2024",
     thumbnail: "Thumbnail.mp4",
-    description: "프로젝트 시각화 콘셉트를 설정하는 단계에서 [편지같은 초대장 : 제한된 지면에서 사진이 가지는 힘을 고려하며]라는 문장으로 방향성을 정의하는 단계를 거쳤습니다. 전시의 주매체가 사진이었기 때문에, 이를 홍보하는 메인 포스터에서도 사진이 가장 강조되어야 한다는 점과 전시 포스터가 편지와 같은 초대장 역할을 해야 한다는 과제가 있었습니다. 과제를 해결하기 위해 전시 정보가 포함되어 있는 텍스트, 레이아웃 등에 대한 해결책을 먼저 고민했습니다. 보편적인 방식의 세로형 판형(A2, A3)으로는 두 가지 접근 방법이 있었습니다. 1. 지면 내 사진의 크기를 줄여 기타 정보가 사진을 침범하지 않게 표현하는 방법. 2. 지면과 같은 사이즈로 사진을 사용해, 스케일로 사진이 가지는 힘을 표현하는 방법. [1]의 경우, 기타 정보가 사진에 침범하지 않는다는 점에서, 순수한 사진의 영역을 부여할 수 있다는 장점을 가지고 있었지만, 크기 자체를 줄이는 방법이기 때문에 지면 내에서 직관적으로 와닿는 힘이 있는가에 대한 문제가 있었습니다. [2]의 경우, 지면과 같은 사이즈로 사진을 이용한다는 점에서, [1]이 가지고 있는 문제를 해결할 수 있었지만, 기타 정보들이 사진 위에 들어가게 되면서 포스터가 매끄러운 레이어를 가지지 않고 층위(1층 사진, 2층 정보)가 명확히 구분되어 이질적인 분위기를 연출한다는 문제가 있었습니다. 결과적으로 세로형 판형으로 문제를 해결할 수 없다 판단해, 지면 자체를 가로형으로 사용하는 방식을 최종 채택하게 되었습니다. 구체적으로 사진의 영역과 정보의 영역을 1/2씩 지정해, 좌측에는 전시 정보를 하단에, 편지를 보낼 때 우표를 붙인다는 점을 통해 중앙에 사진 기반 [우표]를 디자인 했습니다. 우측에는 순수 사진 영역으로 사용해, 가시성을 높일 수 있게 의도했습니다.",
+    description: "During the stage of defining the project's visual concept, I went through a process of defining directionality with the phrase [An Invitation-like letter: Considering the power of photography on a limited page]. Because the main medium of the exhibition was photography, the photo had to be emphasized the most even on the main promotional poster, alongside the challenge that the exhibition poster must act as an invitation like a letter.\nTo solve the tasks, I first deliberated on solutions for texts containing exhibition information, layouts, etc. With the common vertical formats (A2, A3), there were two approaches: 1. Reducing the size of the photo within the page to express it so that other info doesn't intrude on the photo. 2. Using the photo at the same size as the page, expressing the power of the photo through its scale.\nIn the case of [1], it had the advantage of granting pure photographic territory as other info doesn't intrude, but because it reduces the size itself, there was a question of whether it possessed an intuitively felt power within the page. In the case of [2], by using the photo at page size, the problem of [1] could be solved. However, as other info was placed over the photo, an issue arose where the poster didn't have smooth layers but rather clearly divided strata (1st floor photo, 2nd floor info), creating a heterogeneous atmosphere. Ultimately, judging that the problem couldn't be solved with a vertical format, I finally adopted using the page itself in a horizontal format. \nSpecifically, assigning half the area to the photo and half to information, I designed an <envelope> style layout placing exhibition info at the bottom on the left, and based on the idea of attaching a stamp when sending a letter, I designed a photo-based [Stamp] in the center. The right side was dedicated entirely to pure photography to intentionally increase visibility.",
     images: ["Thumbnail.mp4", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.JPG", "07.jpg"]
   },
   {
@@ -247,7 +257,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Aug. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "팀 우보만리의 워드타입 로고 디자인을 맡았습니다. 바탕이 되었던 서체에서 기준자를 설정하고 설정한 기준에 맞춰 각 철자 가로폭과 세로폭을 새로 구조했습니다. 이후 수치 자간을 우선 적용해 새로 구조한 철자 균형을 검토했습니다. 최종적으로 여백으로 인해 발생하는 시각적인 불균형을 조정하기 위해 기준이 되는 자간의 2/3 값을 적용해 시각적인 균형을 조정하는 것을 끝으로 작업을 마무리 했습니다.",
+    description: "I was in charge of designing the word-type logo for Team Ubomanli. I set a baseline character from the base typeface and restructured the horizontal and vertical widths of each letter to match the set baseline. Afterward, I checked the newly structured typographic balance by applying numerical kerning first. Finally, to adjust the visual imbalance caused by margins, I applied a value of 2/3 of the baseline kerning to adjust the visual balance, thereby finishing the work.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
   },
   {
@@ -257,17 +267,17 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jul. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "선물 포장 브랜드 고이고이의 워드타입과 심볼로고 디자인을 맡았습니다. 같은 포장 도구와 방법이더라도 선물하는 사람에 따라 모든 포장이 오직 하나라는 점이 이번 작업의 중요한 콘셉트였습니다. 심볼의 경우, [g,o,i] 세 가지 철자 반복으로만 이루어진 브랜드 이름이지만, 각 철자 모두 약간의 변형이 있을 수 있도록 구성했습니다. 이를 통해 손으로 종이를 접어가며 비뚤배뚤하지만, 정성스레 직접 만듦이 느껴질 수 있도록 표현하려 했습니다. 워드타입의 경우, 비뚤배뚤한 심볼에서 범용성을 고려해 균형을 맞춘 형태로 구성했습니다.",
+    description: "I took charge of the word-type and symbol logo design for the gift wrap brand Goiigoii. Even with the same wrapping tools and methods, the fact that every wrap is unique depending on the person gifting it became an important concept for this project. \nFor the symbol, although the brand name consists solely of repetitions of three letters [g, o, i], it was constructed so that each letter has a slight variation. Through this, I tried to express the feeling of earnestly making it by hand, folding the paper with bare hands, though a bit crooked and uneven. For the word-type, taking versatility into account from the crooked symbol, I constructed a balanced form.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.mp4", "07.JPG", "08.JPG", "09.JPG", "10.JPG", "11.JPG", "12.JPG", "13.JPG", "14.JPG", "15.JPG"]
   },
   {
     slug: "houseOfKorea",
-    title: "Ubomanli ≪서양극장 속 한옥≫",
+    title: "Ubomanli ≪Hanok Within a Western Theater≫",
     scope: "Identity design",
     category: "Commercial",
     completion: "Jul. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "≪서양극장 속 한옥≫ 이라는 타이틀처럼 화이트 큐브의 극장 안에서 한옥을 형상화 한 공연이 진행된다는 점이 공연의 특징이었습니다. 따라서 대조적인 [서양극장]과 [한옥] 사이에 시각적으로 기능하는 매개체를 개발해야 하는 과제가 있었습니다. 우선 [서양극장>]과 [한옥]을 이어주는 매개체 개발을 위한 접근 방법으로 [부조화 속 조화 :융합]을 프로젝트 시각화 콘셉트로 채택했습니다. 콘셉트 채택에 이후, [두 대상의 어떤 부분을 융합할지.]에 대한 고민이 있었습니다. 제한된 판형 안에 두 대상의 특징을 담아냄과 동시에 융합하는 형태로 풀어냈어야 했기 때문에, 두 대상을 대표하는 [기둥]과 [처마]를 활용한 접근 방법을 채택했습니다. 시각화에 들어가며, [서양극장]을 대표하는 [기둥] 위로 [한옥]을 대표하는 [처마]가 들어선 형태의 조형을 제안했습니다. 공연 중심 내용은 [한옥]을 형상화하는 방식으로 진행되지만, 그 공연 또한 서양 극장 양식을 가지는 아르코 대학로예술극장 안에서 진행될 예정이었다는 점에서 대표 이미지 간의 조립을 통해 새로운 조형을 공연 언어로 채택하는 것이 적절하다 생각했습니다. 궁극적으로 [기둥]과 [처마]를 융합한 새로운 조형을 통해 두 대상의 특징을 고루 살리면서 크게 이질적인 지점이 없도록 의도했습니다.",
+    description: "As the title ≪Hanok Within a Western Theater≫ suggests, the performance's characteristic was that an act symbolizing a Hanok takes place within the White Cube theater. Thus, the challenge was to develop a medium that functions visually between the contrasting [Western Theater] and [Hanok]. First, as an approach to develop a medium connecting [Western Theater] and [Hanok], I adopted [Harmony in Disharmony: Fusion] as the project's visual concept. After adopting the concept, there was consideration over [what parts of the two subjects to fuse]. Since I had to capture the characteristics of the two subjects within a limited format while simultaneously resolving them in a fused form, I adopted an approach utilizing the [Pillar] and [Eaves] representing the two subjects.\nUpon entering visualization, I proposed a form where the [Eaves] representing [Hanok] are built atop the [Pillar] representing [Western Theater]. The core content of the performance proceeds by symbolizing [Hanok], but since the performance was also scheduled to take place within the ARKO Arts Theater—which possesses Western theatrical architecture—I deemed it appropriate to adopt a new form as the performance's language by assembling the representative images. Ultimately, through the new form fusing [Pillar] and [Eaves], I aimed to evenly bring out the characteristics of both subjects while ensuring there were no significantly disparate points.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.JPG", "09.JPG", "10.JPG", "11.JPG", "12.JPG", "13.JPG", "14.JPG", "15.JPG", "16.JPG", "18.JPG", "19.JPG", "20.JPG", "21.JPG", "22.JPG", "23.JPG", "25.JPG", "26.JPG", "27.JPG", "28.JPG", "29.JPG", "30.JPG", "31.JPG", "32.JPG", "33.JPG", "34.JPG", "35.JPG", "36.JPG"]
   },
   {
@@ -277,7 +287,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jun. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "프로젝트 시각화 콘셉트를 설정하는 단계에서 기준이 되었던 두 가지 조건은 아래와 같았습니다. 1. ≪KILL≫ 제 1장부터 제 5장까지 [죽음]을 바탕으로 작품이 진행되는데, 이를 어떻게 시각적으로 정의할지. 2. 반복되는 [죽음]을 통해 불완전한 인간 존재에 대한 물음을 어떻게 시각적으로 정의할지. 두 가지 문제를 해결하기 위한 콘셉트로 [불균형]이라는 형태적 언어를 제안했고, 이를 바탕으로 뷸균형이 거듭되는 형태를 통해 작품의 메시지를 전달하고자 했습니다. 또 작품이 제 1장부터 제 5장까지 순서를 가지고 진행되는다는 점을 고려해, 결과물에서 단절된 이미지가 아닌 [흐름]을 가지고 있는 이미지를 표현하고자 의도했습니다. 시각화 작업을 진행하며 결과적으로 작품에서 의미하는 [죽음]이 ['有(유)’의 상태가 아닌 ‘無(무)’의 상태]라 해석해 [죽음]을 나타내기 위한 접근법으로 [소거하는 법을 통한 불균형 표현]이라는 타이틀을 도출했습니다. 반복되는 불균형을 효과적으로 표현하기 위해 가장 완전한 형태, 즉 원에서 시각화 작업을 시작했습니다. '어떤 원이 될 것인가.'에 대한 물음으로 시작해 면과 선, 그리고 점으로 구성된 형태의 원 중 면으로 구성된 원을 제외한 두 가지 원의 형태를 시각화에 활용했습니다. 작업 과정에서 사진작가의 이미지를 사용해야 한다는 조건과 이를 통해 [인간 존재의 불완전함]을 표현해야 한다는 과제가 있었습니다. 신체 특정 부분을 촬영한 사진을 바탕으로 불완전한 형태를 표현해야 했는데, 다른 방향의 상체 이미지를 합쳐 인간의 몸이지만 실재하지 않는 이미지를 표현하려 의도했습니다. 제 1장부터 제 4장까지 선으로 구성된 원이 점차 점으로 구성된 원으로 변하는 과정을 통해 작품의 [흐름]을 표현하려 했습니다. 색상 사용에 있어서도, 사진 이미지를 제외한 배경 혹은 원의 색상이 흰색 혹은 검은색으로만 구성되도록 표현했는데, 흰 색이 가지는 ‘無(무)’의 이미지와 검은 색이 가지는 '有(유)’의 이미지 대비를 통해 [죽음]이라는 극단적 상황을 표현하고자 의도했습니다.",
+    description: "In the stage of setting the visual concept for the project, the two reference parameters were as follows: 1. From chapter 1 to chapter 5, ≪KILL≫ progresses based on [Death]; how to define this visually. 2. How to visually define the question of imperfect human existence through recurring [Death].\nTo solve these two problems, I proposed the formal language of [Imbalance] as a concept, and based on this, I aimed to convey the message of the work through forms of repeated imbalance. Also, considering that the work progresses in a sequence from chapter 1 to 5, I intended to express an image holding a [Flow] rather than a disconnected image in the final piece.\nProceeding with the visualization, I interpreted that [Death] signified in the work was ['The state of 'None (無)' rather than the state of 'Being (有)']. Thus, I derived the title [Expressing Imbalance through Erasure Method] as an approach to depict [Death]. To effectively express repeated imbalance, I started visualization from the most complete form—a circle. Starting with the question, 'What kind of circle will it be?', I utilized two types of circles constructed of lines and dots, excluding solid circles, for the visualization.\nDuring the process, there was a condition to use a photographer's image and a task to express [Imperfect Human Existence] through it. Having to express imperfect forms based on photos taken of specific body parts, I intentionally combined torso images facing different directions to express an image that is a human body but doesn't exist in reality. Through the process of the line-constructed circle gradually changing into a dot-constructed circle from chapter 1 to 4, I tried to express the [Flow] of the work. Regarding color usage, I expressed backgrounds or circles excluding photographic images strictly in black or white. I intended to express the extreme situation of [Death] through the contrast between the image of 'None (無)' held by white and the image of 'Being (有)' held by black.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "10.mp4", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg", "32.jpg", "33.jpg", "34.jpg", "35.jpg", "36.jpg", "37.jpg", "38.jpg", "39.jpg", "40.jpg", "41.jpg", "42.jpg", "43.jpg", "44.jpg", "45.jpg", "46.jpg", "47.JPG", "48.JPG", "49.jpg", "50.jpg", "52.jpg", "53.jpg", "54.jpg", "55.jpg", "57.jpg", "58.jpg", "59.jpg", "60.jpg"]
   },
   {
@@ -287,17 +297,17 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jun. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "프로젝트 시각화 콘셉트를 설정하는 단계에서 [고도 내형을 중심으로 : 오브제 및 공간 내부 텍스쳐들]이라는 문장으로 방향성을 정의하는 단계를 거쳤습니다. 투고컵의 특성 상 매장을 이용하지 않는 고객들을 위한 디자인이 된다는 점에서 시각화를 시작했습니다. 따라서 투고컵을 통해 매장이 가지고 있는 장점을 외부에서도 인식할 수 있어야 한다는 과제가 있었습니다. 가정집의 분위기와 카페가 가지는 분위기가 혼재되어 있다는 점이 매장의 장점이라 생각했는데, 이를 바탕으로 매장 내 특징이 될 수 있는 화분, 조명, 가구와 같은 오브제들과 뜯어낸 문 자국, 에어콘 자국 등과 같은 가정집의 흔적이 될 수 있는 요소들을 합쳐 시각화를 진행했습니다. 궁극적으로 360° 전체 면에 고르게 요소를 배치해, 투고컵을 통해 매장 외부에서 명함처럼 기능할 수 있도록 의도했습니다,",
+    description: "During the stage of defining the project's visual concept, I went through a process of defining direction with the phrase [Centering on Kodo's interior: Objects and textures within the space]. Given the nature of a to-go cup, visualization began with the finding that the design targets customers doing takeout rather than utilizing the shop's interior. Therefore, there was a challenge that the merits the shop possesses had to be recognizable externally through the to-go cup. \nI felt that the merit of the shop was the blend of a homey atmosphere and a cafe atmosphere. Based on this, visualization progressed by combining objects like plants, lighting, and furniture that could act as signature features within the shop, alongside traces of a home like torn door marks or air conditioner marks. Ultimately, by evenly placing elements across the full 360° surface, I intended for the to-go cup to function like a business card outside the shop.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.mp4"]
   },
   {
     slug: "annpaak",
-    title: "Annkpaak ≪장면과 소외≫",
+    title: "Annkpaak ≪Scene and Alienation≫",
     scope: "Identity design",
     category: "Commercial",
     completion: "Apr. 2024",
     thumbnail: "Thumbnail.mp4",
-    description: "≪장면과 소외≫라는 타이틀로 진행된 전시 전체 그래픽을 담당했습니다. 전시를 통해 주최측이 주고자 했던 메시지가 결과값이 아닌 과정에 있었기에 이미지 표현을 위한 두 가지 고민이 있었습니다. 1. 포스터, 책을 비롯한 정적 결과물에서 [과정]이라는 동적 진행상태를 어떻게 표현할지. 2. 동적 형태인 [장면]과 비교적 정적 형태인 [소외]라는 대조적인 메시지를 어떤 방식으로 표현할지. 이러한 문제를 해결하기 위해 [관찰 : 머물러야만 볼 수 있는 것들] 이라는 문장으로 시각화 콘셉트를 정의하는 단계를 거쳤습니다. [1]의 경우, 구체적으로 포스터라는 결과물에서 정적인 요소들을 최소화 하기 위해 인쇄 없이 스코딕스 가공으로만 처리하는 방법을 채택했습니다. 불투명도가 낮고 옅은 막의 형태를 가지고 있는 스코딕스를 통해 위치에 따라 반사되는 빛의 정도가 달라질 수 있도록, 즉 위치와 조도에 따라 포스터의 모습이 동적으로 기능할 수 있도록 의도했습니다. [2]의 경우, 동적 상태를 직관적으로 표현하기 위해 [장면]이라는 타이틀을 어떤 상태에서도 분리되지 않고, 이어져 있도록 표현하는 실험을 먼저 진행 했습니다. 실험을 통해 결과적으로 [장면] 타이틀이 지면 상에서 좌우로 1/4씩 넘치는 구조를 채택했습니다. [분리되지 않고, 이어지고 있음.]을 지면에 국한시킨다면, 표현하고자 했던 메시지가 충돌할 수 있다고 생각했기 때문입니다. 이어서 [소외]라는 정적 상태를 표현하기 위해 지면에서 가장 소외된 공간을 찾고, [장면]이라는 타이틀과 대비감을 높일 수 있도록 자간을 넓게 설정해 완전히 분리되어 있는 형태로 표현했습니다.",
+    description: "I was in charge of the overall exhibition graphics for the exhibition held under the title ≪Scene and Alienation≫. Because the message the organizers intended to deliver through the exhibition lay in the 'process' rather than the 'result value', there were two concerns for image expression: 1. How to express the dynamic progressing state of [Process] in static results like posters and books. 2. How to express the contrasting messages of [Scene] (a dynamic form) and [Alienation] (a relatively static form).\nTo solve these problems, I went through a stage of defining a visual concept with the phrase [Observation: Things visible only if you stay]. For [1], I specifically adopted the method of using Scodix treatment without ink to minimize static elements on the resulting poster. Through Scodix, which has low opacity and the form of a thin film, I intended the poster's appearance to function dynamically depending on positioning and illumination, meaning the degree of reflected light changes based on location. \nFor [2], to intuitively express the dynamic state, I first experimented by expressing the title [Scene] in a way that it never separates but remains connected under any conditions. Based on experimental results, I adopted a structure where the title [Scene] spills over by 1/4 on both the left and right sides of the page. I thought that if [Not separating, continuing] was confined solely within the page, the message intended could clash. Subsequently, to express the static state of [Alienation], I sought the most alienated space on the page and completely separated it by setting the kerning wide to increase the contrast with the title [Scene].",
     images: ["Thumbnail.mp4", "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.JPG", "08.JPG", "09.mp4"]
   },
   {
@@ -307,7 +317,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Feb. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "해당 프로젝트는 엔터테이먼트 내부에서 시각화 콘셉트를 확정한 이후, 시각화 단계에 참여하게 되었습니다. 이에 따라 기준이 조건이 한 가지 존재했습니다. 1. 여섯 종류의 꽃을 활용할 것. 이에 따라 스위트 피, 달리아, 안개꽃, 카네이션, 국화, 튤립 여섯 종류의 꽃을 구한 후 스튜디오에서 개별, 그룹 촬영을 진행했습니다. 이후 벡터화 하는 작업 과정을 통해 소스 이미지들을 개발했습니다. 결과적으로 그룹 촬영 이미지 중 3000*3000px 대지 안에서 기대 효과가 가장 큰 이미지를 채택했고, 마찬가지 과정을 거쳐 최종 시안을 개발했습니다. 개별 촬영을 통해 개발된 소스 이미지들은 배너, 스케줄러, 실물 무드카드 디자인 총 26개 디자인으로 사용되었습니다.",
+    description: "I joined the visualization stage for this project after the entertainment agency confirmed the visual concept internally. Due to this, there was one baseline condition: 1. Utilize six types of flowers. Accordingly, after procuring six types of flowers—sweet pea, dahlia, baby's breath, carnation, chrysanthemum, and tulip—we conducted individual and group shoots at the studio. \nAfterwards, source images were developed through the process of vectorization. Ultimately, from the group shot images, we adopted the image that had the greatest expected effect within the 3000*3000px layout, and went through the same process to develop the final draft. The source images developed through individual shoots were used for a total of 26 designs spanning banners, schedulers, and physical mood cards.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
   },
   {
@@ -317,7 +327,7 @@ export const projects: Project[] = [
     category: "Non-Commercial",
     completion: "Jan. 2024",
     thumbnail: "Thumbnail.jpg",
-    description: "매번 오는 새해와 같은 숫자의 반복이지만, 같은 하루가 없다는 생각에 이상한 달력을 제작했습니다.보통 달력은 가로줄과 세로줄 두 줄을 기준으로 표현합니다. 가로는 요일, 세로는 주차를 의미합니다. 여기서 우리는 가로는 비슷하고 세로는 제법 다른 일상을 살아갑니다. 평일과 주말로 같은 선상의 반복 일상이 자리하고 첫째 주부터 넷째 주까지는 특별한 이벤트를 더해 가로선 사이의 위계를 주는 것이 예시라면 예시일 것 같습니다. 이 점에서 큰 움직임이 없는 가로는 되도록 유지하고 세로는 높이 차이를 부여해 보다 입체적으로 <매일>을 표현하려 노력했습니다. 또 벽걸이용 달력이 주는 특징으로 바랜 듯한 색감을 생각했는데, 이를 구현하기 위해 리소 프린트를 사용했습니다.판매용 달력이 아니었기 때문에, 23년 함께 작업했던 분들께 선물하는 것을 끝으로 작업을 마무리 했습니다.",
+    description: "Every new year brings the repetition of the same numbers, but the thought that 'no single day is exactly the same' led me to create an unusual calendar.\nUsually, calendars are expressed based on two axes: horizontal and vertical. Horizontal represents the day of the week, and vertical means the week of the month. Here, our lives represent fairly similar horizontals, but quite different verticals. A prime example would be regular weekdays and weekends occupying the same horizontal line repetitions, while adding special events from the first to the fourth week establishes a hierarchy among those horizontal lines. \nIn this regard, I tried my best to express 'every day' more three-dimensionally by largely keeping the unchanging horizontal axis intact while applying height differences to the vertical axis. Furthermore, contemplating the faded colors characteristic of wall-hung calendars, I utilized Riso printing to implement this. Since it wasn't a calendar for sale, I wrapped up the project by gifting it to the people I worked with throughout 2023.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.mp4"]
   },
   {
@@ -327,7 +337,7 @@ export const projects: Project[] = [
     category: "Non-Commercial",
     completion: "Dec. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "전면은 먹박, 후면은 형압을 통해 시각화를 진행했습니다. 후면의 형압이 전면의 정보에 개입하지 않으면서 기능할 수 있는 방법을 채택했습니다.",
+    description: "I carried out the visualization via inkless foil stamping (black foil) on the front and embossing on the back. I adopted a method where the back's embossing operates without interfering with the information on the front.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg"]
   },
   {
@@ -337,7 +347,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Dec. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "디자인 콘셉트를 설정하기 이전에 베이지봉봉이자 TTB 스튜디오 브랜드가 갖고 있는 특징과 이 브랜드를 찾는 사람들에 대한 리서치를 진행했습니다. 브랜드 특징 1. 웨딩 사진을 주로 촬영. 2. 제주에 위치. 브랜드를 찾는 고객의 관점 1. 자랑하고 싶고 부러움의 대상이 되고 싶은 마음. 2. 수정이나 재촬영이 아닌 삶에서 단 한 번뿐인 촬영. 3. 야외 촬영에 대한 기대감. 4. 타 웨딩스튜디오에 비해 큰 금액 지불. 리서치를 기준으로 리브랜딩의 방향성을 설정했습니다. 삶의 한 번뿐인 이벤트이기 때문에, 촬영날과 결과물에서 피사체 즉, 고객이 무엇보다 강조되는 구조를 갖춰야 한다 생각했습니다. 따라서 스튜디오 로고나 디자인 요소는 최소한으로 남겨두고, 찾아오시는 분들의 모습이 가장 돋보이는 것을 디자인 기준으로 설정했습니다. 다음으로는 [제주]라는 위치가 가지고 특징의 장단점이 존재했습니다. 야외 촬영 선택지가 많고 이로인해 웨딩 촬영이라는 복식에서 상대적으로 자유로울 수 있다는 특징이 장점으로 기능했습니다. 하지만 위치로 인해 차량이나 항공 같은 이동료와 숙박비 같은 비용 촬영 외 비용이 많이 발생한다는 단점도 존재했습니다. 따라서 소비에 가치를 부여해야 하는, 즉 입체적인 브랜드 경험을 주는 것이 필수적이다 생각했습니다. 사전 리서치를 언어화 해, 브랜드 특징을 설정했습니다. 1. 절제된 깔끔함 상업 촬영 기반이지만, 이 부분을 강조하지 않는 방향. 2. 클래식한 조형 고객에게 전달되는 작업물이 증명사진, 스티커사진처럼 일회적이지 않고 영구적인 특성을 가짐. 3. 감수하고 싶은 불편함 스튜디오 위치나 비용 변경이 불가하다면, [이렇게까지?] 싶은 입체적이고 체계적인 경험을 제공하는 방향. 다음으로는 언어화 한 브랜드 특징을 바탕으로 실질적으로 디자인에 적용될 비주얼 특징을 설정했습니다. 1. 간결한 2. 영속적인 3. 손으로 완성되는 비주얼 특징을 바탕으로 3가지 타입의 로고를 디자인 했습니다. [마지막임과 동시에 새로운 시작]이라는 결혼의 특징을 통해 문장 부호를 활용한 디자인을 채택했습니다. 구체적으로 온점(.)과 쉼표(,)를 활용했는데, 이 중 온점(.)의 경우, 문장의 끝에 사용하고 마지막, 끝과 같은 직관적인 분위기를 생각하게 합니다. 사전적 의미로는 아라비아 숫자로 특정한 의미가 있는 날을 표시할 때 사용한다고 정의하고 있습니다. 쉼표(,)의 경우, 온점과 달리 마지막이나 끝이 아닌 이어가는, 진행 중 같은 분위기를 상상케 합니다. 대비되는 두 가지 문장 부호를 활용해 디자인을 진행했고, 이를 비율(1:1.618)에 맞춰 제작해 단순하지만 근본적인 미적 균형과 체계를 해치지 않으려 의도했습니다. 어플리케이션의 경우, 고객 방문 전, 방문 당일, 방문 이후 세 가지로 나누어 작업을 진행했습니다. 유선이나 메신저를 통해 이루어지던 계약과 안내 문자 등을 서류화 해 [가격표], [게약서], [계약 확인서], [일주일 전 안내문]을 통해 방문 전 계약 내용과 안내가 필요한 부분에 대해 확인하는 절차를 도입하고 지류로 디자인했습니다. 방문 당일의 경우, [촬영 당일 로케이션 정보와 과정], [입간판], [영수증], [영수증 홀더], [음료 커버], [명함], [스튜디오 소개와 촬영 시스템에 관한 안내]과 같은 어플리케이션을 통해 당일 스튜디오에서 직접 경험이 가능한 요소들을 디자인 했습니다. 마지막으로 방문 이후에는 촬영 이미지를 바탕으로 작업된 [엽서]와 [기타 지류]의 레이아웃을 디자인 했고, 패키지를 확정하는 작업을 진행했습니다.",
+    description: "Before establishing the exact design concept, I conducted research into the characteristics of 'Beigebongbong' (and 'TTB Studio') and the customers who seek out this brand. \nBrand features: 1. Mainly capturing wedding photos. 2. Located in Jeju. \nFrom the customers' perspective: 1. A desire to boast and be envied. 2. A once-in-a-lifetime shoot in life, leaving no room for revisions or reshoots. 3. Expectations for outdoor shoots. 4. Paying higher fees compared to other wedding studios. \nBased on this research, I set the direction for rebranding. Since it's a once-in-a-lifetime event, I believed it needed a structure highlighting the subjects—i.e., the customers—the most on the shooting day and in the outcomes. Therefore, keeping studio logos or design elements minimal and ensuring the visitors' appearances stand out the most became the baseline standard.\nNext, there were pros and cons associated with the location: [Jeju]. Abundant outdoor shoot options presented the advantage of relative freedom from typical wedding-shoot attire norms. However, due to its location, there were non-shoot expenses like transportation (vehicles, flights) and accommodation that acted as disadvantages. Thus, I believed providing value for consumption—i.e., offering a multi-dimensional brand experience—was essential.\nBy verbalizing prior research, I established the brand features: 1. Restrained neatness (A commercial-shoot base, yet not emphasizing it). 2. Classic aesthetic (Work delivered to customers bears a permanent nature, unlike ephemeral ID photos/sticker booths). 3. An inconvenience to willingly endure (If studio location/costs are unchangeable, aiming to provide a systematically elaborate, multi-dimensional experience invoking 'Going this far?' surprise).\nThereafter, based on the verbalized brand characteristics, I established practical visual features to apply to the design: 1. Concise 2. Permanent 3. Completed by hand. \nBased on these visual features, I designed 3 types of logos. Adopting a design that leverages punctuation marks based on the wedding characteristic—[The end, while simultaneously a new beginning]. Specifically, I utilized periods (.) and commas (,). The period (.), found at the end of sentences, intuitively suggests atmospheres like finality or endings. By definition, it's used to indicate days holding specific meanings in Arabic numbers. Distinct from the period, the comma (,) incites imagination of continuity and progress rather than ends. Using two contrasting punctuation marks, the design was constructed adjusting to a ratio (1:1.618) to avoid hindering fundamental aesthetic balance and the system while retaining simplicity.\nFor applications, I categorized tasks into: Before customer visits, On the day of visit, and Post-visit. Converting contracts/guidance messages previously exchanged via phones/messengers to paper formatting, I introduced procedures reviewing contracts/necessary guidance before visits via [Price List], [Contract], [Contract Confirmation], and [Week-Prior Guide], designing them on paper stock.\nFor the visit day, I designed applications that could offer tangible experiences directly inside the studio: [Shoot location info/process sheet], [Sign-stand], [Receipt], [Receipt holder], [Cup sleeve], [Business Card], and [Guide regarding studio introduction and shoot system]. Lastly, post-visit, I designed the layout for [Postcards] and [Other paper supplies] based on the shot images, finishing up by finalizing the packaging.",
     images: [
       "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg",
       "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg",
@@ -351,17 +361,17 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Dec. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "전면은 먹박, 후면은 형압을 통해 시각화를 진행했습니다. 후면의 형압이 전면의 정보에 개입하지 않으면서 기능할 수 있는 방법을 채택했습니다.",
+    description: "I carried out the visualization via inkless foil stamping (black foil) on the front and embossing on the back. I adopted a method where the back's embossing operates without interfering with the information on the front.",
     images: ["01.jpg", "02.jpg", "03.jpg"]
   },
   {
     slug: "Seong",
-    title: "성윤선의 장고춤 네트워크 ≪젊은 춤꾼전 : 동행(同行)≫",
+    title: "Seong Yoon-seon's Janggu Dance Network ≪Young Dancers Exhibition: Companion (同行)≫",
     scope: "Identity design",
     category: "Commercial",
     completion: "Nov. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "프로젝트1 시각화를 통해 풀어내야 할 주요 과제는 두 가지였습니다. 1. 총 4번의 공연이 진행된다는 점을 표현할 것. 2. 공연에 사용되는 악기와 장비를 표현할 것. [1]의 경우, 색을 통해 주차 공연을 분리하는 방법을 채택했습니다. 구체적으로 주차별 핸드아웃에 이를 활용했는데, 그래픽 요소나 타이포그래피를 통해 구분하는 방법에 비해 색을 통해 구분하는 방법이 상대적으로 직관적이라 생각했기 때문입니다. [2]의 경우, 공연에서 가장 메인이 되는 장구와 북을 중심으로 설정했습니다. 이후 공연에 사용되는 악기와 장비를 촬영하는 작업을 진행했고, 악기를 이용한 공연이라는 점에서 타이틀을 동적으로 표현하는 과정을 끝으로 시각화 작업을 마쳤습니다.",
+    description: "There were two main tasks to solve through Project 1 visualization: 1. Express that a total of 4 performances take place. 2. Express the instruments and equipment used in the performance. \nFor [1], I adopted a method of segregating the weekly performances through color. Specifically, this was utilized in weekly hand-outs, as I thought segregating via color was relatively more intuitive compared to graphic elements or typography. \nFor [2], I centered on the Janggu (drum) and Buk (drum) which are the main instruments in the performance. We then proceeded with a photoshoot of the instruments and equipment used. As it was a performance using instruments, I concluded the visualization process by expressing the title dynamically.",
     images: ["Thumbnail.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg"]
   },
   {
@@ -371,7 +381,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Nov. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "제주에 위치한 포토 스튜디오와 와인바, 서울에 위치한 편집숍 세 브랜드의 오프라인 행사1 그래픽을 담당했습니다. 프로젝트 시각화 콘셉트를 설정하는 단계에서 각기 다른 세 브랜드를 묶어주는 시각 언어가 필요하다 생각했습니다. 이러한 생각을 바탕으로 두 가지 접근 방법을 생각했습니다. 1. 기호화 2. 형태화 결과적으로 괄호( )라는 문장 부호를 통해 메인 이미지를 표현하는 [1]의 방법을 채택했습니다. 시각화의 주목적이 [세 브랜드가 함께하는 오프라인 행사 소식을 전함.]이라는 점에서 주목적을 직관적으로 전달할 수 있는 방법으로 [1]이 효과적이라 생각했기 때문입니다. 구체적으로 [2]의 경우, 세 브랜드를 묶어주는 이미지를 제작하고 그 의미를 부여해야 한다는 두 단계를 거쳐야 했습니다. 이에 비해 [1]의 경우, 기호를 통해 [포함되어 있음.]이라는 의미가 이미 부여되어 있다 판단했습니다. 따라서 [1]의 경우, 주목적의 표현 의미가 이미 부여되어 있기 때문에 표현법에도, 보는 사람에게도 유리한 접근 방법이라 생각했습니다.",
+    description: "I was in charge of the offline event graphics for three brands: a photo studio and wine bar located in Jeju, and a select shop located in Seoul. In the stage of defining the project's visual concept, I thought a visual language tying the three distinct brands together was necessary. Based on this thought, I considered two approaches: 1. Symbolization 2. Formalization.\nUltimately, I adopted method [1], expressing the main image through the punctuation mark of parentheses ( ). Given that the main purpose of visualization was [Conveying news of the offline event involving three brands together], I believed [1] was effective as a means to intuitively convey the main purpose. Specifically, for [2], it would require two steps: making an image tying the three brands and granting meaning to it. On the other hand, for [1], I judged the meaning of [Being included] was already inherently bestowed through the symbol. Thus, since the intended meaning was already present in [1], I thought it was an advantageous approach for both the expression method and the viewers.",
     images: ["Thumbnail.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.JPG", "09.JPG", "10.JPG", "11.JPG", "12.JPG", "13.JPG", "14.JPG", "15.JPG", "16.JPG", "17.JPG", "18.JPG", "19.JPG", "20.JPG"]
   },
   {
@@ -381,7 +391,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Nov. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "제주 애월읍에 위치한 점 스토어의 일주년을 기념하는 엽서 7종 묶음을 개발했습니다. 브랜드 요소로 점(.)이라는 기호를 사용하고 있었기 때문에 점(.)을 활용한 디자인을 전개하는 방향을 메인 시각화 콘셉트로 채택했습니다. 7종의 구성 중 2장부터 6장의 경우, 최원혁 사진가의 ≪Flowers≫ 시리즈를 사용했습니다. 낱개가 아닌 묶음으로만 판매될 예정이었기 때문에 1장이 표지로 기능할 필요가 있다 생각했습니다. 결과적으로 1장의 경우, 2장부터 6장까지 사용된 ≪Flowers≫ 시리즈 사진 이미지를 점으로 변환하는 과정을 거쳐 표지 기능을 할 수 있도록 의도했습니다.",
+    description: "I developed a 7-piece postcard set to commemorate the 1st anniversary of Jeom Store located in Aewol-eup, Jeju. Since they were using the period (.) mark as a brand element, I adopted expanding designs utilizing the period (.) as the main visualization concept. For cards 2 through 6 of the 7-piece set, I used photographer Choi Won-hyuk's ≪Flowers≫ series. Because they were to be sold exclusively as a set and not individually, I felt one piece needed to act as a cover. Consequently, for the 1st card, I intended it to function as a cover through a process of converting the ≪Flowers≫ series photo image used in cards 2-6 into dot patterns.",
     images: ["01.JPG", "02.mp4", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.mp4"]
   },
   {
@@ -391,7 +401,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Nov. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "≪Knock≫는 2019년 크리틱스초이스에서 안무자가 진행했던 ≪이방인≫ 이라는 초연과 알베르 카뮈의 소설 『이방인』을 모티브로 하고 있습니다. 구체적으로 작품에서 [노크]라는 행위를 통해 [타인과 만나는 나]와 [나와 만나는 나] 사이 이중성이 강조되었는데, 이를 시각적으로 어떻게 풀어낼지가 주요 과제였습니다. 프로젝트 시각화 콘셉트로 [이중성 : 극단적인 대비감을 고려하며]라는 문장으로 방향성을 정의했습니다. 이에 따라 사진 이미지를 포함한 포스터 모든 요소의 색상을 검은 색과 흰 색으로 제한했습니다. 또 작품 제목이 사진 이미지를 기준으로 바라보고 있는 분위기를 연출하고자 중복되는 [k]를 좌우반전 시켜 레이아웃을 구성했습니다. 이를 통해 [타인과 만나는 나]와 [나와 만나는 나] 사이 대비감을 높이려 의도했습니다. 결과적으로 공연에 들어가는 모든 그래픽 요소에 극단적인 대비를 통해 작품에서 말하고자 하는 이중성을 표현하려 의도했습니다.",
+    description: "≪Knock≫ motives the novel 『L'Étranger (The Stranger)』 by Albert Camus and the premiere ≪Stranger≫ held by the choreographer at Critics' Choice in 2019. Specifically, the duality between [The me who meets others] and [The me who meets me] was emphasized through the act of [Knocking] in the work, and the main task was how to express this visually. \nI defined directionality with the phrase [Duality: Considering extreme contrast] as the project's visual concept. Accordingly, I limited the colors of all elements on the poster, including photographic images, to black and white. Also, aiming to create an atmosphere where the title watches based on the photographic image, I structured the layout by horizontally flipping the overlapping [k]. Through this, I intended to heighten the contrast between [The me who meets others] and [The me who meets me]. Ultimately, I aimed to convey the duality articulated in the work via extreme contrast across all graphic elements in the performance.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
   },
   {
@@ -401,7 +411,7 @@ export const projects: Project[] = [
     category: "Non-Commercial",
     completion: "Oct. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "사진가 전기홍과 [buckwild]라는 콘셉트를 가지고 20페이지 분량의 에디토리얼 작업을 진행했습니다.",
+    description: "I carried out a 20-page editorial design project under the concept [buckwild] alongside photographer Jun Ki-hong.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg"]
   },
   {
@@ -411,7 +421,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Sep. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "사진가 최원혁이 운영하는 포토 스튜디오1의 아이덴티티 디자인을 담당했습니다. 팀의 운영자이자 사진가인 최원혁의 요청으로 워드 타입과 심볼 로고가 디자인되었습니다.",
+    description: "I oversaw the identity design for the photo studio run by photographer Choi Won-hyuk. At the request of Choi Won-hyuk, the team's operator and photographer, a word-type and symbol logo were designed.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg"]
   },
   {
@@ -421,47 +431,47 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Sep. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "[meet via meat] 슬로건을 가지고 있는 한우 유통 브랜드 아이덴티티 디자인을 담당했습니다. 기획 단계에서 확정된 조건은 다음과 같았습니다. 1. 높은 채도의 컬러 사용 2. 제품 별 컬러 구분 사용 3. 기존 시장 방향과 다른 디자인 요소 기존 시장에서 타겟 연령층을 20-30대로 설정하고, 이에 따라 제품 가격을 낮게 설정하는 포지셔닝을 하고 있었기 때문에 이를 바탕으로 시각화 방향성을 다음과 같이 설정했습니다. 1. 적극적인 브랜드 요소 개발 2. 곡선이 많고 두꺼운 브랜드 요소 개발 3. 키워드 설정 3-1. 곡선적인 3-2. 볼드한 3-3. 유쾌한 3-4. 정돈된 3-5. 다채로운 세 가지 방향성을 기준으로 로고 타입 3종, 패키지 16종, 명함 2종, 메시지 카드 4종, 핸드아웃 3종, 테이프 2종, 모바일 레이아웃 2종을 디자인했습니다.",
+    description: "I was in charge of the identity design for a Korean beef distribution brand with the slogan [meet via meat]. The conditions finalized in the planning stage were as follows: 1. Use high-saturation colors 2. Use distinct colors per product 3. Use design elements different from existing market directions.\nSince the target age group was set to those in their 20s-30s within the existing market and consequently taking a position setting product prices low, based on this, the visual direction was set as follows: 1. Actively develop brand elements 2. Develop brand elements with many curves and thickness 3. Setting keywords: 3-1. Curvy 3-2. Bold 3-3. Cheerful 3-4. Organized 3-5. Colorful.\nBased on these three directions, I designed 3 types of logo types, 16 packages, 2 types of business cards, 4 types of message cards, 3 types of handouts, 2 types of tapes, and 2 types of mobile layouts.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.JPG", "11.JPG", "12.JPG", "13.JPG", "14.JPG", "15.JPG", "16.JPG", "17.JPG", "18.JPG"]
   },
   {
     slug: "ChoiSeoul",
-    title: "사진가 최원혁 ≪Open Studio≫",
+    title: "Photographer Choi Won-hyuk ≪Open Studio≫",
     scope: "Identity design",
     category: "Commercial",
     completion: "Aug. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "≪Open Studio≫라는 타이틀로 진행된 최원혁 사진가의 개인전 그래픽을 담당했습니다. 전시를 통한 구체적인 메시지를 전하는 것이 아닌 작가의 작업을 모아 놓은 것으로 전시가 진행되었기 때문에, 공간과 작가의 이미지를 조화롭게 표현하는 것이 주요 과제였습니다. 이에 따라 작가의 이미지 중 메인 포스터로 활용될 이미지를 택하는 과정이 먼저 이루어졌습니다. 이후 선택된 이미지를 지면과 동일한 크기로 편집하는 과정을 거쳐 2차 가공을 진행했고, 전시 정보를 위계에 따라 조율하는 것을 끝으로 작업을 마무리했습니다.",
+    description: "I was in charge of the solo exhibition graphics for photographer Choi Won-hyuk, held under the title ≪Open Studio≫. Because the exhibition wasn't meant to deliver a specific message but rather to gather the artist's works, the main task was to harmoniously express the space and the artist's image. Accordingly, the process of selecting the image to be utilized as the main poster from among the artist's images was done first. Later, a secondary process of editing the chosen image to the exact size of the page was undertaken, and the work concluded by tuning the exhibition information according to hierarchy.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg"]
   },
   {
     slug: "miam",
-    title: "사진가 최원혁 ≪MiamMiam≫",
+    title: "Photographer Choi Won-hyuk ≪MiamMiam≫",
     scope: "Identity design",
     category: "Commercial",
     completion: "Aug. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "앨범에서 정의하는 [사랑]과 [이별]이 극단적인 단절 형태가 아닌 경계가 모호하다는 것에서 프로젝트 시각화 콘셉트를 설정했습니다. 구체적으로 [추상적 주제(사랑과 이별)의 경계 : 잔상과 대비감을 고려하며]라는 문장으로 방향성을 정의하여, 사진 자체로는 대비감이 강하지만 그 경계가 점진적으로 확산되는 형태로 촬영을 진행하고 이미지를 채택했습니다.",
+    description: "An exhibition proceeding without a special statement or narrative, structured entirely via photographic images alone. Just as one might encounter various visual experiences while walking through multiple cities, to provide a variety of visual experiences purely through images without a statement, I constructed a layout with photographs containing diverse subjects without a specific form.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg"]
   },
   {
     slug: "oboae",
-    title: "Oboae x 사진가 최원혁",
+    title: "Oboae x Photographer Choi Won-hyuk",
     scope: "Paper design",
     category: "Commercial",
     completion: "Aug. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "제주 중앙로에 위치한 오보에 엽서 5종을 개발했습니다. 전면은 사진의 타이틀을, 후면은 4종의 레이아웃을 개발해 작업을 진행했습니다.",
+    description: "Developed 5 types of postcards for Oboae located in Jungang-ro, Jeju. The front bears the photo titles, and the back was developed with 4 graphic layouts.",
     images: ["00.JPG", "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg"]
   },
   {
     slug: "cidae",
-    title: "Cidae",
+    title: "Goi Goi",
     scope: "Editorial design",
     category: "Commercial",
     completion: "Jul. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "선물 포장 브랜드 고이고이의 워드타입과 심볼로고 디자인을 맡았습니다. 같은 포장 도구와 방법이더라도 선물하는 사람에 따라 모든 포장이 오직 하나라는 점이 이번 작업의 중요한 콘셉트였습니다. 심볼의 경우, [g,o,i] 세 가지 철자 반복으로만 이루어진 브랜드 이름이지만, 각 철자 모두 약간의 변형이 있을 수 있도록 구성했습니다. 이를 통해 손으로 종이를 접어가며 비뚤배뚤하지만, 정성스레 직접 만듦이 느껴질 수 있도록 표현하려 했습니다. 워드타입의 경우, 비뚤배뚤한 심볼에서 범용성을 고려해 균형을 맞춘 형태로 구성했습니다.",
+    description: "I took charge of the wordtype and symbol design for the gift packaging brand Goi Goi. The core concept of this project was that even with the same packaging tools and methods, each packaging is unique depending on the person gifting it. For the symbol, though the brand name consists solely of repetitions of the three letters [g,o,i], it was composed so that each letter could have slight variations. Through this, I intended to portray the sense of manual hand-crafting, slightly uneven from folding paper by hand yet distinctly heartfelt. For the wordtype, I considered versatility alongside the slightly uneven symbol, structuring it in a balanced form.",
     images: ["01.jpg", "02.jpg", "03.jpg"]
   },
   {
@@ -471,7 +481,7 @@ export const projects: Project[] = [
     category: "Commercial",
     completion: "Jul. 2023",
     thumbnail: "Thumbnail.jpg",
-    description: "디자인 콘셉트를 설정하기 이전에 프로젝트를 통해 해결해야 하는 것들에 우선순위를 정하는 과정을 거쳤습니다. 1. 브랜드 스토리 정리 및 시각화 2. 브랜드 요소 통합 가장 먼저 브랜드 스토리를 정리했습니다. 이후 카페라는 카테고리에 대한 리서치를 진행했는데, 이를 바탕으로 프로젝트 방향성을 설정했습니다, 브랜드를 찾는 고객의 관점 1. SNS를 통한 브랜드 운영 1-1. 콘텐츠 사이즈를 SNS 규격에 맞춰 제작 1-2. 카메라를 통한 콘텐츠 제작 1-3. 사진 스타일 설정을 통해 브랜드 톤 유지 2. 덜어내는 방식의 브랜드 통합 [1]의 경우, 카페라는 카테고리 자체 특징이라 생각했습니다. 원두를 납품하는 로스터리가 아닌 이상, 별도 웹 사이트를 가지고 있지 않았고, 이로 인해 고객과 브랜드의 접점이 지도 어플이나 SNS 뿐이라 판단했습니다. 때문에 SNS에서 [일관된 이미지]를 보이는 것이 이번 프로젝트의 중요한 열쇠라 생각했습니다. [2]의 경우, 변화가능한 범위를 기준으로 판단했습니다. 공간 자체를 리빌딩하는 볼륨의 프로젝트가 아니었기에, 실질적으로 프로젝트를 통해 기대하는 효과가 온라인 홍보에 집중되어 있다 생각했습니다. 때문에 온라인 홍보를 접한 고객이 실제 공간을 방문했을 때 이질적이지 않아야 한다 생각했습니다. 따라서 적극적인 요소 개발을 통해 변화된 브랜드를 강조하는 것보다 공간은 유지된다는 제약에서 시작해, 온라인 홍보물과 기타 콘텐츠가 실제 공간과 괴리감이 없게끔 덜어내는 작업에 집중해 시각화를 진행했습니다. 궁극적으로 워드마크 타입과 심볼 로고, 포스터, 엽서, 명함, 티셔츠, 메뉴, 투고컵, 콘텐츠 21종의 디자인을 진행했습니다.",
+    description: "Before setting the design concept, I underwent a process to prioritize what needed to be solved through the project. 1. Organize and visualize the brand story 2. Integrate brand elements \nFirst, I organized the brand story. Next, I conducted research on the category called Cafe, based on which I set the project direction. From the perspective of customers seeking out the brand: 1. Operating the brand through SNS 1-1. Producing content matching SNS sizes 1-2. Producing content through cameras 1-3. Maintaining the brand tone through setting photo styles 2. Brand integration through removal \nFor [1], I considered it a characteristic of the Cafe category itself. Unless it's a roastery supplying coffee beans, they usually didn't have a separate website, so I judged customer touchpoints to only be map apps or SNS. Thus, I believed showing a [consistent image] on SNS was a crucial key to this project. \nFor [2], I judged based on changeable scope. Since it wasn't a project with the volume to remodel the space itself, I thought the realistically expected effect of the project concentrated on online promotion. Therefore, I believed there shouldn't be a sense of disparity when a customer who saw online promotions actually visited the space. Thus, instead of emphasizing the changed brand through actively developing elements, starting with the constraint that the space remains maintained, I visualized focusing on the task of 'removing' so that the online promotions and other content wouldn't feel disparate from the physical space. \nUltimately, I proceeded with designing 21 types spanning wordmark and symbol logos, posters, postcards, business cards, t-shirts, menus, to-go cups, and content.",
     images: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg"]
   },
 ];

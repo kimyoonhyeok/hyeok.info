@@ -38,11 +38,9 @@
     word-break: keep-all;
 }
 
-/* Gap between EN and KO in Intro */
-.introDivider {
-    display: block;
-    height: 1.6em;
-    /* Match body line-height gap */
+.introKorean {
+    margin-top: 19.5px;
+    font-family: "agchoijeongho-screen", "ag-choijeongho-screen", "AppleMyungjo", "Batang", serif;
 }
 
 .infoListItem {
