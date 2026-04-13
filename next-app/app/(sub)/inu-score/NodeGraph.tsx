@@ -9,7 +9,15 @@ type NodeGraphProps = {
     setConnectedNodes: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-const nodesData = [
+type NodeItem = {
+    id: string;
+    label: string;
+    isRoot?: boolean;
+    clickable?: boolean;
+    children?: NodeItem[];
+};
+
+const nodesData: NodeItem[] = [
     { id: 'root', label: '4-1', isRoot: true },
     { id: 'n1', label: 'Design of Level' },
     { id: 'n2', label: 'Infographic' },
@@ -157,6 +165,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
             window.removeEventListener('pointermove', handlePointerMove);
             window.removeEventListener('pointerup', handlePointerUp);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dragLine?.active, dragLine?.sourceId, positions, connectedNodes]);
 
     const handleDragStart = (e: React.PointerEvent, sourceId: string) => {
@@ -289,7 +298,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
 
                 {/* Level 2: 6 items */}
                 <div style={{ flex: '1 1 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', paddingTop: '10vh' }}>
-                    {nodesData.slice(1).map((node: any) => {
+                    {nodesData.slice(1).map((node: NodeItem) => {
                         const isHovered = hoveredNode === node.id;
                         const dim = hoveredNode && hoveredNode !== node.id && hoveredNode !== 'root';
                         const isLastNode = node.id === 'vcd';
@@ -328,7 +337,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                                 {/* Level 3: Children (Visually dimmed until connected) */}
                                 {node.children && (
                                     <div style={{ display: 'flex', gap: '3rem', paddingTop: '10vh', position: 'relative', zIndex: 1 }}>
-                                        {node.children.map((child: any) => {
+                                        {node.children.map((child: NodeItem) => {
                                             const childHovered = hoveredNode === child.id;
                                             const isConnected = connectedNodes.includes(child.id);
                                             const isDimmed = !isConnected || (hoveredNode && hoveredNode !== child.id && hoveredNode !== 'root' && hoveredNode !== 'vcd');
@@ -385,7 +394,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                                                             transition: 'opacity 0.6s ease',
                                                             zIndex: 1,
                                                         }}>
-                                                            {child.children.map((sub: any) => {
+                                                            {child.children.map((sub: NodeItem) => {
                                                                 const subHovered = hoveredNode === sub.id;
                                                                 // Since opacity is already managed by wrapper, we don't dim disconnected subs 
                                                                 // as heavily, but we do dim them if hovering another node.
