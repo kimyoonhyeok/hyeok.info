@@ -16,11 +16,8 @@ export default function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const pathname = usePathname();
-    const isHoverable = pathname?.replace(/\/$/, '') === '/inu-score';
-
     return (
-        <header className={`global-header ${scrolled ? "scrolled" : ""} ${isHoverable ? "header-hoverable" : ""}`}>
+        <header className={`global-header ${scrolled ? "scrolled" : ""}`}>
             <nav className="header-hyeok">
                 <ul>
                     <li>

@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import IshiharaComponent from "./IshiharaComponent";
 import HolbeinComponent from "./HolbeinComponent";
 import ColorConfusionGraphic from "./ColorConfusionGraphic";
+import NodeGraph from "./NodeGraph";
+import ColorVisionSimulator from "./ColorVisionSimulator";
 import styles from "./pt.module.css";
 
 const REF_LIST = [
@@ -40,6 +42,8 @@ const REF_LIST = [
 ];
 
 export default function PresentationPage() {
+    const [view, setView] = useState<'graph' | 'presentation' | 'poster' | 'app'>('graph');
+    const [connectedNodes, setConnectedNodes] = useState<string[]>([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [subSlide, setSubSlide] = useState(0);
     const [mounted, setMounted] = useState(false);
@@ -51,14 +55,23 @@ export default function PresentationPage() {
     // Prevent hydration mismatch: only render after mount
     useEffect(() => { setMounted(true); }, []);
 
-    // Disable body scroll globally for this page
+    // Disable body scroll globally mostly for the presentation view
     useEffect(() => {
+        if (view === 'graph') {
+            document.body.style.overflow = "auto";
+            return;
+        }
+        if (view === 'poster' || view === 'app') {
+            document.body.style.overflow = view === 'app' ? 'auto' : 'hidden';
+            return;
+        }
+        
         const originalOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
         return () => {
             document.body.style.overflow = originalOverflow;
         };
-    }, []);
+    }, [view]);
 
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
@@ -121,14 +134,16 @@ export default function PresentationPage() {
             }
         };
 
-        window.addEventListener("wheel", handleWheel, { passive: false });
-        window.addEventListener("keydown", handleKeyDown);
+        if (view === 'presentation') {
+            window.addEventListener("wheel", handleWheel, { passive: false });
+            window.addEventListener("keydown", handleKeyDown);
+        }
 
         return () => {
             window.removeEventListener("wheel", handleWheel);
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [currentSlide, subSlide]);
+    }, [currentSlide, subSlide, view]);
 
     // Also support touch swiping for mobile
     const touchStart = useRef(0);
@@ -168,15 +183,80 @@ export default function PresentationPage() {
             }
         };
 
-        window.addEventListener("touchstart", handleTouchStart, { passive: true });
-        window.addEventListener("touchend", handleTouchEnd, { passive: true });
+        if (view === 'presentation') {
+            window.addEventListener("touchstart", handleTouchStart, { passive: true });
+            window.addEventListener("touchend", handleTouchEnd, { passive: true });
+        }
         return () => {
             window.removeEventListener("touchstart", handleTouchStart);
             window.removeEventListener("touchend", handleTouchEnd);
         };
-    }, [currentSlide, subSlide]);
+    }, [currentSlide, subSlide, view]);
 
     if (!mounted) return null;
+
+    if (view === 'graph') {
+        return <NodeGraph 
+            onOpenSideProject={() => setView('presentation')} 
+            onOpenMainPoster={() => setView('poster')} 
+            onOpenApp={() => setView('app')}
+            connectedNodes={connectedNodes}
+            setConnectedNodes={setConnectedNodes}
+        />;
+    }
+
+    if (view === 'app') {
+        return <ColorVisionSimulator onClose={() => setView('graph')} />;
+    }
+
+    if (view === 'poster') {
+        return (
+            <div style={{
+                width: '100%',
+                height: 'calc(100vh - 120px)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: '2rem 50px',
+                boxSizing: 'border-box',
+                backgroundColor: '#fff',
+                position: 'relative'
+            }}>
+                <button
+                    onClick={() => setView('graph')}
+                    style={{
+                        position: 'absolute',
+                        top: '2rem',
+                        left: '50px',
+                        background: 'transparent',
+                        border: 'none',
+                        fontSize: '18px',
+                        cursor: 'pointer',
+                        color: '#666',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        transition: 'color 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = '#111'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
+                >
+                    &larr; Back
+                </button>
+                <img 
+                    src="/inu-score/sideproject_poster.jpg" 
+                    alt="Main Poster" 
+                    style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        objectFit: 'contain',
+                        boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
+                        borderRadius: '4px'
+                    }}
+                />
+            </div>
+        );
+    }
 
     return (
         <>
