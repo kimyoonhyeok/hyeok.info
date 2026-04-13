@@ -337,7 +337,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                                 {/* Level 3: Children (Visually dimmed until connected) */}
                                 {node.children && (
                                     <div style={{ display: 'flex', gap: '3rem', paddingTop: '10vh', position: 'relative', zIndex: 1 }}>
-                                        {node.children.map((child: NodeItem) => {
+                                        {node.children?.map((child: NodeItem) => {
                                             const childHovered = hoveredNode === child.id;
                                             const isConnected = connectedNodes.includes(child.id);
                                             const isDimmed = !isConnected || (hoveredNode && hoveredNode !== child.id && hoveredNode !== 'root' && hoveredNode !== 'vcd');
@@ -394,7 +394,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                                                             transition: 'opacity 0.6s ease',
                                                             zIndex: 1,
                                                         }}>
-                                                            {child.children.map((sub: NodeItem) => {
+                                                            {child.children?.map((sub: NodeItem) => {
                                                                 const subHovered = hoveredNode === sub.id;
                                                                 // Since opacity is already managed by wrapper, we don't dim disconnected subs 
                                                                 // as heavily, but we do dim them if hovering another node.
