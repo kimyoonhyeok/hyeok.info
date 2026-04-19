@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 type NodeGraphProps = {
     onOpenSideProject: () => void;
+    onOpenSideProject2: () => void;
     onOpenMainPoster: () => void;
     onOpenApp: () => void;
     connectedNodes: string[];
@@ -24,26 +25,32 @@ const nodesData: NodeItem[] = [
     { id: 'n3', label: 'Layout Design' },
     { id: 'n4', label: 'Typo and Image' },
     { id: 'n5', label: 'Contemporary\nFashion Contents' },
-    { id: 'vcd', label: 'Visual Communication\nDesign Project', 
-      children: [
-          { 
-              id: 'sp', 
-              label: 'SideProject', 
-              children: [
-                  { id: 'week', label: 'Week 1~5', clickable: true },
-                  { id: 'main', label: 'MainPoster', clickable: true },
-                  { id: 'app', label: 'App.', clickable: true },
-                  { id: 'pt', label: 'PT' },
-              ]
-          },
-          { id: 'gp', label: 'Graduation Project' },
-      ]
+    {
+        id: 'vcd', label: 'Visual Communication\nDesign Project',
+        children: [
+            {
+                id: 'sp',
+                label: 'SideProject',
+                children: [
+                    { id: 'main', label: 'MainPoster', clickable: true },
+                    { id: 'app', label: 'App.', clickable: true },
+                    {
+                        id: 'pt', label: 'PT',
+                        children: [
+                            { id: 'week1', label: 'Week 1~4', clickable: true },
+                            { id: 'week2', label: 'Week 5~8', clickable: true },
+                        ]
+                    },
+                ]
+            },
+            { id: 'gp', label: 'Graduation Project' },
+        ]
     },
 ];
 
 type Pos = { x: number, y: number };
 
-export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenApp, connectedNodes, setConnectedNodes }: NodeGraphProps) {
+export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, connectedNodes, setConnectedNodes }: NodeGraphProps) {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [dragLine, setDragLine] = useState<{ active: boolean, x: number, y: number, sourceId: string } | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -87,15 +94,16 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
             if (dragLine?.active && wrapperRef.current) {
                 const rect = wrapperRef.current.getBoundingClientRect();
                 setDragLine(prev => prev ? { ...prev, x: e.clientX - rect.left, y: e.clientY - rect.top } : null);
-                
+
                 // Check if hovering near target for visual feedback
                 const mx = e.clientX - rect.left;
                 const my = e.clientY - rect.top;
                 let foundHover = null;
-                
+
                 // Possible targets depending on source
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
-                                        dragLine.sourceId === 'sp' ? ['week', 'main', 'app', 'pt'] : [];
+                    dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
+                        dragLine.sourceId === 'pt' ? ['week1', 'week2'] : [];
 
                 possibleTargets.forEach((id) => {
                     const target = positions[id];
@@ -115,9 +123,10 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
         const handlePointerUp = (e: PointerEvent) => {
             if (dragLine?.active && wrapperRef.current) {
                 let targetId: string | null = null;
-                
+
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
-                                        dragLine.sourceId === 'sp' ? ['week', 'main', 'app', 'pt'] : [];
+                    dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
+                        dragLine.sourceId === 'pt' ? ['week1', 'week2'] : [];
 
                 if (hoveredNode && possibleTargets.includes(hoveredNode)) {
                     targetId = hoveredNode;
@@ -126,7 +135,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                     const mouseX = e.clientX - rect.left;
                     const mouseY = e.clientY - rect.top;
                     let closestDist = 200; // Increased to 200px for max UX leniency
-                    
+
                     possibleTargets.forEach((id) => {
                         const target = positions[id];
                         if (target) {
@@ -143,15 +152,17 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                     if (!connectedNodes.includes(targetId)) {
                         setConnectedNodes(prev => [...prev, targetId!]);
                     }
-                    if (targetId === 'week') {
+                    if (targetId === 'week1') {
                         setTimeout(() => onOpenSideProject(), 400);
+                    } else if (targetId === 'week2') {
+                        setTimeout(() => onOpenSideProject2(), 400);
                     } else if (targetId === 'main') {
                         setTimeout(() => onOpenMainPoster(), 400);
                     } else if (targetId === 'app') {
                         setTimeout(() => onOpenApp(), 400);
                     }
                 }
-                
+
                 setDragLine(null);
                 setHoveredNode(null);
             }
@@ -171,12 +182,12 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
     const handleDragStart = (e: React.PointerEvent, sourceId: string) => {
         // Only left mouse or touch
         if (e.button !== 0 && e.nativeEvent.type !== 'touchstart') return;
-        
+
         // Ensure source node itself is connected or is root/vcd! 
         if (sourceId !== 'vcd' && !connectedNodes.includes(sourceId)) return;
 
         e.preventDefault();
-        
+
         if (!wrapperRef.current) return;
         const rect = wrapperRef.current.getBoundingClientRect();
         setDragLine({ active: true, sourceId, x: e.clientX - rect.left, y: e.clientY - rect.top });
@@ -192,9 +203,10 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
         const isTargetHovered = hoveredNode === targetId;
         const isRootHovered = hoveredNode === 'root';
         const isVcdHovered = hoveredNode === 'vcd' && (targetId === 'sp' || targetId === 'gp');
-        const isSpHovered = hoveredNode === 'sp' && ['week', 'main', 'app', 'pt'].includes(targetId);
+        const isSpHovered = hoveredNode === 'sp' && ['main', 'app', 'pt'].includes(targetId);
+        const isPtHovered = hoveredNode === 'pt' && ['week1', 'week2'].includes(targetId);
 
-        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered;
+        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered;
 
         // TouchDesigner Style Smooth Cubic Bezier Curve (Vertical flowing)
         const dY = Math.abs(target.y - source.y) * 0.5;
@@ -256,17 +268,20 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                     <AnimatePresence>
                         {/* Root to second level */}
                         {nodesData.slice(1).map((node) => renderLink('root', node.id))}
-                        
+
                         {/* VCD to its children (only if connected) */}
                         {connectedNodes.includes('sp') && renderLink('vcd', 'sp')}
                         {connectedNodes.includes('gp') && renderLink('vcd', 'gp')}
 
                         {/* SP to its children (only if connected) */}
-                        {connectedNodes.includes('week') && renderLink('sp', 'week')}
                         {connectedNodes.includes('main') && renderLink('sp', 'main')}
                         {connectedNodes.includes('app') && renderLink('sp', 'app')}
                         {connectedNodes.includes('pt') && renderLink('sp', 'pt')}
-                        
+
+                        {/* PT to its children (only if connected) */}
+                        {connectedNodes.includes('week1') && renderLink('pt', 'week1')}
+                        {connectedNodes.includes('week2') && renderLink('pt', 'week2')}
+
                         {/* Interactive Drag Wire */}
                         {renderDragWire()}
                     </AnimatePresence>
@@ -275,16 +290,16 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
 
             {/* DOM Content */}
             <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
-                
+
                 {/* Level 1: Root */}
                 <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center', paddingTop: '2vh' }}>
-                    <div 
-                        data-id="root" 
+                    <div
+                        data-id="root"
                         onMouseEnter={() => setHoveredNode('root')}
                         onMouseLeave={() => setHoveredNode(null)}
-                        style={{ 
-                            fontSize: '20px', 
-                            fontWeight: 600,
+                        style={{
+                            fontSize: '20px',
+                            fontWeight: 400,
                             lineHeight: 1.2,
                             padding: '4px 8px',
                             background: '#fff',
@@ -342,7 +357,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                                             const isConnected = connectedNodes.includes(child.id);
                                             const isDimmed = !isConnected || (hoveredNode && hoveredNode !== child.id && hoveredNode !== 'root' && hoveredNode !== 'vcd');
                                             const hasSubChildren = !!child.children;
-                                            const isSpHovered = child.id === 'sp' && ['week', 'main', 'app', 'pt'].includes(hoveredNode || '');
+                                            const isSpHovered = child.id === 'sp' && ['main', 'app', 'pt'].includes(hoveredNode || '');
                                             const isSpHighlighted = childHovered || isSpHovered;
 
                                             return (
@@ -380,11 +395,11 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
 
                                                     {/* Level 4: Sub-Children of SideProject (Absolute positioned so they don't break flex layout) */}
                                                     {child.children && (
-                                                        <div style={{ 
-                                                            display: 'flex', 
-                                                            gap: '2rem', 
-                                                            position: 'absolute', 
-                                                            top: '100%', 
+                                                        <div style={{
+                                                            display: 'flex',
+                                                            gap: '2rem',
+                                                            position: 'absolute',
+                                                            top: '100%',
                                                             marginTop: '8vh',
                                                             left: '50%',
                                                             transform: 'translateX(-50%)',
@@ -396,41 +411,98 @@ export default function NodeGraph({ onOpenSideProject, onOpenMainPoster, onOpenA
                                                         }}>
                                                             {child.children?.map((sub: NodeItem) => {
                                                                 const subHovered = hoveredNode === sub.id;
-                                                                // Since opacity is already managed by wrapper, we don't dim disconnected subs 
-                                                                // as heavily, but we do dim them if hovering another node.
                                                                 const isSubConnected = connectedNodes.includes(sub.id);
                                                                 const isSubDimmed = hoveredNode && hoveredNode !== sub.id && hoveredNode !== 'root' && hoveredNode !== 'sp' && hoveredNode !== 'vcd';
+                                                                const hasSubChildren = !!sub.children;
+                                                                const isPtSubHovered = sub.id === 'pt' && ['week1', 'week2'].includes(hoveredNode || '');
+                                                                const isSubHighlighted = subHovered || isPtSubHovered;
 
                                                                 return (
-                                                                    <motion.div
-                                                                        key={sub.id}
-                                                                        data-id={sub.id}
-                                                                        onMouseEnter={() => setHoveredNode(sub.id)}
-                                                                        onMouseLeave={() => setHoveredNode(null)}
-                                                                        onClick={() => {
-                                                                            if (isSubConnected && sub.clickable) {
-                                                                                if (sub.id === 'week') onOpenSideProject();
-                                                                                else if (sub.id === 'main') onOpenMainPoster();
-                                                                                else if (sub.id === 'app') onOpenApp();
-                                                                            }
-                                                                        }}
-                                                                        style={{
-                                                                            fontSize: '18px', 
-                                                                            lineHeight: 1.2,
-                                                                            fontWeight: sub.clickable && isSubConnected ? 500 : 400,
-                                                                            textAlign: 'center',
-                                                                            whiteSpace: 'pre-line',
-                                                                            padding: '4px 8px',
-                                                                            background: '#fff',
-                                                                            cursor: isSubConnected && sub.clickable ? 'pointer' : 'default',
-                                                                            opacity: isSubDimmed ? 0.3 : 1, // Full opacity when parent connects and not otherwise dimmed!
-                                                                            color: subHovered && sub.clickable && isSubConnected ? '#E74C3C' : '#111',
-                                                                            transition: 'opacity 0.4s ease, color 0.3s',
-                                                                            userSelect: 'none',
-                                                                        }}
-                                                                    >
-                                                                        {sub.label}
-                                                                    </motion.div>
+                                                                    <div key={sub.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+                                                                        <motion.div
+                                                                            data-id={sub.id}
+                                                                            onMouseEnter={() => setHoveredNode(sub.id)}
+                                                                            onMouseLeave={() => setHoveredNode(null)}
+                                                                            onPointerDown={(e) => hasSubChildren && isSubConnected && handleDragStart(e, sub.id)}
+                                                                            onClick={() => {
+                                                                                if (isSubConnected && sub.clickable) {
+                                                                                    if (sub.id === 'main') onOpenMainPoster();
+                                                                                    else if (sub.id === 'app') onOpenApp();
+                                                                                }
+                                                                            }}
+                                                                            style={{
+                                                                                fontSize: '18px',
+                                                                                lineHeight: 1.2,
+                                                                                fontWeight: (sub.clickable || hasSubChildren) && isSubConnected ? 500 : 400,
+                                                                                textAlign: 'center',
+                                                                                whiteSpace: 'pre-line',
+                                                                                padding: '4px 8px',
+                                                                                background: '#fff',
+                                                                                cursor: isSubConnected && sub.clickable ? 'pointer' : (hasSubChildren && isSubConnected ? 'grab' : 'default'),
+                                                                                opacity: isSubDimmed ? 0.3 : 1,
+                                                                                color: isSubHighlighted && isSubConnected ? '#E74C3C' : '#111',
+                                                                                transition: 'opacity 0.4s ease, color 0.3s',
+                                                                                userSelect: 'none',
+                                                                            }}
+                                                                        >
+                                                                            {sub.label}
+                                                                        </motion.div>
+
+                                                                        {/* Level 5: PT children (week1, week2) */}
+                                                                        {sub.children && (
+                                                                            <div style={{
+                                                                                display: 'flex',
+                                                                                gap: '1.5rem',
+                                                                                position: 'absolute',
+                                                                                top: '100%',
+                                                                                marginTop: '8vh',
+                                                                                left: '50%',
+                                                                                transform: 'translateX(-50%)',
+                                                                                whiteSpace: 'nowrap',
+                                                                                opacity: isSubConnected ? 1 : 0,
+                                                                                pointerEvents: isSubConnected ? 'auto' : 'none',
+                                                                                transition: 'opacity 0.6s ease',
+                                                                                zIndex: 1,
+                                                                            }}>
+                                                                                {sub.children?.map((leaf: NodeItem) => {
+                                                                                    const leafHovered = hoveredNode === leaf.id;
+                                                                                    const isLeafConnected = connectedNodes.includes(leaf.id);
+                                                                                    const isLeafDimmed = hoveredNode && hoveredNode !== leaf.id && hoveredNode !== 'root' && hoveredNode !== 'sp' && hoveredNode !== 'vcd' && hoveredNode !== 'pt';
+
+                                                                                    return (
+                                                                                        <motion.div
+                                                                                            key={leaf.id}
+                                                                                            data-id={leaf.id}
+                                                                                            onMouseEnter={() => setHoveredNode(leaf.id)}
+                                                                                            onMouseLeave={() => setHoveredNode(null)}
+                                                                                            onClick={() => {
+                                                                                                if (isLeafConnected && leaf.clickable) {
+                                                                                                    if (leaf.id === 'week1') onOpenSideProject();
+                                                                                                    else if (leaf.id === 'week2') onOpenSideProject2();
+                                                                                                }
+                                                                                            }}
+                                                                                            style={{
+                                                                                                fontSize: '16px',
+                                                                                                lineHeight: 1.2,
+                                                                                                fontWeight: leaf.clickable && isLeafConnected ? 500 : 400,
+                                                                                                textAlign: 'center',
+                                                                                                whiteSpace: 'pre-line',
+                                                                                                padding: '4px 8px',
+                                                                                                background: '#fff',
+                                                                                                cursor: isLeafConnected && leaf.clickable ? 'pointer' : 'default',
+                                                                                                opacity: isLeafDimmed ? 0.3 : 1,
+                                                                                                color: leafHovered && leaf.clickable && isLeafConnected ? '#E74C3C' : '#111',
+                                                                                                transition: 'opacity 0.4s ease, color 0.3s',
+                                                                                                userSelect: 'none',
+                                                                                            }}
+                                                                                        >
+                                                                                            {leaf.label}
+                                                                                        </motion.div>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
                                                                 );
                                                             })}
                                                         </div>

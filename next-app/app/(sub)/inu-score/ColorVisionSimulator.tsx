@@ -1,6 +1,7 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import ColorMirroring from './ColorMirroring';
 
 type FilterType = 'normal' | 'protanopia' | 'deuteranopia' | 'tritanopia';
 
@@ -8,42 +9,15 @@ type ColorVisionSimulatorProps = {
     onClose: () => void;
 };
 
-// TouchDesigner-style: Sight node on left, target nodes stacked on right
-// SVG coordinate space: 320 × 260
-const SVG_W = 320;
-const SVG_H = 280;
-
-const NODE_W = 80;
-const NODE_H = 26;
-
-// Sight node center
-const SIGHT = { x: 60, y: SVG_H / 2 };
-
-// Target nodes — stacked vertically to the right
-const TARGETS: { id: FilterType; label: string; desc: string; y: number }[] = [
-    { id: 'normal',       label: 'C',  desc: 'Normal',       y: 70  },
-    { id: 'protanopia',   label: 'P',  desc: 'Protanopia',   y: 120 },
-    { id: 'deuteranopia', label: 'D',  desc: 'Deuteranopia', y: 170 },
-    { id: 'tritanopia',   label: 'T',  desc: 'Tritanopia',   y: 220 },
-];
-const TARGET_X = 210; // center-x of target nodes
-
-// Port positions
-const sightOutputPort = { x: SIGHT.x + NODE_W / 2, y: SIGHT.y };
-const targetInputX = TARGET_X - NODE_W / 2;
-
-// Bezier from source to target: horizontal S-curve (TouchDesigner style)
-function bezier(x1: number, y1: number, x2: number, y2: number) {
-    const cx = (x1 + x2) / 2;
-    return `M ${x1} ${y1} C ${cx} ${y1}, ${cx} ${y2}, ${x2} ${y2}`;
-}
+const FILTERS: (FilterType | 'video' | 'mirroring')[] = ['normal', 'protanopia', 'deuteranopia', 'tritanopia', 'video', 'mirroring'];
+const LABELS = ['Common (C)', 'Protanopia (P)', 'Deuteranopia (D)', 'Tritanopia (T)', 'Colour Changes (V)', 'Live Mirroring'];
 
 export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorProps) {
-    const [activeFilter, setActiveFilter] = useState<FilterType>('normal');
-    const [dragging, setDragging] = useState(false);
-    const [dragPos, setDragPos] = useState({ x: sightOutputPort.x, y: sightOutputPort.y });
-    const [hoveredNode, setHoveredNode] = useState<FilterType | null>(null);
-    const svgRef = useRef<SVGSVGElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const isAnimating = useRef(false);
+
+    const activeFilter = FILTERS[activeIndex];
 
     const getFilterStyle = (filter: FilterType) => {
         switch (filter) {
@@ -54,48 +28,117 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
         }
     };
 
-    const toSVGCoords = useCallback((clientX: number, clientY: number) => {
-        const svg = svgRef.current;
-        if (!svg) return { x: clientX, y: clientY };
-        const rect = svg.getBoundingClientRect();
-        return {
-            x: (clientX - rect.left) * (SVG_W / rect.width),
-            y: (clientY - rect.top)  * (SVG_H / rect.height),
-        };
-    }, []);
+    // Keyboard and Wheel Interception
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
 
-    const onPortDown = (e: React.PointerEvent<SVGCircleElement>) => {
-        e.currentTarget.setPointerCapture(e.pointerId);
-        setDragging(true);
-        setDragPos(toSVGCoords(e.clientX, e.clientY));
-    };
-
-    const onSVGPointerMove = useCallback((e: React.PointerEvent<SVGSVGElement>) => {
-        if (!dragging) return;
-        const pos = toSVGCoords(e.clientX, e.clientY);
-        setDragPos(pos);
-
-        let hit: FilterType | null = null;
-        for (const t of TARGETS) {
-            const dx = pos.x - TARGET_X;
-            const dy = pos.y - t.y;
-            if (Math.abs(dx) < NODE_W / 2 + 16 && Math.abs(dy) < NODE_H / 2 + 12) {
-                hit = t.id;
-                break;
+        const handleWheel = (e: WheelEvent) => {
+            if (isAnimating.current) {
+                e.preventDefault();
+                return;
             }
-        }
-        setHoveredNode(hit);
-    }, [dragging, toSVGCoords]);
 
-    const onSVGPointerUp = useCallback(() => {
-        if (dragging && hoveredNode) setActiveFilter(hoveredNode);
-        setDragging(false);
-        setHoveredNode(null);
-        setDragPos({ x: sightOutputPort.x, y: sightOutputPort.y });
-    }, [dragging, hoveredNode]);
+            const atTop = container.scrollTop <= 10;
+            
+            if (atTop) {
+                if (e.deltaY > 30) {
+                    if (activeIndex < 5) {
+                        e.preventDefault();
+                        isAnimating.current = true;
+                        setActiveIndex(i => i + 1);
+                        setTimeout(() => isAnimating.current = false, 600);
+                    }
+                } else if (e.deltaY < -30) {
+                    if (activeIndex > 0) {
+                        e.preventDefault();
+                        isAnimating.current = true;
+                        setActiveIndex(i => i - 1);
+                        setTimeout(() => isAnimating.current = false, 600);
+                    }
+                }
+            }
+        };
+
+        container.addEventListener('wheel', handleWheel, { passive: false });
+        return () => container.removeEventListener('wheel', handleWheel);
+    }, [activeIndex]);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            const container = scrollContainerRef.current;
+            if (!container) return;
+            const atTop = container.scrollTop <= 10;
+
+            if (atTop) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    if (activeIndex < 5) {
+                        e.preventDefault(); // Stop screen from scrolling downwards
+                        if (isAnimating.current) return; // Discard rapid inputs
+                        isAnimating.current = true;
+                        setActiveIndex(i => i + 1);
+                        setTimeout(() => isAnimating.current = false, 600);
+                    }
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    if (activeIndex > 0) {
+                        e.preventDefault(); // Stop screen from scrolling upwards
+                        if (isAnimating.current) return; // Discard rapid inputs
+                        isAnimating.current = true;
+                        setActiveIndex(i => i - 1);
+                        setTimeout(() => isAnimating.current = false, 600);
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault(); // Stop bouncing at top
+                    }
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown, { passive: false });
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [activeIndex]);
+
+    // Touch events for mobile
+    const touchStart = useRef(0);
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
+
+        const handleTouchStart = (e: TouchEvent) => {
+            touchStart.current = e.touches[0].clientY;
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            if (isAnimating.current) {
+                e.preventDefault();
+                return;
+            }
+            const atTop = container.scrollTop <= 10;
+            if (atTop) {
+                const diff = touchStart.current - e.touches[0].clientY;
+                if (diff > 50 && activeIndex < 5) {
+                    e.preventDefault();
+                    isAnimating.current = true;
+                    setActiveIndex(i => i + 1);
+                    setTimeout(() => isAnimating.current = false, 600);
+                } else if (diff < -50 && activeIndex > 0) {
+                    e.preventDefault();
+                    isAnimating.current = true;
+                    setActiveIndex(i => i - 1);
+                    setTimeout(() => isAnimating.current = false, 600);
+                }
+            }
+        };
+
+        container.addEventListener('touchstart', handleTouchStart, { passive: true });
+        container.addEventListener('touchmove', handleTouchMove, { passive: false });
+        return () => {
+            container.removeEventListener('touchstart', handleTouchStart);
+            container.removeEventListener('touchmove', handleTouchMove);
+        };
+    }, [activeIndex]);
 
     return (
-        <div style={{ width: '100%', backgroundColor: '#fff', overflowY: 'auto' }}>
+        <div ref={scrollContainerRef} style={{ width: '100%', height: '100%', backgroundColor: '#fff', overflowY: 'auto' }}>
             {/* Color matrix filters */}
             <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}>
                 <defs>
@@ -150,107 +193,50 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
                     </button>
                 </div>
 
-                {/* Poster Image */}
-                <img
-                    src="/inu-score/sideproject_poster.jpg"
-                    alt="Main Poster — Color Vision Simulation"
-                    style={{
-                        maxWidth: '100%', maxHeight: '100%', objectFit: 'contain',
-                        filter: getFilterStyle(activeFilter),
-                        transition: 'filter 0.35s ease-out',
-                        boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-                        borderRadius: '4px',
-                    }}
-                />
+                {/* Poster Image, Video, or Live Mirroring */}
+                {activeFilter === 'mirroring' ? (
+                    <div style={{ width: '100%', height: '100%', padding: '2rem 50px', boxSizing: 'border-box' }}>
+                        <ColorMirroring />
+                    </div>
+                ) : activeFilter === 'video' ? (
+                    <video
+                        src="/inu-score/colour_changes.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        style={{
+                            maxWidth: '100%', maxHeight: '100%', objectFit: 'contain',
+                            boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+                            borderRadius: '4px',
+                        }}
+                    />
+                ) : (
+                    <img
+                        src="/inu-score/sideproject_poster_app_final.jpg"
+                        alt="Main Poster — Color Vision Simulation"
+                        style={{
+                            maxWidth: '100%', maxHeight: '100%', objectFit: 'contain',
+                            filter: getFilterStyle(activeFilter as FilterType),
+                            transition: 'filter 0.35s ease-out',
+                            boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+                            borderRadius: '4px',
+                        }}
+                    />
+                )}
 
-                {/* ── TouchDesigner-style Node Graph (bottom-left, aligned to poster bottom) ── */}
+                {/* ── State Indicator (Replaces Node Graph) ── */}
                 <div style={{
                     position: 'absolute',
                     bottom: '2rem',
                     left: '50px',
-                    width: `${SVG_W}px`,
                     zIndex: 100,
                     userSelect: 'none',
+                    fontSize: '18px',
+                    color: '#666',
+                    fontFamily: '"Pretendard", sans-serif',
                 }}>
-                    <svg
-                        ref={svgRef}
-                        viewBox={`0 0 ${SVG_W} ${SVG_H}`}
-                        style={{ width: '100%', height: `${SVG_H}px`, overflow: 'visible', cursor: dragging ? 'grabbing' : 'default' }}
-                        onPointerMove={onSVGPointerMove}
-                        onPointerUp={onSVGPointerUp}
-                        onPointerLeave={onSVGPointerUp}
-                    >
-                        {/* Static bezier connections to each target */}
-                        {TARGETS.map(t => {
-                            const isActive = activeFilter === t.id;
-                            return (
-                                <path
-                                    key={`conn-${t.id}`}
-                                    d={bezier(sightOutputPort.x, sightOutputPort.y, targetInputX, t.y)}
-                                    fill="none"
-                                    stroke="#111"
-                                    strokeWidth={1}
-                                    opacity={isActive ? 1 : 0.18}
-                                />
-                            );
-                        })}
-
-                        {/* Live drag line */}
-                        {dragging && (
-                            <path
-                                d={bezier(sightOutputPort.x, sightOutputPort.y, dragPos.x, dragPos.y)}
-                                fill="none"
-                                stroke="#111"
-                                strokeWidth={1}
-                                strokeLinecap="round"
-                            />
-                        )}
-
-                        {/* Sight: text + output port only */}
-                        <text
-                            x={SIGHT.x - NODE_W / 2 + 4} y={SIGHT.y}
-                            textAnchor="start" dominantBaseline="central"
-                            fontSize="12" fontFamily="Helvetica Neue, sans-serif" fill="#111"
-                            style={{ pointerEvents: 'none' }}
-                        >
-                            Sight
-                        </text>
-                        {/* Output port */}
-                        <circle
-                            cx={sightOutputPort.x} cy={sightOutputPort.y}
-                            r={4}
-                            fill="#111"
-                            style={{ cursor: 'crosshair' }}
-                            onPointerDown={onPortDown}
-                        />
-
-                        {/* Target nodes: input dot + text, opacity-controlled */}
-                        {TARGETS.map(t => {
-                            const isActive = activeFilter === t.id;
-                            const isHovered = hoveredNode === t.id;
-                            return (
-                                <g key={t.id} opacity={isActive ? 1 : 0.5}>
-                                    {/* Input port */}
-                                    <circle
-                                        cx={targetInputX} cy={t.y}
-                                        r={4}
-                                        fill={isHovered ? '#555' : '#111'}
-                                        style={{ pointerEvents: 'none' }}
-                                    />
-                                    {/* Label */}
-                                    <text
-                                        x={targetInputX + 12} y={t.y}
-                                        textAnchor="start" dominantBaseline="central"
-                                        fontSize="12" fontFamily="Helvetica Neue, sans-serif"
-                                        fill="#111"
-                                        style={{ pointerEvents: 'none' }}
-                                    >
-                                        {t.label} — {t.desc}
-                                    </text>
-                                </g>
-                            );
-                        })}
-                    </svg>
+                    {LABELS[activeIndex]}
                 </div>
             </div>
 
