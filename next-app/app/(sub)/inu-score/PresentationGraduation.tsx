@@ -332,7 +332,7 @@ export default function PresentationGraduation({ onClose }: PresentationGraduati
 
                     {/* Book Component */}
                     <div style={{ width: '90%', maxWidth: '1200px', height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {/* @ts-ignore */}
+                        {/* @ts-expect-error */}
                         <HTMLFlipBook
                             width={450}
                             height={600}
