@@ -6,6 +6,7 @@ type NodeGraphProps = {
     onOpenSideProject2: () => void;
     onOpenMainPoster: () => void;
     onOpenApp: () => void;
+    onOpenGraduation: () => void;
     connectedNodes: string[];
     setConnectedNodes: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -43,14 +44,20 @@ const nodesData: NodeItem[] = [
                     },
                 ]
             },
-            { id: 'gp', label: 'Graduation Project' },
+            {
+                id: 'gp',
+                label: 'Graduation Project',
+                children: [
+                    { id: 'gp_pt1', label: '1st PT', clickable: true },
+                ]
+            },
         ]
     },
 ];
 
 type Pos = { x: number, y: number };
 
-export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, connectedNodes, setConnectedNodes }: NodeGraphProps) {
+export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, connectedNodes, setConnectedNodes }: NodeGraphProps) {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [dragLine, setDragLine] = useState<{ active: boolean, x: number, y: number, sourceId: string } | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -103,7 +110,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                 // Possible targets depending on source
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
-                        dragLine.sourceId === 'pt' ? ['week1', 'week2'] : [];
+                        dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
+                            dragLine.sourceId === 'gp' ? ['gp_pt1'] : [];
 
                 possibleTargets.forEach((id) => {
                     const target = positions[id];
@@ -126,7 +134,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
 
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
-                        dragLine.sourceId === 'pt' ? ['week1', 'week2'] : [];
+                        dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
+                            dragLine.sourceId === 'gp' ? ['gp_pt1'] : [];
 
                 if (hoveredNode && possibleTargets.includes(hoveredNode)) {
                     targetId = hoveredNode;
@@ -150,7 +159,14 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
 
                 if (targetId) {
                     if (!connectedNodes.includes(targetId)) {
-                        setConnectedNodes(prev => [...prev, targetId!]);
+                        setConnectedNodes(prev => {
+                            const next = [...prev, targetId!];
+                            // auto-connect gp when gp_pt1 is connected
+                            if (targetId === 'gp_pt1' && !prev.includes('gp')) {
+                                next.push('gp');
+                            }
+                            return next;
+                        });
                     }
                     if (targetId === 'week1') {
                         setTimeout(() => onOpenSideProject(), 400);
@@ -160,6 +176,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         setTimeout(() => onOpenMainPoster(), 400);
                     } else if (targetId === 'app') {
                         setTimeout(() => onOpenApp(), 400);
+                    } else if (targetId === 'gp_pt1') {
+                        setTimeout(() => onOpenGraduation(), 400);
                     }
                 }
 
@@ -183,8 +201,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
         // Only left mouse or touch
         if (e.button !== 0 && e.nativeEvent.type !== 'touchstart') return;
 
-        // Ensure source node itself is connected or is root/vcd! 
-        if (sourceId !== 'vcd' && !connectedNodes.includes(sourceId)) return;
+        // Ensure source node itself is connected or is root/vcd/gp! 
+        if (sourceId !== 'vcd' && sourceId !== 'gp' && !connectedNodes.includes(sourceId)) return;
 
         e.preventDefault();
 
@@ -205,8 +223,9 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
         const isVcdHovered = hoveredNode === 'vcd' && (targetId === 'sp' || targetId === 'gp');
         const isSpHovered = hoveredNode === 'sp' && ['main', 'app', 'pt'].includes(targetId);
         const isPtHovered = hoveredNode === 'pt' && ['week1', 'week2'].includes(targetId);
+        const isGpHovered = hoveredNode === 'gp' && ['gp_pt1'].includes(targetId);
 
-        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered;
+        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered || isGpHovered;
 
         // TouchDesigner Style Smooth Cubic Bezier Curve (Vertical flowing)
         const dY = Math.abs(target.y - source.y) * 0.5;
@@ -281,6 +300,9 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         {/* PT to its children (only if connected) */}
                         {connectedNodes.includes('week1') && renderLink('pt', 'week1')}
                         {connectedNodes.includes('week2') && renderLink('pt', 'week2')}
+
+                        {/* GP to its children (only if connected) */}
+                        {connectedNodes.includes('gp_pt1') && renderLink('gp', 'gp_pt1')}
 
                         {/* Interactive Drag Wire */}
                         {renderDragWire()}
@@ -358,7 +380,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                             const isDimmed = !isConnected || (hoveredNode && hoveredNode !== child.id && hoveredNode !== 'root' && hoveredNode !== 'vcd');
                                             const hasSubChildren = !!child.children;
                                             const isSpHovered = child.id === 'sp' && ['main', 'app', 'pt'].includes(hoveredNode || '');
-                                            const isSpHighlighted = childHovered || isSpHovered;
+                                            const isGpChildHovered = child.id === 'gp' && ['gp_pt1'].includes(hoveredNode || '');
+                                            const isSpHighlighted = childHovered || isSpHovered || isGpChildHovered;
 
                                             return (
                                                 <div key={child.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
@@ -412,7 +435,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                                             {child.children?.map((sub: NodeItem) => {
                                                                 const subHovered = hoveredNode === sub.id;
                                                                 const isSubConnected = connectedNodes.includes(sub.id);
-                                                                const isSubDimmed = hoveredNode && hoveredNode !== sub.id && hoveredNode !== 'root' && hoveredNode !== 'sp' && hoveredNode !== 'vcd';
+                                                                const isSubDimmed = hoveredNode && hoveredNode !== sub.id && hoveredNode !== 'root' && hoveredNode !== 'sp' && hoveredNode !== 'gp' && hoveredNode !== 'vcd';
                                                                 const hasSubChildren = !!sub.children;
                                                                 const isPtSubHovered = sub.id === 'pt' && ['week1', 'week2'].includes(hoveredNode || '');
                                                                 const isSubHighlighted = subHovered || isPtSubHovered;
@@ -428,6 +451,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                                                                 if (isSubConnected && sub.clickable) {
                                                                                     if (sub.id === 'main') onOpenMainPoster();
                                                                                     else if (sub.id === 'app') onOpenApp();
+                                                                                    else if (sub.id === 'gp_pt1') onOpenGraduation();
                                                                                 }
                                                                             }}
                                                                             style={{

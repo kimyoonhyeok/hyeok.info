@@ -8,6 +8,7 @@ import ColorConfusionGraphic from "./ColorConfusionGraphic";
 import NodeGraph from "./NodeGraph";
 import ColorVisionSimulator from "./ColorVisionSimulator";
 import PresentationWeek2 from "./PresentationWeek2";
+import PresentationGraduation from "./PresentationGraduation";
 import styles from "./pt.module.css";
 
 const REF_LIST = [
@@ -44,7 +45,7 @@ const REF_LIST = [
 ];
 
 export default function PresentationPage() {
-    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app'>('graph');
+    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app' | 'graduation'>('graph');
     const [connectedNodes, setConnectedNodes] = useState<string[]>([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [subSlide, setSubSlide] = useState(0);
@@ -68,6 +69,10 @@ export default function PresentationPage() {
             return;
         }
         if (view === 'presentation2') {
+            document.body.style.overflow = 'hidden';
+            return;
+        }
+        if (view === 'graduation') {
             document.body.style.overflow = 'hidden';
             return;
         }
@@ -207,6 +212,7 @@ export default function PresentationPage() {
             onOpenSideProject2={() => setView('presentation2')}
             onOpenMainPoster={() => setView('poster')}
             onOpenApp={() => setView('app')}
+            onOpenGraduation={() => setView('graduation')}
             connectedNodes={connectedNodes}
             setConnectedNodes={setConnectedNodes}
         />;
@@ -218,6 +224,10 @@ export default function PresentationPage() {
 
     if (view === 'presentation2') {
         return <PresentationWeek2 onClose={() => setView('graph')} onOpenMainPoster={() => setView('poster')} onOpenApp={() => setView('app')} />;
+    }
+
+    if (view === 'graduation') {
+        return <PresentationGraduation onClose={() => setView('graph')} />;
     }
 
     if (view === 'poster') {
