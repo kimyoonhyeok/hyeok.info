@@ -9,6 +9,7 @@ import NodeGraph from "./NodeGraph";
 import ColorVisionSimulator from "./ColorVisionSimulator";
 import PresentationWeek2 from "./PresentationWeek2";
 import PresentationGraduation from "./PresentationGraduation";
+import PresentationInfographic from "./PresentationInfographic";
 import styles from "./pt.module.css";
 
 const REF_LIST = [
@@ -44,8 +45,11 @@ const REF_LIST = [
     },
 ];
 
+import { useRouter } from "next/navigation";
+
 export default function PresentationPage() {
-    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app' | 'graduation'>('graph');
+    const router = useRouter();
+    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app' | 'graduation' | 'infographic'>('graph');
     const [connectedNodes, setConnectedNodes] = useState<string[]>([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [subSlide, setSubSlide] = useState(0);
@@ -73,6 +77,10 @@ export default function PresentationPage() {
             return;
         }
         if (view === 'graduation') {
+            document.body.style.overflow = 'hidden';
+            return;
+        }
+        if (view === 'infographic') {
             document.body.style.overflow = 'hidden';
             return;
         }
@@ -213,6 +221,7 @@ export default function PresentationPage() {
             onOpenMainPoster={() => setView('poster')}
             onOpenApp={() => setView('app')}
             onOpenGraduation={() => setView('graduation')}
+            onOpenInfographic={() => router.push('/infographic')}
             connectedNodes={connectedNodes}
             setConnectedNodes={setConnectedNodes}
         />;
@@ -228,6 +237,10 @@ export default function PresentationPage() {
 
     if (view === 'graduation') {
         return <PresentationGraduation onClose={() => setView('graph')} />;
+    }
+
+    if (view === 'infographic') {
+        return <PresentationInfographic onClose={() => setView('graph')} />;
     }
 
     if (view === 'poster') {
@@ -265,7 +278,7 @@ export default function PresentationPage() {
                     &larr; Back
                 </button>
                 <img
-                    src="/inu-score/sideproject_poster_final.jpg"
+                    src="/inu-score/visual communication design/sideproject/sideproject_poster_final.jpg"
                     alt="Main Poster"
                     style={{
                         maxWidth: '100%',
@@ -545,7 +558,7 @@ export default function PresentationPage() {
                             </div>
                             <div className={styles.chapterRight}>
                                 <img
-                                    src="/inu-score/sideproject_poster_final.jpg"
+                                    src="/inu-score/visual communication design/sideproject/sideproject_poster_final.jpg"
                                     alt="Poster Sketch"
                                     onClick={() => setIsPosterExpanded(true)}
                                     style={{
@@ -599,7 +612,7 @@ export default function PresentationPage() {
                     }}
                 >
                     <img
-                        src="/inu-score/sideproject_poster_final.jpg"
+                        src="/inu-score/visual communication design/sideproject/sideproject_poster_final.jpg"
                         alt="Poster Sketch Expanded"
                         style={{
                             maxWidth: '1000px',

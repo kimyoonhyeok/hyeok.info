@@ -7,6 +7,7 @@ type NodeGraphProps = {
     onOpenMainPoster: () => void;
     onOpenApp: () => void;
     onOpenGraduation: () => void;
+    onOpenInfographic: () => void;
     connectedNodes: string[];
     setConnectedNodes: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -22,7 +23,7 @@ type NodeItem = {
 const nodesData: NodeItem[] = [
     { id: 'root', label: '4-1', isRoot: true },
     { id: 'n1', label: 'Design of Level' },
-    { id: 'n2', label: 'Infographic' },
+    { id: 'n2', label: 'Infographic', children: [{ id: 'infographic_pt1', label: '1st PT', clickable: true }] },
     { id: 'n3', label: 'Layout Design' },
     { id: 'n4', label: 'Typo and Image' },
     { id: 'n5', label: 'Contemporary\nFashion Contents' },
@@ -57,7 +58,7 @@ const nodesData: NodeItem[] = [
 
 type Pos = { x: number, y: number };
 
-export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, connectedNodes, setConnectedNodes }: NodeGraphProps) {
+export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, onOpenInfographic, connectedNodes, setConnectedNodes }: NodeGraphProps) {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [dragLine, setDragLine] = useState<{ active: boolean, x: number, y: number, sourceId: string } | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -111,7 +112,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
-                            dragLine.sourceId === 'gp' ? ['gp_pt1'] : [];
+                            dragLine.sourceId === 'gp' ? ['gp_pt1'] :
+                                dragLine.sourceId === 'n2' ? ['infographic_pt1'] : [];
 
                 possibleTargets.forEach((id) => {
                     const target = positions[id];
@@ -135,7 +137,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
-                            dragLine.sourceId === 'gp' ? ['gp_pt1'] : [];
+                            dragLine.sourceId === 'gp' ? ['gp_pt1'] :
+                                dragLine.sourceId === 'n2' ? ['infographic_pt1'] : [];
 
                 if (hoveredNode && possibleTargets.includes(hoveredNode)) {
                     targetId = hoveredNode;
@@ -165,6 +168,9 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                             if (targetId === 'gp_pt1' && !prev.includes('gp')) {
                                 next.push('gp');
                             }
+                            if (targetId === 'infographic_pt1' && !prev.includes('n2')) {
+                                next.push('n2');
+                            }
                             return next;
                         });
                     }
@@ -178,6 +184,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         setTimeout(() => onOpenApp(), 400);
                     } else if (targetId === 'gp_pt1') {
                         setTimeout(() => onOpenGraduation(), 400);
+                    } else if (targetId === 'infographic_pt1') {
+                        setTimeout(() => onOpenInfographic(), 400);
                     }
                 }
 
@@ -201,8 +209,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
         // Only left mouse or touch
         if (e.button !== 0 && e.nativeEvent.type !== 'touchstart') return;
 
-        // Ensure source node itself is connected or is root/vcd/gp! 
-        if (sourceId !== 'vcd' && sourceId !== 'gp' && !connectedNodes.includes(sourceId)) return;
+        // Ensure source node itself is connected or is root/vcd/gp/n2! 
+        if (sourceId !== 'vcd' && sourceId !== 'gp' && sourceId !== 'n2' && !connectedNodes.includes(sourceId)) return;
 
         e.preventDefault();
 
@@ -224,8 +232,9 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
         const isSpHovered = hoveredNode === 'sp' && ['main', 'app', 'pt'].includes(targetId);
         const isPtHovered = hoveredNode === 'pt' && ['week1', 'week2'].includes(targetId);
         const isGpHovered = hoveredNode === 'gp' && ['gp_pt1'].includes(targetId);
+        const isN2Hovered = hoveredNode === 'n2' && ['infographic_pt1'].includes(targetId);
 
-        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered || isGpHovered;
+        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered || isGpHovered || isN2Hovered;
 
         // TouchDesigner Style Smooth Cubic Bezier Curve (Vertical flowing)
         const dY = Math.abs(target.y - source.y) * 0.5;
@@ -304,6 +313,9 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         {/* GP to its children (only if connected) */}
                         {connectedNodes.includes('gp_pt1') && renderLink('gp', 'gp_pt1')}
 
+                        {/* n2 to its children */}
+                        {connectedNodes.includes('infographic_pt1') && renderLink('n2', 'infographic_pt1')}
+
                         {/* Interactive Drag Wire */}
                         {renderDragWire()}
                     </AnimatePresence>
@@ -358,7 +370,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                         background: '#fff',
                                         cursor: hasChildren ? 'grab' : 'default',
                                         opacity: dim ? 0.3 : 1,
-                                        color: isHovered ? '#E74C3C' : '#111',
+                                        color: isHovered || (node.id === 'n2' && hoveredNode === 'infographic_pt1') ? '#E74C3C' : '#111',
                                         transition: 'opacity 0.3s, color 0.3s',
                                         userSelect: 'none',
                                         position: 'relative',
@@ -377,7 +389,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                         {node.children?.map((child: NodeItem) => {
                                             const childHovered = hoveredNode === child.id;
                                             const isConnected = connectedNodes.includes(child.id);
-                                            const isDimmed = !isConnected || (hoveredNode && hoveredNode !== child.id && hoveredNode !== 'root' && hoveredNode !== 'vcd');
+                                            const isDimmed = !isConnected || (hoveredNode && hoveredNode !== child.id && hoveredNode !== 'root' && hoveredNode !== 'vcd' && hoveredNode !== 'n2');
                                             const hasSubChildren = !!child.children;
                                             const isSpHovered = child.id === 'sp' && ['main', 'app', 'pt'].includes(hoveredNode || '');
                                             const isGpChildHovered = child.id === 'gp' && ['gp_pt1'].includes(hoveredNode || '');
@@ -390,7 +402,10 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                                         onMouseEnter={() => setHoveredNode(child.id)}
                                                         onMouseLeave={() => setHoveredNode(null)}
                                                         onClick={() => {
-                                                            if (isConnected && child.clickable) onOpenSideProject();
+                                                            if (isConnected && child.clickable) {
+                                                                if (child.id === 'infographic_pt1') onOpenInfographic();
+                                                                else onOpenSideProject();
+                                                            }
                                                         }}
                                                         onPointerDown={(e) => hasSubChildren && handleDragStart(e, child.id)}
                                                         style={{

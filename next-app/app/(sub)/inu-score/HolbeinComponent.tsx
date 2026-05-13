@@ -32,7 +32,7 @@ const HolbeinComponent: React.FC = () => {
         <div className={styles.holbeinContainer} onClick={handleClick}>
             <div className={`${styles.canvasWrapper} ${viewState === 'ANAMORPHIC' ? styles.anamorphic : ''}`}>
                 <img 
-                    src="/inu-score/01.jpg" 
+                    src="/inu-score/visual communication design/sideproject/01.jpg" 
                     alt="The Ambassadors by Hans Holbein" 
                     className={styles.painting} 
                 />

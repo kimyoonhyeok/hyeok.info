@@ -90,12 +90,12 @@ export default function PresentationGraduation({ onClose }: PresentationGraduati
 
         // Page 2: 01.png (Right page, Cover)
         pages.push(
-            <BookPage key="p1" bgImage="/inu-score/graduation/01.png" bgPosition="center" bgSize="cover" />
+            <BookPage key="p1" bgImage="/inu-score/visual communication design/graduation/01.png" bgPosition="center" bgSize="cover" />
         );
 
         // Pages 2 to 21: 02.png to 11.png (Spreads)
         for (let i = 2; i <= 11; i++) {
-            const imgPath = `/inu-score/graduation/${String(i).padStart(2, '0')}.png`;
+            const imgPath = `/inu-score/visual communication design/graduation/${String(i).padStart(2, '0')}.png`;
             // Left half of the spread
             pages.push(
                 <BookPage key={`p${i}_left`} bgImage={imgPath} bgPosition="left center" bgSize="200% 100%" />
@@ -108,7 +108,7 @@ export default function PresentationGraduation({ onClose }: PresentationGraduati
 
         // Page 23: 12.png (Left page, Back Cover)
         pages.push(
-            <BookPage key="p22" bgImage="/inu-score/graduation/12.png" bgPosition="center" bgSize="cover" />
+            <BookPage key="p22" bgImage="/inu-score/visual communication design/graduation/12.png" bgPosition="center" bgSize="cover" />
         );
 
         // Page 24: Blank White Page (Right side of the back cover spread)
@@ -268,7 +268,7 @@ export default function PresentationGraduation({ onClose }: PresentationGraduati
                                         >
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img 
-                                                src="/inu-score/graduation/01.png" 
+                                                src="/inu-score/visual communication design/graduation/01.png" 
                                                 alt="Book Cover" 
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '2px' }} 
                                             />

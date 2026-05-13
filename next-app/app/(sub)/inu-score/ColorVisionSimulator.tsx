@@ -200,7 +200,7 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
                     </div>
                 ) : activeFilter === 'video' ? (
                     <video
-                        src="/inu-score/colour_changes.mp4"
+                        src="/inu-score/visual communication design/sideproject/colour_changes.mp4"
                         autoPlay
                         loop
                         muted
@@ -213,7 +213,7 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
                     />
                 ) : (
                     <img
-                        src="/inu-score/sideproject_poster_app_final.jpg"
+                        src="/inu-score/visual communication design/sideproject/sideproject_poster_app_final.jpg"
                         alt="Main Poster — Color Vision Simulation"
                         style={{
                             maxWidth: '100%', maxHeight: '100%', objectFit: 'contain',
