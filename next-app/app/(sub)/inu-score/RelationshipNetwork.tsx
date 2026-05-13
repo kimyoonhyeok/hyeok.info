@@ -318,9 +318,6 @@ const RELATIONS: Relation[] = [
 export default function RelationshipNetwork() {
     const [hoveredPerson, setHoveredPerson] = useState<string | null>(null);
 
-    const w = 1200;
-    const h = 550;
-
     const personMap = Object.fromEntries(PEOPLE.map(p => [p.id, p]));
 
     const isConnected = (personId: string) => {
