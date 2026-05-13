@@ -141,17 +141,24 @@ export default function PresentationGraduation({ onClose }: PresentationGraduati
 
                 {/* ── Side Navigation Indicator ───────────────────────────────── */}
                 <div className={styles.slideIndicators}>
-                    <div className={styles.indicatorsInner} style={{ transform: `translateY(${138 - currentSlide * 44}px)` }}>
+                    <div 
+                        className={styles.indicatorsInner}
+                        style={{ transform: `translateY(${-Math.max(0, Math.min(currentSlide - 2, Math.max(0, totalSlides - 6))) * 40}px)` }}
+                    >
                         {Array.from({ length: totalSlides }).map((_, idx) => {
-                            const absOffset = Math.abs(idx - currentSlide);
                             const isActive = idx === currentSlide;
+                            // Window start is activeIndex - 2, clamped
+                            const windowStart = Math.max(0, Math.min(currentSlide - 2, Math.max(0, totalSlides - 6)));
+                            const isVisible = totalSlides <= 6 || (idx >= windowStart && idx < windowStart + 6);
+                            
                             return (
                                 <div
                                     key={idx}
                                     className={`${styles.indicatorWrapper} ${isActive ? styles.active : ''}`}
-                                    style={{
-                                        transform: `translateX(-${Math.min(absOffset * absOffset * 2.5, 18)}px) scale(${isActive ? 1 : 0.85})`,
-                                        opacity: isActive ? 1 : 0.3,
+                                    style={{ 
+                                        opacity: isVisible ? (isActive ? 1 : 0.3) : 0,
+                                        pointerEvents: isVisible ? 'auto' : 'none',
+                                        visibility: isVisible ? 'visible' : 'hidden'
                                     }}
                                     onClick={() => setCurrentSlide(idx)}
                                 >

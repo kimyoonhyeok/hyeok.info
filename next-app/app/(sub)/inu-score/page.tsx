@@ -299,26 +299,21 @@ export default function PresentationPage() {
                 <div className={styles.slideIndicators}>
                     <div
                         className={styles.indicatorsInner}
-                        style={{
-                            transform: `translateY(${138 - currentSlide * 44}px)`,
-                        }}
+                        style={{ transform: `translateY(${-Math.max(0, Math.min(currentSlide - 2, totalSlides - 6)) * 40}px)` }}
                     >
                         {Array.from({ length: totalSlides }).map((_, idx) => {
-                            const offset = idx - currentSlide;
-                            const absOffset = Math.abs(offset);
                             const isActive = idx === currentSlide;
-                            // Keep original opacity & scale behavior
-                            const opacity = isActive ? 1 : 0.3;
-                            const scale = isActive ? 1 : 0.85;
-                            // Arc shift: quadratic X push so items trace a circular path
-                            const arcShiftX = Math.min(absOffset * absOffset * 2.5, 18);
+                            const windowStart = Math.max(0, Math.min(currentSlide - 2, totalSlides - 6));
+                            const isVisible = idx >= windowStart && idx < windowStart + 6;
+                            
                             return (
                                 <div
                                     key={idx}
-                                    className={`${styles.indicatorWrapper} ${isActive ? styles.active : ""}`}
-                                    style={{
-                                        transform: `translateX(-${arcShiftX}px) scale(${scale})`,
-                                        opacity,
+                                    className={`${styles.indicatorWrapper} ${isActive ? styles.active : ''}`}
+                                    style={{ 
+                                        opacity: isVisible ? (isActive ? 1 : 0.3) : 0,
+                                        pointerEvents: isVisible ? 'auto' : 'none',
+                                        visibility: isVisible ? 'visible' : 'hidden'
                                     }}
                                     onClick={() => {
                                         setCurrentSlide(idx);

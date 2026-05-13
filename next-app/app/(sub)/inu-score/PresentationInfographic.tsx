@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import styles from './pt.module.css';
 import DynamicTimelineChart from './DynamicTimelineChart';
 import DemographicChart from './DemographicChart';
@@ -15,7 +15,7 @@ const REF_LIST = [
     { id: 'ref3', ko: 'Chen Shou, Records of the Three Kingdoms (289 AD) & Luo Guanzhong, Romance of the Three Kingdoms (14th C.)' }
 ];
 
-// ── Shared paragraph style: keep-all + left-align, no hyphens ─────────────────────
+// ── Shared paragraph style ───────────────────────────────────────────────────
 const P: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <p style={{ textAlign: 'left', wordBreak: 'keep-all', overflowWrap: 'break-word', marginBottom: '1.2em', marginTop: 0, fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontWeight: 400 }}>
         {children}
@@ -27,12 +27,44 @@ interface PresentationInfographicProps {
 }
 
 export default function PresentationInfographic({ onClose }: PresentationInfographicProps) {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [subSlide, setSubSlide] = useState(0);
+    const [currentStep, setCurrentStep] = useState(0);
     const [activeRef, setActiveRef] = useState<string | null>(null);
     const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
-    const totalSlides = 18;
     const isScrolling = useRef(false);
+
+    // ── Step Mapping (22 Steps total) ──────────────────────────────────────────
+    const steps = useMemo(() => [
+        { s: 0, sub: 0 }, // 0: Title
+        { s: 1, sub: 0 }, // 1: TOC
+        { s: 2, sub: 0 }, // 2: Ch 1-1
+        { s: 2, sub: 1 }, // 3: Ch 1-2
+        { s: 3, sub: 0 }, // 4: Ch 2-1
+        { s: 3, sub: 1 }, // 5: Ch 2-2
+        { s: 4, sub: 0 }, // 6: Ch 3
+        { s: 5, sub: 0 }, // 7: Ch 4
+        { s: 6, sub: 0 }, // 8: Ch 5
+        { s: 7, sub: 0 }, // 9: Ch 6-1
+        { s: 7, sub: 1 }, // 10: Ch 6-2
+        { s: 8, sub: 0 }, // 11: Ch 7
+        { s: 9, sub: 0 }, // 12: Ch 8-1
+        { s: 9, sub: 1 }, // 13: Ch 8-2
+        { s: 10, sub: 0 }, // 14: Ch 9 Viz
+        { s: 11, sub: 0 }, // 15: Timeline Chart
+        { s: 12, sub: 0 }, // 16: Demographic Chart
+        { s: 13, sub: 0 }, // 17: Warlord Flow
+        { s: 14, sub: 0 }, // 18: Battle Bubble
+        { s: 15, sub: 0 }, // 19: Relationship Network
+        { s: 16, sub: 0 }, // 20: Territorial Map
+        { s: 17, sub: 0 }, // 21: Outro
+    ], []);
+
+    const totalSteps = steps.length;
+    const { s: currentSlide, sub: subSlide } = steps[currentStep];
+
+    // Ensure we start at step 0 on mount
+    useEffect(() => {
+        setCurrentStep(0);
+    }, []);
 
     // ── Wheel & Keyboard navigation ──────────────────────────────────────────
     useEffect(() => {
@@ -41,65 +73,28 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
             isScrolling.current = true;
 
             if (e.deltaY > 30) {
-                if (currentSlide === 7 && subSlide < 1) {
-                    setSubSlide(1);
-                } else if (currentSlide === 9 && subSlide < 1) {
-                    setSubSlide(1);
-                } else {
-                    setCurrentSlide(prev => {
-                        const next = Math.min(prev + 1, totalSlides - 1);
-                        if (prev !== next) setSubSlide(0);
-                        return next;
-                    });
-                }
+                setCurrentStep(prev => Math.min(prev + 1, totalSteps - 1));
             } else if (e.deltaY < -30) {
-                if (currentSlide === 7 && subSlide > 0) {
-                    setSubSlide(0);
-                } else if (currentSlide === 9 && subSlide > 0) {
-                    setSubSlide(0);
-                } else {
-                    setCurrentSlide(prev => {
-                        const next = Math.max(prev - 1, 0);
-                        if (next === 7) setSubSlide(1);
-                        else if (next === 9) setSubSlide(1);
-                        return next;
-                    });
-                }
+                setCurrentStep(prev => {
+                    if (prev === 0) onClose();
+                    return Math.max(prev - 1, 0);
+                });
             }
             setTimeout(() => { isScrolling.current = false; }, 800);
         };
 
         const handleKeyDown = (e: KeyboardEvent) => {
             if (isScrolling.current) return;
-            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
                 isScrolling.current = true;
-                if (currentSlide === 7 && subSlide < 1) {
-                    setSubSlide(1);
-                } else if (currentSlide === 9 && subSlide < 1) {
-                    setSubSlide(1);
-                } else {
-                    setCurrentSlide(prev => {
-                        const next = Math.min(prev + 1, totalSlides - 1);
-                        if (prev !== next) setSubSlide(0);
-                        return next;
-                    });
-                }
+                setCurrentStep(prev => Math.min(prev + 1, totalSteps - 1));
                 setTimeout(() => { isScrolling.current = false; }, 800);
             } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
                 isScrolling.current = true;
-                if (currentSlide === 7 && subSlide > 0) {
-                    setSubSlide(0);
-                } else if (currentSlide === 9 && subSlide > 0) {
-                    setSubSlide(0);
-                } else {
-                    setCurrentSlide(prev => {
-                        const next = Math.max(prev - 1, 0);
-                        if (next === 7) setSubSlide(1);
-                        else if (next === 9) setSubSlide(1);
-                        return next;
-                    });
-                }
+                setCurrentStep(prev => Math.max(prev - 1, 0));
                 setTimeout(() => { isScrolling.current = false; }, 800);
+            } else if (e.key === 'Escape') {
+                onClose();
             }
         };
 
@@ -109,7 +104,7 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
             window.removeEventListener('wheel', handleWheel);
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [currentSlide, subSlide]);
+    }, [onClose, totalSteps]);
 
     // ── Touch swipe ──────────────────────────────────────────────────────────
     const touchStart = useRef(0);
@@ -121,13 +116,9 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
             if (Math.abs(diff) > 50) {
                 isScrolling.current = true;
                 if (diff > 0) {
-                    if (currentSlide === 7 && subSlide < 1) { setSubSlide(1); }
-                    else if (currentSlide === 9 && subSlide < 1) { setSubSlide(1); }
-                    else { setCurrentSlide(prev => { const n = Math.min(prev + 1, totalSlides - 1); if (prev !== n) setSubSlide(0); return n; }); }
+                    setCurrentStep(prev => Math.min(prev + 1, totalSteps - 1));
                 } else {
-                    if (currentSlide === 7 && subSlide > 0) { setSubSlide(0); }
-                    else if (currentSlide === 9 && subSlide > 0) { setSubSlide(0); }
-                    else { setCurrentSlide(prev => { const n = Math.max(prev - 1, 0); if (n === 7) setSubSlide(1); else if (n === 9) setSubSlide(1); return n; }); }
+                    setCurrentStep(prev => Math.max(prev - 1, 0));
                 }
                 setTimeout(() => { isScrolling.current = false; }, 800);
             }
@@ -138,7 +129,7 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
             window.removeEventListener('touchstart', handleTouchStart);
             window.removeEventListener('touchend', handleTouchEnd);
         };
-    }, [currentSlide, subSlide]);
+    }, [totalSteps]);
 
     return (
         <div className={styles.ptContainer}>
@@ -175,22 +166,30 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
 
             {/* ── Side Navigation Indicator ───────────────────────────────── */}
             <div className={styles.slideIndicators}>
-                <div
+                <div 
                     className={styles.indicatorsInner}
-                    style={{ transform: `translateY(${138 - currentSlide * 44}px)` }}
+                    style={{ transform: `translateY(${-Math.max(0, Math.min(currentSlide - 2, 18 - 6)) * 40}px)` }}
                 >
-                    {Array.from({ length: totalSlides }).map((_, idx) => {
-                        const absOffset = Math.abs(idx - currentSlide);
+                    {Array.from({ length: 18 }).map((_, idx) => {
                         const isActive = idx === currentSlide;
+                        // Window start is activeIndex - 2, clamped
+                        const windowStart = Math.max(0, Math.min(currentSlide - 2, 18 - 6));
+                        const isVisible = idx >= windowStart && idx < windowStart + 6;
+                        
                         return (
                             <div
                                 key={idx}
                                 className={`${styles.indicatorWrapper} ${isActive ? styles.active : ''}`}
-                                style={{
-                                    transform: `translateX(-${Math.min(absOffset * absOffset * 2.5, 18)}px) scale(${isActive ? 1 : 0.85})`,
-                                    opacity: isActive ? 1 : 0.3,
+                                style={{ 
+                                    opacity: isVisible ? (isActive ? 1 : 0.3) : 0,
+                                    pointerEvents: isVisible ? 'auto' : 'none',
+                                    visibility: isVisible ? 'visible' : 'hidden'
                                 }}
-                                onClick={() => { setCurrentSlide(idx); setSubSlide(0); }}
+                                onClick={() => {
+                                    // Find the first step for this slide
+                                    const target = steps.findIndex(st => st.s === idx);
+                                    if (target !== -1) setCurrentStep(target);
+                                }}
                                 title={`Slide ${idx + 1}`}
                             >
                                 <div className={styles.indicatorLine} />
@@ -236,7 +235,7 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
                     </div>
                 </div>
 
-                {/* ── SLIDE 2: CHAPTER 1 ─── */}
+                {/* ── SLIDE 2: CHAPTER 1 (2 parts) ─── */}
                 <div className={styles.slide}>
                     <div className={styles.chapterLayout}>
                         <div className={styles.chapterLeft}>
@@ -244,16 +243,25 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
                                 <span className={styles.chapterNum}>01.</span> Core Narrative &amp; Irony
                             </h2>
                         </div>
-                        <div className={styles.chapterRight}>
-                            <div className={styles.chapterBody}>
-                                <P>서사의 핵심 아이러니: 최종 승자는 위, 촉, 오 그 누구도 아닌 사마씨의 진(晉)나라입니다. 그러나 진나라조차 짧게 끝나고 위진남북조 시대의 극심한 혼란으로 이어집니다.</P>
-                                <P>절대 강자 없이 갑과 을이 끊임없이 뒤바뀌는 구조 자체가 삼국지가 지닌 매력의 핵심이며, 100년이라는 긴 시간 동안 여러 영웅들이 명멸하는 역동성을 만들어냅니다.</P>
+                        <div className={styles.chapterRight} style={{ position: 'relative' }}>
+                            <div style={{ flex: 1, display: 'grid' }}>
+                                <div className={styles.chapterBody} style={{ gridArea: '1 / 1', opacity: subSlide === 0 ? 1 : 0, pointerEvents: subSlide === 0 ? 'auto' : 'none', transition: 'opacity 0.3s ease' }}>
+                                    <P>서사의 핵심 아이러니: 최종 승자는 위, 촉, 오 그 누구도 아닌 사마씨의 진(晉)나라입니다. 그러나 진나라조차 짧게 끝나고 위진남북조 시대의 극심한 혼란으로 이어집니다.</P>
+                                    <P>절대 강자 없이 갑과 을이 끊임없이 뒤바뀌는 구조 자체가 삼국지가 지닌 매력의 핵심이며, 100년이라는 긴 시간 동안 여러 영웅들이 명멸하는 역동성을 만들어냅니다.</P>
+                                </div>
+                                <div className={styles.chapterBody} style={{ gridArea: '1 / 1', opacity: subSlide === 1 ? 1 : 0, pointerEvents: subSlide === 1 ? 'auto' : 'none', transition: 'opacity 0.3s ease' }}>
+                                    <P>개인의 능력이 운명을 결정하는 듯 보이지만, 결국 시대의 거대한 흐름(천시) 앞에서는 개인의 노력이 무위로 돌아가는 허무주의적 결말을 맞이합니다.</P>
+                                    <P>&quot;천하의 대세는 나뉘면 반드시 합쳐지고, 합쳐지면 반드시 나뉜다&quot;는 서문의 구절은 영원한 권력도, 영원한 국가도 없음을 강조합니다.</P>
+                                </div>
+                            </div>
+                            <div style={{ position: 'absolute', bottom: '-2rem', right: '0', fontSize: '14px', color: '#aaa', textAlign: 'right', letterSpacing: '0.02em' }}>
+                                {subSlide + 1} / 2{subSlide === 0 ? ' ↓' : ''}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* ── SLIDE 3: CHAPTER 2 ─── */}
+                {/* ── SLIDE 3: CHAPTER 2 (2 parts) ─── */}
                 <div className={styles.slide}>
                     <div className={styles.chapterLayout}>
                         <div className={styles.chapterLeft}>
@@ -261,10 +269,21 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
                                 <span className={styles.chapterNum}>02.</span> Historical vs Literary Perspectives
                             </h2>
                         </div>
-                        <div className={styles.chapterRight}>
-                            <div className={styles.chapterBody}>
-                                <P>진수(陳壽)가 편찬한 정사 『삼국지』는 289년에 기록되었으며, 조조의 위나라를 정통으로 삼아 간결하고 객관적인 기록을 지향합니다(조조만 황제 파트인 본기에 기록). 인물에 대한 과도한 미화가 배제되어 있습니다.</P>
-                                <P>반면 나관중의 소설 『삼국지연의』(14세기)는 유비의 촉한을 정통으로 삼는 &apos;촉한정통론&apos;을 바탕으로 합니다. 민간 설화와 후대 주석을 결합하여 도원결의, 삼고초려 등의 고사성어와 극적 드라마를 창조했으며, 주요 인물들을 영웅화하거나 악인으로 묘사하여 대중적인 스토리텔링을 극대화했습니다.</P>
+                        <div className={styles.chapterRight} style={{ position: 'relative' }}>
+                            <div style={{ flex: 1, display: 'grid' }}>
+                                <div className={styles.chapterBody} style={{ gridArea: '1 / 1', opacity: subSlide === 0 ? 1 : 0, pointerEvents: subSlide === 0 ? 'auto' : 'none', transition: 'opacity 0.3s ease' }}>
+                                    <P>정사 삼국지 (Sanguozhi)는 진수(Chen Shou)가 편찬한 정통 역사서로, 승자인 위나라를 정통으로 삼아(위진정통론) 간결하고 객관적인 기록을 지향합니다(조조만 황제 파트인 본기에 기록). 인물에 대한 과도한 미화가 배제되어 있습니다.</P>
+                                    <P>반면 나관중의 소설 삼국지연의 (Sanguo Yanyi)는 14세기 나관중이 쓴 역사 소설로, 촉한정통론(Liu Bei as the legitimate ruler)을 바탕으로 촉의 인물들을 영웅화하고 극적인 요소를 대거 추가했습니다.</P>
+                                </div>
+                                <div className={styles.chapterBody} style={{ gridArea: '1 / 1', opacity: subSlide === 1 ? 1 : 0, pointerEvents: subSlide === 1 ? 'auto' : 'none', transition: 'opacity 0.3s ease' }}>
+                                    <P>우리가 흔히 접하는 삼국지는 대부분 &apos;연의&apos;의 각색된 내용입니다. 정사에서는 지극히 평범하거나 패배했던 전투들이 연의에서는 특정 인물을 돋보이게 하는 신화적 사건으로 포장되었습니다. (예: 제갈량의 적벽대전 동남풍 대여)</P>
+                                    <P>이러한 &apos;역사와 픽션의 괴리&apos;는 우리가 삼국지를 이해하는 데 있어 중요한 분석 지점을 제공합니다.
+                                        <sup className={styles.refSup} onMouseEnter={(e) => { setActiveRef('ref1'); setTooltipPos({ x: e.clientX, y: e.clientY }); }} onMouseLeave={() => setActiveRef(null)}>[1]</sup>
+                                    </P>
+                                </div>
+                            </div>
+                            <div style={{ position: 'absolute', bottom: '-2rem', right: '0', fontSize: '14px', color: '#aaa', textAlign: 'right', letterSpacing: '0.02em' }}>
+                                {subSlide + 1} / 2{subSlide === 0 ? ' ↓' : ''}
                             </div>
                         </div>
                     </div>
@@ -326,7 +345,7 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
                     </div>
                 </div>
 
-                {/* ── SLIDE 7: CHAPTER 6 — 전투/이벤트 (2 sub-slides) ─── */}
+                {/* ── SLIDE 7: CHAPTER 6 (2 parts) ─── */}
                 <div className={styles.slide}>
                     <div className={styles.chapterLayout} style={{ position: 'relative', top: '2.5rem' }}>
                         <div className={styles.chapterLeft}>
@@ -371,7 +390,7 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
                     </div>
                 </div>
 
-                {/* ── SLIDE 9: CHAPTER 8 — 인물 해석 (2 sub-slides) ─── */}
+                {/* ── SLIDE 9: CHAPTER 8 (2 parts) ─── */}
                 <div className={styles.slide}>
                     <div className={styles.chapterLayout} style={{ position: 'relative', top: '2.5rem' }}>
                         <div className={styles.chapterLeft}>
@@ -417,11 +436,7 @@ export default function PresentationInfographic({ onClose }: PresentationInfogra
 
                 {/* ── SLIDE 11: Timeline Chart ─── */}
                 <div className={styles.slide}>
-                    {currentSlide === 11 && (
-                        <div style={{ width: '100%', height: '100%', padding: '6vh 4vw' }}>
-                            <DynamicTimelineChart />
-                        </div>
-                    )}
+                    {currentSlide === 11 && <DynamicTimelineChart />}
                 </div>
 
                 {/* ── SLIDE 12: Demographic Chart ─── */}
