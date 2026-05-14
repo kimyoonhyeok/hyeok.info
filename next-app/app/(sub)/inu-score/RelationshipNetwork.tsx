@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { motion, useMotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const FONT = '"Pretendard Variable", "Pretendard", sans-serif';
 
