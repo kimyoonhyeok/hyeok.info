@@ -323,7 +323,7 @@ const RELATIONS: Relation[] = [
 export default function RelationshipNetwork() {
     const [hoveredPerson, setHoveredPerson] = useState<string | null>(null);
     const [nodes, setNodes] = useState<Person[]>(() => 
-        PEOPLE.map(p => ({ ...p, vx: 0, vy: 0, fx: null, fy: null, seed: Math.random() * Math.PI * 2 }))
+        PEOPLE.map(p => ({ ...p, vx: 0, vy: 0, fx: null, fy: null, seed: 0 }))
     );
     const requestRef = useRef<number>(null);
     const nodesRef = useRef<Person[]>(nodes);
@@ -339,6 +339,14 @@ export default function RelationshipNetwork() {
     const FLOAT_SPEED = 0.0015;
 
     useEffect(() => {
+        // Initialize random seeds on mount to avoid hydration mismatch
+        const initializedNodes = nodesRef.current.map(n => ({
+            ...n,
+            seed: Math.random() * Math.PI * 2
+        }));
+        nodesRef.current = initializedNodes;
+        setNodes(initializedNodes);
+
         const simulate = (time: number) => {
             timeRef.current = time;
             const currentNodes = nodesRef.current.map(n => ({ ...n }));
@@ -486,10 +494,10 @@ export default function RelationshipNetwork() {
                         const style = EDGE_STYLES[rel.type];
                         const connected = isEdgeConnected(rel);
                         const time = timeRef.current;
-                        const fX1 = Math.sin(time * FLOAT_SPEED + from.seed!) * FLOAT_AMP;
-                        const fY1 = Math.cos(time * FLOAT_SPEED * 0.8 + from.seed!) * FLOAT_AMP;
-                        const fX2 = Math.sin(time * FLOAT_SPEED + to.seed!) * FLOAT_AMP;
-                        const fY2 = Math.cos(time * FLOAT_SPEED * 0.8 + to.seed!) * FLOAT_AMP;
+                        const fX1 = Math.sin(time * FLOAT_SPEED + (from.seed || 0)) * FLOAT_AMP;
+                        const fY1 = Math.cos(time * FLOAT_SPEED * 0.8 + (from.seed || 0)) * FLOAT_AMP;
+                        const fX2 = Math.sin(time * FLOAT_SPEED + (to.seed || 0)) * FLOAT_AMP;
+                        const fY2 = Math.cos(time * FLOAT_SPEED * 0.8 + (to.seed || 0)) * FLOAT_AMP;
 
                         return (
                             <line
@@ -509,8 +517,8 @@ export default function RelationshipNetwork() {
                         const connected = isConnected(person.id);
                         const isHovered = hoveredPerson === person.id;
                         const time = timeRef.current;
-                        const floatX = Math.sin(time * FLOAT_SPEED + person.seed!) * FLOAT_AMP;
-                        const floatY = Math.cos(time * FLOAT_SPEED * 0.8 + person.seed!) * FLOAT_AMP;
+                        const floatX = Math.sin(time * FLOAT_SPEED + (person.seed || 0)) * FLOAT_AMP;
+                        const floatY = Math.cos(time * FLOAT_SPEED * 0.8 + (person.seed || 0)) * FLOAT_AMP;
                         const x = person.x + floatX;
                         const y = person.y + floatY;
 
