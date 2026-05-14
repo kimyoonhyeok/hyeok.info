@@ -320,6 +320,15 @@ const RELATIONS: Relation[] = [
     }
 ];
 
+// Stabilized Simulation parameters
+const REPULSION = 120000; 
+const SPRING = 0.02;
+const CENTER_FORCE = 0.005;
+const FRICTION = 0.6; // High damping for stability
+const CENTER = { x: 700, y: 325 };
+const FLOAT_AMP = 3;
+const FLOAT_SPEED = 0.0015;
+
 export default function RelationshipNetwork() {
     const [hoveredPerson, setHoveredPerson] = useState<string | null>(null);
     const [nodes, setNodes] = useState<Person[]>(() => 
@@ -328,15 +337,6 @@ export default function RelationshipNetwork() {
     const requestRef = useRef<number>(null);
     const nodesRef = useRef<Person[]>(nodes);
     const timeRef = useRef<number>(0);
-
-    // Stabilized Simulation parameters
-    const REPULSION = 120000; 
-    const SPRING = 0.02;
-    const CENTER_FORCE = 0.005;
-    const FRICTION = 0.6; // High damping for stability
-    const CENTER = { x: 700, y: 325 };
-    const FLOAT_AMP = 3;
-    const FLOAT_SPEED = 0.0015;
 
     useEffect(() => {
         // Initialize random seeds on mount to avoid hydration mismatch
@@ -434,11 +434,7 @@ export default function RelationshipNetwork() {
         setNodes(newNodes);
     };
 
-    const handleDrag = (id: string, info: any) => {
-        // We need to account for SVG scaling/viewBox
-        // But framer-motion drag handles this if we use it correctly
-        // However, updating fx/fy directly from info.point is tricky due to coordinate space
-    };
+
 
     const handleDragEnd = (id: string) => {
         const newNodes = nodesRef.current.map(n => 
@@ -487,7 +483,7 @@ export default function RelationshipNetwork() {
             <div style={{ width: '100%', maxWidth: '1000px', height: '600px', position: 'relative', overflow: 'visible', background: 'transparent', zIndex: 1 }}>
                 <svg width="100%" height="100%" viewBox="-150 -100 1600 750" preserveAspectRatio="xMidYMid meet">
                     {/* Edges */}
-                    {RELATIONS.map((rel, i) => {
+                    {RELATIONS.map((rel) => {
                         const from = personMap[rel.from];
                         const to = personMap[rel.to];
                         if (!from || !to) return null;
@@ -501,7 +497,7 @@ export default function RelationshipNetwork() {
 
                         return (
                             <line
-                                key={i}
+                                key={`${rel.from}-${rel.to}`}
                                 x1={from.x + fX1} y1={from.y + fY1} x2={to.x + fX2} y2={to.y + fY2}
                                 stroke={style.color}
                                 strokeWidth={connected && hoveredPerson ? 2.5 : 1.5}
@@ -513,7 +509,7 @@ export default function RelationshipNetwork() {
                     })}
 
                     {/* Nodes */}
-                    {nodes.map((person, i) => {
+                    {nodes.map((person) => {
                         const connected = isConnected(person.id);
                         const isHovered = hoveredPerson === person.id;
                         const time = timeRef.current;
@@ -528,7 +524,7 @@ export default function RelationshipNetwork() {
                                 drag
                                 dragMomentum={false}
                                 onDragStart={() => handleDragStart(person.id)}
-                                onDrag={(e, info) => {
+                                onDrag={(_e, info) => {
                                     const scale = 1600 / 1000;
                                     const newNodes = nodesRef.current.map(n => 
                                         n.id === person.id ? { 
