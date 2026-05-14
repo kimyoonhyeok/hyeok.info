@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 // Colors based on infographic_data.md
 const COLORS = {
     wei: '#1a237e',
-    shu: '#b71c1c',
-    wu: '#1b5e20',
+    shu: '#1b5e20',
+    wu: '#b71c1c',
     base: '#e0e0e0',
     text: '#333'
 };
@@ -35,21 +35,79 @@ export default function DynamicTimelineChart() {
     // Time Mapping: 180 ~ 285 AD
     const mapX = (year: number) => padX + ((year - 180) / 105) * (width - padX * 2);
 
-    // Flow Paths (representing population/power decay)
-    // 157 AD: 10.6M -> 280 AD: 2.45M (Overall drastic decline)
-    // We'll use bezier curves to visualize the splitting and shrinking
-    
-    // Wei (Navy): Starts to grow after 200, peaks around 260, absorbs Shu
-    const pathWei = `M ${mapX(190)} 200 C ${mapX(210)} 100, ${mapX(250)} 80, ${mapX(265)} 100 S ${mapX(280)} 180, ${mapX(280)} 180`;
-    
-    // Shu (Red): Forms after 208, small, declines after 222, ends 263
-    const pathShu = `M ${mapX(208)} 250 C ${mapX(215)} 280, ${mapX(234)} 300, ${mapX(263)} 250`;
-    
-    // Wu (Green): Forms after 200, steady, ends 280
-    const pathWu = `M ${mapX(200)} 300 C ${mapX(220)} 350, ${mapX(260)} 350, ${mapX(280)} 220`;
+    // Path Data Definitions
+    const PATHS = {
+        historical: {
+            wei: [
+                { x: 190, y: 200 }, { x: 210, y: 100 }, { x: 250, y: 80 }, { x: 265, y: 100 }, { x: 280, y: 180 }
+            ],
+            shu: [
+                { x: 208, y: 250 }, { x: 215, y: 280 }, { x: 234, y: 300 }, { x: 263, y: 250 }
+            ],
+            wu: [
+                { x: 200, y: 300 }, { x: 220, y: 350 }, { x: 260, y: 350 }, { x: 280, y: 220 }
+            ]
+        },
+        fiction: {
+            wei: [
+                { x: 190, y: 200 }, { x: 210, y: 180 }, { x: 250, y: 200 }, { x: 265, y: 220 }, { x: 280, y: 250 }
+            ],
+            shu: [
+                { x: 208, y: 200 }, { x: 215, y: 120 }, { x: 234, y: 100 }, { x: 263, y: 150 }
+            ],
+            wu: [
+                { x: 200, y: 280 }, { x: 220, y: 230 }, { x: 260, y: 210 }, { x: 280, y: 210 }
+            ]
+        }
+    };
 
-    // Main chaotic trunk (180 to 210)
     const pathBase = `M ${mapX(180)} 200 Q ${mapX(195)} 200, ${mapX(205)} 250`;
+
+    // Tapered Path Generator
+    const renderTaperedPath = (faction: 'wei' | 'shu' | 'wu', baseWidth: number) => {
+        const data = viewMode === 'historical' ? PATHS.historical[faction] : PATHS.fiction[faction];
+        const segments = 15;
+        const result = [];
+        
+        for (let i = 0; i < segments; i++) {
+            const t1 = i / segments;
+            const t2 = (i + 1) / segments;
+            
+            // Cubic Bezier interpolation (simplified for segments)
+            // Since we have multiple points, we'll just lerp between points for segments
+            const pIndex1 = Math.floor(t1 * (data.length - 1));
+            const pIndex2 = Math.min(pIndex1 + 1, data.length - 1);
+            const subT1 = (t1 * (data.length - 1)) % 1;
+            
+            const pIndex3 = Math.floor(t2 * (data.length - 1));
+            const pIndex4 = Math.min(pIndex3 + 1, data.length - 1);
+            const subT2 = (t2 * (data.length - 1)) % 1;
+
+            const x1 = mapX(data[pIndex1].x + (data[pIndex2].x - data[pIndex1].x) * subT1);
+            const y1 = data[pIndex1].y + (data[pIndex2].y - data[pIndex1].y) * subT1;
+            const x2 = mapX(data[pIndex3].x + (data[pIndex4].x - data[pIndex3].x) * subT2);
+            const y2 = data[pIndex3].y + (data[pIndex4].y - data[pIndex3].y) * subT2;
+
+            const year = data[pIndex1].x + (data[pIndex2].x - data[pIndex1].x) * subT1;
+            const widthScale = 0.2 + 0.8 * ((year - 180) / 100);
+            const width = baseWidth * widthScale;
+
+            result.push(
+                <motion.line
+                    key={`${faction}-${i}`}
+                    x1={x1} y1={y1} x2={x2} y2={y2}
+                    stroke={COLORS[faction]}
+                    strokeWidth={width}
+                    strokeLinecap="round"
+                    opacity={0.8}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.8, x1, y1, x2, y2 }}
+                    transition={{ duration: 0.5, delay: i * 0.05 }}
+                />
+            );
+        }
+        return result;
+    };
 
     const getEventColor = (faction: string) => {
         if (faction === 'wei') return COLORS.wei;
@@ -116,14 +174,9 @@ export default function DynamicTimelineChart() {
                     <motion.path d={pathBase} fill="none" stroke={COLORS.base} strokeWidth="12" strokeLinecap="round" 
                         initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }} />
                     
-                    <motion.path d={pathWei} fill="none" stroke={COLORS.wei} strokeWidth={viewMode === 'historical' ? 24 : 18} strokeLinecap="round" opacity={0.8}
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }} />
-                    
-                    <motion.path d={pathShu} fill="none" stroke={COLORS.shu} strokeWidth={viewMode === 'historical' ? 8 : 28} strokeLinecap="round" opacity={0.8}
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 1, ease: "easeInOut" }} />
-                    
-                    <motion.path d={pathWu} fill="none" stroke={COLORS.wu} strokeWidth={viewMode === 'historical' ? 14 : 20} strokeLinecap="round" opacity={0.8}
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.8, delay: 0.8, ease: "easeInOut" }} />
+                    {renderTaperedPath('wei', viewMode === 'historical' ? 24 : 18)}
+                    {renderTaperedPath('shu', viewMode === 'historical' ? 8 : 42)}
+                    {renderTaperedPath('wu', viewMode === 'historical' ? 14 : 26)}
 
                     {/* Event Nodes */}
                     {EVENTS.map((ev, i) => {
@@ -143,8 +196,8 @@ export default function DynamicTimelineChart() {
                                 
                                 {/* Node Pulse (Fiction Mode) */}
                                 {isFictionExaggerated && (
-                                    <motion.circle cx={cx} cy={cy} r="16" fill="none" stroke="#f57f17" strokeWidth="2"
-                                        animate={{ scale: [1, 1.8], opacity: [0.8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}
+                                    <motion.circle cx={cx} cy={cy} r="20" fill="none" stroke={getEventColor(ev.faction)} strokeWidth="3"
+                                        animate={{ scale: [1, 2.5], opacity: [0.8, 0] }} transition={{ repeat: Infinity, duration: 1 }}
                                     />
                                 )}
 

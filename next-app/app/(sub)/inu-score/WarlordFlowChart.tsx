@@ -7,8 +7,8 @@ const FONT = '"Pretendard Variable", "Pretendard", sans-serif';
 
 const COLORS = {
     wei: '#2962ff',
-    shu: '#d50000',
-    wu: '#00c853',
+    shu: '#00c853',
+    wu: '#d50000',
     jin: '#aa00ff',
     chaos: '#78909c',
 };

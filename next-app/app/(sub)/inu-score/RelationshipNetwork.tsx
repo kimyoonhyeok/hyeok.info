@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 
 const FONT = '"Pretendard Variable", "Pretendard", sans-serif';
 
@@ -12,6 +12,11 @@ interface Person {
     x: number;
     y: number;
     role: string;
+    fx?: number | null;
+    fy?: number | null;
+    vx?: number;
+    vy?: number;
+    seed?: number;
 }
 
 interface Relation {
@@ -22,8 +27,8 @@ interface Relation {
 
 const COLORS: Record<string, string> = {
     wei: '#2962ff',
-    shu: '#d50000',
-    wu: '#00c853',
+    shu: '#00c853',
+    wu: '#d50000',
     neutral: '#78909c',
 };
 
@@ -317,8 +322,123 @@ const RELATIONS: Relation[] = [
 
 export default function RelationshipNetwork() {
     const [hoveredPerson, setHoveredPerson] = useState<string | null>(null);
+    const [nodes, setNodes] = useState<Person[]>(() => 
+        PEOPLE.map(p => ({ ...p, vx: 0, vy: 0, fx: null, fy: null, seed: Math.random() * Math.PI * 2 }))
+    );
+    const requestRef = useRef<number>(null);
+    const nodesRef = useRef<Person[]>(nodes);
+    const timeRef = useRef<number>(0);
 
-    const personMap = Object.fromEntries(PEOPLE.map(p => [p.id, p]));
+    // Stabilized Simulation parameters
+    const REPULSION = 120000; 
+    const SPRING = 0.02;
+    const CENTER_FORCE = 0.005;
+    const FRICTION = 0.6; // High damping for stability
+    const CENTER = { x: 700, y: 325 };
+    const FLOAT_AMP = 3;
+    const FLOAT_SPEED = 0.0015;
+
+    useEffect(() => {
+        const simulate = (time: number) => {
+            timeRef.current = time;
+            const currentNodes = nodesRef.current.map(n => ({ ...n }));
+            
+            // 1. Repulsion between all nodes
+            for (let i = 0; i < currentNodes.length; i++) {
+                for (let j = i + 1; j < currentNodes.length; j++) {
+                    const nodeA = currentNodes[i];
+                    const nodeB = currentNodes[j];
+                    const dx = nodeB.x - nodeA.x;
+                    const dy = nodeB.y - nodeA.y;
+                    const distSq = dx * dx + dy * dy + 1;
+                    if (distSq > 160000) continue; // Optimization: skip far nodes
+                    const force = REPULSION / distSq;
+                    const fx = (dx / Math.sqrt(distSq)) * force;
+                    const fy = (dy / Math.sqrt(distSq)) * force;
+                    
+                    nodeA.vx! -= fx;
+                    nodeA.vy! -= fy;
+                    nodeB.vx! += fx;
+                    nodeB.vy! += fy;
+                }
+            }
+
+            // 2. Spring force for relations
+            RELATIONS.forEach(rel => {
+                const from = currentNodes.find(n => n.id === rel.from);
+                const to = currentNodes.find(n => n.id === rel.to);
+                if (from && to) {
+                    const dx = to.x - from.x;
+                    const dy = to.y - from.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                    const force = (dist - 180) * SPRING; // Relaxed target length
+                    const fx = (dx / dist) * force;
+                    const fy = (dy / dist) * force;
+                    
+                    from.vx! += fx;
+                    from.vy! += fy;
+                    to.vx! -= fx;
+                    to.vy! -= fy;
+                }
+            });
+
+            // 3. Movement and Floating
+            currentNodes.forEach(node => {
+                if (node.fx !== null && node.fx !== undefined) {
+                    node.x = node.fx;
+                    node.y = node.fy!;
+                    node.vx = 0;
+                    node.vy = 0;
+                } else {
+                    node.vx! += (CENTER.x - node.x) * CENTER_FORCE;
+                    node.vy! += (CENTER.y - node.y) * CENTER_FORCE;
+
+                    node.vx! *= FRICTION;
+                    node.vy! *= FRICTION;
+                    node.x += node.vx!;
+                    node.y += node.vy!;
+
+                    node.x = Math.max(-100, Math.min(1500, node.x));
+                    node.y = Math.max(-50, Math.min(700, node.y));
+                }
+            });
+
+            nodesRef.current = currentNodes;
+            setNodes(currentNodes);
+            requestRef.current = requestAnimationFrame(simulate);
+        };
+
+        requestRef.current = requestAnimationFrame(simulate);
+        return () => {
+            if (requestRef.current) cancelAnimationFrame(requestRef.current);
+        };
+    }, []);
+
+    const personMap = useMemo(() => 
+        Object.fromEntries(nodes.map(p => [p.id, p])),
+    [nodes]);
+
+    const handleDragStart = (id: string) => {
+        const newNodes = nodesRef.current.map(n => 
+            n.id === id ? { ...n, fx: n.x, fy: n.y } : n
+        );
+        nodesRef.current = newNodes;
+        setNodes(newNodes);
+    };
+
+    const handleDrag = (id: string, info: any) => {
+        // We need to account for SVG scaling/viewBox
+        // But framer-motion drag handles this if we use it correctly
+        // However, updating fx/fy directly from info.point is tricky due to coordinate space
+    };
+
+    const handleDragEnd = (id: string) => {
+        const newNodes = nodesRef.current.map(n => 
+            n.id === id ? { ...n, fx: null, fy: null } : n
+        );
+        nodesRef.current = newNodes;
+        setNodes(newNodes);
+    };
 
     const isConnected = (personId: string) => {
         if (!hoveredPerson) return true;
@@ -365,45 +485,69 @@ export default function RelationshipNetwork() {
                         if (!from || !to) return null;
                         const style = EDGE_STYLES[rel.type];
                         const connected = isEdgeConnected(rel);
+                        const time = timeRef.current;
+                        const fX1 = Math.sin(time * FLOAT_SPEED + from.seed!) * FLOAT_AMP;
+                        const fY1 = Math.cos(time * FLOAT_SPEED * 0.8 + from.seed!) * FLOAT_AMP;
+                        const fX2 = Math.sin(time * FLOAT_SPEED + to.seed!) * FLOAT_AMP;
+                        const fY2 = Math.cos(time * FLOAT_SPEED * 0.8 + to.seed!) * FLOAT_AMP;
+
                         return (
-                            <motion.line
+                            <line
                                 key={i}
-                                x1={from.x} y1={from.y} x2={to.x} y2={to.y}
+                                x1={from.x + fX1} y1={from.y + fY1} x2={to.x + fX2} y2={to.y + fY2}
                                 stroke={style.color}
                                 strokeWidth={connected && hoveredPerson ? 2.5 : 1.5}
                                 strokeDasharray={style.dash}
                                 opacity={connected ? (hoveredPerson ? 0.8 : 0.3) : 0.05}
-                                initial={{ pathLength: 0 }}
-                                animate={{ pathLength: 1 }}
-                                transition={{ duration: 1, delay: i * 0.05 }}
                                 style={{ transition: 'opacity 0.3s, stroke-width 0.3s' }}
                             />
                         );
                     })}
 
                     {/* Nodes */}
-                    {PEOPLE.map((person, i) => {
+                    {nodes.map((person, i) => {
                         const connected = isConnected(person.id);
                         const isHovered = hoveredPerson === person.id;
+                        const time = timeRef.current;
+                        const floatX = Math.sin(time * FLOAT_SPEED + person.seed!) * FLOAT_AMP;
+                        const floatY = Math.cos(time * FLOAT_SPEED * 0.8 + person.seed!) * FLOAT_AMP;
+                        const x = person.x + floatX;
+                        const y = person.y + floatY;
+
                         return (
-                            <g
+                            <motion.g
                                 key={person.id}
-                                style={{ cursor: 'pointer' }}
+                                drag
+                                dragMomentum={false}
+                                onDragStart={() => handleDragStart(person.id)}
+                                onDrag={(e, info) => {
+                                    const scale = 1600 / 1000;
+                                    const newNodes = nodesRef.current.map(n => 
+                                        n.id === person.id ? { 
+                                            ...n, 
+                                            x: n.x + info.delta.x * scale, 
+                                            y: n.y + info.delta.y * scale,
+                                            fx: n.x + info.delta.x * scale,
+                                            fy: n.y + info.delta.y * scale
+                                        } : n
+                                    );
+                                    nodesRef.current = newNodes;
+                                    setNodes(newNodes);
+                                }}
+                                onDragEnd={() => handleDragEnd(person.id)}
+                                style={{ cursor: 'grab' }}
                                 onMouseEnter={() => setHoveredPerson(person.id)}
                                 onMouseLeave={() => setHoveredPerson(null)}
                             >
-                                <motion.circle
-                                    cx={person.x} cy={person.y}
+                                <circle
+                                    cx={x} cy={y}
                                     r={isHovered ? 18 : 14}
                                     fill={COLORS[person.faction]}
                                     opacity={connected ? (isHovered ? 1 : 0.7) : 0.1}
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ duration: 0.5, delay: i * 0.08 }}
                                     style={{ transition: 'opacity 0.3s' }}
                                 />
                                 <text
-                                    x={person.x} y={person.y + 30}
+                                    x={x} y={y + 30}
                                     textAnchor="middle" fill={connected ? '#333' : '#ddd'}
                                     fontSize="11" fontFamily={FONT} fontWeight="400"
                                     style={{ transition: 'fill 0.3s' }}
@@ -413,14 +557,14 @@ export default function RelationshipNetwork() {
 
                                 {/* Role tooltip on hover */}
                                 {isHovered && (
-                                    <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                                        <rect x={person.x - 80} y={person.y - 40} width="160" height="22" rx="4" fill="#fff" stroke="#eee" />
-                                        <text x={person.x} y={person.y - 25} textAnchor="middle" fill="#666" fontSize="9" fontFamily={FONT} fontWeight="400">
+                                    <g>
+                                        <rect x={x - 80} y={y - 40} width="160" height="22" rx="4" fill="#fff" stroke="#eee" />
+                                        <text x={x} y={y - 25} textAnchor="middle" fill="#666" fontSize="9" fontFamily={FONT} fontWeight="400">
                                             {person.role}
                                         </text>
-                                    </motion.g>
+                                    </g>
                                 )}
-                            </g>
+                            </motion.g>
                         );
                     })}
                 </svg>

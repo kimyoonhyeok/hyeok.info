@@ -11,8 +11,8 @@ const TOTAL_JIN = 2450000;  // 280 AD: ~2.45M households
 
 const KINGDOMS = [
     { id: 'wei', label: 'Wei (魏)', households: 4370000, troops: '400k–500k', color: '#2962ff', year: '263 AD' },
-    { id: 'shu', label: 'Shu (蜀)', households: 280000, troops: '102k', color: '#d50000', year: '263 AD' },
-    { id: 'wu', label: 'Wu (吳)', households: 523000, troops: '230k', color: '#00c853', year: '280 AD' },
+    { id: 'shu', label: 'Shu (蜀)', households: 280000, troops: '102k', color: '#00c853', year: '263 AD' },
+    { id: 'wu', label: 'Wu (吳)', households: 523000, troops: '230k', color: '#d50000', year: '280 AD' },
 ];
 
 const maxH = KINGDOMS[0].households;

@@ -29,7 +29,7 @@ const BATTLES: BattleData[] = [
         historical: { side1: 200000, side2: 50000, side1Label: 'Cao Cao', side2Label: 'Sun-Liu Alliance' },
         fiction: { side1: 830000, side2: 50000, side1Label: 'Cao Cao', side2Label: 'Sun-Liu Alliance' },
         winner: 'Sun-Liu Alliance',
-        color: '#00c853',
+        color: '#d50000',
     },
     {
         name: 'Battle of Yiling',
@@ -37,7 +37,7 @@ const BATTLES: BattleData[] = [
         historical: { side1: 100000, side2: 50000, side1Label: 'Liu Bei', side2Label: 'Lu Xun' },
         fiction: { side1: 750000, side2: 50000, side1Label: 'Liu Bei', side2Label: 'Lu Xun' },
         winner: 'Lu Xun',
-        color: '#d50000',
+        color: '#00c853',
     },
     {
         name: 'Wuzhangyuan',
