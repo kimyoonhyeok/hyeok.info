@@ -334,7 +334,7 @@ export default function RelationshipNetwork() {
     const [nodes, setNodes] = useState<Person[]>(() => 
         PEOPLE.map(p => ({ ...p, vx: 0, vy: 0, fx: null, fy: null, seed: 0 }))
     );
-    const requestRef = useRef<number>(null);
+    const requestRef = useRef<number>();
     const nodesRef = useRef<Person[]>(nodes);
     const timeRef = useRef<number>(0);
 
