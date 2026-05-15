@@ -86,7 +86,7 @@ export default function AboutPage() {
             <div className={styles.infoColumn}>
                 <div>
                     <span className={styles.sectionTitle}>Work</span>
-                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><Link href="/leeseungyoon" className={styles.textLink}>｢Lee Seung-yoon 0th Album｣ Identity Design</Link></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Lee Seung-yoon 0th Album｣ Identity Design</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢SKETCHED SPACE｣ Website Design & Development</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Subverted Anatomical Landscape｣ ≪X≫ ARKO Arts Theater, Program Design</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Sangmyung Univ. 53rd Graduation Exhibition｣ Identity Design</span></div>
