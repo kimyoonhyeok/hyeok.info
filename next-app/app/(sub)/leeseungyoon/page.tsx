@@ -1,29 +1,23 @@
-import fs from 'fs';
-import path from 'path';
+'use client';
+
 import LeeseungyoonClient from './LeeseungyoonClient';
 
 export default function LeeseungyoonPage() {
-    const publicDir = path.join(process.cwd(), 'public');
     const baseDir = '/project_images/leeseungyoon/Lyric(3:3).Cover(0:3)';
     
-    const coverDir = path.join(publicDir, baseDir, 'Cover');
-    const bodyDir = path.join(publicDir, baseDir, 'Body');
+    // Hardcoded file lists to avoid 'fs' usage in serverless functions (fixes Vercel 300MB bundle limit)
+    const covers = [
+        "Front Cover.jpg",
+        "Back Cover.jpg"
+    ];
     
-    let covers: string[] = [];
-    let bodies: string[] = [];
-    
-    const getNum = (f: string) => {
-        const match = f.match(/(\d+)\.jpg$/i);
-        if (match && match[1]) return parseInt(match[1], 10);
-        return 999;
-    };
-
-    try {
-        covers = fs.readdirSync(coverDir).filter(f => f.endsWith('.jpg')).sort((a,b) => getNum(a) - getNum(b));
-        bodies = fs.readdirSync(bodyDir).filter(f => f.endsWith('.jpg')).sort((a, b) => getNum(a) - getNum(b));
-    } catch (e) {
-        console.error(e);
-    }
+    const bodies = [
+        "00.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", 
+        "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", 
+        "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", 
+        "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg", "32.jpg", "33.jpg", 
+        "34.jpg", "35.jpg", "36.jpg", "37.jpg"
+    ];
 
     const coverUrls = covers.map(f => `${baseDir}/Cover/${f}`);
     const bodyUrls = bodies.map(f => `${baseDir}/Body/${f}`);
