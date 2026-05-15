@@ -3,12 +3,12 @@
 import LeeseungyoonClient from './LeeseungyoonClient';
 
 export default function LeeseungyoonPage() {
-    const baseDir = '/project_images/leeseungyoon/Lyric(3:3).Cover(0:3)';
+    const baseDir = '/project_images/LeeSeungYoon/Lyric(3:3).Cover(0:3)';
     
     // Hardcoded file lists to avoid 'fs' usage in serverless functions (fixes Vercel 300MB bundle limit)
     const covers = [
-        "Front Cover.jpg",
-        "Back Cover.jpg"
+        "Back Cover.jpg",
+        "Front Cover.jpg"
     ];
     
     const bodies = [
