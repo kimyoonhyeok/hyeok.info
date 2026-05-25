@@ -16,6 +16,15 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
     const [activeIndex, setActiveIndex] = useState(0);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const isAnimating = useRef(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect mobile/tablet breakpoint
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 767);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const activeFilter = FILTERS[activeIndex];
 
@@ -97,45 +106,47 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [activeIndex]);
 
-    // Touch events for mobile
-    const touchStart = useRef(0);
+    // Touch events for mobile — horizontal swipe (avoids conflict with vertical page scroll)
+    const touchStartX = useRef(0);
+    const touchStartY = useRef(0);
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (!container) return;
 
         const handleTouchStart = (e: TouchEvent) => {
-            touchStart.current = e.touches[0].clientY;
+            touchStartX.current = e.touches[0].clientX;
+            touchStartY.current = e.touches[0].clientY;
         };
 
-        const handleTouchMove = (e: TouchEvent) => {
-            if (isAnimating.current) {
-                e.preventDefault();
-                return;
-            }
-            const atTop = container.scrollTop <= 10;
-            if (atTop) {
-                const diff = touchStart.current - e.touches[0].clientY;
-                if (diff > 50 && activeIndex < 5) {
-                    e.preventDefault();
-                    isAnimating.current = true;
-                    setActiveIndex(i => i + 1);
-                    setTimeout(() => isAnimating.current = false, 600);
-                } else if (diff < -50 && activeIndex > 0) {
-                    e.preventDefault();
-                    isAnimating.current = true;
-                    setActiveIndex(i => i - 1);
-                    setTimeout(() => isAnimating.current = false, 600);
-                }
+        const handleTouchEnd = (e: TouchEvent) => {
+            if (isAnimating.current) return;
+            const dx = touchStartX.current - e.changedTouches[0].clientX;
+            const dy = touchStartY.current - e.changedTouches[0].clientY;
+
+            // Only trigger if horizontal swipe is dominant (prevent accidental triggers on vertical scroll)
+            if (Math.abs(dx) < 30 || Math.abs(dx) < Math.abs(dy)) return;
+
+            if (dx > 30 && activeIndex < 5) {
+                // Swipe left → next filter
+                isAnimating.current = true;
+                setActiveIndex(i => i + 1);
+                setTimeout(() => isAnimating.current = false, 600);
+            } else if (dx < -30 && activeIndex > 0) {
+                // Swipe right → prev filter
+                isAnimating.current = true;
+                setActiveIndex(i => i - 1);
+                setTimeout(() => isAnimating.current = false, 600);
             }
         };
 
         container.addEventListener('touchstart', handleTouchStart, { passive: true });
-        container.addEventListener('touchmove', handleTouchMove, { passive: false });
+        container.addEventListener('touchend', handleTouchEnd, { passive: true });
         return () => {
             container.removeEventListener('touchstart', handleTouchStart);
-            container.removeEventListener('touchmove', handleTouchMove);
+            container.removeEventListener('touchend', handleTouchEnd);
         };
     }, [activeIndex]);
+
 
     return (
         <div ref={scrollContainerRef} style={{ width: '100%', height: '100%', backgroundColor: '#fff', overflowY: 'auto' }}>
@@ -169,20 +180,20 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
             {/* Poster Viewer */}
             <div style={{
                 width: '100%',
-                height: 'calc(100vh - 120px)',
+                height: isMobile ? 'calc(100vh - 120px)' : 'calc(100vh - 120px)',
                 position: 'relative',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                padding: '2rem 50px',
+                padding: isMobile ? '4rem 1rem 3rem' : '2rem 50px',
                 boxSizing: 'border-box',
             }}>
                 {/* Back Button */}
-                <div style={{ position: 'absolute', top: '2rem', left: '50px', zIndex: 10 }}>
+                <div style={{ position: 'absolute', top: '2rem', left: isMobile ? '1rem' : '50px', zIndex: 10 }}>
                     <button
                         onClick={onClose}
                         style={{
-                            background: 'transparent', border: 'none', fontSize: '18px',
+                            background: 'transparent', border: 'none', fontSize: isMobile ? '14px' : '18px',
                             cursor: 'pointer', color: '#666', display: 'flex',
                             alignItems: 'center', gap: '8px', transition: 'color 0.2s ease',
                         }}
@@ -195,7 +206,7 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
 
                 {/* Poster Image, Video, or Live Mirroring */}
                 {activeFilter === 'mirroring' ? (
-                    <div style={{ width: '100%', height: '100%', padding: '2rem 50px', boxSizing: 'border-box' }}>
+                    <div style={{ width: '100%', height: '100%', padding: isMobile ? '0' : '2rem 50px', boxSizing: 'border-box' }}>
                         <ColorMirroring />
                     </div>
                 ) : activeFilter === 'video' ? (
@@ -225,28 +236,82 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
                     />
                 )}
 
-                {/* ── State Indicator (Replaces Node Graph) ── */}
+                {/* ── State Indicator + Mobile Dots ── */}
                 <div style={{
                     position: 'absolute',
-                    bottom: '2rem',
-                    left: '50px',
+                    bottom: isMobile ? '1rem' : '2rem',
+                    left: isMobile ? '1rem' : '50px',
                     zIndex: 100,
                     userSelect: 'none',
-                    fontSize: '18px',
-                    color: '#666',
                     fontFamily: '"Pretendard", sans-serif',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
                 }}>
-                    {LABELS[activeIndex]}
+                    <span style={{ fontSize: isMobile ? '13px' : '18px', color: '#666' }}>
+                        {LABELS[activeIndex]}
+                    </span>
+                    {/* Mobile: dot indicators */}
+                    {isMobile && (
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            {FILTERS.map((_, i) => (
+                                <div
+                                    key={i}
+                                    onClick={() => { if (!isAnimating.current) { isAnimating.current = true; setActiveIndex(i); setTimeout(() => isAnimating.current = false, 600); } }}
+                                    style={{
+                                        width: i === activeIndex ? '18px' : '6px',
+                                        height: '6px',
+                                        borderRadius: '3px',
+                                        backgroundColor: '#111',
+                                        opacity: i === activeIndex ? 1 : 0.25,
+                                        cursor: 'pointer',
+                                        transition: 'all 0.35s ease',
+                                        flexShrink: 0,
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
+
+                {/* Mobile: swipe hint (only on first load, fades out) */}
+                {isMobile && activeIndex === 0 && (
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '1rem',
+                        right: '1rem',
+                        zIndex: 100,
+                        fontSize: '11px',
+                        color: '#aaa',
+                        fontFamily: '"Pretendard", sans-serif',
+                        userSelect: 'none',
+                        letterSpacing: '0.02em',
+                    }}>
+                        ← swipe →
+                    </div>
+                )}
             </div>
 
             {/* ── Info Section ── */}
             <div style={{
-                display: 'flex', flexDirection: 'row', alignItems: 'flex-start',
-                padding: '6rem 50px', gap: '4rem', width: '100%', boxSizing: 'border-box',
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                alignItems: 'flex-start',
+                padding: isMobile ? '3rem 1rem' : '6rem 50px',
+                gap: isMobile ? '2rem' : '4rem',
+                width: '100%',
+                boxSizing: 'border-box',
             }}>
                 {/* Left: Metadata */}
-                <div style={{ flex: '0 0 40%', display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '20px', lineHeight: 1.2 }}>
+                <div style={{
+                    flex: isMobile ? 'none' : '0 0 40%',
+                    width: isMobile ? '100%' : undefined,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.8rem',
+                    fontSize: isMobile ? '14px' : '20px',
+                    lineHeight: 1.2,
+                }}>
                     <div>Project Name : Divergent Consequences With Single Image</div>
                     <div>Task Scope : Poster Design, Web Design and Development</div>
                     <div>Category : Non-Commercial</div>
@@ -254,7 +319,14 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
                 </div>
 
                 {/* Right: Description */}
-                <div style={{ flex: 1, fontSize: '20px', lineHeight: 1.6, wordBreak: 'keep-all', color: '#111' }}>
+                <div style={{
+                    flex: 1,
+                    width: isMobile ? '100%' : undefined,
+                    fontSize: isMobile ? '14px' : '20px',
+                    lineHeight: 1.6,
+                    wordBreak: 'keep-all',
+                    color: '#111',
+                }}>
                     <p style={{ margin: 0, marginBottom: '1rem' }}>
                         This project was conceived to explore the concept of &lsquo;different outcomes from the same image.&rsquo; Approximately 80 to 85% of human perceptual activity is mediated through vision, and color operates as a particularly powerful cognitive tool.
                     </p>
@@ -266,7 +338,7 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
                     </p>
 
                     {/* EN Footnotes (no #4) */}
-                    <div style={{ marginTop: '4rem', lineHeight: 1.6 }}>
+                    <div style={{ marginTop: isMobile ? '2rem' : '4rem', lineHeight: 1.6 }}>
                         1. Protanopia: characterized by the absence of long-wavelength sensitive cone cells; results in the inability to distinguish red from green. Approximately 1% of male population is affected.<br />
                         2. Deuteranopia: caused by missing medium-wavelength (green) cones. The most common form of color blindness; affects roughly 1% of males.<br />
                         3. Tritanopia: a rare form caused by absent short-wavelength (blue) cones; individuals confuse blue with green and yellow with violet.
@@ -277,7 +349,7 @@ export default function ColorVisionSimulator({ onClose }: ColorVisionSimulatorPr
                         [data-ko-desc] { font-family: "Pretendard Variable", "Pretendard", sans-serif !important; }
                         [data-ko-desc] * { font-family: inherit; }
                     `}</style>
-                    <div data-ko-desc="true" style={{ marginTop: '8rem', lineHeight: 1.6, wordBreak: 'keep-all' }}>
+                    <div data-ko-desc="true" style={{ marginTop: isMobile ? '4rem' : '8rem', lineHeight: 1.6, wordBreak: 'keep-all' }}>
                         <p style={{ margin: 0, marginBottom: '1rem' }}>
                             본 작업은 &ldquo;같은 이미지로부터 다른 결과&rdquo;라는 개념을 탐구하기 위해 진행되었다. 인간의 지각 활동의 80~85%가 시각을 통해 매개되며, 색은 특히 강력한 인지적 도구로 작동한다. Singh(2006)의 Management Decision에 게재된 연구에 따르면 인간은 90초 이내에 대상에 대한 판단을 내리며, 그 중 62~90%가 색에만 기반한다.
                         </p>

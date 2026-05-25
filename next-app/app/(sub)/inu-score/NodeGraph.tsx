@@ -8,6 +8,7 @@ type NodeGraphProps = {
     onOpenApp: () => void;
     onOpenGraduation: () => void;
     onOpenInfographic: () => void;
+    onOpenInfographicMainPoster: () => void;
     connectedNodes: string[];
     setConnectedNodes: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -23,7 +24,7 @@ type NodeItem = {
 const nodesData: NodeItem[] = [
     { id: 'root', label: '4-1', isRoot: true },
     { id: 'n1', label: 'Design of Level' },
-    { id: 'n2', label: 'Infographic', children: [{ id: 'infographic_pt1', label: '1st PT', clickable: true }] },
+    { id: 'n2', label: 'Infographic', children: [{ id: 'infographic_pt1', label: '1st PT', clickable: true }, { id: 'infographic_main_poster', label: 'Main Poster', clickable: true }] },
     { id: 'n3', label: 'Layout Design' },
     { id: 'n4', label: 'Typo and Image' },
     { id: 'n5', label: 'Contemporary\nFashion Contents' },
@@ -58,7 +59,7 @@ const nodesData: NodeItem[] = [
 
 type Pos = { x: number, y: number };
 
-export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, onOpenInfographic, connectedNodes, setConnectedNodes }: NodeGraphProps) {
+export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, onOpenInfographic, onOpenInfographicMainPoster, connectedNodes, setConnectedNodes }: NodeGraphProps) {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [dragLine, setDragLine] = useState<{ active: boolean, x: number, y: number, sourceId: string } | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -113,7 +114,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
                             dragLine.sourceId === 'gp' ? ['gp_pt1'] :
-                                dragLine.sourceId === 'n2' ? ['infographic_pt1'] : [];
+                                dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] : [];
 
                 possibleTargets.forEach((id) => {
                     const target = positions[id];
@@ -138,7 +139,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
                             dragLine.sourceId === 'gp' ? ['gp_pt1'] :
-                                dragLine.sourceId === 'n2' ? ['infographic_pt1'] : [];
+                                dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] : [];
 
                 if (hoveredNode && possibleTargets.includes(hoveredNode)) {
                     targetId = hoveredNode;
@@ -171,6 +172,9 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                             if (targetId === 'infographic_pt1' && !prev.includes('n2')) {
                                 next.push('n2');
                             }
+                            if (targetId === 'infographic_main_poster' && !prev.includes('n2')) {
+                                next.push('n2');
+                            }
                             return next;
                         });
                     }
@@ -186,6 +190,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         setTimeout(() => onOpenGraduation(), 400);
                     } else if (targetId === 'infographic_pt1') {
                         setTimeout(() => onOpenInfographic(), 400);
+                    } else if (targetId === 'infographic_main_poster') {
+                        setTimeout(() => onOpenInfographicMainPoster(), 400);
                     }
                 }
 
@@ -232,7 +238,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
         const isSpHovered = hoveredNode === 'sp' && ['main', 'app', 'pt'].includes(targetId);
         const isPtHovered = hoveredNode === 'pt' && ['week1', 'week2'].includes(targetId);
         const isGpHovered = hoveredNode === 'gp' && ['gp_pt1'].includes(targetId);
-        const isN2Hovered = hoveredNode === 'n2' && ['infographic_pt1'].includes(targetId);
+        const isN2Hovered = hoveredNode === 'n2' && ['infographic_pt1', 'infographic_main_poster'].includes(targetId);
 
         const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered || isGpHovered || isN2Hovered;
 
@@ -315,6 +321,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
 
                         {/* n2 to its children */}
                         {connectedNodes.includes('infographic_pt1') && renderLink('n2', 'infographic_pt1')}
+                        {connectedNodes.includes('infographic_main_poster') && renderLink('n2', 'infographic_main_poster')}
 
                         {/* Interactive Drag Wire */}
                         {renderDragWire()}
@@ -404,6 +411,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                                         onClick={() => {
                                                             if (isConnected && child.clickable) {
                                                                 if (child.id === 'infographic_pt1') onOpenInfographic();
+                                                                else if (child.id === 'infographic_main_poster') onOpenInfographicMainPoster();
                                                                 else onOpenSideProject();
                                                             }
                                                         }}

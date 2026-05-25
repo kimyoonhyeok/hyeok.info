@@ -30,7 +30,7 @@ const WARLORDS = [
 const KINGDOMS_Y: Record<string, number> = { wei: 85, shu: 210, wu: 290 };
 const JIN_Y = 190;
 
-export default function WarlordFlowChart() {
+export default function WarlordFlowChart({ isPoster = false }: { isPoster?: boolean }) {
     const [hoveredWarlord, setHoveredWarlord] = useState<string | null>(null);
 
     const w = 1000;
@@ -92,37 +92,64 @@ export default function WarlordFlowChart() {
     };
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4vh 4vw', fontFamily: FONT, backgroundColor: 'transparent' }}>
+        <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: isPoster ? '0px' : '4vh 4vw',
+            fontFamily: FONT,
+            backgroundColor: 'transparent',
+            boxSizing: 'border-box'
+        }}>
             
             {/* Header / Text positioned at bottom left */}
-            <div style={{ position: 'absolute', bottom: '4vh', left: '4vw', textAlign: 'left', zIndex: 10 }}>
-                <h3 style={{ fontFamily: FONT, fontSize: '1.2rem', margin: 0, fontWeight: 400, color: '#3e3129' }}>
+            <div style={isPoster ? {
+                width: '100%',
+                padding: '4px 8px 12px 8px',
+                boxSizing: 'border-box',
+                zIndex: 10
+            } : {
+                position: 'absolute', bottom: '4vh', left: '4vw', textAlign: 'left', zIndex: 10
+            }}>
+                <h3 style={{ fontFamily: FONT, fontSize: isPoster ? '11px' : '1.2rem', margin: 0, fontWeight: 400, color: '#3e3129' }}>
                     Warlord Convergence: Late Han → Three Kingdoms → Jin
                 </h3>
-                <p style={{ fontFamily: FONT, fontSize: '0.85rem', color: '#6a5a4a', margin: '0.5rem 0 0 0', fontWeight: 400 }}>
-                    Flow of power from multiple warlords (184 AD) through tripartite division to unification (280 AD)
-                </p>
-                <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.2rem', fontSize: '0.7rem', color: '#998f82', fontFamily: FONT, fontWeight: 400, alignItems: 'flex-start' }}>
-                    <span>— Lines show independent warlords gradually absorbed into Wei (Blue)</span>
-                </div>
+                {!isPoster && (
+                    <p style={{ fontFamily: FONT, fontSize: '0.85rem', color: '#6a5a4a', margin: '0.5rem 0 0 0', fontWeight: 400 }}>
+                        Flow of power from multiple warlords (184 AD) through tripartite division to unification (280 AD)
+                    </p>
+                )}
             </div>
 
-            <div style={{ width: '100%', maxWidth: '1200px', height: '500px', position: 'relative', overflow: 'visible', zIndex: 1 }}>
+            <div style={{
+                width: '100%',
+                maxWidth: '1200px',
+                height: isPoster ? 'auto' : '500px',
+                flex: isPoster ? 1 : undefined,
+                minHeight: 0,
+                position: 'relative',
+                overflow: 'visible',
+                zIndex: 1
+            }}>
                 <svg width="100%" height="100%" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="xMidYMid meet">
                     {/* Era Labels */}
-                    <text x={leftX} y={h - 10} textAnchor="middle" fill="#ccc" fontSize="10" fontFamily={FONT} fontWeight="400">c. 184 AD</text>
+                    <text x={leftX} y={h - 10} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "10"} fontFamily={FONT} fontWeight="400">c. 184 AD</text>
                     
                     {/* Time Markers */}
                     <g opacity={0.3}>
                         <line x1={leftX + 220} y1={20} x2={leftX + 220} y2={h - 30} stroke="#999" strokeWidth="1" strokeDasharray="4 4" />
-                        <text x={leftX + 220} y={h - 10} textAnchor="middle" fill="#ccc" fontSize="10" fontFamily={FONT} fontWeight="400">Guandu (200 AD)</text>
+                        <text x={leftX + 220} y={h - 10} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "10"} fontFamily={FONT} fontWeight="400">Guandu (200 AD)</text>
                         
                         <line x1={leftX + 260} y1={20} x2={leftX + 260} y2={h - 30} stroke="#999" strokeWidth="1" strokeDasharray="4 4" />
-                        <text x={leftX + 260} y={15} textAnchor="middle" fill="#ccc" fontSize="10" fontFamily={FONT} fontWeight="400">Red Cliffs (208 AD)</text>
+                        <text x={leftX + 260} y={15} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "10"} fontFamily={FONT} fontWeight="400">Red Cliffs (208 AD)</text>
                     </g>
 
-                    <text x={midX + 60} y={h - 10} textAnchor="middle" fill="#ccc" fontSize="10" fontFamily={FONT} fontWeight="400">c. 220 AD</text>
-                    <text x={farRightX} y={h - 10} textAnchor="middle" fill="#ccc" fontSize="10" fontFamily={FONT} fontWeight="400">280 AD</text>
+                    <text x={midX + 60} y={h - 10} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "10"} fontFamily={FONT} fontWeight="400">c. 220 AD</text>
+                    <text x={farRightX} y={h - 10} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "10"} fontFamily={FONT} fontWeight="400">280 AD</text>
 
                     <defs>
                         {WARLORDS.map(wl => (
@@ -158,7 +185,7 @@ export default function WarlordFlowChart() {
                                 y={wl.y + 4}
                                 textAnchor="end"
                                 fill={hoveredWarlord === wl.name ? '#111' : (wl.fate === 'eliminated' ? '#bbb' : '#666')}
-                                fontSize="11"
+                                fontSize={isPoster ? "9" : "11"}
                                 fontFamily={FONT}
                                 fontWeight="400"
                                 style={{ cursor: 'pointer', transition: 'fill 0.3s' }}
@@ -181,7 +208,7 @@ export default function WarlordFlowChart() {
                                     y={wl.fate === 'wei_early' || wl.fate === 'divided' ? wl.y - 8 : wl.y + 3}
                                     textAnchor="start"
                                     fill="#aaa"
-                                    fontSize="8"
+                                    fontSize={isPoster ? "9" : "8"}
                                     fontFamily={FONT}
                                     fontWeight="400"
                                     initial={{ opacity: 0 }}

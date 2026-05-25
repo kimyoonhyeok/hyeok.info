@@ -10,6 +10,7 @@ import ColorVisionSimulator from "./ColorVisionSimulator";
 import PresentationWeek2 from "./PresentationWeek2";
 import PresentationGraduation from "./PresentationGraduation";
 import PresentationInfographic from "./PresentationInfographic";
+import InfographicMainPoster from "./InfographicMainPoster";
 import styles from "./pt.module.css";
 
 const REF_LIST = [
@@ -49,7 +50,7 @@ import { useRouter } from "next/navigation";
 
 export default function PresentationPage() {
     const router = useRouter();
-    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app' | 'graduation' | 'infographic'>('graph');
+    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app' | 'graduation' | 'infographic' | 'infographic-poster'>('graph');
     const [connectedNodes, setConnectedNodes] = useState<string[]>([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [subSlide, setSubSlide] = useState(0);
@@ -68,7 +69,7 @@ export default function PresentationPage() {
             document.body.style.overflow = "auto";
             return;
         }
-        if (view === 'poster' || view === 'app') {
+        if (view === 'poster' || view === 'infographic-poster' || view === 'app') {
             document.body.style.overflow = view === 'app' ? 'auto' : 'hidden';
             return;
         }
@@ -222,6 +223,7 @@ export default function PresentationPage() {
             onOpenApp={() => setView('app')}
             onOpenGraduation={() => setView('graduation')}
             onOpenInfographic={() => router.push('/infographic')}
+            onOpenInfographicMainPoster={() => setView('infographic-poster')}
             connectedNodes={connectedNodes}
             setConnectedNodes={setConnectedNodes}
         />;
@@ -242,6 +244,12 @@ export default function PresentationPage() {
     if (view === 'infographic') {
         return <PresentationInfographic onClose={() => setView('graph')} />;
     }
+
+    if (view === 'infographic-poster') {
+        return <InfographicMainPoster onClose={() => setView('graph')} />;
+    }
+
+
 
     if (view === 'poster') {
         return (

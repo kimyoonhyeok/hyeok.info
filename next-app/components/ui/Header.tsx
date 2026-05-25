@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -15,6 +17,8 @@ export default function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const showWorks = !pathname?.includes("/inu-score");
+
     return (
         <header className={`global-header ${scrolled ? "scrolled" : ""}`}>
             <nav className="header-hyeok">
@@ -24,13 +28,15 @@ export default function Header() {
                     </li>
                 </ul>
             </nav>
-            <nav className="header-works">
-                <ul>
-                    <li>
-                        <Link href="/works">Works</Link>
-                    </li>
-                </ul>
-            </nav>
+            {showWorks && (
+                <nav className="header-works">
+                    <ul>
+                        <li>
+                            <Link href="/works">Works</Link>
+                        </li>
+                    </ul>
+                </nav>
+            )}
             <nav className="header-about">
                 <ul>
                     <li>
@@ -48,3 +54,4 @@ export default function Header() {
         </header>
     );
 }
+

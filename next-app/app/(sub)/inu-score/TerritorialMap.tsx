@@ -49,37 +49,84 @@ const BATTLES_ON_MAP = [
     { name: 'Yiling', year: 222, x: 380, y: 260 },
 ];
 
-export default function TerritorialMap() {
+export default function TerritorialMap({ isPoster = false }: { isPoster?: boolean }) {
     const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
     const [hoveredBattle, setHoveredBattle] = useState<string | null>(null);
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4vh 4vw', fontFamily: FONT, backgroundColor: 'transparent' }}>
+        <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: isPoster ? '0px' : '4vh 4vw',
+            fontFamily: FONT,
+            backgroundColor: 'transparent',
+            boxSizing: 'border-box'
+        }}>
             
             {/* Header / Text positioned at bottom left */}
-            <div style={{ position: 'absolute', bottom: '4vh', left: '4vw', textAlign: 'left', zIndex: 10 }}>
-                <h3 style={{ fontFamily: FONT, fontSize: '1.2rem', margin: 0, fontWeight: 400, color: '#3e3129' }}>
-                    Territorial Overview (c. 220–260 AD)
-                </h3>
-                <p style={{ fontFamily: FONT, fontSize: '0.85rem', color: '#6a5a4a', margin: '0.5rem 0 0 0', fontWeight: 400 }}>
-                    Hover regions for details — battle markers show key turning points
-                </p>
+            <div style={isPoster ? {
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '4px 8px 12px 8px',
+                boxSizing: 'border-box',
+                zIndex: 10
+            } : {
+                position: 'absolute', bottom: '4vh', left: '4vw', textAlign: 'left', zIndex: 10
+            }}>
+                <div style={{ textAlign: 'left' }}>
+                    <h3 style={{ fontFamily: FONT, fontSize: isPoster ? '11px' : '1.2rem', margin: 0, fontWeight: 400, color: '#3e3129' }}>
+                        Territorial Overview (c. 220–260 AD)
+                    </h3>
+                    {!isPoster && (
+                        <p style={{ fontFamily: FONT, fontSize: '0.85rem', color: '#6a5a4a', margin: '0.5rem 0 0 0', fontWeight: 400 }}>
+                            Hover regions for details — battle markers show key turning points
+                        </p>
+                    )}
+                </div>
+
                 {/* Legend */}
-                <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.7rem', fontFamily: FONT, fontWeight: 400 }}>
+                <div style={isPoster ? {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    fontSize: '9px',
+                    lineHeight: '14.56px',
+                    fontFamily: FONT,
+                    fontWeight: 400
+                } : {
+                    marginTop: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.7rem', fontFamily: FONT, fontWeight: 400
+                }}>
                     {REGIONS.map(r => (
-                        <div key={r.id} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <div style={{ width: 10, height: 10, borderRadius: 2, background: r.color, opacity: 0.5 }} />
+                        <div key={r.id} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <div style={{ width: 8, height: 8, borderRadius: 2, background: r.color, opacity: 0.5 }} />
                             <span style={{ color: '#998f82' }}>{r.label}</span>
                         </div>
                     ))}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="none" stroke="#e65100" strokeWidth="1.5" /></svg>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <svg width="8" height="8"><circle cx="4" cy="4" r="3" fill="none" stroke="#e65100" strokeWidth="1" /></svg>
                         <span style={{ color: '#998f82' }}>Battle</span>
                     </div>
                 </div>
             </div>
 
-            <div style={{ width: '100%', maxWidth: '1200px', height: '500px', position: 'relative', overflow: 'visible', background: 'transparent', zIndex: 1 }}>
+            <div style={{
+                width: '100%',
+                maxWidth: '1200px',
+                height: isPoster ? 'auto' : '500px',
+                flex: isPoster ? 1 : undefined,
+                minHeight: 0,
+                position: 'relative',
+                overflow: 'visible',
+                background: 'transparent',
+                zIndex: 1
+            }}>
                 <svg width="100%" height="100%" viewBox="0 0 850 430" preserveAspectRatio="xMidYMid meet">
                     {/* China outline */}
                     <path d={CHINA_PATH} fill="none" stroke="#ddd" strokeWidth="1.5" />
@@ -177,10 +224,10 @@ export default function TerritorialMap() {
                     })}
 
                     {/* Compass */}
-                    <text x={770} y={60} textAnchor="middle" fill="#ccc" fontSize="14" fontFamily={FONT} fontWeight="400">N</text>
-                    <text x={770} y={380} textAnchor="middle" fill="#ccc" fontSize="14" fontFamily={FONT} fontWeight="400">S</text>
-                    <text x={810} y={220} textAnchor="middle" fill="#ccc" fontSize="14" fontFamily={FONT} fontWeight="400">E</text>
-                    <text x={730} y={220} textAnchor="middle" fill="#ccc" fontSize="14" fontFamily={FONT} fontWeight="400">W</text>
+                    <text x={770} y={60} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "14"} fontFamily={FONT} fontWeight="400">N</text>
+                    <text x={770} y={380} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "14"} fontFamily={FONT} fontWeight="400">S</text>
+                    <text x={810} y={220} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "14"} fontFamily={FONT} fontWeight="400">E</text>
+                    <text x={730} y={220} textAnchor="middle" fill="#ccc" fontSize={isPoster ? "9" : "14"} fontFamily={FONT} fontWeight="400">W</text>
                 </svg>
             </div>
         </div>

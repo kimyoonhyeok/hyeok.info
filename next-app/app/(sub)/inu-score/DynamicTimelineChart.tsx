@@ -23,9 +23,12 @@ const EVENTS = [
     { year: 280, name: 'Fall of Wu', desc: 'Jin unification, end of era', faction: 'base', yOffset: 0 }
 ];
 
-export default function DynamicTimelineChart() {
+export default function DynamicTimelineChart({ isPoster = false, fixedMode }: { isPoster?: boolean; fixedMode?: 'historical' | 'fiction' }) {
     const [hoveredEvent, setHoveredEvent] = useState<number | null>(null);
-    const [viewMode, setViewMode] = useState<'historical' | 'fiction'>('historical');
+    const [viewMode, setViewMode] = useState<'historical' | 'fiction'>(fixedMode || 'historical');
+
+    // When fixedMode is set, lock the viewMode
+    const effectiveMode = fixedMode || viewMode;
 
     const width = 1000;
     const height = 400;
@@ -65,7 +68,7 @@ export default function DynamicTimelineChart() {
 
     // Tapered Path Generator
     const renderTaperedPath = (faction: 'wei' | 'shu' | 'wu', baseWidth: number) => {
-        const data = viewMode === 'historical' ? PATHS.historical[faction] : PATHS.fiction[faction];
+        const data = effectiveMode === 'historical' ? PATHS.historical[faction] : PATHS.fiction[faction];
         const segments = 15;
         const result = [];
         
@@ -117,19 +120,41 @@ export default function DynamicTimelineChart() {
     };
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4vh 4vw', backgroundColor: 'transparent' }}>
+        <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: isPoster ? '0px' : '4vh 4vw',
+            backgroundColor: 'transparent',
+            boxSizing: 'border-box'
+        }}>
             
-            {/* Header & Controls positioned at bottom left */}
-            <div style={{ position: 'absolute', bottom: '4vh', left: '4vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem', zIndex: 10 }}>
-                {/* Mode Toggle */}
-                <div style={{ display: 'flex', gap: '1rem', padding: '0.3rem 0' }}>
+            {/* Header & Controls */}
+            <div style={isPoster ? {
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '4px 8px 12px 8px',
+                boxSizing: 'border-box',
+                zIndex: 10
+            } : {
+                position: 'absolute', bottom: '4vh', left: '4vw', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem', zIndex: 10
+            }}>
+                {/* Mode Toggle — hidden when fixedMode is set (poster split view) */}
+                {!fixedMode && (
+                <div style={{ display: 'flex', gap: '1rem', padding: isPoster ? '0' : '0.3rem 0' }}>
                     <button
                         onClick={() => setViewMode('historical')}
                         style={{
                             padding: '0 0 0.2rem 0', border: 'none', background: 'transparent',
-                            borderBottom: viewMode === 'historical' ? '2px solid #111' : '2px solid transparent',
-                            fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: '0.9rem', fontWeight: 500,
-                            color: viewMode === 'historical' ? '#111' : '#888', cursor: 'pointer', transition: 'all 0.3s'
+                            borderBottom: effectiveMode === 'historical' ? '2px solid #111' : '2px solid transparent',
+                            fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: isPoster ? '9px' : '0.9rem', lineHeight: isPoster ? '14.56px' : 'normal', fontWeight: 500,
+                            color: effectiveMode === 'historical' ? '#111' : '#888', cursor: 'pointer', transition: 'all 0.3s'
                         }}
                     >
                         Historical Records
@@ -138,33 +163,59 @@ export default function DynamicTimelineChart() {
                         onClick={() => setViewMode('fiction')}
                         style={{
                             padding: '0 0 0.2rem 0', border: 'none', background: 'transparent',
-                            borderBottom: viewMode === 'fiction' ? '2px solid #E74C3C' : '2px solid transparent',
-                            fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: '0.9rem', fontWeight: 500,
-                            color: viewMode === 'fiction' ? '#E74C3C' : '#888', cursor: 'pointer', transition: 'all 0.3s'
+                            borderBottom: effectiveMode === 'fiction' ? '2px solid #E74C3C' : '2px solid transparent',
+                            fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: isPoster ? '9px' : '0.9rem', lineHeight: isPoster ? '14.56px' : 'normal', fontWeight: 500,
+                            color: effectiveMode === 'fiction' ? '#E74C3C' : '#888', cursor: 'pointer', transition: 'all 0.3s'
                         }}
                     >
                         Romance Exaggeration
                     </button>
                 </div>
+                )}
+                {fixedMode && isPoster && (
+                    <span style={{
+                        fontFamily: '"Pretendard Variable", "Pretendard", sans-serif',
+                        fontSize: '9px',
+                        lineHeight: '14.56px',
+                        fontWeight: 500,
+                        color: fixedMode === 'fiction' ? '#E74C3C' : '#111',
+                        borderBottom: `2px solid ${fixedMode === 'fiction' ? '#E74C3C' : '#111'}`,
+                        paddingBottom: '0.2rem'
+                    }}>
+                        {fixedMode === 'fiction' ? 'Romance Exaggeration' : 'Historical Records'}
+                    </span>
+                )}
 
                 <div style={{ textAlign: 'left' }}>
-                    <h3 style={{ fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: '1.2rem', margin: 0, fontWeight: 400, color: '#3e3129' }}>
+                    <h3 style={{ fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: isPoster ? '10px' : '1.2rem', margin: 0, fontWeight: 400, color: '#3e3129' }}>
                         Demographic Dynamics & Key Battles (180 AD – 280 AD)
                     </h3>
-                    <p style={{ fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: '0.85rem', color: '#6a5a4a', margin: '0.5rem 0 0 0', fontWeight: 400 }}>
-                        * Based on Historical Census (Y-Axis) and Chronology (X-Axis)
-                    </p>
+                    {!isPoster && (
+                        <p style={{ fontFamily: '"Pretendard Variable", "Pretendard", sans-serif', fontSize: '0.85rem', color: '#6a5a4a', margin: '0.5rem 0 0 0', fontWeight: 400 }}>
+                            * Based on Historical Census (Y-Axis) and Chronology (X-Axis)
+                        </p>
+                    )}
                 </div>
             </div>
 
-            <div style={{ width: '100%', maxWidth: '1200px', height: '500px', position: 'relative', overflow: 'visible', background: 'transparent', zIndex: 1 }}>
+            <div style={{
+                width: '100%',
+                maxWidth: '1200px',
+                height: isPoster ? 'auto' : '500px',
+                flex: isPoster ? 1 : undefined,
+                minHeight: 0,
+                position: 'relative',
+                overflow: 'visible',
+                background: 'transparent',
+                zIndex: 1
+            }}>
                 <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
                     
                     {/* Grid Lines */}
                     {[180, 200, 220, 240, 260, 280].map(year => (
                         <g key={year}>
                             <line x1={mapX(year)} y1={padY} x2={mapX(year)} y2={height - padY} stroke="#f0f0f0" strokeDasharray="4 4" strokeWidth="1" />
-                            <text x={mapX(year)} y={height - 20} textAnchor="middle" fill="#aaa" fontSize="12" fontFamily='"Helvetica Neue", sans-serif' letterSpacing="0.05em">
+                            <text x={mapX(year)} y={height - 20} textAnchor="middle" fill="#aaa" fontSize={isPoster ? 9 : 12} fontFamily='"Helvetica Neue", sans-serif' letterSpacing="0.05em">
                                 {year}
                             </text>
                         </g>
@@ -174,16 +225,16 @@ export default function DynamicTimelineChart() {
                     <motion.path d={pathBase} fill="none" stroke={COLORS.base} strokeWidth="12" strokeLinecap="round" 
                         initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }} />
                     
-                    {renderTaperedPath('wei', viewMode === 'historical' ? 24 : 18)}
-                    {renderTaperedPath('shu', viewMode === 'historical' ? 8 : 42)}
-                    {renderTaperedPath('wu', viewMode === 'historical' ? 14 : 26)}
+                    {renderTaperedPath('wei', effectiveMode === 'historical' ? 24 : 18)}
+                    {renderTaperedPath('shu', effectiveMode === 'historical' ? 8 : 42)}
+                    {renderTaperedPath('wu', effectiveMode === 'historical' ? 14 : 26)}
 
                     {/* Event Nodes */}
                     {EVENTS.map((ev, i) => {
                         const cx = mapX(ev.year);
                         const cy = 200 + ev.yOffset;
                         const isHovered = hoveredEvent === i;
-                        const isFictionExaggerated = viewMode === 'fiction' && (ev.year === 200 || ev.year === 208 || ev.year === 222);
+                        const isFictionExaggerated = effectiveMode === 'fiction' && (ev.year === 200 || ev.year === 208 || ev.year === 222);
 
                         return (
                             <g key={i} 
@@ -207,7 +258,7 @@ export default function DynamicTimelineChart() {
                                 />
 
                                 {/* Event Label */}
-                                <text x={cx} y={cy - 15} textAnchor="middle" fill={isHovered ? '#111' : '#555'} fontSize={isHovered ? 14 : 12} fontWeight={isHovered ? 400 : 400} fontFamily='"Pretendard Variable", "Pretendard", sans-serif'
+                                <text x={cx} y={cy - 15} textAnchor="middle" fill={isHovered ? '#111' : '#555'} fontSize={isPoster ? 9 : (isHovered ? 14 : 12)} fontWeight={isHovered ? 400 : 400} fontFamily='"Pretendard Variable", "Pretendard", sans-serif'
                                     style={{ transition: 'all 0.2s ease' }}
                                 >
                                     {ev.name}
@@ -217,10 +268,10 @@ export default function DynamicTimelineChart() {
                                 {isHovered && (
                                     <motion.g initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                                         <rect x={cx - 125} y={cy + 15} width="250" height="40" rx="6" fill="#fff" stroke="#eee" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.1))" />
-                                        <text x={cx} y={cy + 30} textAnchor="middle" fill="#666" fontSize="11" fontFamily='"Pretendard Variable", "Pretendard", sans-serif' fontWeight="400">
-                                            {viewMode === 'fiction' && isFictionExaggerated ? 'Exaggerated Force: 5-7x Inflation' : ev.desc}
+                                        <text x={cx} y={cy + 30} textAnchor="middle" fill="#666" fontSize={isPoster ? 9 : 11} fontFamily='"Pretendard Variable", "Pretendard", sans-serif' fontWeight="400">
+                                            {effectiveMode === 'fiction' && isFictionExaggerated ? 'Exaggerated Force: 5-7x Inflation' : ev.desc}
                                         </text>
-                                        <text x={cx} y={cy + 45} textAnchor="middle" fill="#999" fontSize="9" fontFamily='"Pretendard Variable", "Pretendard", sans-serif' fontWeight="400">
+                                        <text x={cx} y={cy + 45} textAnchor="middle" fill="#999" fontSize={isPoster ? 9 : 9} fontFamily='"Pretendard Variable", "Pretendard", sans-serif' fontWeight="400">
                                             {ev.year} AD
                                         </text>
                                     </motion.g>
