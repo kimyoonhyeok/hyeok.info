@@ -83,7 +83,7 @@ export default function ColorMirroring() {
                             width: '100%',
                             height: '100%',
                             objectFit: 'contain',
-                            backgroundColor: '#000' // Better contrast for video frames
+                            backgroundColor: '#000'
                         }}
                     />
                     <button
@@ -111,72 +111,74 @@ export default function ColorMirroring() {
                     </button>
                 </>
             ) : (
-                <>
-                    <button
-                        onClick={startMirroring}
-                        style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            background: 'transparent',
-                            border: 'none',
-                            color: '#111',
-                            fontSize: '18px',
-                            fontWeight: 400,
-                            fontFamily: '"Pretendard", sans-serif',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            transition: 'color 0.2s ease',
-                            zIndex: 10
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.color = '#555'}
-                        onMouseLeave={(e) => e.currentTarget.style.color = '#111'}
-                    >
-                        &rarr; Initialize Mobile Mirroring
-                    </button>
+                /* Flex column layout — no absolute positioning to prevent mobile overlap */
+                <div style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    padding: '2rem',
+                    boxSizing: 'border-box',
+                }}>
+                    {/* Top: empty spacer */}
+                    <div />
 
+                    {/* Center: Initialize button */}
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <button
+                            onClick={startMirroring}
+                            style={{
+                                background: 'transparent',
+                                border: 'none',
+                                color: '#111',
+                                fontSize: '18px',
+                                fontWeight: 400,
+                                fontFamily: '"Pretendard", sans-serif',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                transition: 'color 0.2s ease',
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.color = '#555'}
+                            onMouseLeave={(e) => e.currentTarget.style.color = '#111'}
+                        >
+                            &rarr; Initialize Mobile Mirroring
+                        </button>
+                    </div>
+
+                    {/* Bottom: instructions + optional error */}
                     <div style={{
-                        position: 'absolute',
-                        bottom: '2rem',
-                        left: '2rem',
                         color: '#666',
                         fontFamily: '"Pretendard", sans-serif',
                         fontSize: '18px',
                         fontWeight: 400,
                         lineHeight: 1.6,
                         textAlign: 'left',
-                        zIndex: 10
+                        width: '100%',
                     }}>
-                        <div style={{ marginBottom: '16px', color: '#111' }}>
+                        {errorMsg && (
+                            <div style={{
+                                color: '#E74C3C',
+                                fontSize: '14px',
+                                lineHeight: 1.4,
+                                marginBottom: '12px',
+                            }}>
+                                {errorMsg}
+                            </div>
+                        )}
+                        <div style={{ marginBottom: '10px', color: '#111' }}>
                             Mirror iPhone Screen (CVS Simulate)
                         </div>
-                        <div>
+                        <div style={{ fontSize: '15px' }}>
                             1. Connect iPhone via USB and open QuickTime Player<br />
                             2. File &gt; New Movie Recording &gt; Select iPhone<br />
                             3. Click the button in the center, go to Window and select QuickTime.
                         </div>
                     </div>
-
-                    {errorMsg && (
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '8rem',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            color: '#E74C3C',
-                            fontSize: '16px',
-                            maxWidth: '400px',
-                            lineHeight: 1.4,
-                            textAlign: 'center',
-                            zIndex: 10
-                        }}>
-                            {errorMsg}
-                        </div>
-                    )}
-                </>
+                </div>
             )}
         </div>
     );
