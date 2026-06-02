@@ -8,19 +8,31 @@ type PresentationGraduationProps = {
     onClose: () => void;
 };
 
-const BookPage = React.forwardRef<HTMLDivElement, { bgImage: string; bgPosition: string; bgSize: string; isCover?: boolean }>((props, ref) => {
+const BookPage = React.forwardRef<HTMLDivElement, { bgImage?: string; bgPosition?: string; bgSize?: string; children?: React.ReactNode }>((props, ref) => {
     return (
-        <div className="demoPage" ref={ref}>
-            <div style={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#fff',
-                boxShadow: 'inset 0 0 10px rgba(0,0,0,0.1)',
-                backgroundImage: props.bgImage ? `url(${props.bgImage})` : 'none',
-                backgroundPosition: props.bgPosition,
-                backgroundSize: props.bgSize,
-                backgroundRepeat: 'no-repeat',
-            }} />
+        <div className="demoPage" ref={ref} style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#fff' }}>
+            {props.bgImage && (
+                <div style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundImage: `url('${props.bgImage}')`,
+                    backgroundPosition: props.bgPosition || 'center',
+                    backgroundSize: props.bgSize || '100% 100%',
+                    backgroundRepeat: 'no-repeat',
+                }} />
+            )}
+            {props.children && (
+                <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: props.bgImage ? 'transparent' : '#fff',
+                }}>
+                    {props.children}
+                </div>
+            )}
         </div>
     );
 });
@@ -80,7 +92,7 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isBookOpen, setIsBookOpen] = useState(false);
     const [activeRef2, setActiveRef2] = useState<{ id: number; x: number; y: number } | null>(null);
-    const totalSlides = 5; // 0: Title, 1-3: Text, 4: Book Cover
+    const totalSlides = 7; // 0: Title, 1-3: Text, 4: Book Cover, 5: Exhibition Sketch, 6: Outro/Copyright
     const isScrolling = useRef(false);
 
     useEffect(() => { setMounted(true); }, []);
@@ -123,37 +135,50 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
 
     if (!mounted) return null;
 
-    // Helper to generate the pages properly based on spreads
     const renderBookPages = () => {
-        const pages = [];
+        const pages: React.ReactNode[] = [];
         
-        // Page 1: Blank White Page (Left side of the cover spread)
-        pages.push(
-            <BookPage key="p_blank_start" bgImage="" bgPosition="center" bgSize="cover" />
-        );
-
-        // Page 2: Cover page (Right page, Cover)
+        // Page 1: Cover (shown alone on the right because showCover=true)
         pages.push(
             <BookPage 
                 key="p1" 
-                bgImage="/inu-score/visual communication design/graduation/01.jpg" 
-                bgPosition="center" 
-                bgSize="cover" 
+                bgImage="/inu-score/visual communication design/graduation/page_01.jpg" 
             />
         );
 
-        // Pages 2 to 35: 02.jpg to 35.jpg
-        for (let i = 2; i <= 35; i++) {
-            const imgPath = `/inu-score/visual communication design/graduation/${String(i).padStart(2, '0')}.jpg`;
+        // Inner pages: page_02.jpg – page_34.jpg
+        // These are double-wide spreads in the PDF, so we split them into left and right halves.
+        for (let i = 2; i <= 34; i++) {
+            const imgPath = `/inu-score/visual communication design/graduation/page_${String(i).padStart(2, '0')}.jpg`;
+            
+            // Left half of the spread
             pages.push(
                 <BookPage 
-                    key={`p${i}`} 
+                    key={`p${i}_left`} 
                     bgImage={imgPath} 
-                    bgPosition="center" 
-                    bgSize="cover" 
+                    bgPosition="left center" 
+                    bgSize="200% 100%" 
+                />
+            );
+            
+            // Right half of the spread
+            pages.push(
+                <BookPage 
+                    key={`p${i}_right`} 
+                    bgImage={imgPath} 
+                    bgPosition="right center" 
+                    bgSize="200% 100%" 
                 />
             );
         }
+
+        // Back cover: page_35.jpg (Left page, shown alone at the end because showCover=true and total is even)
+        pages.push(
+            <BookPage 
+                key="p35" 
+                bgImage="/inu-score/visual communication design/graduation/page_35.jpg" 
+            />
+        );
 
         return pages;
     };
@@ -308,12 +333,27 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
                                             onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
                                             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                                         >
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img 
-                                                src="/inu-score/visual communication design/graduation/01.jpg" 
-                                                alt="Book Cover" 
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '2px' }} 
-                                            />
+                                            <div style={{
+                                                width: '100%',
+                                                height: '100%',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                backgroundColor: '#1a1a1a',
+                                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                                borderRadius: '2px',
+                                            }}>
+                                                <span style={{
+                                                    fontFamily: '"garamond-premier-pro", Georgia, "Times New Roman", serif',
+                                                    fontSize: '28px',
+                                                    fontWeight: 400,
+                                                    color: '#ffffff',
+                                                    letterSpacing: '0.15em',
+                                                    textTransform: 'uppercase'
+                                                }}>
+                                                    Cover
+                                                </span>
+                                            </div>
                                             {/* Hover Overlay with Magnifying Glass */}
                                             <div style={{
                                                 position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
@@ -335,6 +375,43 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* SLIDE 5: EXHIBITION SKETCH */}
+                    <div className={styles.slide}>
+                        <div className={styles.chapterLayout}>
+                            <div className={styles.chapterLeft}>
+                                <h2 className={styles.chapterTitle}>
+                                    <span className={styles.chapterNum}>5.</span> 전시 스케치
+                                </h2>
+                            </div>
+                            <div className={styles.chapterRight}>
+                                <div className={styles.chapterBody}>
+                                    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src="/inu-score/visual communication design/graduation/exhibition_sketch_v3_white_hanji.png"
+                                            alt="Exhibition Sketch"
+                                            style={{ 
+                                                width: '100%', 
+                                                maxWidth: '800px', 
+                                                height: 'auto', 
+                                                display: 'block' 
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* SLIDE 6: OUTRO / COPYRIGHT */}
+                    <div className={styles.slide}>
+                        <div className={styles.titleContainer}>
+                            <h1 className={styles.mainTitle}>
+                                (c) 2026. Yoonhyeok Kim. all rights reserved.
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -379,14 +456,14 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
                         {/* @ts-expect-error - react-pageflip types are incomplete and do not cover all props perfectly */}
                         <HTMLFlipBook
                             width={450}
-                            height={600}
+                            height={580}
                             size="stretch"
                             minWidth={315}
                             maxWidth={1000}
                             minHeight={400}
                             maxHeight={1533}
                             maxShadowOpacity={0.1}
-                            showCover={false}
+                            showCover={true}
                             mobileScrollSupport={true}
                             className="demo-book"
                             style={{ margin: '0 auto', boxShadow: '0 30px 60px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.06)' }}
