@@ -136,15 +136,15 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
         pages.push(
             <BookPage 
                 key="p1" 
-                bgImage="/inu-score/visual communication design/graduation/졸업전시_14주차_김윤혁.jpg" 
+                bgImage="/inu-score/visual communication design/graduation/01.jpg" 
                 bgPosition="center" 
                 bgSize="cover" 
             />
         );
 
-        // Pages 2 to 35: 졸업전시_14주차_김윤혁2.jpg to 졸업전시_14주차_김윤혁35.jpg
+        // Pages 2 to 35: 02.jpg to 35.jpg
         for (let i = 2; i <= 35; i++) {
-            const imgPath = `/inu-score/visual communication design/graduation/졸업전시_14주차_김윤혁${i}.jpg`;
+            const imgPath = `/inu-score/visual communication design/graduation/${String(i).padStart(2, '0')}.jpg`;
             pages.push(
                 <BookPage 
                     key={`p${i}`} 
@@ -310,7 +310,7 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
                                         >
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img 
-                                                src="/inu-score/visual communication design/graduation/졸업전시_14주차_김윤혁.jpg" 
+                                                src="/inu-score/visual communication design/graduation/01.jpg" 
                                                 alt="Book Cover" 
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '2px' }} 
                                             />
