@@ -7,6 +7,7 @@ type NodeGraphProps = {
     onOpenMainPoster: () => void;
     onOpenApp: () => void;
     onOpenGraduation: () => void;
+    onOpenGraduation2: () => void;
     onOpenInfographic: () => void;
     onOpenInfographicMainPoster: () => void;
     connectedNodes: string[];
@@ -51,6 +52,7 @@ const nodesData: NodeItem[] = [
                 label: 'Graduation Project',
                 children: [
                     { id: 'gp_pt1', label: '1st PT', clickable: true },
+                    { id: 'gp_pt2', label: '2nd PT', clickable: true },
                 ]
             },
         ]
@@ -59,7 +61,7 @@ const nodesData: NodeItem[] = [
 
 type Pos = { x: number, y: number };
 
-export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, onOpenInfographic, onOpenInfographicMainPoster, connectedNodes, setConnectedNodes }: NodeGraphProps) {
+export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, onOpenGraduation2, onOpenInfographic, onOpenInfographicMainPoster, connectedNodes, setConnectedNodes }: NodeGraphProps) {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [dragLine, setDragLine] = useState<{ active: boolean, x: number, y: number, sourceId: string } | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -113,7 +115,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
-                            dragLine.sourceId === 'gp' ? ['gp_pt1'] :
+                            dragLine.sourceId === 'gp' ? ['gp_pt1', 'gp_pt2'] :
                                 dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] : [];
 
                 possibleTargets.forEach((id) => {
@@ -138,7 +140,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                 const possibleTargets = dragLine.sourceId === 'vcd' ? ['sp', 'gp'] :
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
-                            dragLine.sourceId === 'gp' ? ['gp_pt1'] :
+                            dragLine.sourceId === 'gp' ? ['gp_pt1', 'gp_pt2'] :
                                 dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] : [];
 
                 if (hoveredNode && possibleTargets.includes(hoveredNode)) {
@@ -165,8 +167,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                     if (!connectedNodes.includes(targetId)) {
                         setConnectedNodes(prev => {
                             const next = [...prev, targetId!];
-                            // auto-connect gp when gp_pt1 is connected
-                            if (targetId === 'gp_pt1' && !prev.includes('gp')) {
+                            // auto-connect gp when gp_pt1 or gp_pt2 is connected
+                            if ((targetId === 'gp_pt1' || targetId === 'gp_pt2') && !prev.includes('gp')) {
                                 next.push('gp');
                             }
                             if (targetId === 'infographic_pt1' && !prev.includes('n2')) {
@@ -188,6 +190,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         setTimeout(() => onOpenApp(), 400);
                     } else if (targetId === 'gp_pt1') {
                         setTimeout(() => onOpenGraduation(), 400);
+                    } else if (targetId === 'gp_pt2') {
+                        setTimeout(() => onOpenGraduation2(), 400);
                     } else if (targetId === 'infographic_pt1') {
                         setTimeout(() => onOpenInfographic(), 400);
                     } else if (targetId === 'infographic_main_poster') {
@@ -237,7 +241,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
         const isVcdHovered = hoveredNode === 'vcd' && (targetId === 'sp' || targetId === 'gp');
         const isSpHovered = hoveredNode === 'sp' && ['main', 'app', 'pt'].includes(targetId);
         const isPtHovered = hoveredNode === 'pt' && ['week1', 'week2'].includes(targetId);
-        const isGpHovered = hoveredNode === 'gp' && ['gp_pt1'].includes(targetId);
+        const isGpHovered = hoveredNode === 'gp' && ['gp_pt1', 'gp_pt2'].includes(targetId);
         const isN2Hovered = hoveredNode === 'n2' && ['infographic_pt1', 'infographic_main_poster'].includes(targetId);
 
         const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered || isGpHovered || isN2Hovered;
@@ -318,6 +322,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
 
                         {/* GP to its children (only if connected) */}
                         {connectedNodes.includes('gp_pt1') && renderLink('gp', 'gp_pt1')}
+                        {connectedNodes.includes('gp_pt2') && renderLink('gp', 'gp_pt2')}
 
                         {/* n2 to its children */}
                         {connectedNodes.includes('infographic_pt1') && renderLink('n2', 'infographic_pt1')}
@@ -475,6 +480,7 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                                                                                     if (sub.id === 'main') onOpenMainPoster();
                                                                                     else if (sub.id === 'app') onOpenApp();
                                                                                     else if (sub.id === 'gp_pt1') onOpenGraduation();
+                                                                                    else if (sub.id === 'gp_pt2') onOpenGraduation2();
                                                                                 }
                                                                             }}
                                                                             style={{

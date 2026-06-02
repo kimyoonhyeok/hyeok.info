@@ -9,6 +9,7 @@ import NodeGraph from "./NodeGraph";
 import ColorVisionSimulator from "./ColorVisionSimulator";
 import PresentationWeek2 from "./PresentationWeek2";
 import PresentationGraduation from "./PresentationGraduation";
+import PresentationGraduation2 from "./PresentationGraduation2";
 import PresentationInfographic from "./PresentationInfographic";
 import InfographicMainPoster from "./InfographicMainPoster";
 import styles from "./pt.module.css";
@@ -50,7 +51,7 @@ import { useRouter } from "next/navigation";
 
 export default function PresentationPage() {
     const router = useRouter();
-    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app' | 'graduation' | 'infographic' | 'infographic-poster'>('graph');
+    const [view, setView] = useState<'graph' | 'presentation' | 'presentation2' | 'poster' | 'app' | 'graduation' | 'graduation2' | 'infographic' | 'infographic-poster'>('graph');
     const [connectedNodes, setConnectedNodes] = useState<string[]>([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [subSlide, setSubSlide] = useState(0);
@@ -78,6 +79,10 @@ export default function PresentationPage() {
             return;
         }
         if (view === 'graduation') {
+            document.body.style.overflow = 'hidden';
+            return;
+        }
+        if (view === 'graduation2') {
             document.body.style.overflow = 'hidden';
             return;
         }
@@ -222,6 +227,7 @@ export default function PresentationPage() {
             onOpenMainPoster={() => setView('poster')}
             onOpenApp={() => setView('app')}
             onOpenGraduation={() => setView('graduation')}
+            onOpenGraduation2={() => setView('graduation2')}
             onOpenInfographic={() => router.push('/infographic')}
             onOpenInfographicMainPoster={() => setView('infographic-poster')}
             connectedNodes={connectedNodes}
@@ -239,6 +245,10 @@ export default function PresentationPage() {
 
     if (view === 'graduation') {
         return <PresentationGraduation onClose={() => setView('graph')} />;
+    }
+
+    if (view === 'graduation2') {
+        return <PresentationGraduation2 onClose={() => setView('graph')} />;
     }
 
     if (view === 'infographic') {
