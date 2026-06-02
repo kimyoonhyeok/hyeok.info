@@ -132,33 +132,28 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
             <BookPage key="p_blank_start" bgImage="" bgPosition="center" bgSize="cover" />
         );
 
-        // Page 2: 01.png (Right page, Cover)
+        // Page 2: Cover page (Right page, Cover)
         pages.push(
-            <BookPage key="p1" bgImage="/inu-score/visual communication design/graduation/01.png" bgPosition="center" bgSize="cover" />
+            <BookPage 
+                key="p1" 
+                bgImage="/inu-score/visual communication design/graduation/졸업전시_14주차_김윤혁.jpg" 
+                bgPosition="center" 
+                bgSize="cover" 
+            />
         );
 
-        // Pages 2 to 21: 02.png to 11.png (Spreads)
-        for (let i = 2; i <= 11; i++) {
-            const imgPath = `/inu-score/visual communication design/graduation/${String(i).padStart(2, '0')}.png`;
-            // Left half of the spread
+        // Pages 2 to 35: 졸업전시_14주차_김윤혁2.jpg to 졸업전시_14주차_김윤혁35.jpg
+        for (let i = 2; i <= 35; i++) {
+            const imgPath = `/inu-score/visual communication design/graduation/졸업전시_14주차_김윤혁${i}.jpg`;
             pages.push(
-                <BookPage key={`p${i}_left`} bgImage={imgPath} bgPosition="left center" bgSize="200% 100%" />
-            );
-            // Right half of the spread
-            pages.push(
-                <BookPage key={`p${i}_right`} bgImage={imgPath} bgPosition="right center" bgSize="200% 100%" />
+                <BookPage 
+                    key={`p${i}`} 
+                    bgImage={imgPath} 
+                    bgPosition="center" 
+                    bgSize="cover" 
+                />
             );
         }
-
-        // Page 23: 12.png (Left page, Back Cover)
-        pages.push(
-            <BookPage key="p22" bgImage="/inu-score/visual communication design/graduation/12.png" bgPosition="center" bgSize="cover" />
-        );
-
-        // Page 24: Blank White Page (Right side of the back cover spread)
-        pages.push(
-            <BookPage key="p_blank_end" bgImage="" bgPosition="center" bgSize="cover" />
-        );
 
         return pages;
     };
@@ -315,7 +310,7 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
                                         >
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img 
-                                                src="/inu-score/visual communication design/graduation/01.png" 
+                                                src="/inu-score/visual communication design/graduation/졸업전시_14주차_김윤혁.jpg" 
                                                 alt="Book Cover" 
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '2px' }} 
                                             />
@@ -349,7 +344,9 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
             {isBookOpen && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-                    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
                     zIndex: 9999,
                     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
                 }}>
@@ -359,19 +356,19 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
                         style={{
                             position: 'absolute', top: '5.625rem', left: '50px',
                             background: 'transparent', border: 'none', fontSize: '18px',
-                            cursor: 'pointer', color: 'rgba(255,255,255,0.8)', display: 'flex',
+                            cursor: 'pointer', color: 'rgba(0, 0, 0, 0.7)', display: 'flex',
                             alignItems: 'center', gap: '8px', transition: 'color 0.2s ease',
                             zIndex: 10000,
                         }}
-                        onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
+                        onMouseEnter={e => (e.currentTarget.style.color = '#000')}
+                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(0, 0, 0, 0.7)')}
                     >
                         &larr; Back
                     </button>
 
                     {/* Instruction */}
                     <div style={{
-                        position: 'absolute', top: '40px', color: 'rgba(255,255,255,0.4)',
+                        position: 'absolute', top: '40px', color: 'rgba(0, 0, 0, 0.4)',
                         fontSize: '12px', letterSpacing: '0.5px', textTransform: 'uppercase'
                     }}>
                         Drag corners or click to turn pages
@@ -392,7 +389,7 @@ export default function PresentationGraduation2({ onClose }: PresentationGraduat
                             showCover={false}
                             mobileScrollSupport={true}
                             className="demo-book"
-                            style={{ margin: '0 auto', boxShadow: '0 0 30px rgba(0,0,0,0.5)' }}
+                            style={{ margin: '0 auto', boxShadow: '0 30px 60px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.06)' }}
                         >
                             {renderBookPages()}
                         </HTMLFlipBook>
