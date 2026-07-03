@@ -135,7 +135,7 @@ export default function InfographicMainPoster({ onClose }: { onClose?: () => voi
                     </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', textAlign: 'left', paddingTop: '6px' }}>
                         <div style={{ ...POSTER_DESC_FONT, textAlign: 'left', maxWidth: '400px', lineHeight: '1.2' }}>
-                            A comparative structural analysis between Luo Guanzhong's novel <i>Sanguo Yanyi</i> and Chen Shou's historical record <i>Sanguozhi</i>.
+                            A comparative structural analysis between Luo Guanzhong&apos;s novel <i>Sanguo Yanyi</i> and Chen Shou&apos;s historical record <i>Sanguozhi</i>.
                             <br/>
                             <span style={{ color: '#888', fontSize: '9pt' }}>Visualizing Fiction vs Reality  |  Scale: 184–280 AD</span>
                         </div>
@@ -157,7 +157,7 @@ export default function InfographicMainPoster({ onClose }: { onClose?: () => voi
                         <div style={SECTION_TITLE_FONT}>01. The Root</div>
                         <div style={{ ...POSTER_DESC_FONT, flexShrink: 0 }}>
                             <strong>Core Narrative & Irony</strong><br/><br/>
-                            184-280 AD. A century of chaos initiated by the Yellow Turban Rebellion. While Wei, Shu, and Wu fought for supremacy, the ultimate victor was the Sima clan's Jin Dynasty. This irony highlights the fleeting nature of power.<br/><br/>
+                            184-280 AD. A century of chaos initiated by the Yellow Turban Rebellion. While Wei, Shu, and Wu fought for supremacy, the ultimate victor was the Sima clan&apos;s Jin Dynasty. This irony highlights the fleeting nature of power.<br/><br/>
                             <span style={{ fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif', fontSize: '11pt', display: 'block', marginTop: '16px' }}>56,486,856</span>
                             <span style={{ fontSize: '8pt', color: '#888' }}>Han Dynasty Census (157 AD)</span>
                         </div>
