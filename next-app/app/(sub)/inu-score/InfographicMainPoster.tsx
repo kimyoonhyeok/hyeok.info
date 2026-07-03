@@ -1,132 +1,68 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-
+import React from 'react';
 import DynamicTimelineChart from './DynamicTimelineChart';
-import DemographicChart from './DemographicChart';
-import WarlordFlowChart from './WarlordFlowChart';
-import TerritorialMap from './TerritorialMap';
 import BattleBubbleChart from './BattleBubbleChart';
+import WarlordFlowChart from './WarlordFlowChart';
+import DemographicChart from './DemographicChart';
+import TerritorialMap from './TerritorialMap';
 
-const LINE = '#1a1a1a';
-const BG = '#ffffff';
+const LINE = '#666666'; // 얇고 연한 회색 선 (레퍼런스의 와이어프레임 느낌)
+const BG = '#FBFBF9'; // 따뜻한 느낌의 오프화이트/종이 질감 배경
 
-// Poster Typography Strategy
-// Main Title size: 20px
-// Subtitle / Descriptions size: 9px (exactly 9px with 14.56px line-height for visual neatness)
 const POSTER_TITLE_FONT = {
-    fontFamily: '"IBM Plex Sans", sans-serif',
-    fontSize: '20px',
-    fontWeight: 500,
-    color: LINE,
-    letterSpacing: '-0.02em'
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    fontSize: '19pt',
+    fontWeight: 400,
+    color: '#222222',
+    letterSpacing: '-0.02em',
+    marginBottom: '16px'
 };
 
 const POSTER_DESC_FONT = {
-    fontFamily: '"IBM Plex Sans", sans-serif',
-    fontSize: '9px',
-    lineHeight: '14.56px',
-    fontWeight: 400,
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    fontSize: '10pt', // 80% of 12pt
+    lineHeight: '1.6',
+    fontWeight: 300,
     color: '#444444',
     letterSpacing: '-0.01em'
 };
 
+const SECTION_TITLE_FONT = {
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    fontSize: '13pt', // 80% of 16pt
+    fontWeight: 400,
+    color: '#222222',
+    marginBottom: '12px',
+    borderBottom: `0.5px solid ${LINE}`,
+    paddingBottom: '8px',
+    display: 'inline-block'
+};
+
 export default function InfographicMainPoster({ onClose }: { onClose?: () => void }) {
-    const [isZoomed, setIsZoomed] = useState(false);
-    const [zoomScale, setZoomScale] = useState(1);
-    const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    // Dynamic trackpad pinch-to-zoom capture with non-passive event listener
-    useEffect(() => {
-        if (!isZoomed) return;
-        const container = containerRef.current;
-        if (!container) return;
-
-        const handleWheel = (e: WheelEvent) => {
-            e.preventDefault(); // Stop default browser zoom and page scroll inside modal
-
-            if (e.ctrlKey) {
-                // Pinch zoom gesture
-                setZoomScale(prev => {
-                    const nextScale = Math.max(1, Math.min(8, prev - e.deltaY * 0.015));
-                    return nextScale;
-                });
-            } else {
-                // Trackpad two-finger swipe translates to panning when zoomed in
-                if (zoomScale > 1) {
-                    setPanOffset(prev => ({
-                        x: prev.x - e.deltaX * 0.75,
-                        y: prev.y - e.deltaY * 0.75
-                    }));
-                }
-            }
-        };
-
-        container.addEventListener('wheel', handleWheel, { passive: false });
-        return () => {
-            container.removeEventListener('wheel', handleWheel);
-        };
-    }, [isZoomed, zoomScale]);
-
-    // Reset offset when scale goes back to 1x
-    useEffect(() => {
-        if (zoomScale === 1) {
-            setPanOffset({ x: 0, y: 0 });
-        }
-    }, [zoomScale]);
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-        if (zoomScale <= 1) return;
-        setIsDragging(true);
-        setDragStart({ x: e.clientX - panOffset.x, y: e.clientY - panOffset.y });
-    };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!isDragging) return;
-        setPanOffset({
-            x: e.clientX - dragStart.x,
-            y: e.clientY - dragStart.y
-        });
-    };
-
-    const handleMouseUp = () => {
-        setIsDragging(false);
-    };
-
-    const handleDoubleClick = () => {
-        if (zoomScale > 1) {
-            setZoomScale(1);
-            setPanOffset({ x: 0, y: 0 });
-        } else {
-            setZoomScale(2.5);
-        }
-    };
+    // 인쇄용 고정 사이즈 (1189px x 841px)
+    const POSTER_WIDTH = 1189;
+    const POSTER_HEIGHT = 841;
 
     return (
         <div style={{
-            width: '100%',
-            height: 'calc(100vh - 120px)',
-            minHeight: 'calc(100vh - 120px)',
-            backgroundColor: BG,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '4vh 4vw',
-            boxSizing: 'border-box',
-            fontFamily: '"IBM Plex Sans", sans-serif',
-            position: 'relative'
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: '#e5e5e5', 
+            overflow: 'auto',
+            fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+            position: 'relative',
+            padding: '40px 0', // Add padding so it doesn't touch the edges when scrolling
+            boxSizing: 'border-box'
         }}>
-            {/* Google Fonts & Custom CSS Import */}
+            {/* Google Fonts */}
             <style dangerouslySetInnerHTML={{
                 __html: `
-                @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
                 
                 @media print {
-                    .poster-card { box-shadow: none !important; }
                     .back-btn { display: none !important; }
+                    body { background-color: white !important; }
                 }
                 
                 .chart-container {
@@ -134,13 +70,13 @@ export default function InfographicMainPoster({ onClose }: { onClose?: () => voi
                     position: relative;
                     overflow: hidden;
                     background: transparent;
+                    box-shadow: none !important; 
                 }
-
-                .chart-container > div {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
+                
+                /* 와이어프레임 스타일 공통 선형 요소 */
+                .wireframe-box {
+                    border: 0.5px solid ${LINE};
+                    background: transparent;
                 }
                 `
             }} />
@@ -151,23 +87,18 @@ export default function InfographicMainPoster({ onClose }: { onClose?: () => voi
                     className="back-btn"
                     onClick={onClose}
                     style={{
-                        position: 'absolute',
-                        top: '2rem',
-                        left: '50px',
+                        position: 'fixed',
+                        top: '24px',
+                        left: '24px',
                         zIndex: 50,
-                        background: 'transparent',
-                        border: 'none',
-                        padding: '0',
-                        fontSize: '18px',
+                        background: 'white',
+                        border: '1px solid #ddd',
+                        padding: '8px 16px',
+                        fontSize: '12pt',
                         cursor: 'pointer',
-                        color: '#666',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        transition: 'color 0.2s ease'
+                        color: '#222',
+                        borderRadius: '4px'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#111'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
                 >
                     &larr; Back
                 </button>
@@ -176,301 +107,179 @@ export default function InfographicMainPoster({ onClose }: { onClose?: () => voi
             {/* ═══ POSTER CANVAS ═══ */}
             <div 
                 className="poster-card" 
-                onClick={() => setIsZoomed(true)}
                 style={{
-                    width: 'calc(min(100vw - 8vw, (100vh - 120px - 8vh) * 1.4146))',
-                    height: 'calc(min(100vw - 8vw, (100vh - 120px - 8vh) * 1.4146) * (1189 / 1682))',
+                    width: `${POSTER_WIDTH}px`,
+                    height: `${POSTER_HEIGHT}px`,
+                    minWidth: `${POSTER_WIDTH}px`,
+                    minHeight: `${POSTER_HEIGHT}px`,
+                    margin: '0 auto', // Standard block centering prevents top clipping
                     backgroundColor: BG,
-                    boxShadow: '0 8px 48px 0 rgba(0,0,0,0.13), 0 2px 8px 0 rgba(0,0,0,0.07)',
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative',
                     overflow: 'hidden',
-                    color: LINE,
-                    cursor: 'zoom-in',
-                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease',
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.01)';
-                    e.currentTarget.style.boxShadow = '0 12px 60px 0 rgba(0,0,0,0.18), 0 4px 16px 0 rgba(0,0,0,0.1)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'none';
-                    e.currentTarget.style.boxShadow = '0 8px 48px 0 rgba(0,0,0,0.13), 0 2px 8px 0 rgba(0,0,0,0.07)';
+                    color: '#222',
+                    boxShadow: 'none', // 모든 그림자 제거
+                    border: '0.5px solid #ccc',
+                    padding: '32px', // Reduced from 48px
+                    boxSizing: 'border-box'
                 }}
             >
-                {/* --- TITLE --- */}
-                <div style={{
-                    width: '100%',
-                    padding: '32px 32px 0 32px',
-                    boxSizing: 'border-box',
-                    zIndex: 10
-                }}>
-                    <span style={POSTER_TITLE_FONT}>
-                        Final Project Theme : Three Kingdoms Period (184-280 AD)
-                    </span>
-                </div>
-
-                {/* --- TOP HALF (Romance) --- */}
-                <div style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: '32px 32px 16px',
-                    position: 'relative',
-                }}>
-                    <div style={{ ...POSTER_DESC_FONT, marginBottom: '8px' }}>
-                        Romance — Luo Guanzhong (c. 1330–1400), <i>Sanguo Yanyi</i> (三國演義), 14th c.
+                {/* --- HEADER --- */}
+                <div style={{ width: '100%', marginBottom: '24px', display: 'flex', gap: '48px', alignItems: 'flex-start', borderBottom: `0.5px solid ${LINE}`, paddingBottom: '16px' }}>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ ...POSTER_TITLE_FONT, marginBottom: 0, lineHeight: 1.1 }}>
+                            Differences between History and Romance<br/>
+                            <span style={{ fontSize: '15pt', color: '#666' }}>The Three Kingdoms (184-280 AD)</span>
+                        </div>
                     </div>
-
-                    <div style={{ flex: 1, display: 'flex', gap: '24px' }}>
-                        <div className="chart-container">
-                            <DynamicTimelineChart isPoster={true} fixedMode="fiction" />
-                        </div>
-                        <div className="chart-container">
-                            <BattleBubbleChart isPoster={true} fixedMode="fiction" />
-                        </div>
-                        <div className="chart-container">
-                            <WarlordFlowChart isPoster={true} />
-                        </div>
-                        <div className="chart-container" style={{ flex: 1.5 }}>
-                            <TerritorialMap isPoster={true} />
-                        </div>
-                        <div className="chart-container">
-                            <DemographicChart isPoster={true} />
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', textAlign: 'left', paddingTop: '6px' }}>
+                        <div style={{ ...POSTER_DESC_FONT, textAlign: 'left', maxWidth: '400px', lineHeight: '1.2' }}>
+                            A comparative structural analysis between Luo Guanzhong's novel <i>Sanguo Yanyi</i> and Chen Shou's historical record <i>Sanguozhi</i>.
+                            <br/>
+                            <span style={{ color: '#888', fontSize: '9pt' }}>Visualizing Fiction vs Reality  |  Scale: 184–280 AD</span>
                         </div>
                     </div>
                 </div>
 
-                {/* --- CENTRAL DIVIDER HAIRLINE --- */}
-                <div style={{ width: '100%', height: '1px', backgroundColor: LINE, opacity: 0.2 }} />
-
-                {/* --- BOTTOM HALF (Historic) --- */}
-                <div style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: '32px 32px 20px',
-                    position: 'relative',
-                }}>
-                    <div style={{ ...POSTER_DESC_FONT, marginBottom: '8px' }}>
-                        Historic — Chen Shou (233–297), <i>Sanguozhi</i> (三國志), 289 AD.
+                {/* --- MAIN LAYOUT (1 + 3) --- */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '24px', minHeight: 0 }}>
+                    
+                    {/* [Phase 1] 공통점: 난세의 시작 (Left Column) */}
+                    <div style={{ 
+                        flex: '0 0 16%', 
+                        borderRight: `0.5px solid ${LINE}`, 
+                        paddingRight: '32px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        minHeight: 0
+                    }}>
+                        <div style={SECTION_TITLE_FONT}>01. The Root</div>
+                        <div style={{ ...POSTER_DESC_FONT, flexShrink: 0 }}>
+                            <strong>Core Narrative & Irony</strong><br/><br/>
+                            184-280 AD. A century of chaos initiated by the Yellow Turban Rebellion. While Wei, Shu, and Wu fought for supremacy, the ultimate victor was the Sima clan's Jin Dynasty. This irony highlights the fleeting nature of power.<br/><br/>
+                            <span style={{ fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif', fontSize: '11pt', display: 'block', marginTop: '16px' }}>56,486,856</span>
+                            <span style={{ fontSize: '8pt', color: '#888' }}>Han Dynasty Census (157 AD)</span>
+                        </div>
+                        {/* 다이어그램 노드 느낌의 장식 */}
+                        <div style={{ flex: 1, marginTop: '32px', position: 'relative', display: 'flex', justifyContent: 'flex-start', minHeight: 0 }}>
+                            <div style={{ width: '0.5px', height: '100%', backgroundColor: LINE, position: 'absolute', left: '7.5px' }}></div>
+                            
+                            {[
+                                { y: '5%', label: '157 AD: 56.4M Pop.\n(Late Han Peak)' },
+                                { y: '20%', label: '184 AD: Yellow Turban\nRebellion' },
+                                { y: '35%', label: '200 AD: Battle of\nGuandu' },
+                                { y: '50%', label: '208 AD: Battle of\nRed Cliffs' },
+                                { y: '65%', label: '220 AD: Wei Established' },
+                                { y: '80%', label: '263 AD: Fall of Shu' },
+                                { y: '95%', label: '280 AD: Jin Unification\n(16.1M Pop.)' },
+                            ].map((node, i) => (
+                                <div key={i} style={{ position: 'absolute', top: node.y, display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'flex-start' }}>
+                                    <div style={{ width: '16px', height: '16px', border: `0.5px solid ${LINE}`, borderRadius: '50%', backgroundColor: BG, zIndex: 2 }}></div>
+                                    <div style={{ marginLeft: '12px', ...POSTER_DESC_FONT, fontSize: '8pt', color: '#666', maxWidth: '120px', whiteSpace: 'pre-line', lineHeight: '1.2' }}>
+                                        {node.label}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <div style={{ flex: 1, display: 'flex', gap: '24px' }}>
-                        <div className="chart-container">
-                            <DynamicTimelineChart isPoster={true} fixedMode="historical" />
+                    {/* Right Columns (Set 1, Set 2, Set 3) */}
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '24px', minHeight: 0 }}>
+                        
+                        {/* 02. Characters */}
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative', minHeight: 0 }}>
+                            <div style={SECTION_TITLE_FONT}>02. Characters</div>
+                            
+                            {/* Top: Romance */}
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', borderBottom: `0.5px solid ${LINE}`, paddingBottom: '12px', marginBottom: '12px', minHeight: 0 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', flexShrink: 0 }}>
+                                    <span style={{ fontSize: '10pt', fontWeight: 500, color: '#222', borderBottom: '1px solid #222' }}>Romance</span>
+                                </div>
+                                <div style={{ ...POSTER_DESC_FONT, flexShrink: 0, marginBottom: '16px' }}>
+                                    <i>Romance</i> elevates figures like Liu Bei into virtuous paragons, Cao Cao into a ruthless villain, and Zhuge Liang into a mystical strategist.
+                                </div>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <WarlordFlowChart isPoster={true} mode="fiction" />
+                                </div>
+                            </div>
+
+                            {/* Bottom: History */}
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', flexShrink: 0 }}>
+                                    <span style={{ fontSize: '10pt', fontWeight: 500, color: '#666', borderBottom: '1px solid #666' }}>History</span>
+                                </div>
+                                <div style={{ ...POSTER_DESC_FONT, flexShrink: 0, marginBottom: '16px' }}>
+                                    Historically, leaders were pragmatists. Liu Bei was an opportunistic warlord, Cao Cao a pragmatic reformer, and Zhuge Liang a brilliant administrator.
+                                </div>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <WarlordFlowChart isPoster={true} mode="historical" />
+                                </div>
+                            </div>
                         </div>
-                        <div className="chart-container">
-                            <BattleBubbleChart isPoster={true} fixedMode="historical" />
+
+                        {/* 03. State Power */}
+                        <div className="wireframe-box" style={{ flex: 1, padding: '0 24px 0 24px', display: 'flex', flexDirection: 'column', position: 'relative', borderTop: 'none', borderBottom: 'none', minHeight: 0 }}>
+                            <div style={SECTION_TITLE_FONT}>03. State Power</div>
+                            
+                            {/* Top: Romance */}
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', borderBottom: `0.5px solid ${LINE}`, paddingBottom: '12px', marginBottom: '12px', minHeight: 0 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', flexShrink: 0 }}>
+                                    <span style={{ fontSize: '10pt', fontWeight: 500, color: '#222', borderBottom: '1px solid #222' }}>Romance</span>
+                                </div>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <DynamicTimelineChart isPoster={true} fixedMode="fiction" />
+                                </div>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 0.6, display: 'flex', flexDirection: 'column', marginTop: '8px' }}>
+                                    <DemographicChart isPoster={true} fixedMode="fiction" />
+                                </div>
+                            </div>
+
+                            {/* Bottom: History */}
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', flexShrink: 0 }}>
+                                    <span style={{ fontSize: '10pt', fontWeight: 500, color: '#666', borderBottom: '1px solid #666' }}>History</span>
+                                </div>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <DynamicTimelineChart isPoster={true} fixedMode="historical" />
+                                </div>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 0.6, display: 'flex', flexDirection: 'column', marginTop: '8px' }}>
+                                    <DemographicChart isPoster={true} fixedMode="historical" />
+                                </div>
+                            </div>
                         </div>
-                        <div className="chart-container">
-                            <WarlordFlowChart isPoster={true} />
+
+                        {/* 04. Geopolitics & Battles */}
+                        <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', position: 'relative', minHeight: 0 }}>
+                            <div style={SECTION_TITLE_FONT}>04. Geopolitics & Battles</div>
+                            
+                            {/* Top: Map */}
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', borderBottom: `0.5px solid ${LINE}`, paddingBottom: '12px', marginBottom: '12px', minHeight: 0 }}>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <TerritorialMap isPoster={true} />
+                                </div>
+                                <div style={{ ...POSTER_DESC_FONT, flexShrink: 0, marginTop: '8px' }}>
+                                    Territorial overview of Wei, Shu, and Wu (c. 220–260 AD), marking the locations of the three major battles that defined the era.
+                                </div>
+                            </div>
+
+                            {/* Bottom: Troop Exaggeration */}
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', flexShrink: 0 }}>
+                                    <span style={{ fontSize: '10pt', fontWeight: 500, color: '#222', borderBottom: '1px solid #222' }}>Troop Exaggeration (Romance vs History)</span>
+                                </div>
+                                <div style={{ ...POSTER_DESC_FONT, flexShrink: 0, marginBottom: '8px' }}>
+                                    <i>Romance</i> (top dashed circles) inflates troop counts by 4x to 7x to amplify dramatic tension, compared to Historical facts (bottom solid circles).
+                                </div>
+                                <div className="chart-container" style={{ minHeight: 0, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <BattleBubbleChart isPoster={true} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="chart-container" style={{ flex: 1.5 }}>
-                            <TerritorialMap isPoster={true} />
-                        </div>
-                        <div className="chart-container">
-                            <DemographicChart isPoster={true} />
-                        </div>
+
                     </div>
                 </div>
             </div>
-
-            {/* ═══ ZOOMED FULLSCREEN OVERLAY ═══ */}
-            {isZoomed && (
-                <div 
-                    ref={containerRef}
-                    style={{
-                        position: 'fixed',
-                        inset: 0,
-                        backgroundColor: 'rgba(0, 0, 0, 0.25)',
-                        zIndex: 1000,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backdropFilter: 'blur(30px)',
-                        padding: '24px',
-                        overflow: 'hidden',
-                        userSelect: 'none'
-                    }}
-                    onClick={(e) => {
-                        if (e.target === e.currentTarget) {
-                            setIsZoomed(false);
-                        }
-                    }}
-                >
-                    {/* Elegant Close Button */}
-                    <button
-                        onClick={() => setIsZoomed(false)}
-                        style={{
-                            position: 'fixed',
-                            top: '24px',
-                            right: '24px',
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '50%',
-                            backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                            backdropFilter: 'blur(16px)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            color: '#ffffff',
-                            fontSize: '18px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
-                            transition: 'all 0.2s',
-                            zIndex: 1010
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
-                            e.currentTarget.style.transform = 'scale(1.05)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                            e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                    >
-                        ✕
-                    </button>
-
-                    {/* Floating Controls Information Overlay */}
-                    <div 
-                        style={{
-                            position: 'fixed',
-                            bottom: '24px',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '12px',
-                            backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                            backdropFilter: 'blur(16px)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            borderRadius: '30px',
-                            padding: '10px 20px',
-                            color: '#ffffff',
-                            fontFamily: '"IBM Plex Sans", sans-serif',
-                            fontSize: '11px',
-                            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-                            zIndex: 1010,
-                            pointerEvents: 'none'
-                        }}
-                    >
-                        <span>Pinch trackpad to Zoom ({Math.round(zoomScale * 100)}%)</span>
-                        <span style={{ opacity: 0.4 }}>|</span>
-                        <span>Drag to Pan</span>
-                        <span style={{ opacity: 0.4 }}>|</span>
-                        <span>Double-click to Reset</span>
-                    </div>
-
-                    {/* Zoomed Poster Content */}
-                    <div 
-                        onMouseDown={handleMouseDown}
-                        onMouseMove={handleMouseMove}
-                        onMouseUp={handleMouseUp}
-                        onMouseLeave={handleMouseUp}
-                        onDoubleClick={handleDoubleClick}
-                        style={{
-                            width: '92vw',
-                            maxWidth: '1800px',
-                            height: 'calc(min(92vw, 1800px) * (1189 / 1682))',
-                            backgroundColor: BG,
-                            boxShadow: '0 24px 70px rgba(0,0,0,0.45)',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            position: 'relative',
-                            overflow: 'hidden',
-                            color: LINE,
-                            borderRadius: '4px',
-                            cursor: zoomScale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-out',
-                            transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${zoomScale})`,
-                            transformOrigin: 'center center',
-                            transition: isDragging ? 'none' : 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
-                        }}
-                        onClick={(e) => e.stopPropagation()} // Prevent close on clicking poster content
-                    >
-                        {/* --- ZOOMED TITLE --- */}
-                        <div style={{
-                            width: '100%',
-                            padding: '36px 36px 0 36px',
-                            boxSizing: 'border-box',
-                            zIndex: 10
-                        }}>
-                            <span style={POSTER_TITLE_FONT}>
-                                Final Project Theme : Three Kingdoms Period (184-280 AD)
-                            </span>
-                        </div>
-
-                        {/* --- ZOOMED TOP HALF (Romance) --- */}
-                        <div style={{
-                            flex: 1,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            padding: '36px 36px 16px',
-                            position: 'relative',
-                        }}>
-                            <div style={{ ...POSTER_DESC_FONT, marginBottom: '8px' }}>
-                                Romance — Luo Guanzhong (c. 1330–1400), <i>Sanguo Yanyi</i> (三國演義), 14th c.
-                            </div>
-
-                            <div style={{ flex: 1, display: 'flex', gap: '28px' }}>
-                                <div className="chart-container">
-                                    <DynamicTimelineChart isPoster={true} fixedMode="fiction" />
-                                </div>
-                                <div className="chart-container">
-                                    <BattleBubbleChart isPoster={true} fixedMode="fiction" />
-                                </div>
-                                <div className="chart-container">
-                                    <WarlordFlowChart isPoster={true} />
-                                </div>
-                                <div className="chart-container" style={{ flex: 1.5 }}>
-                                    <TerritorialMap isPoster={true} />
-                                </div>
-                                <div className="chart-container">
-                                    <DemographicChart isPoster={true} />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* --- ZOOMED CENTRAL DIVIDER HAIRLINE --- */}
-                        <div style={{ width: '100%', height: '1px', backgroundColor: LINE, opacity: 0.2 }} />
-
-                        {/* --- ZOOMED BOTTOM HALF (Historic) --- */}
-                        <div style={{
-                            flex: 1,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            padding: '36px 36px 20px',
-                            position: 'relative',
-                        }}>
-                            <div style={{ ...POSTER_DESC_FONT, marginBottom: '8px' }}>
-                                Historic — Chen Shou (233–297), <i>Sanguozhi</i> (三國志), 289 AD.
-                            </div>
-
-                            <div style={{ flex: 1, display: 'flex', gap: '28px' }}>
-                                <div className="chart-container">
-                                    <DynamicTimelineChart isPoster={true} fixedMode="historical" />
-                                </div>
-                                <div className="chart-container">
-                                    <BattleBubbleChart isPoster={true} fixedMode="historical" />
-                                </div>
-                                <div className="chart-container">
-                                    <WarlordFlowChart isPoster={true} />
-                                </div>
-                                <div className="chart-container" style={{ flex: 1.5 }}>
-                                    <TerritorialMap isPoster={true} />
-                                </div>
-                                <div className="chart-container">
-                                    <DemographicChart isPoster={true} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

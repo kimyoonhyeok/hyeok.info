@@ -11,6 +11,26 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "LeeSeungYoon",
+    title: "Seungyoon Lee 4th Full-length Studio Album ≪0≫",
+    scope: "Physical Album Design",
+    category: "Commercial",
+    completion: "Jun. 2026",
+    thumbnail: "Thumbnail.mp4",
+    description: "",
+    images: ["Thumbnail.mp4", "Main.jpg", "Main2.jpg", "Main3.jpg", "Main4.jpg", "Main5.jpg", "Main6.jpg", "Main7.jpg", "Main8.jpg", "Main9.jpg", "Main10.jpg", "Main11.jpg", "Main12.jpg", "Main13.jpg", "Main14.jpg", "Main15.jpg", "Main16.jpg", "Main17.jpg", "Main18.jpg", "Main19.jpg", "Main20.jpg"]
+  },
+  {
+    slug: "InuScore",
+    title: "Divergent Consequences With Single Image",
+    scope: "Poster Design, Web Design and Development",
+    category: "Non-Commercial",
+    completion: "Apr. 2026",
+    thumbnail: "MainPoster.jpg",
+    description: "This project explores the epistemic asymmetry that arises when two observers encounter the same visual object under different conditions of knowledge and biological capacity. Taking four types of visual media—the Ishihara color-blindness test chart, a musical score, Hans Holbein's painting, and an MRI scan—as its core subjects, the work visualizes the divergent cognitive realities produced for observer A (limited to surface-level perception) and observer B (capable of full decoding).\n\nThe project was realized as a web-based interactive archiving poster, designed around a three-column grid: the left column represents A's restricted visual perspective, the right column represents B's decoded reality, and the center column overlays both observers' eye-tracking trajectories onto the original base canvas in contrasting colors. This structure objectively documents how the absence of specific knowledge or physical conditions generates radically polarized informational outcomes from a single image.\n\nThe companion web application component renders a real-time Color Vision Deficiency (CVD) simulator, allowing users to directly experience the visual world of an observer with color blindness across multiple deficiency types. By enabling the user to toggle between chromatic perspectives, the tool makes the epistemic gap legible as a lived experience rather than an abstract claim.\n\nTheoretical grounding was drawn from Miranda Fricker's Epistemic Injustice (2007), applied to the context of visual media, alongside empirical studies on quality of life impacts of color vision deficiency and philosophical literature on perceptual structure and epistemic significance.",
+    images: ["MainPoster.jpg", "AppPoster.jpg", "sns_02.jpg", "sns_03.jpg", "sns_04.jpg", "sns_05.jpg", "colour_changes.mp4"]
+  },
+  {
     slug: "Notefolio",
     title: "Notefolio WorkShop 6-week course ≪Workshop for the Beginning≫",
     scope: "Workshop",

@@ -86,7 +86,9 @@ export default function AboutPage() {
             <div className={styles.infoColumn}>
                 <div>
                     <span className={styles.sectionTitle}>Work</span>
-                    {/* <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Lee Seung-yoon 0th Album｣ Identity Design</span></div> */}
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Ubomanli｣ ≪Coexistence of the Incompatible≫, ARKO Arts Theater, Poster Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Wald Ensemble x Subverted Anatomical Landscape｣ ≪Apollo≫ Seosomun Shrine History Museum, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Seungyoon Lee｣ 4th Full-length Studio Album ≪0≫, Physical Album Design</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢SKETCHED SPACE｣ Website Design & Development</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Subverted Anatomical Landscape｣ ≪X≫ ARKO Arts Theater, Program Design</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Sangmyung Univ. 53rd Graduation Exhibition｣ Identity Design</span></div>
@@ -152,7 +154,7 @@ export default function AboutPage() {
                 <div>
                     <span className={styles.sectionTitle}>Clients / Collaboration</span>
                     <div className={styles.infoListItem}>
-                        {/* Mound Media, Lee Seungyoon, */}HOBIN Film, SAA, LG ART CENTER, SKETCHED SPACE, Coffee Collage, Arko Selection, Arko Theater, Sangmyung Univ., MSS, KOSME, Kyung Hee Univ., NA1, Bobu Office, Michan Lee, Sumin Kim, Korica, Lwy, Sunoa, Bongak Choi, Seodaemun-Gu, SWYFT, Lobby/St, Kodo Coffee, Annpaak, Subverted
+                        Wald Ensemble, Seosomun Shrine History Museum, Mound Media, Mareumo Entertainment, Seungyoon Lee, HOBIN Film, SAA, LG ART CENTER, SKETCHED SPACE, Coffee Collage, Arko Selection, Arko Theater, Sangmyung Univ., MSS, KOSME, Kyung Hee Univ., NA1, Bobu Office, Michan Lee, Sumin Kim, Korica, Lwy, Sunoa, Bongak Choi, Seodaemun-Gu, SWYFT, Lobby/St, Kodo Coffee, Annpaak, Subverted
                         Anatomical Landscape (SAL), Ist Entertainment, Theboyz,
                         Glaspress, Beigebongbong, Ubomanli, Janggo Chum Network Of Yunseeon Sung, Jeom Store, Wonhyuck
                         Choi, Bite Poets, Garb, Templethebongbong, Gihong Jeon, Inho Cho, Chelon Archive Co., Cidae Mag,

@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -32,6 +33,7 @@ interface ProjectDetailProps {
 
 export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [isGlobalMuted, setIsGlobalMuted] = useState<boolean>(false); // Try unmuted by default
     const swiperRef = useRef<SwiperType | null>(null);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
@@ -40,26 +42,54 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
         videoRefs.current.forEach((video, index) => {
             if (!video) return;
 
-            // Enforce sound enabled (Browser interaction policy might block this initially)
-            video.muted = false;
-
             if (index === activeIndex) {
-                video.currentTime = 0;
-                // Force load if it was preload="none"
-                video.preload = "auto";
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch((error) => {
-                        console.log("Auto-play prevented (likely due to sound policy):", error);
-                        // Optional fallback logic could go here, but per user request, we force this setup.
-                    });
+                if (video.paused) {
+                    video.currentTime = 0;
+                    video.preload = "auto";
+                    video.muted = isGlobalMuted; // Apply the global mute preference
+                    
+                    // The video's muted property is bound to state in JSX.
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch((error) => {
+                            if (error.name === 'AbortError') return; // Ignore if it was aborted by a pause() call
+                            console.log("Auto-play prevented (likely due to sound policy):", error);
+                            // Fallback: Mute and play
+                            video.muted = true;
+                            setIsGlobalMuted(true);
+                            video.play().catch(e => console.log("Muted fallback failed:", e));
+                        });
+                    }
                 }
             } else {
-                video.pause();
-                video.currentTime = 0;
+                if (!video.paused) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
             }
         });
     }, [activeIndex]);
+
+    const setMute = (index: number, mute: boolean) => {
+        const video = videoRefs.current[index];
+        setIsGlobalMuted(mute); // Update global state
+        
+        if (video) {
+            if (video.muted !== mute) {
+                video.muted = mute;
+                if (!mute) {
+                    video.volume = 1;
+                    // Force a re-play to ensure audio context is active
+                    video.pause();
+                    video.play().catch(e => console.error("Force play failed", e));
+                }
+            } else if (!mute && video.paused) {
+                // If it's already unmuted but paused, play it
+                video.volume = 1;
+                video.play().catch(e => console.error("Force play failed", e));
+            }
+        }
+    };
 
     // Navigation handlers
     const handlePrev = useCallback(() => {
@@ -102,28 +132,48 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                         return (
                             <SwiperSlide key={idx}>
                                 {isVideo ? (
-                                    <video
-                                        ref={(el) => { videoRefs.current[idx] = el; }}
-                                        src={src}
-                                        loop
-                                        playsInline // Essential for iOS
-                                        controls={false} // Hidden controls per request
-                                        muted={false} // Enforce sound ON per request
-                                        preload={isNearby ? "auto" : "none"}
-                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                                    />
-                                ) : (
-                                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image
+                                    <>
+                                        <video
+                                            ref={(el) => { videoRefs.current[idx] = el; }}
                                             src={src}
-                                            alt={`${project.title} - ${idx + 1}`}
-                                            fill
-                                            priority={idx === 0}
-                                            sizes="(max-width: 768px) 100vw, 100vw"
-                                            quality={95} // Higher quality to reduce artifacts for detailed images
-                                            style={{ objectFit: 'contain' }}
+                                            loop
+                                            autoPlay={idx === activeIndex}
+                                            playsInline
+                                            controls={false}
+                                            muted={isGlobalMuted}
+                                            preload={isNearby ? "auto" : "none"}
+                                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                         />
-                                    </div>
+                                    </>
+                                ) : (slug === 'InuScore' && idx === 0) ? (
+                                     // Natural-size img with inline overrides to defeat global .swiper-slide img CSS
+                                     // This makes the element's actual size = visible poster size, so border is exact
+                                     <img
+                                         src={src}
+                                         alt={`${project.title} - ${idx + 1}`}
+                                         style={{
+                                             width: 'auto',
+                                             height: 'auto',
+                                             maxWidth: '100%',
+                                             maxHeight: '100%',
+                                             display: 'block',
+                                             objectFit: 'unset',
+                                             border: '0.27px solid rgba(0, 0, 0, 0.12)',
+                                             boxSizing: 'border-box',
+                                         }}
+                                     />
+                                ) : (
+                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                         <Image
+                                             src={src}
+                                             alt={`${project.title} - ${idx + 1}`}
+                                             fill
+                                             priority={idx === 0}
+                                             sizes="(max-width: 768px) 100vw, 100vw"
+                                             quality={95}
+                                             style={{ objectFit: 'contain' }}
+                                         />
+                                     </div>
                                 )}
                             </SwiperSlide>
                         );
@@ -140,6 +190,41 @@ export default function ProjectDetail({ project, slug }: ProjectDetailProps) {
                     onClick={handleNext}
                 />
             </div>
+            
+            {/* Sound Controller for Active Video */}
+            {project.images[activeIndex] && (project.images[activeIndex].toLowerCase().endsWith('.mp4') || project.images[activeIndex].toLowerCase().endsWith('.webm')) && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: '1rem', // Match header's top margin perfectly inside .container
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        zIndex: 100, // Make sure it sits above everything
+                        background: 'transparent',
+                        display: 'flex',
+                        alignItems: 'baseline',
+                        fontSize: '0.75rem', // Match header font size
+                        fontFamily: 'inherit',
+                        color: 'inherit',
+                        pointerEvents: 'auto'
+                    }}
+                >
+                    Sound :&nbsp;
+                    <span 
+                        onPointerDown={(e) => e.stopPropagation()}
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setMute(activeIndex, false); }}
+                        className={`category-text ${!isGlobalMuted ? 'active' : 'inactive'}`}
+                        style={{ cursor: 'pointer' }}
+                    >On</span>
+                    &nbsp;/&nbsp;
+                    <span 
+                        onPointerDown={(e) => e.stopPropagation()}
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setMute(activeIndex, true); }}
+                        className={`category-text ${isGlobalMuted ? 'active' : 'inactive'}`}
+                        style={{ cursor: 'pointer' }}
+                    >Off</span>
+                </div>
+            )}
         </div>
 
         {/* Info Section — rendered below the swiper for all projects */}

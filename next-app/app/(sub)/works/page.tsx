@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import React from "react";
 import Link from "next/link";
@@ -48,15 +49,32 @@ const ProjectItem = ({ href, imgSrc, alt, title, scope, category, completion, sl
                             transform: slug === 'fitnessIdeal' ? 'scale(1.25) translate3d(0, 0, 0)' : 'translate3d(0, 0, 0)'
                         }}
                     />
+                ) : slug === 'InuScore' ? (
+                    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <img
+                            src={imgSrc}
+                            alt={alt}
+                            style={{
+                                width: 'auto',
+                                height: '100%',
+                                display: 'block',
+                            }}
+                        />
+                    </div>
                 ) : (
                     <Image
                         src={imgSrc}
                         alt={alt}
                         width={600}
                         height={450}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center center',
+                        }}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        quality={60} // Optimization: Reduce thumbnail quality for speed
+                        quality={60}
                     />
                 )}
             </div>

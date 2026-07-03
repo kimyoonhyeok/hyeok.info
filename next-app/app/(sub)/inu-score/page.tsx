@@ -228,7 +228,7 @@ export default function PresentationPage() {
             onOpenApp={() => setView('app')}
             onOpenGraduation={() => setView('graduation')}
             onOpenGraduation2={() => router.push('/inu-score/graduation/2nd')}
-            onOpenInfographic={() => router.push('/infographic')}
+            onOpenInfographic={() => router.push('/inu-score/infographic')}
             onOpenInfographicMainPoster={() => setView('infographic-poster')}
             connectedNodes={connectedNodes}
             setConnectedNodes={setConnectedNodes}
