@@ -8,8 +8,46 @@ export interface Project {
   description: string;
   images: string[];
 }
-
 export const projects: Project[] = [
+  {
+    slug: "Coexistence",
+    title: "Ubomanli <Coexistence of Incompatible>",
+    scope: "Identity Design",
+    category: "Commercial",
+    completion: "Jul. 2026",
+    thumbnail: "Thumbnail.mp4",
+    description: "The visual design project for Ubomanli's *Coexistence of Non-coexistence* (performance title: *Coexistence*) originates from an exploration into the dual concepts of \"coexistence\" (共存) and the \"empty zone\" (空 zone). Inspired by poet Yi Sang’s *Crow's Eye View*, the 10x10 grid iconography (a structure of '空' and '●') was translated into a formative language where physical breath and the sounds of percussion and string instruments expand from points to lines, planes, and circles before dispersing once more. To visualize this narrative, the entire performance was defined as a \"Lecture Performance Lab\" and a record of thought processes, culminating in the selection of Option 5—a typography-rich draft—as the final key visual.\n\nComplementary color contrast was adopted for the main color scheme to enhance visual impact and engagement. Building upon a light green and yellow palette, four to five derivative colorways (variations of Options 5, 6, and 7) were applied to online channels to emphasize the experimental nature of the performance. Regarding typography, the visual balance between the English subtitle \"Lecture Performance Lab\" and the Korean title was recalibrated, while the systematic layout of the performer's Korean and Hanja names, the title of \"Choreographer,\" and the performance schedule ensured clarity of information.",
+    images: [
+      "Thumbnail.mp4",
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg"
+    ]
+  },
+  {
+    slug: "Appolo",
+    title: "Waldensemble x SAL «APOLLO»",
+    scope: "Identity Design",
+    category: "Commercial",
+    completion: "Jul. 2026",
+    thumbnail: "Thumbnail.jpg",
+    description: "The visual design was developed based on Igor Stravinsky’s composition *Apollon musagète* and George Balanchine’s choreography. Centered on the theme \"Origin and Variation,\" the objective was a modern reinterpretation of mythological elements, for which a form combining Apollo’s head with a harp was adopted as the key visual. This form was selected to avoid clichés associated with conventional classical iconography and to reinterpret the myth. By adopting the approach of the composer and choreographer—removing ornamentation to focus on structural essence—the core of the myth was embodied in the imagery. The formative principles of the key visual were then applied across detailed applications, including posters, leaflets, and mobile layouts, ensuring overall visual consistency.",
+    images: [
+      "Thumbnail.jpg",
+      "01.jpg",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.mp4",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg"
+    ]
+  },
   {
     slug: "LeeSeungYoon",
     title: "Seungyoon Lee 4th Full-length Studio Album ≪0≫",
