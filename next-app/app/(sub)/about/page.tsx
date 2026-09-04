@@ -86,6 +86,7 @@ export default function AboutPage() {
             <div className={styles.infoColumn}>
                 <div>
                     <span className={styles.sectionTitle}>Work</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Gomsisun｣ ≪Layer≫, ARKO Arts Theater, Identity Design</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Ubomanli｣ ≪Coexistence of the Incompatible≫, ARKO Arts Theater, Poster Design</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Wald Ensemble x Subverted Anatomical Landscape｣ ≪Apollo≫ Seosomun Shrine History Museum, Program Design</span></div>
                     <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Seungyoon Lee｣ 4th Full-length Studio Album ≪0≫, Physical Album Design</span></div>
