@@ -10,6 +10,36 @@ export interface Project {
 }
 export const projects: Project[] = [
   {
+    slug: "Layer",
+    title: "Gomsisun «겹겹»",
+    scope: "Identity Design",
+    category: "Commercial",
+    completion: "Aug. 2026",
+    thumbnail: "Thumbnail.mp4",
+    description: "The visual center of gravity was established as 'Overlap.' Based on the narrative that the life graphs written by four dancers pass through positives and negatives before ending at the present, the undulations of life were substituted not as lines but as chromatic bands possessing area, with the intention of embodying each individual's narrative as a visual mass. During the working process, a formative experiment of actually folding paper to construct steps and planes was conducted beforehand, in order to explore both the character '겹' and its concept. As a result, departing from the conventional graphic approach of reducing opacity and layering along the Z-axis, the aim was to derive a method of physical superimposition—stacking opaque chromatic bands along the Y-axis (vertically) upon the temporal axis of the performance's dramatic arc.\n\nThe core methodology was borrowed from the Korean traditional concept of 'saekdong' (색동). Following saekdong's principle of plane division, opaque color planes were juxtaposed along the Y-axis, with the intention of expressing overlap through the accumulation of colors rather than the intersection of trajectories. The seam lines where plane meets plane are determined by the waveform contours of each dancer's life, and the form of these seams itself becomes a formative element that visualizes 'the process of combining from individual to community.' Through a structure in which colors maintain their independent properties without permeating or mixing into one another while forming layers, the aim was to translate the process of four life waveforms converging upon a single shared temporal axis into a visual language.",
+    images: [
+      "Thumbnail.mp4",
+      "01.mp4",
+      "02.jpg",
+      "03.jpg",
+      "04.jpg",
+      "05.jpg",
+      "06.jpg",
+      "07.jpg",
+      "08.jpg",
+      "09.jpg",
+      "10.jpg",
+      "11.jpg",
+      "12.jpg",
+      "13.jpg",
+      "14.jpg",
+      "15.jpg",
+      "16.jpg",
+      "17.jpg",
+      "18.jpg"
+    ]
+  },
+  {
     slug: "Coexistence",
     title: "Ubomanli <Coexistence of Incompatible>",
     scope: "Identity Design",
