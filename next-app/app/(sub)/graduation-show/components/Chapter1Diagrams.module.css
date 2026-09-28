@@ -1,0 +1,132 @@
+.matrixWrapper {
+    position: relative;
+    width: 100%;
+    margin: 4rem 0;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+}
+
+.yLabel {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: left center;
+    color: #7c7c7c;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 1.2rem;
+}
+
+.xLabel {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #7c7c7c;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 1.2rem;
+}
+
+.matrixContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #333;
+}
+
+.matrixCell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffff00;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem;
+    line-height: 1.4;
+}
+
+.matrixCell span {
+    display: block;
+}
+
+.legendContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin: 6rem 0;
+}
+
+.legendRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.legendItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.legendItem p {
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: #7c7c7c;
+    line-height: 1.5;
+}
+
+.legendKr {
+    font-size: 0.95rem;
+    margin-top: 0.5rem !important;
+}
+
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid;
+    margin-bottom: 1.5rem;
+    position: relative;
+    background-color: transparent;
+}
+
+.circle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background-color: #666;
+    border-radius: 50%;
+}
+
+.square {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+}
+
+.neutralBorder { border-color: #ff5500; }
+.femaleBorder { border-color: #998833; }
+.maleBorder { border-color: #4a3b8c; }
+
+/* SVG Relational Diagram */
+.diagramWrapper {
+    width: 100%;
+    max-width: 560px;
+    /* viewBox is 750 × 820 → aspect ratio 75:82 */
+    aspect-ratio: 75 / 82;
+    margin: 4rem auto;
+    position: relative;
+    background-color: transparent;
+    overflow: visible;
+}

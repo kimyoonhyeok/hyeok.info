@@ -60,6 +60,16 @@ body {
   flex-direction: column;
 }
 
+.works-container.graduation-show-layout,
+.works-container:has([data-page="graduation-show"]) {
+  padding: 0;
+}
+
+.works-container.graduation-show-layout footer,
+.works-container:has([data-page="graduation-show"]) footer {
+  padding: 1rem 1.5rem;
+}
+
 /* Header/Footer are used in Works Layout */
 /* We keep these global classes because Header/Footer components use them */
 
@@ -73,6 +83,23 @@ body {
   font-size: 0.75rem;
   position: relative;
   z-index: 102;
+}
+
+.global-header.header-hover-only {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+  background: transparent;
+}
+
+.global-header.header-hover-only:hover {
+  opacity: 1;
 }
 
 .global-header ul {

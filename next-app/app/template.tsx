@@ -1,12 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import LottieLoader from "@/components/LottieLoader";
 
 export default function Template({ children }: { children: React.ReactNode }) {
     return (
         <>
-            <LottieLoader />
+            {/* <LottieLoader /> */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

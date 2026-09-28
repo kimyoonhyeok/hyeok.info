@@ -18,9 +18,10 @@ export default function Header() {
     }, []);
 
     const showWorks = !pathname?.includes("/inu-score");
+    const isGraduationShow = pathname?.includes("graduation-show");
 
     return (
-        <header className={`global-header ${scrolled ? "scrolled" : ""}`}>
+        <header className={`global-header ${scrolled ? "scrolled" : ""} ${isGraduationShow ? "header-hover-only" : ""}`}>
             <nav className="header-hyeok">
                 <ul>
                     <li>

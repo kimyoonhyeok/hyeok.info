@@ -1,0 +1,227 @@
+.container {
+  width: 100%;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  color: #7c7c7c;
+  background: #ffffff;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.heroSection {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #FFFF00; /* As identified from the PDF */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent {
+  /* Initial state */
+  transform: translateY(0);
+}
+
+/* Parallax disabled due to CSS parser bug */
+
+.title {
+  font-size: 5vw;
+  font-weight: 700;
+  color: #7c7c7c;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 1.5vw;
+  color: #7c7c7c;
+  margin-top: 1rem;
+}
+
+.chapterTitle {
+  font-size: 2.5vw;
+  font-weight: 700;
+  color: #7c7c7c;
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.chapterTitleKr {
+  font-size: 2.5vw;
+  font-weight: 700;
+  color: #7c7c7c;
+  margin: 0.5rem 0 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.contentSection {
+  width: 100%;
+  padding: 12rem 100px 12rem;
+  box-sizing: border-box;
+  background: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+.sectionBlock {
+  margin-bottom: 16rem;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7c7c7c;
+  margin-bottom: 6rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.flexRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 0 4rem;
+  margin-bottom: 0;
+  width: 87.5%;
+  margin: 0 auto;
+}
+
+.enCol {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.krCol {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.enCol, .krCol {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  line-height: 1.5;
+  word-break: keep-all;
+  text-align: left;
+}
+
+.enCol p, .krCol p {
+  margin: 0;
+  text-align: left;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #7c7c7c;
+}
+
+.enCol h3, .krCol h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7c7c7c;
+  margin: 0;
+  line-height: 1.5;
+  text-indent: 1.5em;
+}
+
+.note {
+  font-size: 0.95rem;
+  color: #7c7c7c;
+  margin-top: 3rem;
+  padding-top: 0;
+  border-top: none;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.enNote {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.krNote {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.chapterList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chapterList li {
+  margin: 0;
+  line-height: 1.5;
+  color: #7c7c7c;
+  font-weight: 700;
+}
+
+.chapterList strong {
+  color: #7c7c7c;
+  display: block;
+  margin: 0;
+  line-height: 1.5;
+  text-indent: 1.5em;
+  font-weight: 700;
+}
+
+.container sup {
+  font-size: 75%;
+  color: #7c7c7c;
+  margin-left: -0.05em;
+}
+
+/* Scroll reveal effects with Progressive Enhancement */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scroll reveal disabled due to CSS parser bug */
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .flexRow {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .enCol {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .enNote {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .krCol {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .krNote {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  .title {
+    font-size: 8vw;
+  }
+  .subtitle {
+    font-size: 4vw;
+  }
+  .contentSection {
+    padding: 4rem 2rem;
+  }
+}
+
+.enCol strong, .krCol strong {
+  font-weight: 700;
+  color: #7c7c7c;
+}
