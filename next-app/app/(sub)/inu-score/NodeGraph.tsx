@@ -10,6 +10,7 @@ type NodeGraphProps = {
     onOpenGraduation2: () => void;
     onOpenInfographic: () => void;
     onOpenInfographicMainPoster: () => void;
+    onOpenGraduationShow?: () => void;
     connectedNodes: string[];
     setConnectedNodes: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -30,7 +31,7 @@ const nodesData: NodeItem[] = [
     { id: 'n4', label: 'Typo and Image' },
     { id: 'n5', label: 'Contemporary\nFashion Contents' },
     {
-        id: 'vcd', label: 'Visual Communication\nDesign Project',
+        id: 'vcd', label: 'Visual Communication\nDesign Project -1',
         children: [
             {
                 id: 'sp',
@@ -59,9 +60,19 @@ const nodesData: NodeItem[] = [
     },
 ];
 
+const nodesData2: NodeItem[] = [
+    { id: 'root2', label: '4-2', isRoot: true },
+    {
+        id: 'vcd2', label: 'Visual Communication\nDesign Project -2',
+        children: [
+            { id: 'gs2', label: 'Graduation Show', clickable: true },
+        ]
+    },
+];
+
 type Pos = { x: number, y: number };
 
-export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, onOpenGraduation2, onOpenInfographic, onOpenInfographicMainPoster, connectedNodes, setConnectedNodes }: NodeGraphProps) {
+export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpenMainPoster, onOpenApp, onOpenGraduation, onOpenGraduation2, onOpenInfographic, onOpenInfographicMainPoster, onOpenGraduationShow, connectedNodes, setConnectedNodes }: NodeGraphProps) {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [dragLine, setDragLine] = useState<{ active: boolean, x: number, y: number, sourceId: string } | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -116,7 +127,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
                             dragLine.sourceId === 'gp' ? ['gp_pt1', 'gp_pt2'] :
-                                dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] : [];
+                                dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] :
+                                    dragLine.sourceId === 'vcd2' ? ['gs2'] : [];
 
                 possibleTargets.forEach((id) => {
                     const target = positions[id];
@@ -141,7 +153,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                     dragLine.sourceId === 'sp' ? ['main', 'app', 'pt'] :
                         dragLine.sourceId === 'pt' ? ['week1', 'week2'] :
                             dragLine.sourceId === 'gp' ? ['gp_pt1', 'gp_pt2'] :
-                                dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] : [];
+                                dragLine.sourceId === 'n2' ? ['infographic_pt1', 'infographic_main_poster'] :
+                                    dragLine.sourceId === 'vcd2' ? ['gs2'] : [];
 
                 if (hoveredNode && possibleTargets.includes(hoveredNode)) {
                     targetId = hoveredNode;
@@ -196,6 +209,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         setTimeout(() => onOpenInfographic(), 400);
                     } else if (targetId === 'infographic_main_poster') {
                         setTimeout(() => onOpenInfographicMainPoster(), 400);
+                    } else if (targetId === 'gs2') {
+                        setTimeout(() => onOpenGraduationShow?.(), 400);
                     }
                 }
 
@@ -219,8 +234,8 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
         // Only left mouse or touch
         if (e.button !== 0 && e.nativeEvent.type !== 'touchstart') return;
 
-        // Ensure source node itself is connected or is root/vcd/gp/n2! 
-        if (sourceId !== 'vcd' && sourceId !== 'gp' && sourceId !== 'n2' && !connectedNodes.includes(sourceId)) return;
+        // Ensure source node itself is connected or is root/vcd/gp/n2/vcd2/gp2! 
+        if (sourceId !== 'vcd' && sourceId !== 'gp' && sourceId !== 'n2' && sourceId !== 'vcd2' && sourceId !== 'gp2' && !connectedNodes.includes(sourceId)) return;
 
         e.preventDefault();
 
@@ -237,14 +252,17 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
 
         const isParentHovered = hoveredNode === sourceId;
         const isTargetHovered = hoveredNode === targetId;
-        const isRootHovered = hoveredNode === 'root';
+        const isRootHovered = hoveredNode === 'root' && !sourceId.endsWith('2');
+        const isRoot2Hovered = hoveredNode === 'root2' && sourceId === 'root2';
         const isVcdHovered = hoveredNode === 'vcd' && (targetId === 'sp' || targetId === 'gp');
         const isSpHovered = hoveredNode === 'sp' && ['main', 'app', 'pt'].includes(targetId);
         const isPtHovered = hoveredNode === 'pt' && ['week1', 'week2'].includes(targetId);
         const isGpHovered = hoveredNode === 'gp' && ['gp_pt1', 'gp_pt2'].includes(targetId);
         const isN2Hovered = hoveredNode === 'n2' && ['infographic_pt1', 'infographic_main_poster'].includes(targetId);
+        const isVcd2Hovered = hoveredNode === 'vcd2' && targetId === 'gs2';
+        const isGs2Hovered = hoveredNode === 'gs2' && targetId === 'gs2';
 
-        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isVcdHovered || isSpHovered || isPtHovered || isGpHovered || isN2Hovered;
+        const isHighlighted = isParentHovered || isTargetHovered || isRootHovered || isRoot2Hovered || isVcdHovered || isSpHovered || isPtHovered || isGpHovered || isN2Hovered || isVcd2Hovered || isGs2Hovered;
 
         // TouchDesigner Style Smooth Cubic Bezier Curve (Vertical flowing)
         const dY = Math.abs(target.y - source.y) * 0.5;
@@ -328,6 +346,13 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         {connectedNodes.includes('infographic_pt1') && renderLink('n2', 'infographic_pt1')}
                         {connectedNodes.includes('infographic_main_poster') && renderLink('n2', 'infographic_main_poster')}
 
+                        {/* === 4-2 Branch Links === */}
+                        {/* Root2 to VCD2 */}
+                        {nodesData2.slice(1).map((node) => renderLink('root2', node.id))}
+
+                        {/* VCD2 to Graduation Show */}
+                        {connectedNodes.includes('gs2') && renderLink('vcd2', 'gs2')}
+
                         {/* Interactive Drag Wire */}
                         {renderDragWire()}
                     </AnimatePresence>
@@ -335,30 +360,32 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
             </svg>
 
             {/* DOM Content */}
-            <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
+            <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row', position: 'relative', zIndex: 1 }}>
 
-                {/* Level 1: Root */}
-                <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center', paddingTop: '2vh' }}>
-                    <div
-                        data-id="root"
-                        onMouseEnter={() => setHoveredNode('root')}
-                        onMouseLeave={() => setHoveredNode(null)}
-                        style={{
-                            fontSize: '20px',
-                            fontWeight: 400,
-                            lineHeight: 1.2,
-                            padding: '4px 8px',
-                            background: '#fff',
-                            cursor: 'default',
-                            transition: 'color 0.3s'
-                        }}
-                    >
-                        4-1
+                {/* Left Column: 4-1 */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    {/* Level 1: Root 4-1 */}
+                    <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center', paddingTop: '2vh' }}>
+                        <div
+                            data-id="root"
+                            onMouseEnter={() => setHoveredNode('root')}
+                            onMouseLeave={() => setHoveredNode(null)}
+                            style={{
+                                fontSize: '20px',
+                                fontWeight: 400,
+                                lineHeight: 1.2,
+                                padding: '4px 8px',
+                                background: '#fff',
+                                cursor: 'default',
+                                transition: 'color 0.3s'
+                            }}
+                        >
+                            4-1
+                        </div>
                     </div>
-                </div>
 
-                {/* Level 2: 6 items */}
-                <div style={{ flex: '1 1 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', paddingTop: '10vh' }}>
+                    {/* Level 2: items under 4-1 */}
+                    <div style={{ flex: '1 1 auto', display: 'flex', justifyContent: 'space-evenly', alignItems: 'flex-start', width: '100%', paddingTop: '10vh' }}>
                     {nodesData.slice(1).map((node: NodeItem) => {
                         const isHovered = hoveredNode === node.id;
                         const dim = hoveredNode && hoveredNode !== node.id && hoveredNode !== 'root';
@@ -569,6 +596,120 @@ export default function NodeGraph({ onOpenSideProject, onOpenSideProject2, onOpe
                         );
                     })}
                 </div>
+                </div>{/* End Left Column: 4-1 */}
+
+                {/* Right Column: 4-2 */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    {/* Level 1: Root 4-2 */}
+                    <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center', paddingTop: '2vh' }}>
+                        <div
+                            data-id="root2"
+                            onMouseEnter={() => setHoveredNode('root2')}
+                            onMouseLeave={() => setHoveredNode(null)}
+                            style={{
+                                fontSize: '20px',
+                                fontWeight: 400,
+                                lineHeight: 1.2,
+                                padding: '4px 8px',
+                                background: '#fff',
+                                cursor: 'default',
+                                transition: 'color 0.3s'
+                            }}
+                        >
+                            4-2
+                        </div>
+                    </div>
+
+                    {/* Level 2: items under 4-2 */}
+                    <div style={{ flex: '1 1 auto', display: 'flex', justifyContent: 'space-evenly', alignItems: 'flex-start', width: '100%', paddingTop: '10vh' }}>
+                    {nodesData2.slice(1).map((node: NodeItem) => {
+                        const isHovered = hoveredNode === node.id;
+                        const dim = hoveredNode && hoveredNode !== node.id && hoveredNode !== 'root2';
+                        const hasChildren = !!node.children;
+
+                        return (
+                            <div key={node.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+                                <motion.div
+                                    data-id={node.id}
+                                    onMouseEnter={() => setHoveredNode(node.id)}
+                                    onMouseLeave={() => setHoveredNode(null)}
+                                    onPointerDown={(e) => hasChildren && handleDragStart(e, node.id)}
+                                    style={{
+                                        fontSize: '20px',
+                                        lineHeight: 1.2,
+                                        fontWeight: 400,
+                                        textAlign: 'center',
+                                        whiteSpace: 'pre-line',
+                                        padding: '4px 8px',
+                                        background: '#fff',
+                                        cursor: hasChildren ? 'grab' : 'default',
+                                        opacity: dim ? 0.3 : 1,
+                                        color: isHovered || hoveredNode === 'gs2' ? '#E74C3C' : '#111',
+                                        transition: 'opacity 0.3s, color 0.3s',
+                                        userSelect: 'none',
+                                        position: 'relative',
+                                        zIndex: 2,
+                                    }}
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: dim ? 0.3 : 1 }}
+                                    transition={{ duration: 0.5, type: 'spring' }}
+                                >
+                                    {node.label}
+                                </motion.div>
+
+                                {/* Level 3: Children (Graduation Show only) */}
+                                {node.children && (
+                                    <div style={{ display: 'flex', gap: '3rem', paddingTop: '10vh', position: 'relative', zIndex: 1 }}>
+                                        {node.children?.map((child: NodeItem) => {
+                                            const childHovered = hoveredNode === child.id;
+                                            const isConnected = connectedNodes.includes(child.id);
+                                            const isDimmed = !isConnected || (hoveredNode && hoveredNode !== child.id && hoveredNode !== 'root2' && hoveredNode !== 'vcd2');
+
+                                            return (
+                                                <div key={child.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+                                                    <motion.div
+                                                        data-id={child.id}
+                                                        onMouseEnter={() => setHoveredNode(child.id)}
+                                                        onMouseLeave={() => setHoveredNode(null)}
+                                                        onClick={() => {
+                                                            if (!connectedNodes.includes(child.id)) {
+                                                                setConnectedNodes(prev => [...prev, child.id]);
+                                                            }
+                                                            onOpenGraduationShow?.();
+                                                        }}
+                                                        style={{
+                                                            fontSize: '20px',
+                                                            lineHeight: 1.2,
+                                                            fontWeight: isConnected ? 500 : 400,
+                                                            textAlign: 'center',
+                                                            whiteSpace: 'pre-line',
+                                                            padding: '4px 8px',
+                                                            background: '#fff',
+                                                            cursor: 'pointer',
+                                                            opacity: isDimmed ? 0.2 : 1,
+                                                            color: childHovered ? '#E74C3C' : '#111',
+                                                            transition: 'opacity 0.4s ease, color 0.3s',
+                                                            userSelect: 'none',
+                                                            position: 'relative',
+                                                            zIndex: 2,
+                                                        }}
+                                                        initial={{ y: 20, opacity: 0 }}
+                                                        animate={{ y: 0, opacity: isDimmed ? 0.2 : 1 }}
+                                                        transition={{ duration: 0.5, type: 'spring', delay: 0.2 }}
+                                                    >
+                                                        {child.label}
+                                                    </motion.div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+                </div>{/* End Right Column: 4-2 */}
+
             </div>
         </div>
     );
