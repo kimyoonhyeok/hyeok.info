@@ -1057,14 +1057,17 @@ export default function GraduationShowPage() {
                     </div>
                 </div>
 
-                {/* Chapter 3 */}
-                <div className={`${styles.reveal} ${styles.sectionBlock}`}>
-                    <div className={styles.titleScreen} style={{ backgroundColor: '#00c3eb' }}>
-                        <div className={styles.chapterNumber}>Chapter 3</div>
-                        <h1 className={styles.chapterTitle}>Situational Perception and Social Norms</h1>
-                        <h2 className={styles.chapterSubtitle}>상황 인지와 사회적 규범</h2>
-                    </div>
+            </section>
+
+            {/* Chapter 3 */}
+            <section className={styles.heroSection} >
+                <div className={styles.heroContent}>
+                    <h1 className={styles.chapterTitle}>Situational Perception and Social Norms</h1>
+                    <p className={styles.chapterTitleKr}>상황 인지와 사회적 규범</p>
                 </div>
+            </section>
+
+            <section className={styles.contentSection}>
 
                 <div className={`${styles.reveal} ${styles.sectionBlock}`}>
                     <h2 className={styles.sectionTitle}>1. Research</h2>
