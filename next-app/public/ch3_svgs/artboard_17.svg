@@ -1,0 +1,20 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" viewBox="0 0 666.142 701.575">
+<defs>
+<clipPath id="ab17_clip_1">
+<path transform="matrix(1,0,0,-1,0,701.575)" d="M0 701.575H666.142V0H0Z"/>
+</clipPath>
+<clipPath id="ab17_clip_2">
+<path transform="matrix(1,0,0,-1,0,701.575)" d="M0 701.575H666.142V0H0Z"/>
+</clipPath>
+</defs>
+<g>
+<g inkscape:groupmode="layer" inkscape:label="Layer 1">
+<g clip-path="url(#ab17_clip_1)">
+<path transform="matrix(1,0,0,-1,333.0709,563.3861)" d="M0 0C-117.415 0-212.598 95.184-212.598 212.599-212.598 330.013-117.415 425.197 0 425.197 117.415 425.197 212.598 330.013 212.598 212.599 212.598 95.184 117.415 0 0 0M-318.898-124.016H318.89698V549.21206H-318.898Z" fill="#867229"/>
+</g>
+<g clip-path="url(#ab17_clip_2)">
+<path transform="matrix(1,0,0,-1,545.6693,350.7876)" d="M0 0C0-117.415-95.184-212.598-212.598-212.598-330.013-212.598-425.197-117.415-425.197 0-425.197 117.415-330.013 212.598-212.598 212.598-95.184 212.598 0 117.415 0 0" fill="#ffffff"/>
+</g>
+</g>
+</g>
+</svg>

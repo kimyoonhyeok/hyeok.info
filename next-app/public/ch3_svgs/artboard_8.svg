@@ -1,0 +1,30 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" viewBox="0 0 666.142 701.575">
+<defs>
+<clipPath id="ab8_clip_1">
+<path transform="matrix(1,0,0,-1,0,701.575)" d="M0 701.575H666.142V0H0Z"/>
+</clipPath>
+<clipPath id="ab8_clip_2">
+<path transform="matrix(1,0,0,-1,0,701.575)" d="M262.205 427.465H403.937V569.197H262.205Z"/>
+</clipPath>
+<clipPath id="ab8_clip_3">
+<path transform="matrix(1,0,0,-1,0,701.575)" d="M262.205 162.992H403.937V304.724H262.205Z"/>
+</clipPath>
+</defs>
+<g>
+<g inkscape:groupmode="layer" inkscape:label="Layer 1">
+<g clip-path="url(#ab8_clip_1)">
+<g opacity=".25">
+<g clip-path="url(#ab8_clip_2)">
+<path transform="matrix(1,0,0,-1,403.937,203.24433)" d="M0 0C0-39.138-31.728-70.866-70.866-70.866-110.004-70.866-141.732-39.138-141.732 0-141.732 39.138-110.004 70.866-70.866 70.866-31.728 70.866 0 39.138 0 0" fill="#583884"/>
+</g>
+</g>
+<g opacity=".199997">
+<g clip-path="url(#ab8_clip_3)">
+<path transform="matrix(1,0,0,-1,403.937,467.7167)" d="M0 0C0-39.138-31.728-70.866-70.866-70.866-110.004-70.866-141.732-39.138-141.732 0-141.732 39.138-110.004 70.866-70.866 70.866-31.728 70.866 0 39.138 0 0" fill="#00c1e5"/>
+</g>
+</g>
+<path transform="matrix(1,0,0,-1,194.1732,335.4805)" d="M0 0C0-31.311-25.382-56.693-56.693-56.693-88.004-56.693-113.386-31.311-113.386 0-113.386 31.311-88.004 56.693-56.693 56.693-25.382 56.693 0 31.311 0 0" fill="#867229"/>
+</g>
+</g>
+</g>
+</svg>
