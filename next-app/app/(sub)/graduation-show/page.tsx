@@ -1100,12 +1100,12 @@ export default function GraduationShowPage() {
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16rem', marginTop: '4rem' }}>
                         {/* Nunchi Section */}
-                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
-                            <div style={{ flex: '1.5' }}>
-                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 18. Nunchi 1 — Independent Individual (눈치 1 — 독립된 주체)</div>
+                        <div>
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 18. Nunchi 1 — Independent Individual (눈치 1 — 독립된 주체)</div>
+                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
                                 <NunchiFig1 />
                             </div>
-                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                            <div className={styles.flexRow}>
                                 <div className={styles.enCol}>
                                     <h3>Fig 1</h3>
                                     <p>The circular geometric node represents an independent individual embedded within a given social interaction.</p>
@@ -1117,12 +1117,12 @@ export default function GraduationShowPage() {
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
-                            <div style={{ flex: '1.5' }}>
-                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 19. Nunchi 2 — Situational Space (눈치 2 — 상황적 공간)</div>
+                        <div>
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 19. Nunchi 2 — Situational Space (눈치 2 — 상황적 공간)</div>
+                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
                                 <NunchiFig2 />
                             </div>
-                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                            <div className={styles.flexRow}>
                                 <div className={styles.enCol}>
                                     <h3>Fig 2</h3>
                                     <p>The square background defines a bounded situational space or specific relational environment in which interaction occurs.</p>
@@ -1134,11 +1134,10 @@ export default function GraduationShowPage() {
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
-                            <div style={{ flex: '1.5' }}>
-                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 20. Nunchi — Definition (눈치 — 정의)</div>
-                            </div>
-                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div>
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 20. Nunchi — Definition (눈치 — 정의)</div>
+                            
+                            <div className={styles.flexRow}>
                                 <div className={styles.enCol}>
                                     <h3>눈치, Nunchi</h3>
                                     <p>The subtle capacity or tact to evaluate others' unstated feelings, intentions, and atmospheric cues through immediate context.</p>
@@ -1150,12 +1149,12 @@ export default function GraduationShowPage() {
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
-                            <div style={{ flex: '1.5' }}>
-                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 21. Nunchi 3 — Embedded Individual (눈치 3 — 고정된 주체)</div>
+                        <div>
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 21. Nunchi 3 — Embedded Individual (눈치 3 — 고정된 주체)</div>
+                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
                                 <NunchiFig1_2 />
                             </div>
-                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                            <div className={styles.flexRow}>
                                 <div className={styles.enCol}>
                                     <h3>Fig 1+2</h3>
                                     <p>The combination of a circular node positioned inside a square plane symbolizes an individual embedded within a specific situational context.</p>
@@ -1167,12 +1166,12 @@ export default function GraduationShowPage() {
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
-                            <div style={{ flex: '1.5' }}>
-                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 22. Nunchi 4 — Atmospheric Alignment (눈치 4 — 분위기 동조)</div>
+                        <div>
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 22. Nunchi 4 — Atmospheric Alignment (눈치 4 — 분위기 동조)</div>
+                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
                                 <NunchiFig3 />
                             </div>
-                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                            <div className={styles.flexRow}>
                                 <div className={styles.enCol}>
                                     <h3>Fig 3</h3>
                                     <p>The overlapping and subtle tonal transitions between geometric elements map the active process of reading and aligning with the surrounding atmosphere.</p>
