@@ -40,7 +40,7 @@ export const NunchiAnimatedDiagram = () => {
       height: '100vh',
       marginLeft: 'calc(-50vw + 50%)',
       marginRight: 'calc(-50vw + 50%)',
-      marginBottom: '8rem',
+      marginBottom: '4rem',
       marginTop: '4rem',
       backgroundColor: showSquare ? COLORS.brown : 'transparent',
       display: 'flex',

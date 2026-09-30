@@ -1101,9 +1101,9 @@ export default function GraduationShowPage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16rem', marginTop: '4rem' }}>
                         {/* Nunchi Section */}
                         <div>
-                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 18. Nunchi 1-3 — Situational Perception & Alignment (눈치 — 상황 인지와 분위기 동조)</div>
-                            
                             <NunchiAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 18. Nunchi 1-3 — Situational Perception & Alignment (눈치 — 상황 인지와 분위기 동조)</div>
                             
                             <div className={styles.flexRow}>
                                 <div className={styles.enCol}>
