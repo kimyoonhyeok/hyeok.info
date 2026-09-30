@@ -3,6 +3,7 @@
 import React from "react";
 import styles from "./GraduationShow.module.css";
 import { CoordinateMatrix, SymbolLegend, RelationalDiagram } from "./components/Chapter1Diagrams";
+import { NunchiFig1, NunchiFig2, NunchiFig1_2, NunchiFig3 } from "./components/Chapter3Diagrams";
 import { Give1Diagram, Give2Diagram, Give3Diagram, Give4Diagram, Ask1Diagram, Ask2Diagram, Ask3Diagram, Ask4Diagram, Stay1Diagram, Stay2Diagram, Stay3Diagram, Stay4Diagram, Eat1Diagram, Eat2Diagram, Eat3Diagram, Eat4Diagram } from "./components/Chapter2Diagrams";
 
 export default function GraduationShowPage() {
@@ -1055,6 +1056,133 @@ export default function GraduationShowPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Chapter 3 */}
+                <div className={`${styles.reveal} ${styles.sectionBlock}`}>
+                    <div className={styles.titleScreen} style={{ backgroundColor: '#00c3eb' }}>
+                        <div className={styles.chapterNumber}>Chapter 3</div>
+                        <h1 className={styles.chapterTitle}>Situational Perception and Social Norms</h1>
+                        <h2 className={styles.chapterSubtitle}>상황 인지와 사회적 규범</h2>
+                    </div>
+                </div>
+
+                <div className={`${styles.reveal} ${styles.sectionBlock}`}>
+                    <h2 className={styles.sectionTitle}>1. Research</h2>
+                    <div className={styles.flexRow}>
+                        <div className={styles.enCol}>
+                            <h3>Situational Perception and Social Norms</h3>
+                            <p>In cross-cultural pragmatics, managing unstated situational atmosphere and social face is not an absolute binary, but a shared communicative continuum configured with differing cultural weights (Hall, 1976; Ide, 1989)<sup>1</sup>.</p>
+                            <p>In Anglo-British discourse, inappropriate or oblivious behavior is often evaluated as tactlessness or social awkwardness—primarily framing it as an individual's failure to regulate explicit communicative intention and volition. English addresses atmospheric awareness through various overlapping concepts such as 'tact', 'reading the room', and 'saving face', which largely function as descriptive and evaluative terms for personal conduct and situational skill.</p>
+                            <p>In contrast, Korean culture distributes a significantly heavier burden of contextual decoding onto the listener, institutionalizing atmospheric perception ('nunchi') and dignity preservation ('chaemyeon') as normative discernment (Ide, 1989; Lim, 1994)<sup>2</sup>.</p>
+                            <p>Rather than remaining an isolated evaluative trait, 'nunchi' expands into an active relational grammar. It functions as a dynamic root that combines with directional verbs to operate across active observation ('nunchireul boda'), causative pressure ('nunchireul juda'), and passive constraint ('nunchiga boida'). While English approaches situational awareness through distributed idiomatic descriptions of personal volition, Korean centralizes it into an operational vocabulary that systematically coordinates social hierarchy and interpersonal boundaries.</p>
+                        </div>
+                        <div className={styles.krCol}>
+                            <h3>상황 인지와 사회적 규범</h3>
+                            <p>비교화용론의 관점에서 무언의 상황적 분위기를 감지하고 사회적 체면을 유지하는 행위는 절대적인 이분법이라기보다, 문화권마다 서로 다른 비중으로 구성되는 소통의 연속체적 과제입니다(Hall, 1976; Ide, 1989)<sup>1</sup>.</p>
+                            <p>영미권 담화에서도 상황에 맞지 않는 발화나 행동은 'tactless', 'oblivious', 혹은 'socially awkward'한 것으로 평가될 수 있으나, 이는 대체로 화자가 자신의 명시적 의도를 섬세하게 조율하지 못한 데서 비롯된 개인의 전략적 소통 실패(Volition)로 귀결되는 경향이 있습니다. 영어는 'tact', 'reading the room', 'saving face' 등 부분적으로 중첩되는 다양한 개념들을 통해 상황 인식을 다루며, 이들은 주로 개인의 성향과 행동을 평가하는 기술적 어휘로 기능합니다.</p>
+                            <p>반면 한국어권에서는 맥락 해독의 인지적 부담이 청자에게 더 크게 배분되는 경향이 있어, 분위기 감지('눈치')와 사회적 품위 유지('체면')가 상호작용 속에서 준수해야 할 규범적 분별(Discernment)의 의무로 제도화되어 왔습니다(Ide, 1989; 임태섭, 1994)<sup>2</sup>.</p>
+                            <p>이에 따라 한국어의 '눈치'는 단순한 개인의 성향 평가에 머무르지 않고, 능동적 탐색('눈치를 보다'), 사동적 압력('눈치를 주다'), 피동적 구속('눈치가 보이다')과 같이 다양한 동사 결합을 통해 상호작용의 물리적 역학으로 확장됩니다. 결과적으로 영어가 개인의 자발적 의지와 관련된 분산된 관용적 서술을 통해 상황 인식을 다룬다면, 한국어는 위계와 관계적 경계를 조율하는 단일한 조작적 어휘군을 중심으로 이를 체계화하는 경향이 있다고 해석할 수 있습니다.</p>
+                        </div>
+                        <div className={`${styles.note} ${styles.enNote}`}>
+                            <sup>1</sup> Martin, S. E. (1992). A Reference Grammar of Korean: A Complete Guide to the Grammar and History of the Korean Lang Charles E. Tuttle. (Referenced as grammatical background supporting that Korean responses to negative questions correlate with the surface negative structure, rather than as direct proof of macro-pragmatic divergence.)
+                        </div>
+                        <div className={`${styles.note} ${styles.krNote}`}>
+                            <sup>2</sup> Sohn, H. M. (1999). The Korean Language. Cambridge University Press. (한국어의 전반적인 문법 및 담화적 특성을 설명하는 배경 문헌으로 참조함.)
+                        </div>
+                    </div>
+                </div>
+
+                <div className={`${styles.reveal} ${styles.sectionBlock}`}>
+                    <h2 className={styles.sectionTitle}>2. Differences and Examples & Visual Experiment and Practice</h2>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16rem', marginTop: '4rem' }}>
+                        {/* Nunchi Section */}
+                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
+                            <div style={{ flex: '1.5' }}>
+                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 18. Nunchi 1 — Independent Individual (눈치 1 — 독립된 주체)</div>
+                                <NunchiFig1 />
+                            </div>
+                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                <div className={styles.enCol}>
+                                    <h3>Fig 1</h3>
+                                    <p>The circular geometric node represents an independent individual embedded within a given social interaction.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3>Fig 1</h3>
+                                    <p>다이어그램 내의 정원(Circle) 형태는 주어진 사회적 상호작용 속에 위치한 독립된 개별 주체를 의미합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
+                            <div style={{ flex: '1.5' }}>
+                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 19. Nunchi 2 — Situational Space (눈치 2 — 상황적 공간)</div>
+                                <NunchiFig2 />
+                            </div>
+                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                <div className={styles.enCol}>
+                                    <h3>Fig 2</h3>
+                                    <p>The square background defines a bounded situational space or specific relational environment in which interaction occurs.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3>Fig 2</h3>
+                                    <p>사각형의 배경 평면은 상호작용이 이뤄지는 제한된 특정 상황이나 관계적 공간의 경계를 정의합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
+                            <div style={{ flex: '1.5' }}>
+                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 20. Nunchi — Definition (눈치 — 정의)</div>
+                            </div>
+                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                <div className={styles.enCol}>
+                                    <h3>눈치, Nunchi</h3>
+                                    <p>The subtle capacity or tact to evaluate others' unstated feelings, intentions, and atmospheric cues through immediate context.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3>눈치, Nunchi</h3>
+                                    <p>남의 마음이나 무언의 분위기를 그때그때 상황적 맥락으로 미루어 알아내는 낌새, 또는 그러한 감각적 능력.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
+                            <div style={{ flex: '1.5' }}>
+                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 21. Nunchi 3 — Embedded Individual (눈치 3 — 고정된 주체)</div>
+                                <NunchiFig1_2 />
+                            </div>
+                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                <div className={styles.enCol}>
+                                    <h3>Fig 1+2</h3>
+                                    <p>The combination of a circular node positioned inside a square plane symbolizes an individual embedded within a specific situational context.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3>Fig 1+2</h3>
+                                    <p>사각형(상황적 공간) 내부 중심에 위치한 정원(개인)의 결합은 특정 사회적 맥락이나 환경 속에 고정된 주체를 의미합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '4rem', width: '100%', alignItems: 'flex-start' }}>
+                            <div style={{ flex: '1.5' }}>
+                                <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5' }}>Fig 22. Nunchi 4 — Atmospheric Alignment (눈치 4 — 분위기 동조)</div>
+                                <NunchiFig3 />
+                            </div>
+                            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                <div className={styles.enCol}>
+                                    <h3>Fig 3</h3>
+                                    <p>The overlapping and subtle tonal transitions between geometric elements map the active process of reading and aligning with the surrounding atmosphere.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3>Fig 3</h3>
+                                    <p>기하학적 요소 간의 중첩과 톤 변화는 주변 분위기를 능동적으로 읽어내고 그에 맞춰 자신을 정렬하는 맥락 해독 과정을 도식화합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
 </section>
 
