@@ -123,7 +123,10 @@ export const Chapter3ImageLoop: React.FC<ImageLoopProps> = ({
               left: 0,
               width: '100%',
               height: '100%',
-              objectFit: 'contain',
+              objectFit: 'cover',
+              border: 'none',
+              outline: 'none',
+              display: 'block',
               opacity: step === idx ? 1 : 0,
               transition: `opacity 0.6s ${strongEase}`
             }}
