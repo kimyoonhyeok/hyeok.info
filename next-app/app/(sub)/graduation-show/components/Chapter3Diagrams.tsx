@@ -14,20 +14,21 @@ export const NunchiAnimatedDiagram = () => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // 3 stages, 4 seconds per stage (2s hold, 2s transition)
+    // 4 stages, speed increased by 125% (4000ms / 1.25 = 3200ms interval)
     const interval = setInterval(() => {
-      setStep((prev) => (prev + 1) % 3);
-    }, 4000);
+      setStep((prev) => (prev + 1) % 4);
+    }, 3200);
     return () => clearInterval(interval);
   }, []);
 
-  // step 0: Fig 1 (Independent Individual) -> Circle only
-  // step 1: Fig 2 (Situational Space) -> Square only
-  // step 2: Fig 3 (Atmospheric Alignment) -> Square expands to 100vw, Circle inside (overlay)
+  // step 0: Fig 1 (Independent Individual) -> Blue circle only
+  // step 1: Fig 2 (Situational Space) -> Gold BG only
+  // step 2: Fig 1+2 (Embedded Individual) -> Blue circle inside Gold BG (normal size)
+  // step 3: Fig 3 (Atmospheric Alignment) -> Gold BG expands to 100vw, Blue circle color changes (overlay)
 
-  const isFullWidth = step === 2;
-  const showCircle = step === 0 || step === 2;
-  const showSquare = step === 1 || step === 2;
+  const isFullWidth = step === 3;
+  const showCircle = step === 0 || step === 2 || step === 3;
+  const showSquare = step >= 1;
   
   return (
     <div style={{ 
@@ -49,7 +50,7 @@ export const NunchiAnimatedDiagram = () => {
         marginLeft: isFullWidth ? 'calc(-50vw + 50%)' : '0',
         marginRight: isFullWidth ? 'calc(-50vw + 50%)' : '0',
         backgroundColor: showSquare ? COLORS.brown : 'transparent',
-        transition: 'all 2s ease-in-out',
+        transition: 'all 1.6s ease-in-out',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -62,11 +63,11 @@ export const NunchiAnimatedDiagram = () => {
           maxWidth: '90%',
           maxHeight: '90%',
           borderRadius: '50%',
-          backgroundColor: step === 2 ? 'rgba(255, 255, 255, 0.15)' : COLORS.cyan,
-          mixBlendMode: step === 2 ? 'overlay' : 'normal',
+          backgroundColor: step === 3 ? 'rgba(255, 255, 255, 0.15)' : COLORS.cyan,
+          mixBlendMode: step === 3 ? 'overlay' : 'normal',
           opacity: showCircle ? 1 : 0,
           transform: showCircle ? 'scale(1)' : 'scale(0.5)',
-          transition: 'all 2s ease-in-out'
+          transition: 'all 1.6s ease-in-out'
         }} />
       </div>
     </div>
