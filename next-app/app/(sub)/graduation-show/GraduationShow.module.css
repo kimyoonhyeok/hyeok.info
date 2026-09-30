@@ -225,3 +225,84 @@
   font-weight: 700;
   color: #7c7c7c;
 }
+
+/* Coordinate Matrix Styles */
+.matrixWrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  font-weight: 700;
+  width: 100%; /* controlled by wrapper in page.tsx */
+  margin: 0 auto 4rem auto;
+}
+
+.matrixContainer {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #7c7c7c; /* Outer border only */
+}
+
+.matrixCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.yLabel {
+  grid-column: 1;
+  grid-row: 1;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  color: #7c7c7c;
+  font-size: 1.2rem;
+  padding-right: 1rem;
+}
+
+.xLabel {
+  grid-column: 2;
+  grid-row: 2;
+  color: #7c7c7c;
+  font-size: 1.2rem;
+  padding-top: 1rem;
+  justify-self: end;
+}
+
+/* Legend Styles */
+.legendContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.legendRow {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  width: 100%;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #7c7c7c;
+}
