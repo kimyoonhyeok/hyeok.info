@@ -5,9 +5,9 @@ const COLORS = {
   purple: '#583884',
   gray: '#e7e7e7',
   green: '#00fb49',
-  brown: '#85712a', // Gold BG
-  lightBrown: '#ad9643', // Assimilated Gold Circle
-  cyan: '#00b7eb',
+  brown: '#867229', // Exact Gold from Illustrator
+  lightBrown: '#98843f', // Assimilated Gold Circle from Illustrator
+  cyan: '#00c1e5', // Exact Cyan from Illustrator
   lightGray: '#f5f5f5',
 };
 
@@ -64,28 +64,65 @@ export const NunchiAnimatedDiagram = () => {
   );
 };
 
+// Global cache for fetched SVGs to avoid re-fetching across re-renders
+const svgCache: Record<string, string> = {};
 
-interface ImageLoopProps {
-  images: string[];
-  bgColor?: string;
+interface SvgLoopProps {
+  svgs: string[];
+  bgColor?: string | string[];
   interval?: number;
+  aspectRatio?: string;
 }
 
-export const Chapter3ImageLoop: React.FC<ImageLoopProps> = ({ 
-  images, 
+export const Chapter3SvgLoop: React.FC<SvgLoopProps> = ({ 
+  svgs, 
   bgColor = 'transparent', 
-  interval = 1200 
+  interval = 1200,
+  aspectRatio = '666.142 / 701.575'
 }) => {
   const [step, setStep] = useState(0);
+  const [svgData, setSvgData] = useState<string[]>(() => {
+    return svgs.map((url) => svgCache[url] || '');
+  });
 
   useEffect(() => {
+    let isMounted = true;
+    Promise.all(
+      svgs.map(async (url) => {
+        if (svgCache[url]) return svgCache[url];
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const text = await res.text();
+          svgCache[url] = text;
+          return text;
+        } catch (e) {
+          console.error(`Error loading SVG from ${url}:`, e);
+          return '';
+        }
+      })
+    ).then((results) => {
+      if (isMounted) {
+        setSvgData(results);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [svgs]);
+
+  useEffect(() => {
+    if (svgs.length <= 1) return;
     const timer = setInterval(() => {
-      setStep((prev) => (prev + 1) % images.length);
+      setStep((prev) => (prev + 1) % svgs.length);
     }, interval);
     return () => clearInterval(timer);
-  }, [images.length, interval]);
+  }, [svgs.length, interval]);
 
   const strongEase = 'cubic-bezier(0.76, 0, 0.24, 1)';
+  const currentBg = Array.isArray(bgColor) ? bgColor[step] || 'transparent' : bgColor;
+  const isInstant = Array.isArray(bgColor) && step === 0;
 
   return (
     <div style={{ 
@@ -96,39 +133,42 @@ export const Chapter3ImageLoop: React.FC<ImageLoopProps> = ({
       marginRight: 'calc(-50vw + 50%)',
       marginBottom: '4rem',
       marginTop: '4rem',
-      backgroundColor: bgColor,
+      backgroundColor: currentBg,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      transition: isInstant ? 'none' : `background-color 0.6s ${strongEase}`
     }}>
       <div style={{
         position: 'relative',
-        width: '75vh',
         height: '75vh',
-        maxWidth: '90%',
-        maxHeight: '90%',
+        width: 'auto',
+        aspectRatio: aspectRatio,
+        maxWidth: '90vw',
+        maxHeight: '90vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        overflow: 'visible'
       }}>
-        {images.map((src, idx) => (
-          <img
-            key={src}
-            src={src}
-            alt=""
+        {svgData.map((rawSvg, idx) => (
+          <div
+            key={svgs[idx] || idx}
+            dangerouslySetInnerHTML={{ __html: rawSvg }}
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
-              border: 'none',
-              outline: 'none',
-              display: 'block',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               opacity: step === idx ? 1 : 0,
-              transition: `opacity 0.6s ${strongEase}`
+              transition: `opacity 0.6s ${strongEase}`,
+              pointerEvents: 'none',
+              overflow: 'visible'
             }}
           />
         ))}
@@ -137,38 +177,48 @@ export const Chapter3ImageLoop: React.FC<ImageLoopProps> = ({
   );
 };
 
+const CH3_V = '20260930_v5';
+
 export const BiwiAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/biwi_0.jpeg", "/ch3_figures/biwi_1.jpeg"]} bgColor="#85712a" />
+  <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_19.svg?v=${CH3_V}`, `/ch3_svgs/artboard_20.svg?v=${CH3_V}`]} bgColor="#867229" />
 );
 
 export const ChaemyeonAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/chaemyeon_0.jpeg", "/ch3_figures/chaemyeon_1.jpeg"]} bgColor="transparent" />
+  <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_21.svg?v=${CH3_V}`, `/ch3_svgs/artboard_22.svg?v=${CH3_V}`]} bgColor="transparent" />
 );
 
 export const YeomchiAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/yeomchi_0.jpeg", "/ch3_figures/yeomchi_1.jpeg", "/ch3_figures/yeomchi_2.jpeg"]} bgColor="transparent" />
+  <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_26.svg?v=${CH3_V}`, `/ch3_svgs/artboard_27.svg?v=${CH3_V}`, `/ch3_svgs/artboard_28.svg?v=${CH3_V}`]} bgColor="transparent" />
 );
 
 export const DoriAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/dori_0.jpeg", "/ch3_figures/dori_1.jpeg"]} bgColor="#85712a" />
+  <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_18.svg?v=${CH3_V}`, `/ch3_svgs/artboard_17.svg?v=${CH3_V}`]} bgColor="#867229" />
 );
 
 export const OjilapAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/ojilap_0.jpeg", "/ch3_figures/ojilap_1.jpeg"]} bgColor="transparent" />
+  <Chapter3SvgLoop 
+    svgs={[`/ch3_svgs/artboard_23.svg?v=${CH3_V}`, `/ch3_svgs/artboard_24.svg?v=${CH3_V}`]} 
+    bgColor="transparent" 
+    aspectRatio="820 / 720"
+  />
 );
 
 export const AssertiveAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/assertive_0.jpeg", "/ch3_figures/assertive_1.png", "/ch3_figures/assertive_2.jpeg"]} bgColor="transparent" />
+  <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_10.svg?v=${CH3_V}`, `/ch3_svgs/artboard_11.svg?v=${CH3_V}`, `/ch3_svgs/artboard_12.svg?v=${CH3_V}`]} bgColor={["transparent", "#867229", "#867229"]} />
 );
 
 export const TactAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/tact_0.jpeg", "/ch3_figures/tact_1.jpeg", "/ch3_figures/tact_2.jpeg"]} bgColor="transparent" />
+  <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_7.svg?v=${CH3_V}`, `/ch3_svgs/artboard_8.svg?v=${CH3_V}`, `/ch3_svgs/artboard_9.svg?v=${CH3_V}`]} bgColor="transparent" />
 );
 
 export const NosyAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/nosy_0.jpeg", "/ch3_figures/nosy_1.jpeg"]} bgColor="#583884" />
+  <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_1.svg?v=${CH3_V}`, `/ch3_svgs/artboard_2.svg?v=${CH3_V}`]} bgColor="#583884" />
 );
 
 export const EntitledAnimatedDiagram = () => (
-  <Chapter3ImageLoop images={["/ch3_figures/entitled_0.jpeg", "/ch3_figures/entitled_1.jpeg", "/ch3_figures/entitled_2.jpeg"]} bgColor="transparent" />
+  <Chapter3SvgLoop 
+    svgs={[`/ch3_svgs/artboard_5.svg?v=${CH3_V}`, `/ch3_svgs/artboard_4.svg?v=${CH3_V}`, `/ch3_svgs/artboard_6.svg?v=${CH3_V}`]} 
+    bgColor="transparent" 
+    aspectRatio="830 / 840"
+  />
 );
