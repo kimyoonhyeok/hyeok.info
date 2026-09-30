@@ -14,7 +14,7 @@ export const NunchiAnimatedDiagram = () => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // 4 stages, interval adjusted to 2560ms (1.25x faster than 3200ms)
+    // 4 stages, interval 2560ms
     const interval = setInterval(() => {
       setStep((prev) => (prev + 1) % 4);
     }, 2560);
@@ -22,11 +22,11 @@ export const NunchiAnimatedDiagram = () => {
   }, []);
 
   // step 0: Fig 1 (Independent Individual) -> Blue circle only
-  // step 1: Fig 2 (Situational Space) -> Gold BG only (instantly appears, circle instantly removed)
+  // step 1: Fig 2 (Situational Space) -> Gold BG only (100vw instantly)
   // step 2: Fig 1+2 (Embedded Individual) -> Blue circle fades in inside Gold BG
-  // step 3: Fig 3 (Atmospheric Alignment) -> Gold BG expands to 100vw, Blue circle color changes
+  // step 3: Fig 3 (Atmospheric Alignment) -> Blue circle color changes
 
-  const isFullWidth = step === 3;
+  const isFullWidth = step >= 1;
   const showCircle = step === 0 || step === 2 || step === 3;
   const showSquare = step >= 1;
   
@@ -67,7 +67,7 @@ export const NunchiAnimatedDiagram = () => {
           backgroundColor: step === 3 ? 'rgba(255, 255, 255, 0.15)' : COLORS.cyan,
           mixBlendMode: step === 3 ? 'overlay' : 'normal',
           opacity: showCircle ? 1 : 0,
-          transform: showCircle ? 'scale(1)' : 'scale(1)', // Removed scaling down so it stays in place when hidden
+          transform: showCircle ? 'scale(1)' : 'scale(1)',
           transition: transitionStyle
         }} />
       </div>
