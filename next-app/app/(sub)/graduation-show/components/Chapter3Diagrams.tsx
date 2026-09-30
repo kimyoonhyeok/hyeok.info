@@ -14,10 +14,10 @@ export const NunchiAnimatedDiagram = () => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // 4 stages. Increased interval slightly to 1500ms so crossfade is visible but not choppy.
+    // 4 stages. Speed increased to 1200ms (faster than 1500ms).
     const interval = setInterval(() => {
       setStep((prev) => (prev + 1) % 4);
-    }, 1500);
+    }, 1200);
     return () => clearInterval(interval);
   }, []);
 
@@ -29,10 +29,11 @@ export const NunchiAnimatedDiagram = () => {
   const showCircle = step === 0 || step === 2 || step === 3;
   const showSquare = step >= 1;
   
-  // Transition ONLY opacity and background-color. No width/height/transform changes.
-  // This prevents shrinking/expanding, leaving only smooth crossfades.
-  const containerTransition = 'background-color 0.5s ease-in-out';
-  const circleTransition = 'opacity 0.5s ease-in-out, background-color 0.5s ease-in-out';
+  // Custom cubic-bezier for a more pronounced ("선명한") ease-in-out effect
+  const strongEase = 'cubic-bezier(0.76, 0, 0.24, 1)';
+  // Transition duration set to 0.6s to make the distinct easing curve clearly visible
+  const containerTransition = `background-color 0.6s ${strongEase}`;
+  const circleTransition = `opacity 0.6s ${strongEase}, background-color 0.6s ${strongEase}`;
   
   return (
     <div style={{ 
@@ -59,7 +60,7 @@ export const NunchiAnimatedDiagram = () => {
         backgroundColor: step === 3 ? 'rgba(255, 255, 255, 0.15)' : COLORS.cyan,
         mixBlendMode: step === 3 ? 'overlay' : 'normal',
         opacity: showCircle ? 1 : 0,
-        transform: 'scale(1)', // fixed scale, no shrinking
+        transform: 'scale(1)',
         transition: circleTransition
       }} />
     </div>
