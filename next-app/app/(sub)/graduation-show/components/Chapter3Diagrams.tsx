@@ -14,10 +14,10 @@ export const NunchiAnimatedDiagram = () => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // 4 stages, interval exactly 500ms
+    // 4 stages. Increased interval slightly to 1500ms so crossfade is visible but not choppy.
     const interval = setInterval(() => {
       setStep((prev) => (prev + 1) % 4);
-    }, 500);
+    }, 1500);
     return () => clearInterval(interval);
   }, []);
 
@@ -29,8 +29,10 @@ export const NunchiAnimatedDiagram = () => {
   const showCircle = step === 0 || step === 2 || step === 3;
   const showSquare = step >= 1;
   
-  // No transitions at all (instant changes)
-  const transitionStyle = 'none';
+  // Transition ONLY opacity and background-color. No width/height/transform changes.
+  // This prevents shrinking/expanding, leaving only smooth crossfades.
+  const containerTransition = 'background-color 0.5s ease-in-out';
+  const circleTransition = 'opacity 0.5s ease-in-out, background-color 0.5s ease-in-out';
   
   return (
     <div style={{ 
@@ -46,10 +48,10 @@ export const NunchiAnimatedDiagram = () => {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
-      transition: transitionStyle
+      transition: containerTransition
     }}>
       <div style={{
-        width: '75vh', // Circle size is proportional to viewport height
+        width: '75vh',
         height: '75vh',
         maxWidth: '90%',
         maxHeight: '90%',
@@ -57,9 +59,8 @@ export const NunchiAnimatedDiagram = () => {
         backgroundColor: step === 3 ? 'rgba(255, 255, 255, 0.15)' : COLORS.cyan,
         mixBlendMode: step === 3 ? 'overlay' : 'normal',
         opacity: showCircle ? 1 : 0,
-        // When hidden, we can just leave it as scale(1) with opacity 0 since there's no transition
-        transform: 'scale(1)',
-        transition: transitionStyle
+        transform: 'scale(1)', // fixed scale, no shrinking
+        transition: circleTransition
       }} />
     </div>
   );
