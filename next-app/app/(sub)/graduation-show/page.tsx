@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./GraduationShow.module.css";
 import { CoordinateMatrix, SymbolLegend, RelationalDiagram } from "./components/Chapter1Diagrams";
-import { NunchiFig1, NunchiFig2, NunchiFig1_2, NunchiFig3 } from "./components/Chapter3Diagrams";
+import { NunchiAnimatedDiagram } from "./components/Chapter3Diagrams";
 import { Give1Diagram, Give2Diagram, Give3Diagram, Give4Diagram, Ask1Diagram, Ask2Diagram, Ask3Diagram, Ask4Diagram, Stay1Diagram, Stay2Diagram, Stay3Diagram, Stay4Diagram, Eat1Diagram, Eat2Diagram, Eat3Diagram, Eat4Diagram } from "./components/Chapter2Diagrams";
 
 export default function GraduationShowPage() {
@@ -1101,84 +1101,22 @@ export default function GraduationShowPage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16rem', marginTop: '4rem' }}>
                         {/* Nunchi Section */}
                         <div>
-                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 18. Nunchi 1 — Independent Individual (눈치 1 — 독립된 주체)</div>
-                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
-                                <NunchiFig1 />
-                            </div>
-                            <div className={styles.flexRow}>
-                                <div className={styles.enCol}>
-                                    <h3>Fig 1</h3>
-                                    <p>The circular geometric node represents an independent individual embedded within a given social interaction.</p>
-                                </div>
-                                <div className={styles.krCol}>
-                                    <h3>Fig 1</h3>
-                                    <p>다이어그램 내의 정원(Circle) 형태는 주어진 사회적 상호작용 속에 위치한 독립된 개별 주체를 의미합니다.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 19. Nunchi 2 — Situational Space (눈치 2 — 상황적 공간)</div>
-                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
-                                <NunchiFig2 />
-                            </div>
-                            <div className={styles.flexRow}>
-                                <div className={styles.enCol}>
-                                    <h3>Fig 2</h3>
-                                    <p>The square background defines a bounded situational space or specific relational environment in which interaction occurs.</p>
-                                </div>
-                                <div className={styles.krCol}>
-                                    <h3>Fig 2</h3>
-                                    <p>사각형의 배경 평면은 상호작용이 이뤄지는 제한된 특정 상황이나 관계적 공간의 경계를 정의합니다.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 20. Nunchi — Definition (눈치 — 정의)</div>
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 18. Nunchi 1-3 — Situational Perception & Alignment (눈치 — 상황 인지와 분위기 동조)</div>
+                            
+                            <NunchiAnimatedDiagram />
                             
                             <div className={styles.flexRow}>
                                 <div className={styles.enCol}>
-                                    <h3>눈치, Nunchi</h3>
-                                    <p>The subtle capacity or tact to evaluate others' unstated feelings, intentions, and atmospheric cues through immediate context.</p>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Nunchi 1-3</h3>
+                                    <p>The circular geometric node represents an independent individual embedded within a given social interaction (Fig 1). The square background defines a bounded situational space or specific relational environment in which interaction occurs (Fig 2). The individual exists within the relational space, but maintains clear cognitive boundaries from the surrounding atmosphere (Fig 1+2).</p>
+                                    <p>Finally, the visual assimilation of the node into its background mimics the process of 'nunchi'—reading the room and aligning oneself with the unstated contextual flow, demonstrated by overlapping and subtle tonal transitions (Fig 3).</p>
+                                    <p><strong>Nunchi:</strong> A cognitive practice of quickly perceiving unspoken atmospheric conditions and adapting one's behavior to maintain harmony and save face within a given social space.</p>
                                 </div>
                                 <div className={styles.krCol}>
-                                    <h3>눈치, Nunchi</h3>
-                                    <p>남의 마음이나 무언의 분위기를 그때그때 상황적 맥락으로 미루어 알아내는 낌새, 또는 그러한 감각적 능력.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 21. Nunchi 3 — Embedded Individual (눈치 3 — 고정된 주체)</div>
-                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
-                                <NunchiFig1_2 />
-                            </div>
-                            <div className={styles.flexRow}>
-                                <div className={styles.enCol}>
-                                    <h3>Fig 1+2</h3>
-                                    <p>The combination of a circular node positioned inside a square plane symbolizes an individual embedded within a specific situational context.</p>
-                                </div>
-                                <div className={styles.krCol}>
-                                    <h3>Fig 1+2</h3>
-                                    <p>사각형(상황적 공간) 내부 중심에 위치한 정원(개인)의 결합은 특정 사회적 맥락이나 환경 속에 고정된 주체를 의미합니다.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 22. Nunchi 4 — Atmospheric Alignment (눈치 4 — 분위기 동조)</div>
-                            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto 4rem auto', display: 'flex', justifyContent: 'center' }}>
-                                <NunchiFig3 />
-                            </div>
-                            <div className={styles.flexRow}>
-                                <div className={styles.enCol}>
-                                    <h3>Fig 3</h3>
-                                    <p>The overlapping and subtle tonal transitions between geometric elements map the active process of reading and aligning with the surrounding atmosphere.</p>
-                                </div>
-                                <div className={styles.krCol}>
-                                    <h3>Fig 3</h3>
-                                    <p>기하학적 요소 간의 중첩과 톤 변화는 주변 분위기를 능동적으로 읽어내고 그에 맞춰 자신을 정렬하는 맥락 해독 과정을 도식화합니다.</p>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>눈치 1-3</h3>
+                                    <p>다이어그램 내의 정원(Circle) 형태는 주어진 사회적 상호작용 속에 위치한 독립된 개별 주체를 의미합니다 (Fig 1). 사각형의 배경 평면은 상호작용이 이뤄지는 제한된 특정 상황이나 관계적 공간의 경계를 정의합니다 (Fig 2). 주체는 관계적 공간 내에 위치하지만, 아직 주변 분위기와 동조되지 않은 채 인지적 경계를 분명히 유지하고 있습니다 (Fig 1+2).</p>
+                                    <p>최종적으로 정원이 배경에 흡수되는 듯한 시각적 동조(Assimilation) 현상은 '눈치'의 과정을 모방합니다. 이는 색조의 중첩과 톤 변화를 통해, 주변 분위기를 능동적으로 읽어내고 그에 맞춰 자신을 정렬하는 맥락 해독 과정을 시각화합니다 (Fig 3).</p>
+                                    <p><strong>눈치 (Nunchi):</strong> 말이나 명시적 표현 없이도 상황적 분위기를 기민하게 감지하고, 사회적 공간 내에서 화합을 유지하며 체면을 보호하기 위해 자신의 행동을 조율하는 인지적 규범입니다.</p>
                                 </div>
                             </div>
                         </div>
