@@ -3,7 +3,18 @@
 import React from "react";
 import styles from "./GraduationShow.module.css";
 import { CoordinateMatrix, SymbolLegend, RelationalDiagram } from "./components/Chapter1Diagrams";
-import { NunchiAnimatedDiagram } from "./components/Chapter3Diagrams";
+import { 
+    NunchiAnimatedDiagram,
+    BiwiAnimatedDiagram,
+    ChaemyeonAnimatedDiagram,
+    YeomchiAnimatedDiagram,
+    DoriAnimatedDiagram,
+    OjilapAnimatedDiagram,
+    AssertiveAnimatedDiagram,
+    TactAnimatedDiagram,
+    NosyAnimatedDiagram,
+    EntitledAnimatedDiagram
+} from "./components/Chapter3Diagrams";
 import { Give1Diagram, Give2Diagram, Give3Diagram, Give4Diagram, Ask1Diagram, Ask2Diagram, Ask3Diagram, Ask4Diagram, Stay1Diagram, Stay2Diagram, Stay3Diagram, Stay4Diagram, Eat1Diagram, Eat2Diagram, Eat3Diagram, Eat4Diagram } from "./components/Chapter2Diagrams";
 
 export default function GraduationShowPage() {
@@ -1117,6 +1128,210 @@ export default function GraduationShowPage() {
                                     <p>다이어그램 내의 정원(Circle) 형태는 주어진 사회적 상호작용 속에 위치한 독립된 개별 주체를 의미합니다 (Fig 1). 사각형의 배경 평면은 상호작용이 이뤄지는 제한된 특정 상황이나 관계적 공간의 경계를 정의합니다 (Fig 2). 주체는 관계적 공간 내에 위치하지만, 아직 주변 분위기와 동조되지 않은 채 인지적 경계를 분명히 유지하고 있습니다 (Fig 1+2).</p>
                                     <p>최종적으로 정원이 배경에 흡수되는 듯한 시각적 동조(Assimilation) 현상은 '눈치'의 과정을 모방합니다. 이는 색조의 중첩과 톤 변화를 통해, 주변 분위기를 능동적으로 읽어내고 그에 맞춰 자신을 정렬하는 맥락 해독 과정을 시각화합니다 (Fig 3).</p>
                                     <p><strong>눈치 (Nunchi):</strong> 말이나 명시적 표현 없이도 상황적 분위기를 기민하게 감지하고, 사회적 공간 내에서 화합을 유지하며 체면을 보호하기 위해 자신의 행동을 조율하는 인지적 규범입니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Biwi Section */}
+                        <div>
+                            <BiwiAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 19. Biwi 1-2 — Subordinating to Superior's Stance (비위 — 상급자에 대한 순응과 호응)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Biwi</h3>
+                                    <p>Circles of different sizes represent 'self' and 'other', while the square plane defines a hierarchical organizational context (Fig 1).</p>
+                                    <p>The directional alignment of the forms visualizes the act of subordinating one's personal values to synchronize with a superior's stance (Fig 2).</p>
+                                    <p><strong>Biwi:</strong> The accommodating disposition or behavioral tendency to align with another's mood, feelings, or situational preferences.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>비위</h3>
+                                    <p>크기가 다른 두 정원(Circle)은 '나'와 '상대방'을 각각 상징하며, 사각형 평면은 상급자가 존재하는 직급·조직적 상황을 정의합니다 (Fig 1).</p>
+                                    <p>도형의 기하학적 궤적과 방향성은 자신의 개인적 선호와 별개로 상급자의 생각이나 상황에 능동적으로 동조하는 상태를 시각화합니다 (Fig 2).</p>
+                                    <p><strong>비위 (Biwi):</strong> 다른 사람의 기분이나 마음을 맞춰주고 상황적으로 호응하는 태도나 행동적 성향.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Chaemyeon Section */}
+                        <div>
+                            <ChaemyeonAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 20. Chaemyeon 1-2 — Preservation of Social Dignity (체면 — 사회적 품위와 보호 장벽)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Chaemyeon</h3>
+                                    <p>Non-overlapping, scattered circular nodes represent autonomous individuals before entering direct social contact (Fig 1).</p>
+                                    <p>The overlapping boundaries and outer protective ring visualize 'chaemyeon' as a social barrier that preserves individual dignity during interpersonal contact (Fig 2).</p>
+                                    <p><strong>Chaemyeon:</strong> The social face, dignity, or moral self-respect one must maintain to stand honorably before others within social interactions.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>체면</h3>
+                                    <p>접점이 없이 파편화된 정원(Circle)들은 직접적인 사회적 접촉이 이뤄지기 이전의 독립된 개별 주체들을 나타냅니다 (Fig 1).</p>
+                                    <p>도형 간의 접촉면과 외곽을 둘러싼 보호막 형태는 상호작용 속에서 각 개인의 품위와 자존심을 지켜주는 사회적 장벽(체면)을 시각화합니다 (Fig 2).</p>
+                                    <p><strong>체면 (Chaemyeon):</strong> 타인을 대할 때 사회적 관계 속에서 마땅히 지켜야 할 도덕적 품격, 자존심, 혹은 떳떳한 도리와 체면.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Yeomchi Section */}
+                        <div>
+                            <YeomchiAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 21. Yeomchi 1-3 — Moral Restraint and Boundaries (염치 — 도덕적 자제와 경계 준수)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Yeomchi</h3>
+                                    <p>Circular nodes remaining strictly within their respective square domains symbolize 'having yeomchi'—behaving responsibly inside one's implicit relational boundaries without encroaching on others (Fig 1, 2).</p>
+                                    <p>Nodes breaching and spilling past the square boundaries depict 'lacking yeomchi'—shamelessly overstepping appropriate limits to impose burdens or harm on others (Fig 3).</p>
+                                    <p><strong>Yeomchi:</strong> Sense of shame, decency, or moral self-restraint that prevents one from causing burden, harm, or embarrassment to others across relational boundaries.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>염치</h3>
+                                    <p>정원(개인)들이 각자의 사각형 영역 내부에 절제되어 위치한 구도는 타인에게 피해를 주지 않고 마땅한 한계선 내에서 행동하는 '염치가 있는' 상태를 의미합니다 (Fig 1, 2).</p>
+                                    <p>정원이 사각형의 경계를 넘어 외부로 이탈하고 침범하는 구도는 적절한 한계를 넘어 타인에게 부담과 손해를 주면서도 부끄러워할 줄 모르는 '염치가 없는' 상태를 대조적으로 보여줍니다 (Fig 3).</p>
+                                    <p><strong>염치 (Yeomchi):</strong> 체면을 차릴 줄 알고 부끄러움을 아는 마음으로, 다양한 관계 속에서 타인에게 피해나 부담을 주지 않도록 스스로 행동을 자제하는 도덕적 자의식.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Dori Section */}
+                        <div>
+                            <DoriAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 22. Dori 1-2 — Relational Principles & Obligations (도리 — 상호적 도덕 규범과 도리)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Dori</h3>
+                                    <p>Three intersecting circular nodes on a situational plane represent 'dori' as a moral responsibility emerging from the relational overlap between people (Fig 1).</p>
+                                    <p>An empty circular void within a rigid situational plane visualizes legal and institutional 'duty', contrasting mechanical obligation against organic, relational expectations (Fig 2).</p>
+                                    <p><strong>Dori:</strong> Moral principles and proper behavioral standards rooted naturally in interpersonal relationships and shared human bonds.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>도리</h3>
+                                    <p>세 정원(사람)이 상황 평면 위에서 교차하며 만들어내는 중첩 구도는 강제적 의무가 아닌, 관계적 얽힘 속에서 피어나는 상호적 도덕 규범인 '도리'를 나타냅니다 (Fig 1).</p>
+                                    <p>사각형 평면 내부의 공백화된 원형 궤적은 법률 및 제도적 역할에 의해 부과되는 기계적이고 강제적인 '의무(Duty)'의 성격을 대조적으로 시각화합니다 (Fig 2).</p>
+                                    <p><strong>도리 (Dori):</strong> 인간관계와 상호적 맥락 속에서 마땅히 지켜야 할 자발적 도덕 규범이자 행동적 기준.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Ojilap Section */}
+                        <div>
+                            <OjilapAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 23. Ojilap 1-2 — Uninvited Boundary Intrusion (오지랖 — 사적 경계에 대한 과도한 참견)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Ojilap</h3>
+                                    <p>External nodes surrounding and encroaching upon the central subject visualize 'ojilap' as an uninvited invasion of personal boundaries by single or multiple others (Fig 1).</p>
+                                    <p>The cascading convergence of external nodes onto a single point diagrams excessive curiosity and invasive relational pressure concentrating on an individual (Fig 2).</p>
+                                    <p><strong>Ojilap:</strong> A figurative term referring to the behavior or disposition of excessively intruding into others' private affairs without invitation.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>오지랖</h3>
+                                    <p>중심의 '나'(청록색)를 수많은 타인(주황색)이 둘러싸며 경계를 침범하는 구도는 사적 영역에 대한 타인의 일방적인 관여와 참견을 시각화합니다 (Fig 1).</p>
+                                    <p>수많은 외곽 노드들이 단일 중심점을 향해 응집하고 쏠리는 형태는 한 개인에게 집중되는 과도한 간섭과 관계적 피로도를 도식화합니다 (Fig 2).</p>
+                                    <p><strong>오지랖 (Ojilap):</strong> 쓸데없이 남의 일에 지나치게 관여하고 참견하는 행동이나 성향을 뜻하는 비유적 어휘.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Assertive Section */}
+                        <div>
+                            <AssertiveAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 24. Assertive 1-3 — Clear Boundaries & Autonomy (소신, 단호함 — 독립적 경계 유지)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Assertive</h3>
+                                    <p>The purple circular node represents an autonomous speaker who possesses their own clear identity and communicative intention (Fig 1).</p>
+                                    <p>The square background plane defines the social situation (Fig 2).</p>
+                                    <p>Unlike 'nunchi', where the circle assimilates into the background color, the purple circle maintains its color and boundary within the situation. It shows an individual holding their position without being absorbed by others (Fig 3).</p>
+                                    <p><strong>Assertive:</strong> The attitude of expressing one's opinions and boundaries clearly without yielding to others.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>소신, 단호함</h3>
+                                    <p>보라색 정원(Circle)은 독립적인 말하는 이(화자)를 상징합니다 (Fig 1).</p>
+                                    <p>사각형의 배경 평면은 사회적 상황을 정의합니다 (Fig 2).</p>
+                                    <p>배경색에 동화되었던 '눈치'와 달리, 보라색 정원은 상황 안에서 자신의 색과 경계를 유지합니다. 주변 분위기에 흡수되지 않고 자신의 입장을 지키는 태도를 나타냅니다 (Fig 3).</p>
+                                    <p><strong>소신, 단호함 (Assertive):</strong> 타인에게 맞추어 굽히지 않고 자신의 의견과 경계를 명확하게 전달하는 태도입니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Tact Section */}
+                        <div>
+                            <TactAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 25. Tact 1-3 — Indirect Communication & Considerate Delivery (재치, 요령 — 청자를 고려한 우회적 소통)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Tact</h3>
+                                    <p>The purple and cyan circular nodes represent the speaker and the listener (Fig 1).</p>
+                                    <p>The gold element represents the topic to be conveyed in the conversation (Fig 2).</p>
+                                    <p>The trajectory curves through the gold node rather than moving in a straight line, visualizing indirect communication adjusted to the listener (Fig 3).</p>
+                                    <p><strong>Tact:</strong> The ability to deliver a message without causing offense to the listener.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>재치, 요령, 눈치</h3>
+                                    <p>보라색과 청록색 정원(Circle)은 대화의 화자와 청자를 상징합니다 (Fig 1).</p>
+                                    <p>금색 요소는 대화에서 전달하고자 하는 화제(주제)를 상징합니다 (Fig 2).</p>
+                                    <p>직선 대신 각도를 꺾어 청자에게 도달하는 궤적은, 직설적인 화법 대신 상대를 고려하여 대화를 우회 전달하는 방식을 나타냅니다 (Fig 3).</p>
+                                    <p><strong>재치, 요령, 눈치 (Tact):</strong> 청자의 감정을 상하게 하지 않고 대화의 주제를 전달하는 소통 능력입니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Nosy Section */}
+                        <div>
+                            <NosyAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 26. Nosy 1-2 — Prying into Specific Boundaries (참견, 캐묻기 — 국소적 사적 영역 침범)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Nosy</h3>
+                                    <p>The circular node inside the square plane represents an individual maintaining their own personal sphere within a given social context (Fig 1).</p>
+                                    <p>Unlike 'ojilap', which intervenes in a person's life as a whole, the targeted triangular wedge intruding into the circle visualizes nosiness as prying into specific private details (Fig 2).</p>
+                                    <p><strong>Nosy:</strong> Originating from the word 'nose', this expression describes an intrusive inclination to pry into, interrogate, or poke around in another's business or personal matters.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>참견, 캐묻기</h3>
+                                    <p>사각형 평면 내부의 정원은 주어진 사회적 맥락 안에서 자신만의 영역을 유지하는 개인을 나타냅니다 (Fig 1).</p>
+                                    <p>개인의 삶 전체에 전방위적으로 관여하는 '오지랖'과 달리, 원 내부로 침투하는 날카로운 쐐기형 형태는 특정한 사적 정보를 집요하게 파고드는 국소적 침범을 시각화합니다 (Fig 2).</p>
+                                    <p><strong>참견, 캐묻기 (Nosy):</strong> 코(Nose)를 들이민다는 어원에서 유래하여, 타인의 사적인 일이나 비밀을 캐묻고 집요하게 간섭하는 침해적 성향을 뜻합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Entitled Section */}
+                        <div>
+                            <EntitledAnimatedDiagram />
+
+                            <div style={{ fontSize: '20px', fontWeight: 700, color: '#7c7c7c', marginBottom: '4rem', lineHeight: '1.5', textAlign: 'center' }}>Fig 27. Entitled 1-3 — Compression of Surrounding Space (특권 의식 — 주변 공간의 침해와 압박)</div>
+                            
+                            <div className={styles.flexRow}>
+                                <div className={styles.enCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>Entitled</h3>
+                                    <p>The circular nodes represent individuals coexisting within a shared, equal social plane (Fig 1).</p>
+                                    <p>The central node expands beyond its boundary, encroaching on the surrounding relational territory (Fig 2).</p>
+                                    <p>The layered expansion of the central node compresses the living space of surrounding nodes, illustrating how an individual's entitled perception distorts communal balance (Fig 3).</p>
+                                    <p><strong>Entitled:</strong> The belief that one naturally deserves special privileges, treatment, or exemptions without justifiable contribution or shared social reciprocity.</p>
+                                </div>
+                                <div className={styles.krCol}>
+                                    <h3 style={{ textIndent: 0, marginBottom: '1rem' }}>특권 의식</h3>
+                                    <p>각 정원들은 동등한 사회적 평면 속에서 공존하는 개별 주체들을 의미합니다 (Fig 1).</p>
+                                    <p>중심 노드가 마땅한 한계를 넘어 과도하게 팽창하며 주변의 관계적 영역을 일방적으로 잠식해 들어갑니다 (Fig 2).</p>
+                                    <p>중심 노드의 비대화가 주변 노드들의 공간을 압박하고 밀어내는 구도는, 한 개인의 특권적 인식이 공동체적 균형을 왜곡하는 양상을 시각화합니다 (Fig 3).</p>
+                                    <p><strong>특권 의식 (Entitled):</strong> 정당한 기여나 호혜성 없이도 자신만이 마땅히 특별한 대우나 권리를 누릴 자격이 있다고 믿는 자기중심적 특권 의식.</p>
                                 </div>
                             </div>
                         </div>
