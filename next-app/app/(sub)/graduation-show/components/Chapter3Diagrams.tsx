@@ -177,7 +177,7 @@ export const Chapter3SvgLoop: React.FC<SvgLoopProps> = ({
   );
 };
 
-const CH3_V = '20260930_v5';
+const CH3_V = '20260930_v7';
 
 export const BiwiAnimatedDiagram = () => (
   <Chapter3SvgLoop svgs={[`/ch3_svgs/artboard_19.svg?v=${CH3_V}`, `/ch3_svgs/artboard_20.svg?v=${CH3_V}`]} bgColor="#867229" />
