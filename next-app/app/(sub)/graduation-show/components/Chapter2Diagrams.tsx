@@ -305,10 +305,10 @@ export const Ask1Diagram = () => (
           <div><span style={{ fontWeight: 700, color: '#00fb49' }}>I was wondering if you could possibly</span> <span style={{ fontWeight: 700, color: '#7c7c7c' }}>ask</span></div>
       </div>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3.5rem', alignItems: 'flex-start' }}>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>묻</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>물</span><span style={{ fontWeight: 700, color: '#00fb49', backgroundColor: '#00fb49', color: '#7c7c7c' }}>으시</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>여쭙</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>여쭙</span><span style={{ fontWeight: 700, color: '#00fb49', backgroundColor: '#00fb49', color: '#7c7c7c' }}>습니</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>묻</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>물</span><span style={{ fontWeight: 700, color: '#00fb49' }}>으시</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>여쭙</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>여쭙</span><span style={{ fontWeight: 700, color: '#00fb49' }}>습니</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
       </div>
     </div>
 );
@@ -477,10 +477,10 @@ export const Stay1Diagram = () => (
           <div><span style={{ fontWeight: 700, color: '#00fb49' }}>I was wondering if you could possibly</span> <span style={{ fontWeight: 700, color: '#7c7c7c' }}>stay</span></div>
       </div>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3.5rem', alignItems: 'flex-start' }}>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>있</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>있</span><span style={{ fontWeight: 700, color: '#00fb49', backgroundColor: '#00fb49', color: '#7c7c7c' }}>으시</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>계시</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>계십</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>니다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>있</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>있</span><span style={{ fontWeight: 700, color: '#00fb49' }}>으시</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>계시</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>계십</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>니다</span></div>
       </div>
     </div>
 );
@@ -646,9 +646,9 @@ export const Eat1Diagram = () => (
           <div><span style={{ fontWeight: 700, color: '#00fb49' }}>I was wondering if you could possibly</span> <span style={{ fontWeight: 700, color: '#7c7c7c' }}>eat</span></div>
       </div>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3.5rem', alignItems: 'flex-start' }}>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>먹</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>드시</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>다</span></div>
-          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>드십</span><span style={{ fontWeight: 700, color: '#e7e7e7', backgroundColor: '#e7e7e7', color: '#7c7c7c' }}>니다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#583884' }}>먹</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>드시</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>다</span></div>
+          <div style={{ display: 'flex', gap: '0' }}><span style={{ fontWeight: 700, color: '#85712a' }}>드십</span><span style={{ fontWeight: 700, color: '#7c7c7c' }}>니다</span></div>
       </div>
     </div>
 );
