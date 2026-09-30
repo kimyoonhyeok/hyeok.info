@@ -5,7 +5,8 @@ const COLORS = {
   purple: '#583884',
   gray: '#e7e7e7',
   green: '#00fb49',
-  brown: '#85712a',
+  brown: '#85712a', // Gold BG
+  lightBrown: '#ad9643', // Assimilated Gold Circle
   cyan: '#00b7eb',
   lightGray: '#f5f5f5',
 };
@@ -14,26 +15,23 @@ export const NunchiAnimatedDiagram = () => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // 4 stages. Speed increased to 1200ms (faster than 1500ms).
+    // 4 stages. 1200ms interval.
     const interval = setInterval(() => {
       setStep((prev) => (prev + 1) % 4);
     }, 1200);
     return () => clearInterval(interval);
   }, []);
 
-  // step 0: Fig 1 (Independent Individual) -> Blue circle only
-  // step 1: Fig 2 (Situational Space) -> Gold BG only
-  // step 2: Fig 1+2 (Embedded Individual) -> Blue circle inside Gold BG
-  // step 3: Fig 3 (Atmospheric Alignment) -> Blue circle color changes
-
   const showCircle = step === 0 || step === 2 || step === 3;
   const showSquare = step >= 1;
   
-  // Custom cubic-bezier for a more pronounced ("선명한") ease-in-out effect
   const strongEase = 'cubic-bezier(0.76, 0, 0.24, 1)';
-  // Transition duration set to 0.6s to make the distinct easing curve clearly visible
-  const containerTransition = `background-color 0.6s ${strongEase}`;
-  const circleTransition = `opacity 0.6s ${strongEase}, background-color 0.6s ${strongEase}`;
+  
+  // Step 0 (Reset) and Step 1 (BG instantly appears, circle instantly removed) should have NO transitions.
+  // Step 2 and Step 3 should have transitions for fading in and color morphing.
+  const isInstant = step === 0 || step === 1;
+  const containerTransition = isInstant ? 'none' : `background-color 0.6s ${strongEase}`;
+  const circleTransition = isInstant ? 'none' : `opacity 0.6s ${strongEase}, background-color 0.6s ${strongEase}`;
   
   return (
     <div style={{ 
@@ -57,8 +55,7 @@ export const NunchiAnimatedDiagram = () => {
         maxWidth: '90%',
         maxHeight: '90%',
         borderRadius: '50%',
-        backgroundColor: step === 3 ? 'rgba(255, 255, 255, 0.15)' : COLORS.cyan,
-        mixBlendMode: step === 3 ? 'overlay' : 'normal',
+        backgroundColor: step === 3 ? COLORS.lightBrown : COLORS.cyan,
         opacity: showCircle ? 1 : 0,
         transform: 'scale(1)',
         transition: circleTransition
