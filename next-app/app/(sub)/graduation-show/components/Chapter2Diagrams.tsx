@@ -247,7 +247,7 @@ export const Give3Diagram = () => (
 
 export const Give4Diagram = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', fontFamily: 'Pretendard, sans-serif' }}>
-        <div style={{ display: 'flex', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#9d9990', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>중립(Neutral)
             </div>
@@ -261,7 +261,7 @@ export const Give4Diagram = () => (
                 <LegoBlock text="다" type="gray" />
             </div>
         </div>
-        <div style={{ display: 'flex', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#978e6c', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>주체 높임(Honor Subject)
             </div>
@@ -275,7 +275,7 @@ export const Give4Diagram = () => (
                 <LegoBlock text="오" type="gray" />
             </div>
         </div>
-        <div style={{ display: 'flex', backgroundColor: '#9e8f5d', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#9e8f5d', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#7a6a3b', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>객체 높임(Honor Object/Recipient)
             </div>
@@ -369,10 +369,9 @@ export const Ask3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#83cabe' }}>
                 <span style={{ fontSize: '1.05rem', color: '#83cabe' }}><span style={{ fontWeight: 'bold', color: '#83cabe' }}>친밀한/비격식적 청자</span><br/>Intimate/Casual Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-start', width: '10.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '10.5rem' }}>
                 <div style={{ display: 'flex' }}>
-                    <GhostBlock text="주" />
-                    <LegoBlock text="묻" type="purple" />
+                                        <LegoBlock text="묻" type="purple" />
                     <LegoBlock text="다" type="gray" />
                 </div>
                 <div style={{ display: 'flex' }}>
@@ -392,10 +391,9 @@ export const Ask3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#833448' }}>
                 <span style={{ fontSize: '1.05rem', color: '#833448' }}><span style={{ fontWeight: 'bold', color: '#833448' }}>격식적 청자</span><br/>Formal/Polite Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-start', width: '14rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '14rem' }}>
                 <div style={{ display: 'flex' }}>
-                    <GhostBlock text="주" />
-                    <LegoBlock text="묻" type="purple" />
+                                        <LegoBlock text="묻" type="purple" />
                     <LegoBlock text="습" type="gray" />
                     <LegoBlock text="니" type="gray" />
                     <LegoBlock text="다" type="gray" />
@@ -421,14 +419,12 @@ export const Ask3Diagram = () => (
 
 export const Ask4Diagram = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', fontFamily: 'Pretendard, sans-serif' }}>
-        <div style={{ display: 'flex', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#9d9990', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>중립(Neutral)
             </div>
             <div style={{ display: 'flex' }}>
-                <GhostBlock text="주" />
-                <GhostBlock text="시" />
-                <LegoBlock text="묻" type="purple" />
+                                                <LegoBlock text="묻" type="purple" />
                 <LegoBlock text="다" type="gray" />
                 <LegoBlock text="묻" type="purple" />
                 <LegoBlock text="습" type="gray" />
@@ -436,7 +432,7 @@ export const Ask4Diagram = () => (
                 <LegoBlock text="다" type="gray" />
             </div>
         </div>
-        <div style={{ display: 'flex', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#978e6c', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>주체 높임(Honor Subject)
             </div>
@@ -452,7 +448,7 @@ export const Ask4Diagram = () => (
                 <LegoBlock text="오" type="gray" />
             </div>
         </div>
-        <div style={{ display: 'flex', backgroundColor: '#9e8f5d', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#9e8f5d', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#7a6a3b', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>객체 높임(Honor Object)
             </div>
@@ -544,10 +540,9 @@ export const Stay3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#83cabe' }}>
                 <span style={{ fontSize: '1.05rem', color: '#83cabe' }}><span style={{ fontWeight: 'bold', color: '#83cabe' }}>친밀한/비격식적 청자</span><br/>Intimate/Casual Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-start', width: '10.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '10.5rem' }}>
                 <div style={{ display: 'flex' }}>
-                    <GhostBlock text="주" />
-                    <LegoBlock text="있" type="purple" />
+                                        <LegoBlock text="있" type="purple" />
                     <LegoBlock text="다" type="gray" />
                 </div>
                 <div style={{ display: 'flex' }}>
@@ -567,10 +562,9 @@ export const Stay3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#833448' }}>
                 <span style={{ fontSize: '1.05rem', color: '#833448' }}><span style={{ fontWeight: 'bold', color: '#833448' }}>격식적 청자</span><br/>Formal/Polite Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-start', width: '14rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '14rem' }}>
                 <div style={{ display: 'flex' }}>
-                    <GhostBlock text="주" />
-                    <LegoBlock text="있" type="purple" />
+                                        <LegoBlock text="있" type="purple" />
                     <LegoBlock text="습" type="gray" />
                     <LegoBlock text="니" type="gray" />
                     <LegoBlock text="다" type="gray" />
@@ -595,14 +589,12 @@ export const Stay3Diagram = () => (
 
 export const Stay4Diagram = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', fontFamily: 'Pretendard, sans-serif' }}>
-        <div style={{ display: 'flex', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#9d9990', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>중립(Neutral)
             </div>
             <div style={{ display: 'flex' }}>
-                <GhostBlock text="주" />
-                <GhostBlock text="시" />
-                <LegoBlock text="있" type="purple" />
+                                                <LegoBlock text="있" type="purple" />
                 <LegoBlock text="다" type="gray" />
                 <LegoBlock text="있" type="purple" />
                 <LegoBlock text="습" type="gray" />
@@ -610,7 +602,7 @@ export const Stay4Diagram = () => (
                 <LegoBlock text="다" type="gray" />
             </div>
         </div>
-        <div style={{ display: 'flex', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#978e6c', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>간접 주체 높임(Indirect Subject)
             </div>
@@ -626,7 +618,7 @@ export const Stay4Diagram = () => (
                 <LegoBlock text="오" type="gray" />
             </div>
         </div>
-        <div style={{ display: 'flex', backgroundColor: '#9e8f5d', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#9e8f5d', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#7a6a3b', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>직접 주체 높임(Direct Subject)
             </div>
@@ -703,10 +695,9 @@ export const Eat3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#83cabe' }}>
                 <span style={{ fontSize: '1.05rem', color: '#83cabe' }}><span style={{ fontWeight: 'bold', color: '#83cabe' }}>친밀한/비격식적 청자</span><br/>Intimate/Casual Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-start', width: '10.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '10.5rem' }}>
                 <div style={{ display: 'flex' }}>
-                    <GhostBlock text="주" />
-                    <LegoBlock text="먹" type="purple" />
+                                        <LegoBlock text="먹" type="purple" />
                     <LegoBlock text="다" type="gray" />
                 </div>
                 <div style={{ display: 'flex' }}>
@@ -720,10 +711,9 @@ export const Eat3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#833448' }}>
                 <span style={{ fontSize: '1.05rem', color: '#833448' }}><span style={{ fontWeight: 'bold', color: '#833448' }}>격식적 청자</span><br/>Formal/Polite Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-start', width: '14rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '14rem' }}>
                 <div style={{ display: 'flex' }}>
-                    <GhostBlock text="주" />
-                    <LegoBlock text="먹" type="purple" />
+                                        <LegoBlock text="먹" type="purple" />
                     <LegoBlock text="습" type="gray" />
                     <LegoBlock text="니" type="gray" />
                     <LegoBlock text="다" type="gray" />
@@ -741,14 +731,12 @@ export const Eat3Diagram = () => (
 
 export const Eat4Diagram = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', fontFamily: 'Pretendard, sans-serif' }}>
-        <div style={{ display: 'flex', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#e6e4d7', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#9d9990', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>중립(Neutral)
             </div>
             <div style={{ display: 'flex' }}>
-                <GhostBlock text="주" />
-                <GhostBlock text="시" />
-                <LegoBlock text="먹" type="purple" />
+                                                <LegoBlock text="먹" type="purple" />
                 <LegoBlock text="다" type="gray" />
                 <LegoBlock text="먹" type="purple" />
                 <LegoBlock text="습" type="gray" />
@@ -756,7 +744,7 @@ export const Eat4Diagram = () => (
                 <LegoBlock text="다" type="gray" />
             </div>
         </div>
-        <div style={{ display: 'flex', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', backgroundColor: '#c1b897', minHeight: '3.5rem' }}>
             <div style={{ flex: 1, padding: '0 1rem', display: 'flex', alignItems: 'center', fontSize: '1.4rem', color: '#978e6c', position: 'relative', zIndex: 10, fontWeight: 'bold' }}>
                 주체 및 객체 높임 / Referent Coordinate<br/>주체 높임(Honor Subject)
             </div>
