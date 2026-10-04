@@ -191,8 +191,8 @@ export default function GraduationShowPage() {
                 </div>
 
                 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '8rem auto 16rem auto', width: '100%', maxWidth: '1125px' }}>
-                    <p style={{ color: "#7c7c7c", fontSize: "14px", fontWeight: 700, margin: "0 0 2rem 0", alignSelf: "flex-start" }}>Fig 1. Relational Matrix (관계 좌표계)</p>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '8rem auto 16rem auto', width: '100%', maxWidth: '840px' }}>
+                    <p style={{ color: "#7c7c7c", fontSize: "14px", fontWeight: 700, margin: "0 0 2rem 0", alignSelf: "flex-start", fontFamily: 'Pretendard, sans-serif' }}>Fig 1. Relational Matrix (관계 좌표계)</p>
                     <CoordinateMatrix />
                     <SymbolLegend />
                 </div>

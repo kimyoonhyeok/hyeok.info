@@ -1,31 +1,44 @@
 .matrixWrapper {
     position: relative;
     width: 100%;
-    margin: 4rem 0;
-    padding-left: 3rem;
-    padding-bottom: 3rem;
+    max-width: 680px;
+    margin: 4rem auto;
+    padding-left: 5rem;
+    padding-bottom: 3.5rem;
+    padding-right: 1rem;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
 }
 
 .yLabel {
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
-    transform-origin: left center;
+    top: 0;
+    width: 5rem;
+    height: calc(100% - 3.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-90deg);
+    transform-origin: center center;
     color: #7c7c7c;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     font-weight: 700;
     letter-spacing: 0.05em;
-    font-size: 1.2rem;
+    font-size: 16px;
+    white-space: nowrap;
+    z-index: 5;
 }
 
 .xLabel {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 0.75rem;
+    right: 1rem;
     color: #7c7c7c;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     font-weight: 700;
     letter-spacing: 0.05em;
-    font-size: 1.2rem;
+    font-size: 16px;
+    white-space: nowrap;
 }
 
 .matrixContainer {
@@ -34,7 +47,9 @@
     grid-template-rows: repeat(3, 1fr);
     width: 100%;
     aspect-ratio: 1 / 1;
-    border: 1px solid #333;
+    border: none;
+    border-left: 1.5px solid #aaa;
+    border-bottom: 1.5px solid #aaa;
 }
 
 .matrixCell {
@@ -43,11 +58,12 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #ffff00;
+    color: #000000;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     font-weight: 700;
-    font-size: 1.1rem;
-    padding: 1rem;
-    line-height: 1.4;
+    font-size: 1.05rem;
+    padding: 0.75rem;
+    line-height: 1.35;
 }
 
 .matrixCell span {
@@ -58,7 +74,10 @@
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    margin: 6rem 0;
+    margin: 6rem auto;
+    width: 100%;
+    max-width: 900px;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
 }
 
 .legendRow {
@@ -73,6 +92,12 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+.legendItem strong {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    font-weight: 700;
 }
 
 .legendItem p {
@@ -80,6 +105,7 @@
     margin-top: 1rem;
     color: #7c7c7c;
     line-height: 1.5;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
 }
 
 .legendKr {
