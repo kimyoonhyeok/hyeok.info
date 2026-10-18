@@ -1,0 +1,289 @@
+/* Term Index Field — Chapter 1
+   Colour rule: every text node sets colour explicitly (!important) because the global reset
+   applies `* { color: #000 }`, which beats inheritance. */
+
+.wrapper {
+  --ink: #7c7c7c;
+  --cell: clamp(104px, 15vh, 150px); /* one size for every figure thumbnail */
+  --gap: 12px;
+  width: 100%;
+  margin: 0 auto 16rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+.figLabel {
+  color: var(--ink) !important;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.hint {
+  color: var(--ink) !important;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.6;
+  margin: 0 0 2rem;
+}
+
+/* ── Field ─────────────────────────────────────────────────────────────── */
+.field {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 560px;
+  max-height: 900px;
+}
+
+.axisY,
+.axisX {
+  position: absolute;
+  background: #c8c8c8;
+  pointer-events: none;
+}
+
+.axisY {
+  left: 2%;
+  top: 4%;
+  bottom: 4%;
+  width: 1px;
+}
+
+.axisX {
+  left: 2%;
+  right: 0;
+  bottom: 4%;
+  height: 1px;
+}
+
+.axisLabelY,
+.axisLabelX {
+  position: absolute;
+  color: var(--ink) !important;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.axisLabelY {
+  top: -1.6em;
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.axisLabelX {
+  right: 0;
+  top: 0.6em;
+}
+
+/* ── Term objects ──────────────────────────────────────────────────────── */
+.term {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 10px;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+  font-family: inherit;
+}
+
+.term:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.field[data-active="true"] .term:not(.termActive) {
+  opacity: 0.25;
+}
+
+.termId {
+  color: var(--ink) !important;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.termEn {
+  color: var(--ink) !important;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.termKr {
+  color: var(--ink) !important;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.termPinned .termEn,
+.termPinned .termKr {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* ── Preview panel (fixed, bottom-left; same 3.5rem inset as the chapter nav) ── */
+.panel {
+  position: fixed;
+  left: 3.5rem;
+  bottom: 3.5rem;
+  z-index: 99;
+  width: calc(var(--cell) * 2 + var(--gap)); /* constant width for 1–4 figures */
+  padding: 14px;
+  box-sizing: content-box;
+  background: #ffffff;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.panelVisible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.panelId {
+  color: var(--ink) !important;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.panelTitle {
+  color: var(--ink) !important;
+  font-size: 14px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.panelTitleKr {
+  color: var(--ink) !important;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.panelClose {
+  color: var(--ink) !important;
+  background: transparent;
+  border: 0;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+/* Equal-size grid: fixed track = var(--cell); 1 figure → 1 cell, 2–4 → 2 columns */
+.figGrid {
+  display: grid;
+  grid-template-columns: repeat(2, var(--cell));
+  gap: var(--gap);
+  margin: 0;
+}
+
+.figCell {
+  width: var(--cell);
+  margin: 0;
+}
+
+.figFrame {
+  width: var(--cell);
+  height: var(--cell);
+}
+
+.figCaption {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  font-size: 10.5px;
+  line-height: 1.35;
+}
+
+.figCaption span {
+  color: var(--ink) !important;
+}
+
+.figIndex {
+  font-weight: 700;
+}
+
+.panelMeta {
+  color: var(--ink) !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 12px 0 6px;
+}
+
+.panelSummary {
+  color: var(--ink) !important;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 0 4px;
+  word-break: keep-all;
+}
+
+.panelLink {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--ink) !important;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Small screens: list layout + bottom sheet ─────────────────────────── */
+@media (max-width: 768px) {
+  .wrapper {
+    --cell: clamp(96px, 38vw, 140px);
+  }
+
+  .field {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 1rem;
+  }
+
+  .axisX,
+  .axisY {
+    display: none;
+  }
+
+  .term {
+    position: static;
+    transform: none;
+    white-space: normal;
+  }
+
+  .panel {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}

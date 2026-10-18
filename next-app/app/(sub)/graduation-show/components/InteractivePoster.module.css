@@ -1,0 +1,212 @@
+.wrapper {
+  --pointer-x: 52%;
+  --pointer-y: 36%;
+  --foil-angle: 118deg;
+  --foil-band-shift: 0%;
+  --scroll-sweep: 28%;
+  --scroll-progress: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #bcbcbc;
+}
+
+/* Subtle fine paper stock grain across the entire landing canvas */
+.paperStockTexture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.14;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.graphicContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vh, 3.5rem);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.posterStage {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  user-select: none;
+}
+
+.sizingPosterEn {
+  width: auto;
+  height: auto;
+  max-width: min(88vw, 108vh);
+  max-height: 84vh;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sizingPosterKr {
+  width: auto;
+  height: auto;
+  max-width: 88vw;
+  max-height: 52vh;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.goldLayerGroup {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Subtle physical hot-stamp deboss edge into paper stock */
+  filter: drop-shadow(0 0.4px 0.4px rgba(55, 45, 12, 0.32));
+}
+
+.plateImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+  user-select: none;
+  pointer-events: none;
+}
+
+.cyanLayerGroup {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cyanBaseImg {
+  filter: url(#cyanInkGrain);
+}
+
+.cyanInkTexture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  mix-blend-mode: overlay;
+  opacity: 0.34;
+  background-image:
+    /* Fine print ink grain matching the tactile scale of the poster */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.28' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cn)' opacity='0.82'/%3E%3C/svg%3E"),
+    /* Subtle ink density & paper fiber modulation */
+    radial-gradient(
+      ellipse 45vmax 32vmax at var(--pointer-x) var(--pointer-y),
+      rgba(165, 244, 255, 0.24) 0%,
+      rgba(54, 200, 231, 0.08) 48%,
+      rgba(16, 118, 146, 0.16) 100%
+    ),
+    repeating-linear-gradient(
+      calc(var(--foil-angle) - 15deg),
+      rgba(210, 250, 255, 0.09) 0px,
+      rgba(14, 96, 120, 0.08) 1.5px,
+      rgba(72, 212, 240, 0.07) 3px
+    );
+  background-size: 120px 120px, 100% 100%, 100% 100%;
+}
+
+.grayLayer {
+  z-index: 3;
+}
+
+/* Hot-stamped Gold Foil (금박) Specular Metallic Reflection */
+.goldFoilShimmer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  filter: url(#foilMetallicGrain);
+  background-image:
+    /* 1. Soft directional specular sheen tracking cursor (controlled contrast, no plastic blowout) */
+    radial-gradient(
+      ellipse 38vmax 24vmax at var(--pointer-x) var(--pointer-y),
+      rgba(238, 214, 126, 0.72) 0%,
+      rgba(202, 174, 74, 0.48) 26%,
+      rgba(154, 131, 48, 0.18) 54%,
+      rgba(134, 114, 41, 0) 80%
+    ),
+    /* 2. Anisotropic brushed metallic foil bands responding to pointer & scroll */
+    linear-gradient(
+      var(--foil-angle),
+      #756321 0%,
+      #8b7629 calc(9% + var(--foil-band-shift) * 0.18),
+      #b59b3f calc(16% + var(--foil-band-shift) * 0.18),
+      #d4ba5c calc(21% + var(--foil-band-shift) * 0.18),
+      #9a8330 calc(28% + var(--foil-band-shift) * 0.18),
+      #7c6923 calc(36% + var(--foil-band-shift) * 0.15),
+      #867229 calc(var(--scroll-sweep) - 16%),
+      #bca243 calc(var(--scroll-sweep) - 6%),
+      #e2ca72 var(--scroll-sweep),
+      #b59b3e calc(var(--scroll-sweep) + 7%),
+      #826e27 calc(var(--scroll-sweep) + 18%),
+      #9c8531 calc(72% - var(--foil-band-shift) * 0.15),
+      #cbb152 calc(79% - var(--foil-band-shift) * 0.15),
+      #8e792b calc(87% - var(--foil-band-shift) * 0.15),
+      #746220 100%
+    );
+  background-size: 100% 100%, 100% 100%;
+  opacity: 0.96;
+}
+
+/* Micro-crystalline metallic leaf grain & brushed foil striations */
+.goldFoilGrain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  mix-blend-mode: overlay;
+  opacity: 0.42;
+  background-image:
+    /* Fine metallic grain noise */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.35' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.85'/%3E%3C/svg%3E"),
+    /* Micro-striated foil leaf sheen */
+    repeating-linear-gradient(
+      calc(var(--foil-angle) - 15deg),
+      rgba(255, 244, 188, 0.16) 0px,
+      rgba(72, 58, 14, 0.14) 1.5px,
+      rgba(232, 206, 108, 0.12) 3px
+    );
+  background-size: 120px 120px, 100% 100%;
+}

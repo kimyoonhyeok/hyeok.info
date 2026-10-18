@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="100%" height="100%" viewBox="0 0 666.142 701.575">
+<defs>
+<clipPath id="ab51_clip_1">
+<path transform="matrix(1,0,0,-1,0,701.575)" d="M0 701.575H666.142V0H0Z"/>
+</clipPath>
+<clipPath id="ab51_clip_2">
+<path transform="matrix(1,0,0,-1,0,701.575)" d="M279.921 138.189H386.22V244.488H279.921Z"/>
+</clipPath>
+</defs>
+<g>
+<g inkscape:groupmode="layer" inkscape:label="Layer 1">
+<g clip-path="url(#ab51_clip_1)">
+<path transform="matrix(1,0,0,-1,545.6693,350.7876)" d="M0 0C0-117.415-95.184-212.598-212.598-212.598-330.013-212.598-425.197-117.415-425.197 0-425.197 117.415-330.013 212.599-212.598 212.598-95.184 212.598 0 117.415 0 0" fill="#583884"/>
+<g opacity=".199997">
+<g clip-path="url(#ab51_clip_2)">
+<path transform="matrix(1,0,0,-1,386.2205,510.23643)" d="M0 0C0-29.354-23.796-53.15-53.15-53.15-82.503-53.15-106.299-29.354-106.299 0-106.299 29.354-82.503 53.15-53.15 53.15-23.796 53.15 0 29.354 0 0" fill="#a861bf"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

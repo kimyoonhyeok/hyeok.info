@@ -13,11 +13,12 @@ const blockStyle: React.CSSProperties = {
   justifyContent: 'center',
   width: '3.5rem',
   minHeight: '3.5rem',
-  fontSize: '2.5rem',
+  fontSize: '2.75rem',
   fontWeight: 'bold',
   fontFamily: 'Pretendard, sans-serif',
   color: '#ffffff',
-  margin: '0', 
+  margin: '0',
+  lineHeight: 1,
 };
 
 // Text word with color (Give 1)
@@ -25,7 +26,7 @@ export const ColoredText = ({ text, color }: { text: string; color: string }) =>
   <span style={{ color: color, fontWeight: 'bold' }}>{text}</span>
 );
 
-export const SplitText = ({ text, topColor, bottomColor, splitAt = '55%' }: { text: string; topColor: string; bottomColor: string; splitAt?: string }) => (
+export const SplitText = ({ text, topColor, bottomColor, splitAt = '59%' }: { text: string; topColor: string; bottomColor: string; splitAt?: string }) => (
   <span style={{ 
     background: `linear-gradient(to bottom, ${topColor} 0%, ${topColor} ${splitAt}, ${bottomColor} ${splitAt}, ${bottomColor} 100%)`,
     backgroundClip: 'text',
@@ -46,12 +47,13 @@ export const GhostBlock = ({ text }: { text: string }) => (
         justifyContent: 'center',
         width: '3.5rem',
         height: '3.5rem',
-        fontSize: '2.5rem',
+        fontSize: '2.75rem',
         fontWeight: 'bold',
         fontFamily: 'Pretendard, sans-serif',
         color: '#ffffff',
         backgroundColor: 'rgba(255, 255, 255, 0.3)',
         margin: '0',
+        lineHeight: 1,
     }}>
         {text}
     </div>
@@ -69,10 +71,10 @@ export const LegoBlock = ({ text, type, width = 1 }: { text: string; type: 'purp
     if (type === 'brown') background = COLORS.brown;
     
     if (type === 'purple-green') {
-        background = `linear-gradient(to bottom, ${COLORS.purple} 0%, ${COLORS.purple} 55%, ${COLORS.green} 55%, ${COLORS.green} 100%)`;
+        background = `linear-gradient(to bottom, ${COLORS.purple} 0%, ${COLORS.purple} 59%, ${COLORS.green} 59%, ${COLORS.green} 100%)`;
     }
     if (type === 'brown-green') {
-        background = `linear-gradient(to bottom, ${COLORS.brown} 0%, ${COLORS.brown} 55%, ${COLORS.green} 55%, ${COLORS.green} 100%)`;
+        background = `linear-gradient(to bottom, ${COLORS.brown} 0%, ${COLORS.brown} 59%, ${COLORS.green} 59%, ${COLORS.green} 100%)`;
     }
 
     return (
@@ -85,55 +87,654 @@ export const LegoBlock = ({ text, type, width = 1 }: { text: string; type: 'purp
 export const Chapter2Diagrams = () => null; // placeholder export if needed
 
 
-export const Give1Diagram = () => (
-    <div style={{ display: 'flex', width: '100%', gap: '4rem', padding: '0', fontFamily: 'Pretendard, sans-serif', fontSize: '2.25rem', letterSpacing: '-0.02em', lineHeight: '1.2' }}>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3.5rem' }}>
-        <div>
-          <ColoredText text="give" color={COLORS.purple} />
-        </div>
-        <div>
-          <ColoredText text="Could you " color={COLORS.green} />
-          <ColoredText text="give" color={COLORS.purple} />
-        </div>
-        <div>
-          <ColoredText text="Do you mind " color={COLORS.green} />
-          <ColoredText text="giv" color={COLORS.purple} />
-          <ColoredText text="ing" color='#7c7c7c' />
-        </div>
-        <div>
-          <ColoredText text="I was wondering" color={COLORS.green} /><br/>
-          <ColoredText text="if you would mind " color={COLORS.green} />
-          <ColoredText text="giv" color={COLORS.purple} />
-          <ColoredText text="ing" color='#7c7c7c' />
+export type Chapter2VerbKey = 'give' | 'ask' | 'stay' | 'eat';
+
+type BlockCell = {
+  text: string;
+  bg: string;
+};
+
+const BG_PURPLE = '#583884';
+const BG_GRAY = '#e7e7e7';
+const BG_GREEN = '#00fb49';
+const BG_BROWN = '#85712a';
+const BG_PURPLE_GREEN = 'linear-gradient(to bottom, #583884 0%, #583884 59%, #00fb49 59%, #00fb49 100%)';
+const BG_BROWN_GREEN = 'linear-gradient(to bottom, #85712a 0%, #85712a 59%, #00fb49 59%, #00fb49 100%)';
+
+interface VerbTileConfig {
+  key: Chapter2VerbKey;
+  num: string;
+  baseEn: string;
+  labelEn: string;
+  baseKrRoot: string;
+  baseKrSuffix: string;
+  labelKr: string;
+  enVariations: React.ReactNode;
+  krTopRow: BlockCell[];
+  krSplitRows: { left: BlockCell[]; right: BlockCell[] }[];
+}
+
+export const CHAPTER2_VERB_TILE_CONFIGS: VerbTileConfig[] = [
+  {
+    key: 'give',
+    num: '01',
+    baseEn: 'give',
+    labelEn: '01. Give',
+    baseKrRoot: '주',
+    baseKrSuffix: '다',
+    labelKr: '01. 주다',
+    enVariations: (
+      <>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>Could you</span> <span style={{ color: '#583884', fontWeight: 700 }}>give</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>Do you mind</span> <span style={{ color: '#583884', fontWeight: 700 }}>giv</span><span style={{ color: '#7c7c7c' }}>ing</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>I was wondering if you would mind</span> <span style={{ color: '#583884', fontWeight: 700 }}>giv</span><span style={{ color: '#7c7c7c' }}>ing</span></div>
+      </>
+    ),
+    krTopRow: [
+      { text: '주', bg: BG_PURPLE },
+      { text: 'ㅡ', bg: BG_PURPLE },
+    ],
+    krSplitRows: [
+      {
+        left: [
+          { text: '주', bg: BG_PURPLE },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '줍', bg: BG_PURPLE_GREEN },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+      {
+        left: [
+          { text: '주', bg: BG_PURPLE },
+          { text: '시', bg: BG_GREEN },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '주', bg: BG_PURPLE },
+          { text: '십', bg: BG_GREEN },
+          { text: '시', bg: BG_GREEN },
+          { text: '오', bg: BG_GRAY },
+        ],
+      },
+      {
+        left: [
+          { text: '드', bg: BG_PURPLE },
+          { text: '리', bg: BG_BROWN },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '드', bg: BG_PURPLE },
+          { text: '립', bg: BG_BROWN_GREEN },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'ask',
+    num: '02',
+    baseEn: 'ask',
+    labelEn: '02. Ask',
+    baseKrRoot: '묻',
+    baseKrSuffix: '다',
+    labelKr: '02. 묻다',
+    enVariations: (
+      <>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>can you</span> <span style={{ color: '#583884', fontWeight: 700 }}>ask</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>would you</span> <span style={{ color: '#583884', fontWeight: 700 }}>ask</span> / <span style={{ color: '#00fb49', fontWeight: 700 }}>could you</span> <span style={{ color: '#583884', fontWeight: 700 }}>ask</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>would you mind</span> <span style={{ color: '#583884', fontWeight: 700 }}>ask</span><span style={{ color: '#7c7c7c' }}>ing</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>I was wondering if you could possibly</span> <span style={{ color: '#583884', fontWeight: 700 }}>ask</span></div>
+      </>
+    ),
+    krTopRow: [
+      { text: '묻', bg: BG_PURPLE },
+      { text: 'ㅡ', bg: BG_PURPLE },
+    ],
+    krSplitRows: [
+      {
+        left: [
+          { text: '묻', bg: BG_PURPLE },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '묻', bg: BG_PURPLE },
+          { text: '습', bg: BG_GRAY },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+      {
+        left: [
+          { text: '물', bg: BG_PURPLE },
+          { text: '으', bg: BG_GREEN },
+          { text: '시', bg: BG_GREEN },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '물', bg: BG_PURPLE },
+          { text: '으', bg: BG_GREEN },
+          { text: '십', bg: BG_GREEN },
+          { text: '시', bg: BG_GREEN },
+          { text: '오', bg: BG_GRAY },
+        ],
+      },
+      {
+        left: [
+          { text: '여', bg: BG_BROWN },
+          { text: '쭙', bg: BG_BROWN },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '여', bg: BG_BROWN },
+          { text: '쭙', bg: BG_BROWN },
+          { text: '습', bg: BG_GRAY },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'stay',
+    num: '03',
+    baseEn: 'stay',
+    labelEn: '03. Stay',
+    baseKrRoot: '있',
+    baseKrSuffix: '다',
+    labelKr: '03. 있다',
+    enVariations: (
+      <>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>can you</span> <span style={{ color: '#583884', fontWeight: 700 }}>stay</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>would you</span> <span style={{ color: '#583884', fontWeight: 700 }}>stay</span> / <span style={{ color: '#00fb49', fontWeight: 700 }}>could you</span> <span style={{ color: '#583884', fontWeight: 700 }}>stay</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>would you mind</span> <span style={{ color: '#583884', fontWeight: 700 }}>stay</span><span style={{ color: '#7c7c7c' }}>ing</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>I was wondering if you could possibly</span> <span style={{ color: '#583884', fontWeight: 700 }}>stay</span></div>
+      </>
+    ),
+    krTopRow: [
+      { text: '있', bg: BG_PURPLE },
+      { text: 'ㅡ', bg: BG_PURPLE },
+    ],
+    krSplitRows: [
+      {
+        left: [
+          { text: '있', bg: BG_PURPLE },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '있', bg: BG_PURPLE },
+          { text: '습', bg: BG_GRAY },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+      {
+        left: [
+          { text: '있', bg: BG_PURPLE },
+          { text: '으', bg: BG_GREEN },
+          { text: '시', bg: BG_GREEN },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '있', bg: BG_PURPLE },
+          { text: '으', bg: BG_GREEN },
+          { text: '십', bg: BG_GREEN },
+          { text: '시', bg: BG_GREEN },
+          { text: '오', bg: BG_GRAY },
+        ],
+      },
+      {
+        left: [
+          { text: '계', bg: BG_BROWN },
+          { text: '시', bg: BG_BROWN },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '계', bg: BG_BROWN },
+          { text: '십', bg: BG_BROWN_GREEN },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'eat',
+    num: '04',
+    baseEn: 'eat',
+    labelEn: '04. Eat',
+    baseKrRoot: '먹',
+    baseKrSuffix: '다',
+    labelKr: '04. 먹다',
+    enVariations: (
+      <>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>can you</span> <span style={{ color: '#583884', fontWeight: 700 }}>eat</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>would you</span> <span style={{ color: '#583884', fontWeight: 700 }}>eat</span> / <span style={{ color: '#00fb49', fontWeight: 700 }}>could you</span> <span style={{ color: '#583884', fontWeight: 700 }}>eat</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>would you mind</span> <span style={{ color: '#583884', fontWeight: 700 }}>eat</span><span style={{ color: '#7c7c7c' }}>ing</span></div>
+        <div><span style={{ color: '#00fb49', fontWeight: 700 }}>I was wondering if you could possibly</span> <span style={{ color: '#583884', fontWeight: 700 }}>eat</span></div>
+      </>
+    ),
+    krTopRow: [
+      { text: '먹', bg: BG_PURPLE },
+      { text: 'ㅡ', bg: BG_PURPLE },
+    ],
+    krSplitRows: [
+      {
+        left: [
+          { text: '먹', bg: BG_PURPLE },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '먹', bg: BG_PURPLE },
+          { text: '습', bg: BG_GRAY },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+      {
+        left: [
+          { text: '드', bg: BG_BROWN },
+          { text: '시', bg: BG_BROWN },
+          { text: '다', bg: BG_GRAY },
+        ],
+        right: [
+          { text: '드', bg: BG_BROWN },
+          { text: '십', bg: BG_BROWN_GREEN },
+          { text: '니', bg: BG_GRAY },
+          { text: '다', bg: BG_GRAY },
+        ],
+      },
+    ],
+  },
+];
+
+export const VerbTilePairInteractive = ({
+  config,
+  onActivateVerb,
+  onLeaveVerb,
+}: {
+  config: VerbTileConfig;
+  onActivateVerb?: (key: Chapter2VerbKey) => void;
+  onLeaveVerb?: () => void;
+}) => {
+  const [hoveredSide, setHoveredSide] = React.useState<'en' | 'kr' | null>(null);
+  const [pinnedEn, setPinnedEn] = React.useState(false);
+  const [pinnedKr, setPinnedKr] = React.useState(false);
+
+  const isEnActive = hoveredSide === 'en' || pinnedEn;
+  const isKrActive = hoveredSide === 'kr' || pinnedKr;
+
+  const bSize = '2.05rem';
+  const bFont = '1.375rem'; // 110% of 1.25rem
+
+  const maxLeftCols = Math.max(...config.krSplitRows.map((r) => r.left.length));
+  const maxRightCols = Math.max(...config.krSplitRows.map((r) => r.right.length));
+
+  // Optical vertical offset for lowercase English words inside the circle
+  const enOpticalOffsetY =
+    config.key === 'give' || config.key === 'stay' ? '-0.05em' : '-0.03em';
+
+  return (
+    <div
+      onMouseEnter={() => onActivateVerb?.(config.key)}
+      onMouseLeave={() => {
+        setHoveredSide(null);
+        onLeaveVerb?.();
+      }}
+      style={{
+        display: 'flex',
+        width: '100%',
+        maxWidth: '820px',
+        gap: 0,
+        margin: '0 auto',
+        fontFamily: "'Pretendard Variable', 'Pretendard', sans-serif",
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxSizing: 'border-box',
+      }}
+    >
+      {/* ── Left Square: English Base & Halo Variation ── */}
+      <div
+        onMouseEnter={() => {
+          setHoveredSide('en');
+          onActivateVerb?.(config.key);
+        }}
+        onMouseLeave={() => setHoveredSide(null)}
+        onClick={() => {
+          setPinnedEn((prev) => !prev);
+          onActivateVerb?.(config.key);
+        }}
+        style={{
+          flex: '1 1 0',
+          aspectRatio: '1 / 1',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          backgroundColor: '#ffffff',
+          boxSizing: 'border-box',
+          overflow: 'hidden',
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label={`English verb ${config.baseEn} base form and halo gradation variation`}
+      >
+        {isEnActive ? (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              background: 'transparent',
+            }}
+          >
+            <div
+              style={{
+                position: 'relative',
+                width: '12rem',
+                height: '12rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'transparent',
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
+                  background:
+                    'radial-gradient(circle, #583884 0%, #583884 32%, rgba(88,56,132,0.3) 38%, rgba(255,255,255,0.85) 45%, #00fb49 58%, #00fb49 76%, rgba(0,251,73,0) 100%)',
+                }}
+              />
+              <span
+                style={{
+                  position: 'relative',
+                  zIndex: 10,
+                  color: '#ffffff',
+                  fontSize: '2.25rem',
+                  fontWeight: 700,
+                  lineHeight: 1,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transform: `translateY(${enOpticalOffsetY})`,
+                }}
+              >
+                {config.baseEn}
+              </span>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.15rem',
+                textAlign: 'center',
+                fontSize: '16px',
+                fontWeight: 400,
+                lineHeight: 1.35,
+                color: '#000000',
+                marginTop: '0.65rem',
+              }}
+            >
+              {config.enVariations}
+            </div>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              background: 'transparent',
+            }}
+          >
+            <div
+              style={{
+                width: '6.5rem',
+                height: '6.5rem',
+                borderRadius: '50%',
+                backgroundColor: '#583884',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span
+                style={{
+                  color: '#ffffff',
+                  fontSize: '2rem',
+                  fontWeight: 700,
+                  lineHeight: 1,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transform: `translateY(${enOpticalOffsetY})`,
+                }}
+              >
+                {config.baseEn}
+              </span>
+            </div>
+          </div>
+        )}
+
+        <div style={{ position: 'absolute', bottom: '16px', left: '16px', pointerEvents: 'none', zIndex: 10 }}>
+          <span style={{ fontSize: '16px', fontWeight: 400, color: '#7c7c7c', lineHeight: 1 }}>
+            {config.labelEn}
+          </span>
         </div>
       </div>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3.5rem', alignItems: 'flex-start' }}>
-        <div>
-          <ColoredText text="주" color={COLORS.purple} /><ColoredText text="다" color='#7c7c7c' />
-        </div>
-        <div>
-          <ColoredText text="주" color={COLORS.purple} /><ColoredText text="시" color={COLORS.green} /><ColoredText text="다" color='#7c7c7c' />
-        </div>
-        <div>
-          <SplitText text="줍" topColor={COLORS.purple} bottomColor={COLORS.green} />
-          <ColoredText text="니다" color='#7c7c7c' />
-        </div>
-        <div>
-          <ColoredText text="주" color={COLORS.purple} />
-          <ColoredText text="십시" color={COLORS.green} />
-          <ColoredText text="오" color='#7c7c7c' />
-        </div>
-        <div>
-          <ColoredText text="드" color={COLORS.brown} />
-          <SplitText text="립" topColor={COLORS.brown} bottomColor={COLORS.green} />
-          <ColoredText text="니다" color='#7c7c7c' />
-        </div>
-        <div>
-          <ColoredText text="드리" color={COLORS.brown} /><ColoredText text="다" color='#7c7c7c' />
+
+      {/* ── Right Square: Korean Base & Stacked Lego Variation ── */}
+      <div
+        onMouseEnter={() => {
+          setHoveredSide('kr');
+          onActivateVerb?.(config.key);
+        }}
+        onMouseLeave={() => setHoveredSide(null)}
+        onClick={() => {
+          setPinnedKr((prev) => !prev);
+          onActivateVerb?.(config.key);
+        }}
+        style={{
+          flex: '1 1 0',
+          aspectRatio: '1 / 1',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          backgroundColor: '#ffffff',
+          boxSizing: 'border-box',
+          overflow: 'hidden',
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label={`Korean verb ${config.labelKr} base form and stacked Lego blocks variation`}
+      >
+        {isKrActive ? (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              background: 'transparent',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'center', lineHeight: 1 }}>
+              {/* Top Root Row */}
+              <div style={{ display: 'flex', gap: 0 }}>
+                {config.krTopRow.map((cell, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      ...blockStyle,
+                      width: bSize,
+                      minHeight: bSize,
+                      height: bSize,
+                      fontSize: bFont,
+                      background: cell.bg,
+                      color: '#ffffff',
+                    }}
+                  >
+                    {cell.text}
+                  </div>
+                ))}
+              </div>
+              {/* Split Rows: Left (Intimate) & Right (Formal) */}
+              {config.krSplitRows.map((row, rIdx) => (
+                <div key={rIdx} style={{ display: 'flex', gap: bSize, alignItems: 'center' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      width: `calc(${maxLeftCols} * ${bSize})`,
+                    }}
+                  >
+                    {row.left.map((cell, cIdx) => (
+                      <div
+                        key={cIdx}
+                        style={{
+                          ...blockStyle,
+                          width: bSize,
+                          minHeight: bSize,
+                          height: bSize,
+                          fontSize: bFont,
+                          background: cell.bg,
+                          color: '#ffffff',
+                        }}
+                      >
+                        {cell.text}
+                      </div>
+                    ))}
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      width: `calc(${maxRightCols} * ${bSize})`,
+                    }}
+                  >
+                    {row.right.map((cell, cIdx) => (
+                      <div
+                        key={cIdx}
+                        style={{
+                          ...blockStyle,
+                          width: bSize,
+                          minHeight: bSize,
+                          height: bSize,
+                          fontSize: bFont,
+                          background: cell.bg,
+                          color: '#ffffff',
+                        }}
+                      >
+                        {cell.text}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              background: 'transparent',
+            }}
+          >
+            <div style={{ display: 'flex', gap: 0 }}>
+              <div
+                style={{
+                  ...blockStyle,
+                  width: '3.25rem',
+                  minHeight: '3.25rem',
+                  height: '3.25rem',
+                  fontSize: '2.2rem',
+                  background: '#583884',
+                  color: '#ffffff',
+                }}
+              >
+                {config.baseKrRoot}
+              </div>
+              <div
+                style={{
+                  ...blockStyle,
+                  width: '3.25rem',
+                  minHeight: '3.25rem',
+                  height: '3.25rem',
+                  fontSize: '2.2rem',
+                  background: '#e7e7e7',
+                  color: '#ffffff',
+                }}
+              >
+                {config.baseKrSuffix}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div style={{ position: 'absolute', bottom: '16px', left: '16px', pointerEvents: 'none', zIndex: 10 }}>
+          <span style={{ fontSize: '16px', fontWeight: 400, color: '#7c7c7c', lineHeight: 1 }}>
+            {config.labelKr}
+          </span>
         </div>
       </div>
     </div>
+  );
+};
+
+export const AllChapter2VerbTilesInteractive = ({
+  onSelectVerb,
+}: {
+  onSelectVerb?: (key: Chapter2VerbKey) => void;
+}) => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      maxWidth: '820px',
+      gap: 0,
+      margin: '0 auto',
+      boxSizing: 'border-box',
+    }}
+  >
+    {CHAPTER2_VERB_TILE_CONFIGS.map((cfg) => (
+      <VerbTilePairInteractive key={cfg.key} config={cfg} onActivateVerb={onSelectVerb} />
+    ))}
+  </div>
 );
+
+export const GiveBaseVariationInteractive = () => (
+  <VerbTilePairInteractive config={CHAPTER2_VERB_TILE_CONFIGS[0]} />
+);
+
+export const Give1Diagram = GiveBaseVariationInteractive;
 
 export const Give2Diagram = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '8rem', padding: '0', fontFamily: 'Pretendard, sans-serif' }}>
@@ -369,7 +970,7 @@ export const Ask3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#83cabe' }}>
                 <span style={{ fontSize: '1.05rem', color: '#83cabe' }}><span style={{ fontWeight: 'bold', color: '#83cabe' }}>친밀한/비격식적 청자</span><br/>Intimate/Casual Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '10.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '14rem' }}>
                 <div style={{ display: 'flex' }}>
                                         <LegoBlock text="묻" type="purple" />
                     <LegoBlock text="다" type="gray" />
@@ -540,7 +1141,7 @@ export const Stay3Diagram = () => (
             <div style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#83cabe' }}>
                 <span style={{ fontSize: '1.05rem', color: '#83cabe' }}><span style={{ fontWeight: 'bold', color: '#83cabe' }}>친밀한/비격식적 청자</span><br/>Intimate/Casual Listener</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '10.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'flex-end', width: '14rem' }}>
                 <div style={{ display: 'flex' }}>
                                         <LegoBlock text="있" type="purple" />
                     <LegoBlock text="다" type="gray" />

@@ -1,0 +1,152 @@
+/* ── Semicircular Rotating Wheel Navigation Container (80vh × 25~30vw) ── */
+.dialNav {
+  position: fixed;
+  top: 50%;
+  left: clamp(1rem, 2.5vw, 3rem);
+  transform: translateY(-50%);
+  width: clamp(380px, 32vw, 560px);
+  height: 80vh;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.dialNavVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Semicircular Arc Background Track ───────────────────────────────── */
+.arcSvgWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.arcSvg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Anchor Plane for Rotating Items ─────────────────────────────────── */
+.dialAnchor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ── Semicircular Dial Item ─────────────────────────────────────────── */
+.dialItem {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.85rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-origin: left center;
+  will-change: transform, opacity;
+  transition: opacity 0.25s ease;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dialItem:hover {
+  opacity: 1 !important;
+}
+
+.dialItem:hover .dialTitle {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.dialTitle {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.25;
+  max-width: 320px;
+  letter-spacing: -0.01275em;
+  word-break: keep-all;
+  transition: color 0.25s ease;
+  font-style: normal !important;
+}
+
+.dialItemActive .dialTitle {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ── Boxless Language Toggle at Bottom Right ─────────────────────────── */
+.bottomLangToggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2.5rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+  user-select: none;
+  background: transparent;
+}
+
+.langBtn {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  color: #777777;
+  cursor: pointer;
+  padding: 0.15rem 0.2rem;
+  transition: color 0.15s ease;
+  line-height: 1;
+  font-style: normal !important;
+}
+
+.langBtn:hover {
+  color: #000000;
+}
+
+.langBtnActive {
+  color: #000000;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.langDivider {
+  font-size: 18px;
+  font-weight: 400;
+  color: #888888;
+  font-style: normal !important;
+}
+
+@media (max-width: 768px) {
+  .dialNav {
+    display: none;
+  }
+  .bottomLangToggle {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+}

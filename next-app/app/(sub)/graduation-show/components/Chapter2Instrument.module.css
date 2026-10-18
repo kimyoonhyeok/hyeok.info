@@ -1,0 +1,328 @@
+.instrumentWrapper {
+  width: 100%;
+  max-width: 820px;
+  margin: 0.5rem auto 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  box-sizing: border-box;
+  border: none;
+  padding-top: 0;
+  line-height: 1.45;
+}
+
+/* ── Top Bar: Title & Selectors (corners.kr minimal style) ─── */
+.topBar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0;
+  border: none;
+  width: 100%;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.instrumentMeta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.instrumentCategory {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 1.25;
+}
+
+.instrumentTitle {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.verbSelectorRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  align-items: center;
+}
+
+.verbBtn {
+  background: transparent;
+  border: none;
+  color: #000000;
+  padding: 0.2rem 0;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  opacity: 0.45;
+}
+
+.verbBtn:hover {
+  opacity: 1;
+}
+
+.verbBtnActive {
+  opacity: 1;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.stageSelectorRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  align-items: center;
+}
+
+.stagePrefix {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.stageBtn {
+  background: transparent;
+  border: none;
+  color: #000000;
+  padding: 0.2rem 0;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  opacity: 0.45;
+}
+
+.stageBtn:hover {
+  opacity: 1;
+}
+
+.stageBtnActive {
+  opacity: 1;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ── Vertical Flow Container ───────────────────────────────── */
+.verticalStage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* ── Stage Header (Above Image): Footnote-Style Caption Bar ── */
+.stageHeader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.captionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  padding-bottom: 0.15rem;
+  line-height: 1.25;
+}
+
+.figureCaption {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.bookRefBadge {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  opacity: 0.7;
+  line-height: 1.25;
+}
+
+/* ── Center: Enlarged Diagram Area ─────────────────────────── */
+.diagramArea {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.diagramInnerCanvas {
+  width: 100%;
+  max-width: 820px;
+  min-height: 280px;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 0.25rem 0;
+  margin: 0 auto;
+  border: none;
+  overflow: visible;
+}
+
+.colorKeyBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.15rem;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.35;
+}
+
+.keyItem {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #000000;
+  font-weight: 400;
+}
+
+.keyBlock {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.verbAccordionItem {
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.verbAccordionPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+  transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.28s ease;
+  width: 100%;
+}
+
+.verbAccordionPanelOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.verbAccordionPanelInner {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ── Stage Footer (Below Image) ────────────────────────────── */
+.stageFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0.75rem 0 2rem 0;
+  box-sizing: border-box;
+}
+
+.summaryBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  line-height: 1.45;
+  color: #000000;
+}
+
+.summaryLabel {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.25;
+}
+
+.summaryText {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 1.45;
+}
+
+.textSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.sectionLabel {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.25;
+}
+
+.analysisEn,
+.analysisKr,
+.descKr,
+.descEn,
+.contextEn,
+.contextKr {
+  font-size: 16px;
+  line-height: 1.45;
+  color: #000000;
+  margin: 0;
+  word-break: keep-all;
+  font-weight: 400;
+  font-style: normal;
+}

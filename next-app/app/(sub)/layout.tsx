@@ -14,9 +14,9 @@ export default function SubLayout({
 
     return (
         <div className={`works-container ${isGraduationShow ? "graduation-show-layout" : ""}`}>
-            <Header />
+            {!isGraduationShow && <Header />}
             {children}
-            <Footer />
+            {!isGraduationShow && <Footer />}
         </div>
     );
 }
