@@ -587,6 +587,17 @@ const PLOT_UNIT = PLOT_AXIS / 3;
 const PLOT_ORIGIN_Y = 650;
 const PLOT_TOP = PLOT_ORIGIN_Y - PLOT_AXIS;
 
+function formatGenderName(g: string, l: "en" | "kr"): string {
+  if (l === "kr") {
+    if (g === "male") return "남성";
+    if (g === "female") return "여성";
+    return "성별 무관";
+  }
+  if (g === "male") return "Male";
+  if (g === "female") return "Female";
+  return "Gender-Neutral";
+}
+
 export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr" }) {
   const [selectedTermId, setSelectedTermId] = useState<string | null>(null);
   const [hoveredTermId, setHoveredTermId] = useState<string | null>(null);
@@ -785,7 +796,26 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
 
               {/* Center: Vector Diagram */}
               <div className={styles.diagramFrame}>
+                <div
+                  className={styles.axisLabelY}
+                  style={{
+                    left: `${(PLOT_LEFT / PLOT_VB) * 100}%`,
+                    top: `${(PLOT_TOP / PLOT_VB) * 100}%`,
+                  }}
+                >
+                  {lang === "en" ? "Y: Hierarchy ↑" : "Y: 위계 ↑"}
+                </div>
+                <div
+                  className={styles.axisLabelX}
+                  style={{
+                    right: `${100 - ((PLOT_LEFT + PLOT_AXIS) / PLOT_VB) * 100}%`,
+                    top: `${(PLOT_ORIGIN_Y / PLOT_VB) * 100}%`,
+                  }}
+                >
+                  {lang === "en" ? "X: Distance →" : "X: 사회적 거리 →"}
+                </div>
                 <RelationalDiagram
+                  lang={lang}
                   speakerGender={activeVariant.speakerGender}
                   targetGender={activeVariant.targetGender}
                   targetX={activeVariant.targetX}
@@ -793,20 +823,34 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
                   target2Gender={activeVariant.target2Gender}
                   target2X={activeVariant.target2X}
                   target2Y={activeVariant.target2Y}
-                  target2Label={activeVariant.target2Label}
+                  target2Label={
+                    activeVariant.target2Label
+                      ? (lang === "en"
+                          ? `Target :\n${formatGenderName(activeVariant.target2Gender || "female", "en")}`
+                          : `청자 :\n${formatGenderName(activeVariant.target2Gender || "female", "kr")}`)
+                      : undefined
+                  }
                   boundary={activeVariant.boundary}
                   speakerLabel={
                     activeVariant.speakerLabel === "combined"
                       ? "combined"
-                      : (lang === "en" ? `Speaker : ${activeVariant.speakerGender}` : `화자 : ${activeVariant.speakerGender}`)
+                      : (lang === "en"
+                          ? `Speaker :\n${formatGenderName(activeVariant.speakerGender, "en")}`
+                          : `화자 :\n${formatGenderName(activeVariant.speakerGender, "kr")}`)
                   }
                   targetLabel={
                     activeVariant.speakerLabel === "combined"
                       ? undefined
-                      : (lang === "en" ? `Target : ${activeVariant.targetGender}` : `청자 : ${activeVariant.targetGender}`)
+                      : (lang === "en"
+                          ? `Target :\n${formatGenderName(activeVariant.targetGender, "en")}`
+                          : `청자 :\n${formatGenderName(activeVariant.targetGender, "kr")}`)
                   }
                   distanceLabel={activeVariant.distanceLabel}
-                  boundaryLabel={lang === "en" ? activeTerm.boundaryLabelEn : activeTerm.boundaryLabelKr}
+                  boundaryLabel={
+                    activeVariant.boundary !== "none"
+                      ? (lang === "en" ? activeTerm.boundaryLabelEn : activeTerm.boundaryLabelKr)
+                      : undefined
+                  }
                   autoHint={false}
                 />
               </div>

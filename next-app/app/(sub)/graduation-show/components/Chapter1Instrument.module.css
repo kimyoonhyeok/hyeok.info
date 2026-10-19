@@ -90,7 +90,7 @@
 /* X label sits below the X-axis right end; inline style supplies right/top at the plot corner */
 .axisLabelX {
   position: absolute;
-  transform: translateY(12px);
+  transform: translateY(24px);
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;
@@ -349,7 +349,7 @@
   justify-content: center;
   box-sizing: border-box;
   border: none;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .specDetails {

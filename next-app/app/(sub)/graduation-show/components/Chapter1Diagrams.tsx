@@ -172,6 +172,7 @@ export interface RelationalDiagramProps {
     autoHint?: boolean;
     /** Thumbnail mode: crops to the plot area (1:1), hides text, thickens strokes, disables interaction. */
     compact?: boolean;
+    lang?: 'en' | 'kr';
 }
 
 export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
@@ -189,7 +190,8 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
     distanceLabel,
     boundaryLabel,
     autoHint: autoHintProp = false,
-    compact = false
+    compact = false,
+    lang = 'en'
 }) => {
     const autoHint = autoHintProp && !compact;
     const [hoveredNode, setHoveredNode] = React.useState<'speaker' | 'target' | 'target2' | null>(null);
@@ -263,32 +265,28 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
     const bColor = boundaryColors[boundary];
 
     // ── SVG coordinate system ──────────────────────────────────────────────────
-    // viewBox: "0 0 W H"  where W=750, H=920
-    // The axis frame (plotArea) sits inside with padding so nodes partially
-    // outside the frame still render (SVG overflow is visible).
-    //
-    //  leftPad  = 130  (room for y-axis label + speaker circle half + speaker label)
-    //  topPad   = 60   (room for boundary label)
-    //  axisLen  = 540  (length of each axis, divided into 3 equal segments = 180 per unit)
-    //  botPad   = 220  (room for speaker circle half + speaker label below axis)
-    //  rightPad = 80   (room for x-axis label)
-    //
-    //  Total W = leftPad + axisLen + rightPad = 130 + 540 + 80  = 750
-    //  Total H = topPad  + axisLen + botPad   =  60 + 540 + 220 = 820
+    // Shared 890×890 coordinate system matching the left matrix exactly.
+    //  leftPad  = 130
+    //  topPad   = 110
+    //  axisLen  = 540  (divided into 3 units = 180 per unit)
+    //  botPad   = 240
+    //  rightPad = 220
+    //  Total W = 130 + 540 + 220 = 890
+    //  Total H = 110 + 540 + 240 = 890
     // ──────────────────────────────────────────────────────────────────────────
     const leftPad = 130;
-    const topPad  = 90;
+    const topPad  = 110;
     const axisLen = 540;
     const unit    = axisLen / 3; // 180
-    const botPad  = 220;
+    const botPad  = 240;
     const rightPad = 220;
 
     const VW = leftPad + axisLen + rightPad; // 890
-    const VH = topPad + axisLen + botPad;   // 850
+    const VH = topPad + axisLen + botPad;   // 890
 
     // Origin (0,0) of the relational coordinate system (bottom-left of the plot box)
     const ox = leftPad;
-    const oy = topPad + axisLen; // = 630
+    const oy = topPad + axisLen; // = 650
 
     // Helper: convert relational coords → SVG coords
     const toSVG = (rx: number, ry: number) => ({
@@ -347,14 +345,14 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                     />
                 )}
 
-                {/* ── Boundary Label (top-center of plot area) ───────────────── */}
+                {/* ── Boundary Label (inside top-center of plot area) ───────────────── */}
                 {boundary !== 'none' && boundaryLabel && (
                     <text
                         x={ox + axisLen / 2}
-                        y={topPad - 22}
+                        y={topPad + 44}
                         textAnchor="middle"
                         fill={bColor.text}
-                        fontSize="18"
+                        fontSize="34"
                         fontWeight="bold"
                         fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
                     >
@@ -386,34 +384,6 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                 {/* Y axis */}
                 <line x1={ox} y1={oy} x2={ox} y2={oy - axisLen} stroke="#aaa" strokeWidth="1.5" />
 
-                {/* ── Axis Labels ────────────────────────────────────────────── */}
-                {/* x-axis label: right of x-axis */}
-                <text
-                    x={ox + axisLen + 12}
-                    y={oy + 5}
-                    fill="#000000"
-                    fontSize="16"
-                    fontWeight="400"
-                    fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
-                    dominantBaseline="middle"
-                >
-                    x-axis: Distance
-                </text>
-
-                {/* y-axis label: rotated, left of y-axis */}
-                <text
-                    x={ox - 72}
-                    y={topPad + axisLen / 2}
-                    fill="#000000"
-                    fontSize="16"
-                    fontWeight="400"
-                    fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
-                    textAnchor="middle"
-                    transform={`rotate(-90, ${ox - 72}, ${topPad + axisLen / 2})`}
-                >
-                    y-axis: Hierarchy
-                </text>
-
                 {/* ── Connection Line ────────────────────────────────────────── */}
                 <line
                     x1={speakerPt.x} y1={speakerPt.y}
@@ -438,15 +408,15 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                     {!isCombined && (
                         <text
                             x={speakerPt.x}
-                            y={speakerPt.y + circleR + 18}
+                            y={speakerPt.y + circleR + 32}
                             fill={speakerColor}
-                            fontSize="18"
+                            fontSize="34"
                             fontWeight="bold"
                             fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
                             textAnchor="middle"
                         >
                             {speakerLabel.split('\n').map((line, i) => (
-                                <tspan x={speakerPt.x} dy={i === 0 ? 0 : 24} key={i}>{line}</tspan>
+                                <tspan x={speakerPt.x} dy={i === 0 ? 0 : 40} key={i}>{line}</tspan>
                             ))}
                         </text>
                     )}
@@ -465,16 +435,16 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
 
                         {!isCombined && targetLabel && (
                             <text
-                                x={hasTarget2 ? targetPt.x : targetPt.x + circleR + 10}
-                                y={hasTarget2 ? targetPt.y - circleR - 34 : targetPt.y - circleR - 10}
+                                x={hasTarget2 ? targetPt.x : (targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18)}
+                                y={hasTarget2 ? targetPt.y - circleR - 56 : (targetX >= 2.2 ? targetPt.y - circleR - 56 : targetPt.y - 12)}
                                 fill={targetColor}
-                                fontSize="18"
+                                fontSize="34"
                                 fontWeight="bold"
                                 fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
-                                textAnchor={hasTarget2 ? "middle" : "start"}
+                                textAnchor={hasTarget2 || targetX >= 2.2 ? "middle" : "start"}
                             >
                                 {targetLabel.split('\n').map((line, i) => (
-                                    <tspan x={hasTarget2 ? targetPt.x : targetPt.x + circleR + 10} dy={i === 0 ? 0 : 24} key={i}>{line}</tspan>
+                                    <tspan x={hasTarget2 || targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18} dy={i === 0 ? 0 : 40} key={i}>{line}</tspan>
                                 ))}
                             </text>
                         )}
@@ -496,15 +466,15 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                         {target2Label && (
                             <text
                                 x={target2Pt.x}
-                                y={target2Pt.y - circleR - 34}
+                                y={target2Pt.y - circleR - 56}
                                 fill={target2Color}
-                                fontSize="18"
+                                fontSize="34"
                                 fontWeight="bold"
                                 fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
                                 textAnchor="middle"
                             >
                                 {target2Label.split('\n').map((line, i) => (
-                                    <tspan x={target2Pt.x} dy={i === 0 ? 0 : 24} key={i}>{line}</tspan>
+                                    <tspan x={target2Pt.x} dy={i === 0 ? 0 : 40} key={i}>{line}</tspan>
                                 ))}
                             </text>
                         )}
@@ -521,32 +491,32 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                     >
                         {!isCombined && (
                             <text
-                                x={hasTarget2 ? (targetPt.x + target2Pt.x) / 2 : targetPt.x + circleR + 10}
-                                y={hasTarget2 ? targetPt.y + circleR + 18 : targetPt.y + circleR - 10}
+                                x={hasTarget2 ? (targetPt.x + target2Pt.x) / 2 : (targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18)}
+                                y={hasTarget2 ? targetPt.y + circleR + 24 : (targetX >= 2.2 ? targetPt.y + circleR + 24 : targetPt.y + 24)}
                                 fill="#7c7c7c"
-                                fontSize="16"
+                                fontSize="32"
                                 fontWeight="bold"
                                 fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
-                                textAnchor={hasTarget2 ? "middle" : "start"}
+                                textAnchor={hasTarget2 || targetX >= 2.2 ? "middle" : "start"}
                                 dominantBaseline="hanging"
                             >
                                 {distanceLabel.split('\n').map((line, i) => (
-                                    <tspan x={hasTarget2 ? (targetPt.x + target2Pt.x) / 2 : targetPt.x + circleR + 10} dy={i === 0 ? 0 : 22} key={i}>{line}</tspan>
+                                    <tspan x={hasTarget2 ? (targetPt.x + target2Pt.x) / 2 : (targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18)} dy={i === 0 ? 0 : 38} key={i}>{line}</tspan>
                                 ))}
                             </text>
                         )}
                         {isCombined && (
                             <text
-                                x={targetPt.x - circleR - 10}
-                                y={targetPt.y - circleR * 0.5}
+                                x={targetPt.x - circleR - 16}
+                                y={targetPt.y - 48}
                                 fill="#7c7c7c"
-                                fontSize="16"
+                                fontSize="32"
                                 fontWeight="bold"
                                 fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
                                 textAnchor="end"
                             >
                                 {distanceLabel.split('\n').map((line, i) => (
-                                    <tspan x={targetPt.x - circleR - 10} dy={i === 0 ? 0 : 22} key={i}>{line}</tspan>
+                                    <tspan x={targetPt.x - circleR - 16} dy={i === 0 ? 0 : 38} key={i}>{line}</tspan>
                                 ))}
                             </text>
                         )}
@@ -570,9 +540,9 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                 {isCombined && (
                     <text
                         x={(speakerPt.x + targetPt.x) / 2}
-                        y={Math.max(speakerPt.y, targetPt.y) + circleR + 18}
+                        y={Math.max(speakerPt.y, targetPt.y) + circleR + 90}
                         fill="#ff5500"
-                        fontSize="18"
+                        fontSize="34"
                         fontWeight="bold"
                         fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
                         textAnchor="middle"
@@ -581,9 +551,17 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                             transition: 'opacity 0.3s ease-in-out'
                         }}
                     >
-                        <tspan x={(speakerPt.x + targetPt.x) / 2} dy="0">Speaker / Target :</tspan>
-                        <tspan x={(speakerPt.x + targetPt.x) / 2} dy="24">Gender-Neutral</tspan>
-                        <tspan x={(speakerPt.x + targetPt.x) / 2} dy="24">화자 / 청자 : 성별 무관</tspan>
+                        {lang === "kr" ? (
+                            <>
+                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="0">화자 / 청자 :</tspan>
+                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="40">성별 무관</tspan>
+                            </>
+                        ) : (
+                            <>
+                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="0">Speaker / Target :</tspan>
+                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="40">Gender-Neutral</tspan>
+                            </>
+                        )}
                     </text>
                 )}
             </svg>
