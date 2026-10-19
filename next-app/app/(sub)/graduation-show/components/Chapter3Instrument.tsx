@@ -753,11 +753,12 @@ export default function Chapter3Instrument({ lang = "en" }: { lang?: "en" | "kr"
     return "#ffffff";
   };
 
-  const renderConceptDiagram = (c: ConceptData, phaseIdx: number) => {
+  const renderConceptDiagram = (c: ConceptData, phaseIdx: number, inTile = false) => {
     if (c.key === "nunchi") {
       const idx = phaseIdx % 4;
       const showCircle = idx !== 1;
       const circleColor = idx === 3 ? "#98843f" : "#00c1e5";
+      const circleSize = inTile ? "70%" : "78%";
 
       return (
         <div
@@ -768,8 +769,8 @@ export default function Chapter3Instrument({ lang = "en" }: { lang?: "en" | "kr"
         >
           <div
             style={{
-              width: "78%",
-              height: "78%",
+              width: circleSize,
+              height: circleSize,
               borderRadius: "50%",
               backgroundColor: circleColor,
               opacity: showCircle ? 1 : 0,
@@ -883,9 +884,9 @@ export default function Chapter3Instrument({ lang = "en" }: { lang?: "en" | "kr"
                   >
                     <div
                       className={styles.tileInner}
-                      style={c.key === "ulkeok" ? { transform: "scale(0.75) translateY(-4%)" } : undefined}
+                      style={c.key === "ulkeok" ? { transform: "translateY(-6%) scale(0.84)" } : undefined}
                     >
-                      {renderConceptDiagram(c, curPhase)}
+                      {renderConceptDiagram(c, curPhase, true)}
                     </div>
                     <div className={styles.tileLabel}>
                       <span

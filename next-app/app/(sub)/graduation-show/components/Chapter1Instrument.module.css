@@ -73,29 +73,31 @@
   box-sizing: border-box;
 }
 
+/* Y label sits above the Y-axis top end; inline style supplies left/top at the plot corner */
 .axisLabelY {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  transform: translate(-10px, calc(-100% - 12px));
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   color: #000000;
   letter-spacing: 0.02em;
   line-height: 1.2;
+  white-space: nowrap;
   z-index: 5;
 }
 
+/* X label sits below the X-axis right end; inline style supplies right/top at the plot corner */
 .axisLabelX {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  transform: translateY(12px);
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   color: #000000;
   letter-spacing: 0.02em;
   line-height: 1.2;
+  white-space: nowrap;
   z-index: 5;
 }
 
@@ -158,13 +160,15 @@
   line-height: 1.2;
 }
 
-.nodeLabelNuna {
-  position: absolute;
+.nodeLabelAbove {
   top: auto;
   bottom: 21px;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 0;
+}
+
+.nodeLabelRight {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translateY(-50%);
 }
 
 .activeNode .nodeCircle {

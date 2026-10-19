@@ -233,19 +233,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Lift the graphic so the bottom-left label keeps a clear gap below it */
+  transform: translateY(-5%);
 }
 
+/* Tile overview only: graphic scaled to 70% (expanded slide keeps 78%) */
+.tileInner .svgWrapper svg {
+  width: 70%;
+  height: 70%;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+/* Equal left/bottom inset measured to the glyph box (line-height: 1, no extra leading) */
 .tileLabel {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
+  bottom: 10px;
+  left: 12px;
   background: transparent;
   padding: 0;
   pointer-events: none;
   z-index: 10;
+  display: flex;
+  line-height: 1;
 }
 
 .tileLabelText {
+  display: block;
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;

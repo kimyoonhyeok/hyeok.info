@@ -559,19 +559,33 @@ const PRIMARY_TERMS: TermSpec[] = [
   },
 ];
 
-// All 10 coordinate points strictly matching the book
-const MATRIX_POINTS = [
-  { id: "001", nameKr: "어른", nameEn: "Eoreun", x: 3, y: 3, color: "#ff5500" },
-  { id: "002", nameKr: "형/오빠", nameEn: "Hyeong/Oppa", x: 1, y: 0.95, color: "#4a3b8c" },
-  { id: "003", nameKr: "누나/언니", nameEn: "Nuna/Eonni", x: 1, y: 1.5, color: "#998833" },
-  { id: "004", nameKr: "윗사람", nameEn: "Witsaram", x: 2, y: 3, color: "#ff5500" },
-  { id: "005", nameKr: "선후배", nameEn: "Seonhuba", x: 2, y: 2, color: "#ff5500" },
-  { id: "006", nameKr: "당신/너", nameEn: "Dangsin/Neo", x: 2, y: 0.3, color: "#ff5500" },
-  { id: "007", nameKr: "이름 부르기", nameEn: "First Name", x: 1, y: 0.3, color: "#ff5500" },
-  { id: "008", nameKr: "친형제/자매", nameEn: "Siblings", x: 0.5, y: 0.5, color: "#4a3b8c" },
-  { id: "009", nameKr: "~씨/선생님", nameEn: "-ssi / Teacher", x: 2.5, y: 1.2, color: "#ff5500" },
-  { id: "010", nameKr: "손님/선생님", nameEn: "Customer", x: 3, y: 1.55, color: "#ff5500" },
+// All 10 coordinate points matching the book quadrants.
+// Positions are flexibly adjusted inside their quadrant (see footnote 5) so that
+// labels do not collide inside the shared plot box; `label` sets the label side.
+type LabelSide = "below" | "above" | "right";
+const MATRIX_POINTS: { id: string; nameKr: string; nameEn: string; x: number; y: number; color: string; label: LabelSide }[] = [
+  { id: "001", nameKr: "어른", nameEn: "Eoreun", x: 3, y: 3, color: "#ff5500", label: "below" },
+  { id: "002", nameKr: "형/오빠", nameEn: "Hyeong/Oppa", x: 1, y: 1.0, color: "#4a3b8c", label: "right" },
+  { id: "003", nameKr: "누나/언니", nameEn: "Nuna/Eonni", x: 0.85, y: 1.5, color: "#998833", label: "above" },
+  { id: "004", nameKr: "윗사람", nameEn: "Witsaram", x: 2, y: 3, color: "#ff5500", label: "below" },
+  { id: "005", nameKr: "선후배", nameEn: "Seonhuba", x: 2, y: 2, color: "#ff5500", label: "below" },
+  { id: "006", nameKr: "당신/너", nameEn: "Dangsin/Neo", x: 2.35, y: 0.6, color: "#ff5500", label: "right" },
+  { id: "007", nameKr: "이름 부르기", nameEn: "First Name", x: 1.62, y: 0.6, color: "#ff5500", label: "below" },
+  { id: "008", nameKr: "친형제/자매", nameEn: "Siblings", x: 0.56, y: 0.6, color: "#4a3b8c", label: "below" },
+  { id: "009", nameKr: "~씨/선생님", nameEn: "-ssi / Teacher", x: 2.6, y: 1.3, color: "#ff5500", label: "right" },
+  { id: "010", nameKr: "손님/선생님", nameEn: "Customer", x: 3, y: 1.65, color: "#ff5500", label: "right" },
 ];
+
+// Shared plot geometry — identical to RelationalDiagram (Chapter1Diagrams.tsx):
+// leftPad 130, topPad 90, axisLen 540 inside an 890-wide viewBox. The right diagram's
+// 890×850 viewBox is vertically centred in a square frame (+20 units), so a square
+// 890×890 box with origin (130, 650) yields the same on-screen plot box size/position.
+const PLOT_VB = 890;
+const PLOT_LEFT = 130;
+const PLOT_AXIS = 540;
+const PLOT_UNIT = PLOT_AXIS / 3;
+const PLOT_ORIGIN_Y = 650;
+const PLOT_TOP = PLOT_ORIGIN_Y - PLOT_AXIS;
 
 export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr" }) {
   const [selectedTermId, setSelectedTermId] = useState<string | null>(null);
@@ -619,31 +633,65 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
           </div>
 
           <div className={styles.matrixCanvasWrapper}>
-            <div className={styles.axisLabelY}>
+            <div
+              className={styles.axisLabelY}
+              style={{
+                left: `${(PLOT_LEFT / PLOT_VB) * 100}%`,
+                top: `${(PLOT_TOP / PLOT_VB) * 100}%`,
+              }}
+            >
               {lang === "en" ? "Y: Hierarchy ↑" : "Y: 위계 ↑"}
             </div>
-            <div className={styles.axisLabelX}>
+            <div
+              className={styles.axisLabelX}
+              style={{
+                right: `${100 - ((PLOT_LEFT + PLOT_AXIS) / PLOT_VB) * 100}%`,
+                top: `${(PLOT_ORIGIN_Y / PLOT_VB) * 100}%`,
+              }}
+            >
               {lang === "en" ? "X: Distance →" : "X: 사회적 거리 →"}
             </div>
 
-            <svg className={styles.gridLinesSvg} viewBox="0 0 300 300">
-              {/* 3x3 Dashed grid */}
-              <line x1="100" y1="20" x2="100" y2="280" stroke="#e0e0e0" strokeDasharray="3 3" />
-              <line x1="200" y1="20" x2="200" y2="280" stroke="#e0e0e0" strokeDasharray="3 3" />
-              <line x1="20" y1="100" x2="280" y2="100" stroke="#e0e0e0" strokeDasharray="3 3" />
-              <line x1="20" y1="200" x2="280" y2="200" stroke="#e0e0e0" strokeDasharray="3 3" />
+            <svg className={styles.gridLinesSvg} viewBox={`0 0 ${PLOT_VB} ${PLOT_VB}`}>
+              {/* 3x3 Dashed grid (same stroke spec as RelationalDiagram) */}
+              {[1, 2, 3].map((i) => (
+                <line
+                  key={`h${i}`}
+                  x1={PLOT_LEFT}
+                  y1={PLOT_ORIGIN_Y - i * PLOT_UNIT}
+                  x2={PLOT_LEFT + PLOT_AXIS}
+                  y2={PLOT_ORIGIN_Y - i * PLOT_UNIT}
+                  stroke="#c8c8c8"
+                  strokeDasharray="8,8"
+                  strokeWidth="1"
+                />
+              ))}
+              {[1, 2, 3].map((i) => (
+                <line
+                  key={`v${i}`}
+                  x1={PLOT_LEFT + i * PLOT_UNIT}
+                  y1={PLOT_ORIGIN_Y}
+                  x2={PLOT_LEFT + i * PLOT_UNIT}
+                  y2={PLOT_TOP}
+                  stroke="#c8c8c8"
+                  strokeDasharray="8,8"
+                  strokeWidth="1"
+                />
+              ))}
 
-              {/* Axes lines (matching screenshot 2 thickness and tone) */}
-              <line x1="30" y1="270" x2="280" y2="270" stroke="#aaa" strokeWidth="0.8" />
-              <line x1="30" y1="270" x2="30" y2="20" stroke="#aaa" strokeWidth="0.8" />
+              {/* Axes lines */}
+              <line x1={PLOT_LEFT} y1={PLOT_ORIGIN_Y} x2={PLOT_LEFT + PLOT_AXIS} y2={PLOT_ORIGIN_Y} stroke="#aaa" strokeWidth="1.5" />
+              <line x1={PLOT_LEFT} y1={PLOT_ORIGIN_Y} x2={PLOT_LEFT} y2={PLOT_TOP} stroke="#aaa" strokeWidth="1.5" />
             </svg>
 
             {/* Render Matrix Nodes */}
             {MATRIX_POINTS.map((pt) => {
               const isActive = pt.id === activeTermId;
               const isSelected = pt.id === selectedTermId;
-              const leftPercent = 10 + (pt.x / 3) * 78;
-              const topPercent = 90 - (pt.y / 3) * 78;
+              const leftPercent = ((PLOT_LEFT + pt.x * PLOT_UNIT) / PLOT_VB) * 100;
+              const topPercent = ((PLOT_ORIGIN_Y - pt.y * PLOT_UNIT) / PLOT_VB) * 100;
+              const labelSideClass =
+                pt.label === "above" ? styles.nodeLabelAbove : pt.label === "right" ? styles.nodeLabelRight : "";
 
               return (
                 <div
@@ -660,7 +708,7 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
                   <div className={styles.nodeCircle} style={{ borderColor: pt.color }}>
                     <div className={styles.nodeDot} style={{ backgroundColor: pt.color }} />
                   </div>
-                  <span className={`${styles.nodeLabel} ${pt.id === "003" ? styles.nodeLabelNuna : ""}`}>
+                  <span className={`${styles.nodeLabel} ${labelSideClass}`}>
                     {lang === "en" ? pt.nameEn : pt.nameKr}
                   </span>
                 </div>
