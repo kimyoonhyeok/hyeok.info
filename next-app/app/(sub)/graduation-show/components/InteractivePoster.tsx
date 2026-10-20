@@ -25,8 +25,8 @@ export default function InteractivePoster({
     let scrollProg = 0;
 
     const updateVars = () => {
-      currentX += (targetX - currentX) * 0.12;
-      currentY += (targetY - currentY) * 0.12;
+      currentX += (targetX - currentX) * 0.32;
+      currentY += (targetY - currentY) * 0.32;
 
       const dx = (currentX - 50) / 50; // -1 .. 1
       const dy = (currentY - 50) / 50; // -1 .. 1
@@ -44,8 +44,8 @@ export default function InteractivePoster({
       el.style.setProperty("--scroll-progress", scrollProg.toFixed(3));
 
       if (
-        Math.abs(targetX - currentX) > 0.05 ||
-        Math.abs(targetY - currentY) > 0.05
+        Math.abs(targetX - currentX) > 0.02 ||
+        Math.abs(targetY - currentY) > 0.02
       ) {
         rafId = requestAnimationFrame(updateVars);
       } else {
@@ -120,7 +120,7 @@ export default function InteractivePoster({
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.85"
-              numOctaves="4"
+              numOctaves="1"
               stitchTiles="stitch"
               result="noise"
             />
@@ -152,7 +152,7 @@ export default function InteractivePoster({
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.85"
-              numOctaves="4"
+              numOctaves="1"
               stitchTiles="stitch"
               result="inkNoise"
             />

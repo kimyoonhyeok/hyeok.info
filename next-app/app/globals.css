@@ -98,14 +98,27 @@ body {
   width: 100%;
   padding: 1rem 1.5rem;
   margin-bottom: 0;
-  z-index: 1000;
+  z-index: 10000;
   opacity: 0;
-  transition: opacity 0.25s ease-in-out;
+  pointer-events: none;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity, transform;
+  transition: opacity 0.25s ease-in-out, background-color 0.25s ease-in-out;
   background: transparent;
 }
 
-.global-header.header-hover-only:hover {
+.global-header.header-hover-only:hover,
+.global-header.header-hover-only.is-visible {
   opacity: 1;
+  pointer-events: auto;
+}
+
+.global-header.header-hover-only.scrolled:hover,
+.global-header.header-hover-only.scrolled.is-visible {
+  background-color: #ffffff;
 }
 
 .global-header ul {
