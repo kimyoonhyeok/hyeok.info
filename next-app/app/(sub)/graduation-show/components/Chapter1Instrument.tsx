@@ -598,6 +598,23 @@ function formatGenderName(g: string, l: "en" | "kr"): string {
   return "Gender-Neutral";
 }
 
+function formatDistanceLabel(label: string | undefined, l: "en" | "kr"): string {
+  if (!label) return "";
+  const parts = label.split(/[\n·]/).map((p) => p.trim()).filter(Boolean);
+  const normalized = parts.join(" / ");
+  if (l === "kr") {
+    return normalized
+      .replace(/Distance\(X\)/g, "거리(X)")
+      .replace(/Hierarchy\(Y\)/g, "위계(Y)")
+      .replace(/High/g, "높음")
+      .replace(/Mid/g, "중간")
+      .replace(/Low/g, "낮음")
+      .replace(/Zero/g, "동등")
+      .replace(/N\/A/g, "해당 없음");
+  }
+  return normalized;
+}
+
 export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr" }) {
   const [selectedTermId, setSelectedTermId] = useState<string | null>(null);
   const [hoveredTermId, setHoveredTermId] = useState<string | null>(null);
@@ -730,7 +747,7 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
           {activeTerm && activeVariant && (
             <div className={styles.coordBar}>
               <div>Coord: X={activeVariant.targetX.toFixed(1)} / Y={activeVariant.targetY.toFixed(1)}</div>
-              <div>Level: {activeTerm.distanceLabel}</div>
+              <div>Level: {formatDistanceLabel(activeTerm.distanceLabel, lang)}</div>
               <div>Boundary: {lang === "en" ? activeTerm.boundaryLabelEn : activeTerm.boundaryLabelKr}</div>
             </div>
           )}
@@ -826,8 +843,8 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
                   target2Label={
                     activeVariant.target2Label
                       ? (lang === "en"
-                          ? `Target :\n${formatGenderName(activeVariant.target2Gender || "female", "en")}`
-                          : `청자 :\n${formatGenderName(activeVariant.target2Gender || "female", "kr")}`)
+                          ? `Target : ${formatGenderName(activeVariant.target2Gender || "female", "en")}`
+                          : `청자 : ${formatGenderName(activeVariant.target2Gender || "female", "kr")}`)
                       : undefined
                   }
                   boundary={activeVariant.boundary}
@@ -842,10 +859,9 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
                     activeVariant.speakerLabel === "combined"
                       ? undefined
                       : (lang === "en"
-                          ? `Target :\n${formatGenderName(activeVariant.targetGender, "en")}`
-                          : `청자 :\n${formatGenderName(activeVariant.targetGender, "kr")}`)
+                          ? `Target : ${formatGenderName(activeVariant.targetGender, "en")}`
+                          : `청자 : ${formatGenderName(activeVariant.targetGender, "kr")}`)
                   }
-                  distanceLabel={activeVariant.distanceLabel}
                   boundaryLabel={
                     activeVariant.boundary !== "none"
                       ? (lang === "en" ? activeTerm.boundaryLabelEn : activeTerm.boundaryLabelKr)
@@ -853,6 +869,11 @@ export default function Chapter1Instrument({ lang = "en" }: { lang?: "en" | "kr"
                   }
                   autoHint={false}
                 />
+              </div>
+
+              {/* Below Diagram: XY Level notation outside graph */}
+              <div className={styles.diagramLevelRow}>
+                {formatDistanceLabel(activeVariant.distanceLabel, lang)}
               </div>
 
               {/* Below Diagram: Formula, Logic, Approximation, Definition, Usage, Notes */}

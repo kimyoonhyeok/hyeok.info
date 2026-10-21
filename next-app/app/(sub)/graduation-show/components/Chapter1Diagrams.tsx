@@ -167,7 +167,7 @@ export interface RelationalDiagramProps {
     boundary: BoundaryType;
     speakerLabel: string;
     targetLabel?: string;
-    distanceLabel: string;
+    distanceLabel?: string;
     boundaryLabel?: string;
     autoHint?: boolean;
     /** Thumbnail mode: crops to the plot area (1:1), hides text, thickens strokes, disables interaction. */
@@ -187,7 +187,6 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
     boundary,
     speakerLabel,
     targetLabel,
-    distanceLabel,
     boundaryLabel,
     autoHint: autoHintProp = false,
     compact = false,
@@ -435,17 +434,24 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
 
                         {!isCombined && targetLabel && (
                             <text
-                                x={hasTarget2 ? targetPt.x : (targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18)}
-                                y={hasTarget2 ? targetPt.y - circleR - 56 : (targetX >= 2.2 ? targetPt.y - circleR - 56 : targetPt.y - 12)}
+                                x={
+                                    hasTarget2
+                                        ? targetPt.x
+                                        : targetPt.x + circleR + 20
+                                }
+                                y={
+                                    hasTarget2
+                                        ? targetPt.y - circleR - 24
+                                        : targetPt.y
+                                }
                                 fill={targetColor}
                                 fontSize="34"
                                 fontWeight="bold"
                                 fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
-                                textAnchor={hasTarget2 || targetX >= 2.2 ? "middle" : "start"}
+                                textAnchor={hasTarget2 ? "middle" : "start"}
+                                dominantBaseline={hasTarget2 ? "auto" : "central"}
                             >
-                                {targetLabel.split('\n').map((line, i) => (
-                                    <tspan x={hasTarget2 || targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18} dy={i === 0 ? 0 : 40} key={i}>{line}</tspan>
-                                ))}
+                                {targetLabel}
                             </text>
                         )}
 
@@ -466,58 +472,14 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                         {target2Label && (
                             <text
                                 x={target2Pt.x}
-                                y={target2Pt.y - circleR - 56}
+                                y={target2Pt.y + circleR + 45}
                                 fill={target2Color}
                                 fontSize="34"
                                 fontWeight="bold"
                                 fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
                                 textAnchor="middle"
                             >
-                                {target2Label.split('\n').map((line, i) => (
-                                    <tspan x={target2Pt.x} dy={i === 0 ? 0 : 40} key={i}>{line}</tspan>
-                                ))}
-                            </text>
-                        )}
-                    </g>
-                )}
-
-                {/* ── Distance Label Group ─────────────── */}
-                {!isSamePos && (
-                    <g
-                        style={{
-                            opacity: activeNode === 'speaker' ? 0.25 : 1,
-                            transition: 'opacity 0.3s ease-in-out'
-                        }}
-                    >
-                        {!isCombined && (
-                            <text
-                                x={hasTarget2 ? (targetPt.x + target2Pt.x) / 2 : (targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18)}
-                                y={hasTarget2 ? targetPt.y + circleR + 24 : (targetX >= 2.2 ? targetPt.y + circleR + 24 : targetPt.y + 24)}
-                                fill="#7c7c7c"
-                                fontSize="32"
-                                fontWeight="bold"
-                                fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
-                                textAnchor={hasTarget2 || targetX >= 2.2 ? "middle" : "start"}
-                                dominantBaseline="hanging"
-                            >
-                                {distanceLabel.split('\n').map((line, i) => (
-                                    <tspan x={hasTarget2 ? (targetPt.x + target2Pt.x) / 2 : (targetX >= 2.2 ? targetPt.x : targetPt.x + circleR + 18)} dy={i === 0 ? 0 : 38} key={i}>{line}</tspan>
-                                ))}
-                            </text>
-                        )}
-                        {isCombined && (
-                            <text
-                                x={targetPt.x - circleR - 16}
-                                y={targetPt.y - 48}
-                                fill="#7c7c7c"
-                                fontSize="32"
-                                fontWeight="bold"
-                                fontFamily="'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif"
-                                textAnchor="end"
-                            >
-                                {distanceLabel.split('\n').map((line, i) => (
-                                    <tspan x={targetPt.x - circleR - 16} dy={i === 0 ? 0 : 38} key={i}>{line}</tspan>
-                                ))}
+                                {target2Label}
                             </text>
                         )}
                     </g>
@@ -536,11 +498,11 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                     />
                 )}
 
-                {/* ── Combined Label (centered between two circles on same y=0) */}
+                {/* ── Combined Label (centered between two circles above baseline) */}
                 {isCombined && (
                     <text
                         x={(speakerPt.x + targetPt.x) / 2}
-                        y={Math.max(speakerPt.y, targetPt.y) + circleR + 90}
+                        y={Math.min(speakerPt.y, targetPt.y) - circleR - 30}
                         fill="#ff5500"
                         fontSize="34"
                         fontWeight="bold"
@@ -551,17 +513,7 @@ export const RelationalDiagram: React.FC<RelationalDiagramProps> = ({
                             transition: 'opacity 0.3s ease-in-out'
                         }}
                     >
-                        {lang === "kr" ? (
-                            <>
-                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="0">화자 / 청자 :</tspan>
-                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="40">성별 무관</tspan>
-                            </>
-                        ) : (
-                            <>
-                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="0">Speaker / Target :</tspan>
-                                <tspan x={(speakerPt.x + targetPt.x) / 2} dy="40">Gender-Neutral</tspan>
-                            </>
-                        )}
+                        {lang === "kr" ? "화자 / 청자 : 성별 무관" : "Speaker / Target : Gender-Neutral"}
                     </text>
                 )}
             </svg>
