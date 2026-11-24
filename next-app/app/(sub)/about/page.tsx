@@ -22,13 +22,19 @@ export default function AboutPage() {
                 </div>
             </div>
 
-            {/* Column 2: Profile, Education, Contact, Experience, Exhibitions & Workshops, Licence & Awards */}
+            {/* Column 2: Profile, Education, Contact... */}
             <div className={styles.infoColumn}>
                 <div>
                     <span className={styles.sectionTitle}>Profile</span>
                     <div>
                         Yoonhyeok Kim<br />
                         From Seoul, Republic of Korea
+                    </div>
+                </div>
+                <div>
+                    <span className={styles.sectionTitle}>Education</span>
+                    <div className={styles.infoListItem}>
+                        <span className={styles.yearLabel}>2020-27,</span><Link href="/inu-score" className={styles.textLink}>Incheon National University (INU), B.A. in Fashion Industry, Double Major in Visual Design (B.F.A.)</Link>
                     </div>
                 </div>
                 <div>
@@ -41,91 +47,97 @@ export default function AboutPage() {
                     </div>
                 </div>
                 <div>
-                    <span className={styles.sectionTitle}>Education</span>
-                    <div className={styles.entryItem}>
-                        2020–2027 (expected) · <Link href="/inu-score" className={styles.textLink}>Incheon National University (INU)</Link>
-                        <ul className={styles.entrySubList}>
-                            <li>B.F.A. in Visual Design (Double Major, Division of Design)</li>
-                            <li>B.A. in Fashion Industry (First Major, Department of Fashion Industry)</li>
-                            <li>GPA: 3.61 / 4.5</li>
-                        </ul>
-                    </div>
+                    <span className={styles.sectionTitle}>Exhibition</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>≪LOOPING IN THE BOX≫, ARTKOREALAB, Seoul</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>≪INU x ISU Project≫, Illinois State Univ. (ISU), Incheon Nat&apos;l Univ. (INU)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>≪Maximalism≫, Anpak Space, Seoul</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>≪Maximalism≫, ArtsxStay, Seoul</span></div>
                 </div>
                 <div>
-                    <span className={styles.sectionTitle}>Experience</span>
-                    <div className={styles.entryGroup}>
-                        <div className={styles.entryItem}>
-                            Oct 2022 – Present · Freelance Visual Designer
-                            <ul className={styles.entrySubList}>
-                                <li>Completed over 50 commissioned projects for performance, music, exhibition and brand clients.</li>
-                            </ul>
-                        </div>
-                        <div className={styles.entryItem}>
-                            Oct 2022 – Feb 2023 · Some&amp;Company (Glosome Design Team), Visual Design Intern
-                            <ul className={styles.entrySubList}>
-                                <li>Assisted with promotional graphics and product packaging design.</li>
-                            </ul>
-                        </div>
-                        <div className={styles.entryItem}>
-                            Mar 2021 – Jan 2023 · Myo (State-Funded Startup Project), Founder &amp; Creative Lead
-                            <ul className={styles.entrySubList}>
-                                <li>Selected for a government startup support programme; founded and led a university-based startup team and ran its year-long project.</li>
-                                <li>Led branding and the publication of a printed archive book; ran two crowdfunding campaigns (KRW 5.11M, 102% of target; KRW 1.07M, 214% of target) and held two exhibitions.</li>
-                            </ul>
-                        </div>
-                        <div className={styles.entryItem}>
-                            Mar 2021 – Dec 2022 · O.F.F. (Nationwide Intercollegiate Fashion Association), 27th Cohort, Design Team
-                            <ul className={styles.entrySubList}>
-                                <li>Took part in the annual fashion show, planning concepts and designing and making a garment collection.</li>
-                                <li>Designed layout systems and graphic content for the association&apos;s magazine.</li>
-                            </ul>
-                        </div>
-                        <div className={styles.entryItem}>
-                            Mar 2020 – Aug 2021 · LET.S Magazine, Editorial Designer
-                            <ul className={styles.entrySubList}>
-                                <li>Designed the layout and typography system for the first print issue, <em>LET.S: Vintage</em>.</li>
-                                <li>Produced printed copies for 155 backers; the crowdfunding campaign raised KRW 5.49M (109% of target).</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span className={styles.sectionTitle}>Career</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022–Present,</span><span>Freelance Visual Designer</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022–2023,</span><span>Visual Design Intern, Glosome Design Team, Some&Company Co.,
+                        Ltd.</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2021–2023,</span><span>Founder & President, Myo (Government Startup Project
+                        Collective)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2021–2022,</span><span>Member, 27th Cohort, O.F.F. (Nationwide Intercollegiate Fashion Association)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2020–2021,</span><span>Editorial Design Team, LET.S Magazine</span></div>
                 </div>
                 <div>
-                    <span className={styles.sectionTitle}>Exhibitions &amp; Workshops</span>
-                    <div className={styles.entryGroup}>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>Jan 2026 ·</span><span><em>Looping In The Box</em>, ARTKOREALAB, Seoul (Group Exhibition)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>Nov 2025 ·</span><span><em>INU x ISU Project</em>, exchange exhibition between Illinois State University and Incheon National University (Group Exhibition)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>Sep 2025 ·</span><span><em>Dadakdadak Market: Baeksanghoe</em>, Suwon Paldal Cultural Center, Suwon (Organised by Kyung Hee University &amp; Ministry of SMEs and Startups)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>Jan 2025 ·</span><span>TouchDesigner Workshop, <em>Connecting Hand to Circle: Kinetic Art via MediaPipe</em>, Seoul</span></div>
-                    </div>
+                    <span className={styles.sectionTitle}>Awards</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>Honorable Mention, 11th International Digital Fashion Contest,
+                        The Society of Fashion and Textile Industry (SFTI)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>Selected For The Seoul Fashion Hub Digital Design Showcase</span></div>
                 </div>
                 <div>
-                    <span className={styles.sectionTitle}>Licence &amp; Awards</span>
-                    <div className={styles.entryGroup}>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2024 ·</span><span>National Technical Qualification, Craftsman Photography</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2022 ·</span><span>Honourable Mention, 11th International Digital Fashion Contest, The Society of Fashion and Textile Industry (SFTI)</span></div>
-                    </div>
+                    <span className={styles.sectionTitle}>License</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>National Technical Qualification, Craftsman Photography</span></div>
+                </div>
+                <div>
+                    <span className={styles.sectionTitle}>Workshops / Seminars</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>Notefolio Workshop 6-week course ≪Workshop for Beginners≫, 1F, 3-10 Donggyo-ro 27-gil, Mapo-gu, Seoul(03993)</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>TouchDesigner Workshop, ≪Connecting Hand to Circle: Kinetic Art via MediaPipe≫, 83 Uisadang-daero, Yeongdeungpo-gu, Seoul(07325)</span></div>
                 </div>
             </div>
 
-            {/* Column 3: Selected Projects */}
+            {/* Column 3: Work */}
             <div className={styles.infoColumn}>
                 <div>
-                    <span className={styles.sectionTitle}>Selected Projects (Freelance Visual Designer)</span>
-                    <div className={styles.entryGroup}>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2026 ·</span><span>Wald Ensemble x SAL, <em>Apollo</em> (Seosomun Shrine History Museum), Performance Visual Identity (Programme Leaflet, Main Poster, Banner Design)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2026 ·</span><span>Seungyoon Lee, 4th Studio Album <em>0</em> (Mareumo Entertainment), Physical Album Package Design (3 Editions, 2 Booklets, 2 CDs, Merchandise)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2026 ·</span><span><em>Divergent Consequences With Single Image</em> (Non-Commercial Research), Main Poster, Web Design &amp; Development</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2026 ·</span><span>SKETCHED SPACE (SKETCHED), Website Design Lead, Initial Front-End Development (<a href="https://sketched.space/" target="_blank" rel="noopener noreferrer" className={styles.textLink}>sketched.space</a>)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2026 ·</span><span>Subverted Anatomical Landscape, <em>X</em> (ARKO Arts Theater), Performance Visual Identity (Programme Book, Main Poster, Extended-Format Poster, Banner Design)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2026 ·</span><span>Coffee Collage, F&amp;B Brand Identity System (Brand Guidelines, Packaging, Menus, Bean Information Cards)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2025 ·</span><span>Sangmyung University 53rd Graduation Exhibition, Visual Identity Design (Catalogue Cover, Poster, Banner Design)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2025 ·</span><span>Korea Research Institute of Contemporary Art (KoRICA), Website Design (<a href="https://korica.org/" target="_blank" rel="noopener noreferrer" className={styles.textLink}>korica.org</a>)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2024 ·</span><span>Subverted Anatomical Landscape, <em>KILL</em> (LG Arts Center), Performance Visual Identity (Programme Book, Main Poster, Banners, Merchandise Design)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2024 ·</span><span>Annpaak Special Exhibition <em>Scene and Alienation</em> (Annpaak), Exhibition Visual Identity (Main Poster, Mobile Leaflet, Digital Promotional Materials)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2024 ·</span><span>THE BOYZ, 2nd Full Album Pt.3 <em>Love Letter</em> (IST Entertainment), Album Artwork &amp; Promotional Design, Photography for Design Assets</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2023 ·</span><span>Ubomanli, <em>Knock</em> (National Theater of Korea), Performance Visual Identity (Programme Leaflet, Main Poster Design)</span></div>
-                        <div className={styles.infoListItem}><span className={styles.yearLabel}>2023 ·</span><span>Doosan x Vlook Pop-up Store, Spatial Identity &amp; Pop-up Store Graphic Design</span></div>
-                    </div>
+                    <span className={styles.sectionTitle}>Work</span>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Gomsisun｣ ≪Layer≫, ARKO Arts Theater, Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Ubomanli｣ ≪Coexistence of the Incompatible≫, ARKO Arts Theater, Poster Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Wald Ensemble x Subverted Anatomical Landscape｣ ≪Apollo≫ Seosomun Shrine History Museum, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Seungyoon Lee｣ 4th Full-length Studio Album ≪0≫, Physical Album Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢SKETCHED SPACE｣ Website Design & Development</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2026,</span><span>｢Subverted Anatomical Landscape｣ ≪X≫ ARKO Arts Theater, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Sangmyung Univ. 53rd Graduation Exhibition｣ Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Gomsiseon Project｣ ≪Recycling? Re-cycling!≫ ARKO Arts Theater Small Hall, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Single Origin｣ Website Design & Development</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Dadakdadak Market Baeksanghoe(百象會)｣ Hosted by Kyung Hee Univ., Participating 30 Artists Poster Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Coffee Collage｣ Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Subverted Anatomical Landscape｣ ≪GAMMA≫ ARKO Arts Theater, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Seong Yoon-seon&apos;s Janggu Dance Network｣ ≪Companion≫ Ⅱ Traditional Performing Arts Creation Maru Gwangmudae, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Minchan Lee｣ ≪GLIDE≫ Album Jacket Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Media Artist Sumin Kim｣ Business Card Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Korea Research Institute of Contemporary Art (KoRICA)｣ Website Design & Development</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2025,</span><span>｢Korea Research Institute of Contemporary Art (KoRICA)｣ Logo Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢LWY X SUNOA｣ ≪20≫ Album Jacket Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢LWY X SUNOA｣ ≪Loving You≫ Album Jacket Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Subverted Anatomical Landscape｣ Business Card Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Subverted Anatomical Landscape｣ ≪β≫ Sogang Univ. Mary Hall, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Bongkak Choi X Fitness Ideal｣ Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢GoiiGoii｣ Logo Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Sinchon Global University Culture Festival (SWYFT)｣ 2nd Festival Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Kodo.Jeong｣ Package Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Ubomanli｣ Logo Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Ubomanli｣ ≪Hanok Within a Western Theater≫ ARKO Arts Theater, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Subverted Anatomical Landscape｣ ≪KILL≫ LG Arts Center, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢Annpaak｣ Special Exhibition ≪Scene and Alienation≫ Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2024,</span><span>｢THE BOYZ｣ 2nd Full Pt.3 ≪Love Letter≫ Album Jacket & Promotion Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Beigebongbong｣ Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Seong Yoon-seon&apos;s Janggu Dance Network｣ Sungkyun Small Theater Dec Regular Performance ≪Companion≫ Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Jeom Store｣ 1st Anniversary Goods Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢TTB X Garb X Bite Poets｣ ≪Extra Ordinary≫ Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Ubomanli｣ Business Card Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Gihong Jeon｣ ≪Buckwild≫ Editorial Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Ubomanli｣ ≪Knock≫ National Theater of Korea, Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Chelon Archive Co.｣ Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Mumu｣ Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Cidae.Co｣ Editorial Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Miammiam X Wonhyuck Choi｣ Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Oboae｣ Showroom Postcard Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Info X Cidae.Co｣ Goods Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Nneed Coffee｣ Identity Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Each Differ｣ 23F/W Artwork Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Wonhyuck Choi｣ ≪Open Studio In Seoul≫ Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Each Differ｣ Logo Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Wonhyuck Choi｣ ≪Open Studio In Jeju≫ Program Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Doosan X Vlook｣ Identity & Pop-up Store Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢AAO｣ Monthly 3D Artwork Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Viewfinder｣ Calendar Poster Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2023,</span><span>｢Viewfinder｣ Logo Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>｢Bfrog｣ Showroom Logo Design</span></div>
+                    <div className={styles.infoListItem}><span className={styles.yearLabel}>2022,</span><span>｢Higher Coffee｣ Event Poster Design</span></div>
                 </div>
             </div>
 
@@ -133,10 +145,9 @@ export default function AboutPage() {
             <div className={styles.infoColumn}>
                 <div>
                     <span className={styles.sectionTitle}>Tools</span>
-                    <div className={styles.entryGroup}>
-                        <div className={styles.entryItem}>Graphic &amp; Editorial · InDesign, Illustrator, Photoshop, Lightroom, Lightroom Classic, XD, DaVinci Resolve</div>
-                        <div className={styles.entryItem}>Motion &amp; 3D · After Effects, Cinema 4D</div>
-                        <div className={styles.entryItem}>Web &amp; Interactive · TouchDesigner, React, Next.js, HTML/CSS</div>
+                    <div>
+                        InDesign, Illustrator, Photoshop, Lightroom, Lightroom Classic, After Effects, Cinema 4D, Redshift,
+                        TouchDesigner, XD, React, Next.js, SCSS, HTML/CSS
                     </div>
                 </div>
                 <div>
