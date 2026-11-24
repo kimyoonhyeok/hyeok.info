@@ -51,6 +51,32 @@
     align-items: baseline;
 }
 
+.entryGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.entryItem {
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+.entrySubList {
+    margin: 2px 0 0 0;
+    padding-left: 1em;
+    list-style-type: none;
+}
+
+.entrySubList li {
+    line-height: 1.45;
+    text-indent: -0.75em;
+}
+
+.entrySubList li::before {
+    content: "– ";
+}
+
 .yearLabel {
     flex-shrink: 0;
     margin-right: 0.35em;
